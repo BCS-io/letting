@@ -59,15 +59,9 @@ class Invoicing < ActiveRecord::Base
   private
 
   def maker invoice_date, comments
-    if first_run?
-      FirstRunMaker.new invoicing: self,
-                        invoice_date: invoice_date,
-                        comments: comments
-    else
-      ReRunMaker.new invoices: mold.invoices,
-                     invoice_date: invoice_date,
-                     comments: comments
-    end
+    FirstRunMaker.new invoicing: self,
+                      invoice_date: invoice_date,
+                      comments: comments
   end
 
   def mold
