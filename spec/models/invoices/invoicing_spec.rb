@@ -26,18 +26,6 @@ RSpec.describe Invoicing, type: :model do
                    charges: [charge_new(cycle: cycle)]
   end
 
-  describe '#first_run?' do
-    it 'is true when no work done' do
-      invoicing = invoicing_new runs: [run_new(invoices: [])]
-      expect(invoicing).to be_first_run
-    end
-
-    it 'is false when work done' do
-      invoicing = invoicing_new runs: [run_new(invoices: [invoice_new])]
-      expect(invoicing).to_not be_first_run
-    end
-  end
-
   describe '#actionable?' do
     it 'can be actionable' do
       invoice = Invoice.new products: [Product.new(amount: 40)]

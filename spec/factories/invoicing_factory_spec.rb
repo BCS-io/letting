@@ -15,14 +15,5 @@ describe 'Invoicing Factory' do
       end
       it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
     end
-    it 'is on the second run' do
-      expect(invoicing_new).not_to be_first_run
-    end
-  end
-
-  describe 'override' do
-    it 'can be set to first run' do
-      expect(invoicing_new runs: []).to be_first_run
-    end
   end
 end
