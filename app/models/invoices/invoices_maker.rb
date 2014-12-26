@@ -10,7 +10,7 @@
 # invoices from user supplied arguments(account_range and time period) as well
 # as invoice_date and comments.
 #
-class FirstRunMaker
+class InvoicesMaker
   attr_reader :comments, :invoice_date, :invoicing
 
   def initialize invoicing:,

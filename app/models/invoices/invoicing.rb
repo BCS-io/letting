@@ -59,7 +59,7 @@ class Invoicing < ActiveRecord::Base
   private
 
   def maker invoice_date, comments
-    FirstRunMaker.new invoicing: self,
+    InvoicesMaker.new invoicing: self,
                       invoice_date: invoice_date,
                       comments: comments
   end
