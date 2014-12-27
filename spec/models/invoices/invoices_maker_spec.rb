@@ -7,8 +7,8 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      first = InvoicesMaker.new invoicing: invoicing
-      expect(first.invoices.size).to eq 1
+      maker = InvoicesMaker.new invoicing: invoicing
+      expect(maker.invoices.size).to eq 1
     end
 
     it 'does not create run if no accounts in range' do
@@ -16,12 +16,12 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      first = InvoicesMaker.new invoicing: invoicing
-      expect(first.invoices.size).to eq 0
+      maker = InvoicesMaker.new invoicing: invoicing
+      expect(maker.invoices.size).to eq 0
     end
   end
 
-  describe 'invoice_date' do
+  describe '#invoice_date' do
     it 'defaults to today' do
       account_create property: property_new(human_ref: 8)
       invoicing = invoicing_new property_range: '1-10', runs: []
@@ -41,7 +41,7 @@ RSpec.describe InvoicesMaker, type: :model do
     end
   end
 
-  describe 'comments' do
+  describe '#comments' do
     it 'sets comments' do
       account_create property: property_new(human_ref: 8)
       invoicing = invoicing_new property_range: '1-10', runs: []

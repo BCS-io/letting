@@ -34,7 +34,8 @@ after :invoice_texts do
         },
       ]
 
-      snapshot = Snapshot.new id: 1
+      snapshot = Snapshot.new id: 1, account_id: 1, period: create_date(17)..
+                                                            create_date(2)
       snapshot.debited debits: Debit.all
       snapshot.save!
     end

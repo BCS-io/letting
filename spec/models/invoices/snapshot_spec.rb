@@ -12,14 +12,6 @@ RSpec.describe Snapshot, type: :model do
     expect(snapshot).to be_valid
   end
 
-  it 'can sum' do
-    snapshot = Snapshot.new
-    snapshot
-      .debited debits: [debit_new(amount: 10, charge: charge_new),
-                        debit_new(amount: 20, charge: charge_new)]
-    expect(snapshot.sum).to eq 30
-  end
-
   describe '#debits?' do
     it 'knows if it has debits' do
       snapshot = Snapshot.new

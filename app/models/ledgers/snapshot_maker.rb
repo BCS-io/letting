@@ -8,11 +8,9 @@
 # Used by Account class to wrap (see: debit_maker.gliffy)
 #
 class SnapshotMaker
-  attr_reader :account, :debit_period, :snapshot
-  def initialize account:, debit_period:, snapshot: Snapshot.new
-    @account = account
-    @debit_period = debit_period
-    @snapshot = snapshot
+  attr_reader :snapshot
+  def initialize(account:, debit_period:)
+    @snapshot = Snapshot.new account: account, period: debit_period
   end
 
   def debits?
@@ -29,11 +27,11 @@ class SnapshotMaker
 
   def mold
     snapshot
-      .debited debits: account.exclusive(query_debits: make_debits)
+      .debited debits: snapshot.account.exclusive(query_debits: make_debits)
     self
   end
 
   def make_debits
-    account.debits_coming(debit_period)
+    snapshot.account.debits_coming(snapshot.period)
   end
 end

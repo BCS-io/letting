@@ -29,10 +29,6 @@ class Snapshot < ActiveRecord::Base
     self.debits = debits
   end
 
-  def sum
-    debits.map(&:amount).inject(0, :+)
-  end
-
   def debits?
     debits.any?
   end

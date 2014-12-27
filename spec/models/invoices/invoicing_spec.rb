@@ -57,15 +57,17 @@ RSpec.describe Invoicing, type: :model do
 
   describe '#generate' do
     it 'invoice when an account is within property and date range' do
-      fail 'snapshot not being saved!!!!!!!'
       account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
       invoicing = Invoicing.new property_range: '20',
                                 period: Date.new(2010, 3, 1)..
                                         Date.new(2010, 5, 1)
+      expect(invoicing.runs.size).to eq 0
       invoicing.generate comments: ['', '']
+
       expect(invoicing.runs.size).to eq 1
       expect(invoicing.runs.first.invoices.size).to eq 1
+      expect(invoicing.runs.first.invoices.first.snapshot).to_not be_nil
     end
 
     it 'creates more than one run' do
@@ -76,6 +78,7 @@ RSpec.describe Invoicing, type: :model do
                                         Date.new(2010, 5, 1)
       invoicing.generate comments: ['', '']
       invoicing.generate comments: ['', '']
+
       expect(invoicing.runs.size).to eq 2
     end
 

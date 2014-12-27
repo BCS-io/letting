@@ -13,6 +13,7 @@
 # @invoice_date - the date the invoice is dated with. Used by the arrears
 #                 product item.
 #
+# rubocop: disable Style/MultilineTernaryOperator
 ###
 #
 class ProductsMaker
@@ -43,12 +44,8 @@ class ProductsMaker
   end
 
   def product_arrears
-    product_arrears = []
-    if arrears.nonzero?
-      product_arrears = [Product.arrears(date_due: invoice_date,
-                                         amount: arrears)]
-    end
-    product_arrears
+    arrears.nonzero? ?
+      [Product.arrears(date_due: invoice_date, amount: arrears)] : []
   end
 
   def product_debits
