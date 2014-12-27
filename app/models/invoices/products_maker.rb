@@ -28,7 +28,7 @@ class ProductsMaker
   # products - are the account items of the invoice
   #
   def invoice(*)
-    products
+    products invoice_date: invoice_date
   end
 
   # If we any debits are due for this invoice.
@@ -37,13 +37,13 @@ class ProductsMaker
     product_debits.present?
   end
 
-  private
-
-  def products
-    @products ||= product_arrears + product_debits
+  def products(invoice_date:)
+    @products ||= product_arrears(invoice_date: invoice_date) + product_debits
   end
 
-  def product_arrears
+  private
+
+  def product_arrears(invoice_date:)
     product_arrears = Product.arrears(account: account, date_due: invoice_date)
     product_arrears.amount.nonzero? ? [product_arrears] : []
   end
