@@ -18,7 +18,7 @@ describe 'Invoicing#show', type: :feature do
     #
     it 'inform, if no invoice retained' do
       log_in
-      invoice = invoice_new deliver: false # Retaining mail
+      invoice = invoice_new deliver: 'retain'
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'
@@ -29,7 +29,7 @@ describe 'Invoicing#show', type: :feature do
     #
     it 'do nothing, if any invoice retained' do
       log_in
-      invoice = invoice_new deliver: true  # nothing retained
+      invoice = invoice_new deliver: 'mail'
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'
@@ -42,7 +42,7 @@ describe 'Invoicing#show', type: :feature do
     #
     it 'inform, if no invoice delivered' do
       log_in
-      invoice = invoice_new deliver: false # No Mail delivered
+      invoice = invoice_new deliver: 'retain'
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'
@@ -53,7 +53,7 @@ describe 'Invoicing#show', type: :feature do
     #
     it 'do nothing, if any invoice delivered' do
       log_in
-      invoice = invoice_new deliver: true # Deliver mail
+      invoice = invoice_new deliver: 'mail'
       invoicing_create id: 1, runs: [run_new(invoices: [invoice])]
 
       visit '/invoicings/1'

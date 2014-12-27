@@ -4,7 +4,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.belongs_to :account, null: false, index: true
       t.belongs_to :run, null: false, index: true
       t.belongs_to :snapshot, null: false, index: true
-      t.boolean  :deliver, null: false
+      t.integer  :deliver, null: false
       t.date     :invoice_date, null: false
       t.integer  :property_ref,    null: false
       t.text     :occupiers, null: false

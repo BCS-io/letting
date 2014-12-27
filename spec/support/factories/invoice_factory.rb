@@ -14,7 +14,7 @@ def invoice_new id: nil,
                 comments: [],
                 snapshot: snapshot_new,
                 products: [product_new],
-                deliver: true
+                deliver: 'mail'
   invoice_text_create(id: 1) unless InvoiceText.find_by id: 1
   account.property = property
   invoice = Invoice.new id: id, run_id: run_id
@@ -38,7 +38,7 @@ def invoice_create \
   comments: [],
   snapshot: snapshot_new,
   products: [product_new],
-  deliver: true
+  deliver: 'mail'
 
   invoice = invoice_new id: id,
                         run_id: run_id,

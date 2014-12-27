@@ -14,24 +14,24 @@ RSpec.describe Run, type: :model do
 
   describe '#deliver' do
     it 'sends invoice that has deliver attribute true' do
-      expect(run_new(invoices: [invoice_new(deliver: true)]).deliver.size)
+      expect(run_new(invoices: [invoice_new(deliver: 'mail')]).deliver.size)
         .to eq 1
     end
 
     it 'keeps invoice that has deliver attribute false' do
-      expect(run_new(invoices: [invoice_new(deliver: false)]).deliver.size)
+      expect(run_new(invoices: [invoice_new(deliver: 'retain')]).deliver.size)
         .to eq 0
     end
   end
 
   describe '#retain' do
     it 'keeps invoice that has deliver attribute false' do
-      expect(run_new(invoices: [invoice_new(deliver: false)]).retain.size)
+      expect(run_new(invoices: [invoice_new(deliver: 'retain')]).retain.size)
         .to eq 1
     end
 
     it 'sends invoice that has deliver attribute' do
-      expect(run_new(invoices: [invoice_new(deliver: true)]).retain.size)
+      expect(run_new(invoices: [invoice_new(deliver: 'mail')]).retain.size)
         .to eq 0
     end
   end

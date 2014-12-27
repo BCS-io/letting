@@ -44,7 +44,7 @@ class InvoiceMaker
                snapshot: snapshot,
                comments: comments,
                products: products_maker.invoice
-    invoice.deliver = products_maker.debits?
+    invoice.deliver = products_maker.debits? ? :mail : :retain
     invoice
   end
 end

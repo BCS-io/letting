@@ -37,11 +37,11 @@ class Run < ActiveRecord::Base
   end
 
   def deliver
-    invoices.select(&:deliver)
+    invoices.select { |invoice| invoice.deliver == 'mail' }
   end
 
   def retain
-    invoices.select { |invoice| invoice.deliver == false }
+    invoices.select { |invoice| invoice.deliver == 'retain' }
   end
 
   def finished?

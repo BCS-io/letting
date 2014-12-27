@@ -25,6 +25,7 @@
 # rubocop: disable Metrics/MethodLength, Metrics/ParameterLists
 #
 class Invoice < ActiveRecord::Base
+  enum deliver: [:mail, :retain]
   belongs_to :account
   belongs_to :run, inverse_of: :invoices
   belongs_to :snapshot, autosave: true, inverse_of: :invoices
