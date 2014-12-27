@@ -27,10 +27,22 @@ RSpec.describe Product, type: :model do
 
   describe '.arrears' do
     it 'creates arrears given arguments' do
-      arrears = Product.arrears date_due: '2001/01/30', amount: 10
+      debit = debit_new on_date: '1999/01/01', amount: 8, charge: charge_new
+
+      arrears = Product.arrears account: account_new(debits: [debit]),
+                                date_due: '2001/01/30'
       expect(arrears.to_s).to eq 'charge_type: Arrears ' \
                                  'date_due: 2001-01-30 ' \
-                                 'amount: 10.0 ' \
+                                 'amount: 8.0 ' \
+                                 'period: .., balance: '
+    end
+
+    it 'returns zero if no debt' do
+      arrears = Product.arrears account: account_new,
+                                date_due: '2001/01/30'
+      expect(arrears.to_s).to eq 'charge_type: Arrears ' \
+                                 'date_due: 2001-01-30 ' \
+                                 'amount: 0.0 ' \
                                  'period: .., balance: '
     end
   end

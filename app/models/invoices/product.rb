@@ -32,11 +32,11 @@ class Product < ActiveRecord::Base
   # Wrapper for the arguments required for an Arrears product item.
   # All the other product items are taken from the debit.
   #
-  def self.arrears(date_due:, amount:)
+  def self.arrears(account:, date_due:)
     Product.new charge_type: ChargeTypes::ARREARS,
                 date_due: date_due,
                 automatic_payment: false,
-                amount: amount
+                amount: account.balance(to_date: date_due)
   end
 
   # Scope to return products that trigger the back page of the invoice

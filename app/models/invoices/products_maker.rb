@@ -17,8 +17,9 @@
 ###
 #
 class ProductsMaker
-  attr_reader :arrears, :invoice_date, :snapshot
-  def initialize(snapshot:, arrears:, invoice_date:)
+  attr_reader :account, :arrears, :invoice_date, :snapshot
+  def initialize(account:, snapshot:, arrears:, invoice_date:)
+    @account = account
     @snapshot = snapshot
     @invoice_date = invoice_date
     @arrears = arrears
@@ -45,7 +46,7 @@ class ProductsMaker
 
   def product_arrears
     arrears.nonzero? ?
-      [Product.arrears(date_due: invoice_date, amount: arrears)] : []
+      [Product.arrears(account: account, date_due: invoice_date)] : []
   end
 
   def product_debits

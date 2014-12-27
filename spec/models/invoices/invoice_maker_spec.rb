@@ -14,7 +14,8 @@ RSpec.describe InvoiceMaker, type: :model do
                          invoice_date: Date.new(2010, 2, 1),
                          comments: [],
                          snapshot: Snapshot.new,
-                         products_maker: ProductsMaker.new(invoice_date: Date.new(1999, 1, 2),
+                         products_maker: ProductsMaker.new(account: account,
+                                                           invoice_date: Date.new(1999, 1, 2),
                                                            arrears: 0,
                                                            snapshot: Snapshot.new)
       expect(invoice.compose.to_s)
