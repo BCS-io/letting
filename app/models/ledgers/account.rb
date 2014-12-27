@@ -57,6 +57,8 @@ class Account < ActiveRecord::Base
   MAX_CHARGES = 6
   accepts_nested_attributes_for :charges, allow_destroy: true
 
+  has_many :snapshots, dependent: :destroy, inverse_of: :account
+
   # accounting_period - the date range that we generate debits for.
   # returns        - debits array with data required to bill the
   #                  associated account.

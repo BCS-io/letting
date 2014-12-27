@@ -41,8 +41,11 @@ class InvoicesMaker
   end
 
   def snapshot_maker(account)
-    SnapshotMaker.new(account: account, debit_period: invoicing.period)
-      .invoice
+    snapshot = Snapshot.match(account: account, period: invoicing.period).first
+    snapshot = SnapshotMaker.new(account: account,
+                                 debit_period: invoicing.period)
+               .invoice unless snapshot
+    snapshot
   end
 
   def products_maker account

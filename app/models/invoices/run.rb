@@ -22,9 +22,9 @@ class Run < ActiveRecord::Base
   #
   # invoice_date - date to appear on the invoice
   #
-  def prepare(run_maker:)
+  def prepare(invoices_maker:)
     self.invoice_date = invoice_date
-    self.invoices = run_maker.invoices
+    self.invoices = invoices_maker.invoices
   end
 
   #

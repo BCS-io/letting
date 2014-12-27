@@ -11,9 +11,19 @@
 ###
 #
 class Snapshot < ActiveRecord::Base
+  belongs_to :account, inverse_of: :snapshots
   has_many :invoices, dependent: :destroy, inverse_of: :snapshot
   has_many :debits, dependent: :destroy, inverse_of: :snapshot
   validates :debits, presence: true
+
+  def period
+    (period_first..period_last)
+  end
+
+  def period=(range)
+    self.period_first = range.first
+    self.period_last  = range.last
+  end
 
   def debited(debits:)
     self.debits = debits
@@ -33,5 +43,9 @@ class Snapshot < ActiveRecord::Base
   #   (Working)
   def only_one_invoice?
     invoices.size <= 1
+  end
+
+  def self.match(account:, period:)
+    where account: account, period_first: period.first, period_last: period.last
   end
 end

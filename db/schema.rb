@@ -278,9 +278,14 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   add_index "settlements", ["debit_id"], name: "index_settlements_on_debit_id", using: :btree
 
   create_table "snapshots", force: :cascade do |t|
+    t.integer  "account_id",   null: false
+    t.date     "period_first", null: false
+    t.date     "period_last",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "snapshots", ["account_id"], name: "index_snapshots_on_account_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "nickname",        null: false

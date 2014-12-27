@@ -49,12 +49,12 @@ class Invoicing < ActiveRecord::Base
   # make a run to add to the invoicing
   #
   def generate(invoice_date: Time.zone.today, comments:)
-    runs.build.prepare run_maker: maker(invoice_date, comments)
+    runs.build.prepare invoices_maker: invoices_maker(invoice_date, comments)
   end
 
   private
 
-  def maker invoice_date, comments
+  def invoices_maker invoice_date, comments
     InvoicesMaker.new invoicing: self,
                       invoice_date: invoice_date,
                       comments: comments

@@ -53,4 +53,23 @@ RSpec.describe Snapshot, type: :model do
       expect(snapshot).to_not be_only_one_invoice
     end
   end
+
+  describe '.match' do
+    it 'finds when matching' do
+      account = account_create
+      snapshot_create account: account, period: '2001/01/01'..'2001/03/01'
+
+      snap = Snapshot.match account: account, period: '2001/01/01'..'2001/03/01'
+
+      expect(snap.size).to eq 1
+    end
+
+    it 'returns nothing when missing' do
+      account = account_create
+
+      snap = Snapshot.match account: account, period: '2001/01/01'..'2001/03/01'
+
+      expect(snap.size).to eq 0
+    end
+  end
 end
