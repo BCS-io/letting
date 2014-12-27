@@ -16,7 +16,6 @@ RSpec.describe InvoiceMaker, type: :model do
                          snapshot: Snapshot.new,
                          products_maker: ProductsMaker.new(account: account,
                                                            invoice_date: Date.new(1999, 1, 2),
-                                                           arrears: 0,
                                                            snapshot: Snapshot.new)
       expect(invoice.compose.to_s)
         .to eq [%q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands"),

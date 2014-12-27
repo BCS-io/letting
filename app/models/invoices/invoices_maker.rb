@@ -51,7 +51,6 @@ class InvoicesMaker
   def products_maker account
     ProductsMaker.new(account: account,
                       invoice_date: invoice_date,
-                      arrears: account.balance(to_date: invoice_date),
                       snapshot: snapshot_maker(account))
   end
 end

@@ -17,12 +17,11 @@
 ###
 #
 class ProductsMaker
-  attr_reader :account, :arrears, :invoice_date, :snapshot
-  def initialize(account:, snapshot:, arrears:, invoice_date:)
+  attr_reader :account, :invoice_date, :snapshot
+  def initialize(account:, snapshot:, invoice_date:)
     @account = account
     @snapshot = snapshot
     @invoice_date = invoice_date
-    @arrears = arrears
   end
 
   # Returns the information required for an invoice
@@ -45,8 +44,8 @@ class ProductsMaker
   end
 
   def product_arrears
-    arrears.nonzero? ?
-      [Product.arrears(account: account, date_due: invoice_date)] : []
+    product_arrears = Product.arrears(account: account, date_due: invoice_date)
+    product_arrears.amount.nonzero? ? [product_arrears] : []
   end
 
   def product_debits

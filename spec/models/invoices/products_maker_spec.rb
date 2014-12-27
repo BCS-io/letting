@@ -6,7 +6,6 @@ RSpec.describe ProductsMaker, type: :model do
       (snapshot = Snapshot.new).debited debits: [debit_new(charge: charge_new)]
       maker = ProductsMaker.new account: account_new,
                                 invoice_date: Date.new(1999, 1, 2),
-                                arrears: 0,
                                 snapshot: snapshot
       expect(maker.invoice.first.to_s)
         .to eq 'charge_type: Ground Rent ' \
@@ -23,29 +22,16 @@ RSpec.describe ProductsMaker, type: :model do
 
       maker = ProductsMaker.new account: account_new,
                                 invoice_date: Date.new(1999, 1, 2),
-                                arrears: 0,
                                 snapshot: snapshot
       expect(maker.invoice.size).to eq 1
     end
 
     context 'arrears creation' do
-      it 'makes valid arrears' do
-        (snapshot = Snapshot.new)
-
-        maker = ProductsMaker.new account: account_new,
-                                  invoice_date: Date.new(1999, 1, 2),
-                                  arrears: 10,
-                                  snapshot: snapshot
-
-        expect(maker.invoice.first).to be_valid
-      end
-
       it 'makes arrears from deficit' do
         debit = debit_new on_date: '1999/01/01', amount: 8, charge: charge_new
         snapshot = Snapshot.new
         maker = ProductsMaker.new account: account_new(debits: [debit]),
                                   invoice_date: Date.new(1999, 1, 2),
-                                  arrears: 10,
                                   snapshot: snapshot
 
         expect(maker.invoice.first).to be_valid
@@ -61,7 +47,6 @@ RSpec.describe ProductsMaker, type: :model do
 
         maker = ProductsMaker.new account: account_new,
                                   invoice_date: Date.new(1999, 1, 2),
-                                  arrears: 0,
                                   snapshot: snapshot
         expect(maker.invoice.first.charge_type).to_not eq 'Arrears'
       end
@@ -75,7 +60,6 @@ RSpec.describe ProductsMaker, type: :model do
 
       maker = ProductsMaker.new account: account_new,
                                 invoice_date: Date.new(1999, 1, 2),
-                                arrears: 10,
                                 snapshot: snapshot
 
       expect(maker).to be_debits
@@ -88,7 +72,6 @@ RSpec.describe ProductsMaker, type: :model do
 
       maker = ProductsMaker.new account: account_new,
                                 invoice_date: Date.new(1999, 1, 2),
-                                arrears: 10,
                                 snapshot: snapshot
 
       expect(maker).to be_debits
