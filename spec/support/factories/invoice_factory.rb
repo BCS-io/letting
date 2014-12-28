@@ -14,13 +14,11 @@ def invoice_new id: nil,
                 comments: [],
                 snapshot: snapshot_new,
                 deliver: 'mail'
-  snapshot.account = account
+  property.account = snapshot.account = account if account
   invoice_text_create(id: 1) unless InvoiceText.find_by id: 1
-  account.property = property
   invoice = Invoice.new id: id, run_id: run_id
   invoice.snapshot = snapshot
-  invoice.prepare account: account,
-                  invoice_date: invoice_date,
+  invoice.prepare invoice_date: invoice_date,
                   property: account.property.invoice,
                   snapshot: snapshot,
                   comments: comments

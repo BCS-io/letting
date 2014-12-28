@@ -76,8 +76,7 @@ class Invoice < ActiveRecord::Base
   #                      to the invoice
   # comments           - array of strings to appear on invoice for special info.
   #
-  def prepare(account:,
-              invoice_date: Time.zone.today,
+  def prepare(invoice_date: Time.zone.today,
               property:,
               snapshot:,
               comments: [])

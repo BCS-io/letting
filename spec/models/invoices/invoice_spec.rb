@@ -41,9 +41,8 @@ RSpec.describe Invoice, type: :model do
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',
-                   account: property.account,
                    property: property.invoice,
-                   snapshot: Snapshot.new(account: account_new)
+                   snapshot: Snapshot.new(account: property.account)
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
 
@@ -52,9 +51,8 @@ RSpec.describe Invoice, type: :model do
         invoice = Invoice.new
         property = property_create human_ref: 55, account: account_new
 
-        invoice.prepare account: property.account,
-                        property: property.invoice,
-                        snapshot: Snapshot.new(account: account_new)
+        invoice.prepare property: property.invoice,
+                        snapshot: Snapshot.new(account: property.account)
         expect(invoice.property_ref).to eq 55
       end
 
@@ -64,8 +62,7 @@ RSpec.describe Invoice, type: :model do
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_create agent: agent, account: account_new
 
-        invoice.prepare account: property.account,
-                        property: property.invoice,
+        invoice.prepare property: property.invoice,
                         snapshot: Snapshot.new(account: account_new)
         expect(invoice.billing_address)
           .to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
@@ -79,8 +76,7 @@ RSpec.describe Invoice, type: :model do
                           charge: charge_new(charge_type: GROUND_RENT))
 
         (invoice = Invoice.new)
-          .prepare account: property.account,
-                   property: property.invoice,
+          .prepare property: property.invoice,
                    snapshot: snapshot_new(account: property.account,
                                           debits: [debit])
 
@@ -96,7 +92,6 @@ RSpec.describe Invoice, type: :model do
 
         (invoice = Invoice.new)
           .prepare invoice_date: '2014-06-30',
-                   account: property.account,
                    property: property.invoice,
                    snapshot: snapshot_new(account: property.account,
                                           debits: [debit])
@@ -116,9 +111,8 @@ RSpec.describe Invoice, type: :model do
           property = property_create account: account_new
 
           (invoice = Invoice.new)
-            .prepare account: property.account,
-                     property: property.invoice,
-                     snapshot: Snapshot.new(account: account_new)
+            .prepare property: property.invoice,
+                     snapshot: Snapshot.new(account: property.account)
           expect(invoice.comments.size).to eq 0
         end
 
@@ -127,9 +121,8 @@ RSpec.describe Invoice, type: :model do
           property = property_create account: account_new
 
           (invoice = Invoice.new)
-            .prepare account: property.account,
-                     property: property.invoice,
-                     snapshot: Snapshot.new(account: account_new),
+            .prepare property: property.invoice,
+                     snapshot: Snapshot.new(account: property.account),
                      comments: ['comment']
           expect(invoice.comments.size).to eq 1
           expect(invoice.comments.first.clarify).to eq 'comment'
@@ -140,9 +133,8 @@ RSpec.describe Invoice, type: :model do
           property = property_create account: account_new
 
           (invoice = Invoice.new)
-            .prepare account: property.account,
-                     property: property.invoice,
-                     snapshot: Snapshot.new(account: account_new),
+            .prepare property: property.invoice,
+                     snapshot: Snapshot.new(account: property.account),
                      comments: ['comment', '']
           expect(invoice.comments.size).to eq 1
         end

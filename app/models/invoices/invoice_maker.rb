@@ -34,8 +34,7 @@ class InvoiceMaker
 
   def make_invoice
     (invoice = Invoice.new)
-      .prepare account: account,
-               invoice_date: invoice_date,
+      .prepare invoice_date: invoice_date,
                property: account.property.invoice,
                snapshot: snapshot,
                comments: comments
