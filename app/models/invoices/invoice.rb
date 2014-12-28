@@ -81,8 +81,7 @@ class Invoice < ActiveRecord::Base
               invoice_date: Time.zone.today,
               property:,
               snapshot:,
-              comments: [],
-              products:)
+              comments: [])
     self.account = account
     self.invoice_date = invoice_date
     letters.build invoice_text: InvoiceText.first
@@ -90,7 +89,7 @@ class Invoice < ActiveRecord::Base
     self.comments = generate_comments comments: comments
     self.snapshot = snapshot
 
-    self.products = products
+    self.products = snapshot.products invoice_date: invoice_date
     self
   end
 

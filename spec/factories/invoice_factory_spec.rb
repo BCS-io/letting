@@ -12,8 +12,9 @@ describe 'Invoice Factory' do
   end
 
   describe 'override' do
-    it 'override products' do
-      invoice = invoice_new products: [product_new(amount: 15.00)]
+    it 'override snapshots - changes products' do
+      debit = debit_new(amount: 15.00, charge: charge_new)
+      invoice = invoice_new snapshot: snapshot_new(debits: [debit])
 
       expect(invoice.products.first.amount).to eq 15.00
     end
@@ -63,8 +64,10 @@ describe 'Invoice Factory' do
     end
 
     describe 'override' do
-      it 'override products' do
-        invoice = invoice_create products: [product_new(amount: 15.00)]
+      it 'override snapshots - changes products' do
+        debit = debit_new(amount: 15.00, charge: charge_new)
+        invoice = invoice_create snapshot: snapshot_new(debits: [debit])
+
         expect(invoice.products.first.amount).to eq 15.00
       end
     end

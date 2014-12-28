@@ -13,10 +13,8 @@ RSpec.describe InvoiceMaker, type: :model do
                          period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
                          invoice_date: Date.new(2010, 2, 1),
                          comments: [],
-                         snapshot: Snapshot.new,
-                         products_maker: ProductsMaker.new(account: account,
-                                                           invoice_date: Date.new(1999, 1, 2),
-                                                           snapshot: Snapshot.new)
+                         snapshot: Snapshot.new(account: account)
+
       expect(invoice.compose.to_s)
         .to eq [%q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands"),
                 %q(Property Ref: 2002),

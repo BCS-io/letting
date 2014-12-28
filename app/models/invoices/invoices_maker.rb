@@ -35,8 +35,7 @@ class InvoicesMaker
                      period: invoicing.period,
                      invoice_date: invoice_date,
                      comments: comments,
-                     snapshot: snapshot_maker(account),
-                     products_maker: products_maker(account))
+                     snapshot: snapshot_maker(account))
       .compose
   end
 
@@ -46,11 +45,5 @@ class InvoicesMaker
                                  debit_period: invoicing.period)
                .invoice unless snapshot
     snapshot
-  end
-
-  def products_maker account
-    ProductsMaker.new(account: account,
-                      invoice_date: invoice_date,
-                      snapshot: snapshot_maker(account))
   end
 end

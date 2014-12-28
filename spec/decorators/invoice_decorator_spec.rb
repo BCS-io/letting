@@ -31,15 +31,19 @@ describe InvoiceDecorator do
 
   describe '#earliest_date_due' do
     it 'set to product due_date if available' do
-      product = product_new date_due: Date.new(2010, 3, 25)
+      debit = debit_new on_date: '2010-03-25', charge: charge_new
+      snapshot = snapshot_new(account: account_new, debits: [debit])
+
       invoice_dec = InvoiceDecorator.new invoice_new invoice_date: '2000/1/1',
-                                                     products: [product]
+                                                     snapshot: snapshot
+
       expect(invoice_dec.earliest_date_due).to eq '25/Mar/10'
     end
 
     it 'sets it to invoice_date if no products available' do
       invoice_dec = InvoiceDecorator.new invoice_new invoice_date: '2000/1/1',
-                                                     products: []
+                                                     snapshot: Snapshot.new
+
       expect(invoice_dec.earliest_date_due).to eq '01/Jan/00'
     end
   end

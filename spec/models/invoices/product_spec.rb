@@ -49,18 +49,28 @@ RSpec.describe Product, type: :model do
 
   describe '.page2' do
     it 'returns back page products' do
-      invoice_create products: [product_new(charge_type: GROUND_RENT)]
+      charge = charge_new charge_type: ChargeTypes::GROUND_RENT
+
+      invoice_create snapshot: snapshot_new(debits: [debit_new(charge: charge)])
+
       expect(Product.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'orders Ground Rent before Garage ground rent' do
-      invoice_create products: [product_new(charge_type: GARAGE_GROUND_RENT),
-                                product_new(charge_type: GROUND_RENT)]
+      c_1 = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
+      c_2 = charge_new charge_type: ChargeTypes::GROUND_RENT
+
+      invoice_create snapshot: snapshot_new(debits: [debit_new(charge: c_1),
+                                                     debit_new(charge: c_2)])
+
       expect(Product.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'does not return 1st page only products' do
-      invoice_create products: [product_new(charge_type: INSURANCE)]
+      charge = charge_new charge_type: INSURANCE
+
+      invoice_create snapshot: snapshot_new(debits: [debit_new(charge: charge)])
+
       expect(Product.page2).to be_nil
     end
   end

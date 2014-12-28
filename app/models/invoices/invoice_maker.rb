@@ -16,14 +16,12 @@ class InvoiceMaker
                  period:,
                  invoice_date: Time.zone.today,
                  comments:,
-                 snapshot:,
-                 products_maker:)
+                 snapshot:)
     @account = account
     @period = period
     @invoice_date = invoice_date
     @comments = comments
     @snapshot = snapshot
-    @products_maker = products_maker
   end
 
   #
@@ -42,9 +40,8 @@ class InvoiceMaker
                invoice_date: invoice_date,
                property: account.property.invoice(billing_period: period),
                snapshot: snapshot,
-               comments: comments,
-               products: products_maker.invoice
-    invoice.deliver = products_maker.debits? ? :mail : :retain
+               comments: comments
+    invoice.deliver = snapshot.debits? ? :mail : :retain
     invoice
   end
 end

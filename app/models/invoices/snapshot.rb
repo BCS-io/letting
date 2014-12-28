@@ -44,4 +44,21 @@ class Snapshot < ActiveRecord::Base
   def self.match(account:, period:)
     where account: account, period_first: period.first, period_last: period.last
   end
+
+  def products(invoice_date:)
+    @products ||= product_arrears(invoice_date: invoice_date) + product_debits
+  end
+
+  private
+
+  def product_arrears(invoice_date:)
+    product_arrears = Product.arrears(account: account, date_due: invoice_date)
+    product_arrears.amount.nonzero? ? [product_arrears] : []
+  end
+
+  def product_debits
+    debits.map do |debit|
+      Product.new debit.to_debitable
+    end
+  end
 end
