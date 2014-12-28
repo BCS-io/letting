@@ -31,7 +31,7 @@ class InvoicesMaker
   private
 
   def invoice_maker account: account
-    InvoiceMaker.new(account: account,
+    InvoiceMaker.new(property: account.property,
                      invoice_date: invoice_date,
                      comments: comments,
                      snapshot: snapshot_maker(account))

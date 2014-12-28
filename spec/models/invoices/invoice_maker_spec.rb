@@ -5,14 +5,12 @@ RSpec.describe InvoiceMaker, type: :model do
   describe '#compose' do
     it 'invoice accounts within property and due date range' do
       invoice_text_create id: 1
-      charge = charge_create cycle: cycle_new(due_ons: [due_on_new(month: 3)])
-      account = account_create property: property_new, charges: [charge]
 
       invoice =
-        InvoiceMaker.new account: account,
+        InvoiceMaker.new property: property_new,
                          invoice_date: Date.new(2010, 2, 1),
                          comments: [],
-                         snapshot: Snapshot.new(account: account)
+                         snapshot: Snapshot.new(account: account_new)
 
       expect(invoice.compose.to_s)
         .to eq [%q(Billing Address: "Mr W. G. Grace\nEdgbaston Road\nBirmingham\nWest Midlands"),

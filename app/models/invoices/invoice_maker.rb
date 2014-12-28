@@ -8,15 +8,11 @@
 # period. This is passed to invoice maker, this class, which creates the
 # invoices.
 #
-# rubocop: disable  Metrics/MethodLength,  Metrics/LineLength, Metrics/ParameterLists
 #
 class InvoiceMaker
-  attr_reader :comments, :account, :period, :invoice_date, :snapshot, :products_maker
-  def initialize(account:,
-                 invoice_date: Time.zone.today,
-                 comments:,
-                 snapshot:)
-    @account = account
+  attr_reader :comments, :property, :invoice_date, :snapshot
+  def initialize(property:, invoice_date: Time.zone.today, comments:, snapshot:)
+    @property = property
     @invoice_date = invoice_date
     @comments = comments
     @snapshot = snapshot
@@ -35,7 +31,7 @@ class InvoiceMaker
   def make_invoice
     (invoice = Invoice.new)
       .prepare invoice_date: invoice_date,
-               property: account.property.invoice,
+               property: property.invoice,
                snapshot: snapshot,
                comments: comments
     invoice.deliver = snapshot.debits? ? :mail : :retain
