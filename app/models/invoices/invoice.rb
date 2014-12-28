@@ -26,7 +26,6 @@
 #
 class Invoice < ActiveRecord::Base
   enum deliver: [:mail, :retain]
-  belongs_to :account
   belongs_to :run, inverse_of: :invoices
   belongs_to :snapshot, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
@@ -82,7 +81,6 @@ class Invoice < ActiveRecord::Base
               property:,
               snapshot:,
               comments: [])
-    self.account = account
     self.invoice_date = invoice_date
     letters.build invoice_text: InvoiceText.first
     self.property = property

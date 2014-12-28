@@ -181,7 +181,6 @@ ActiveRecord::Schema.define(version: 20141129154746) do
   end
 
   create_table "invoices", force: :cascade do |t|
-    t.integer  "account_id",       null: false
     t.integer  "run_id",           null: false
     t.integer  "snapshot_id",      null: false
     t.integer  "deliver",          null: false
@@ -195,7 +194,6 @@ ActiveRecord::Schema.define(version: 20141129154746) do
     t.datetime "updated_at"
   end
 
-  add_index "invoices", ["account_id"], name: "index_invoices_on_account_id", using: :btree
   add_index "invoices", ["run_id"], name: "index_invoices_on_run_id", using: :btree
   add_index "invoices", ["snapshot_id"], name: "index_invoices_on_snapshot_id", using: :btree
 

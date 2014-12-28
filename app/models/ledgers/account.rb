@@ -30,7 +30,6 @@ class Account < ActiveRecord::Base
   def address
     property.address.text
   end
-  has_many :invoices
   has_many :debits, dependent: :destroy, inverse_of: :account do
     def exclusive? query_debit
       self.any? do |debit|
