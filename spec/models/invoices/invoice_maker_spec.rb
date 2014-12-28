@@ -10,7 +10,6 @@ RSpec.describe InvoiceMaker, type: :model do
 
       invoice =
         InvoiceMaker.new account: account,
-                         period: Date.new(2010, 2, 1)..Date.new(2010, 5, 1),
                          invoice_date: Date.new(2010, 2, 1),
                          comments: [],
                          snapshot: Snapshot.new(account: account)

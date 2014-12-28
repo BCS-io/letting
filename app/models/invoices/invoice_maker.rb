@@ -13,12 +13,10 @@
 class InvoiceMaker
   attr_reader :comments, :account, :period, :invoice_date, :snapshot, :products_maker
   def initialize(account:,
-                 period:,
                  invoice_date: Time.zone.today,
                  comments:,
                  snapshot:)
     @account = account
-    @period = period
     @invoice_date = invoice_date
     @comments = comments
     @snapshot = snapshot
@@ -38,7 +36,7 @@ class InvoiceMaker
     (invoice = Invoice.new)
       .prepare account: account,
                invoice_date: invoice_date,
-               property: account.property.invoice(billing_period: period),
+               property: account.property.invoice,
                snapshot: snapshot,
                comments: comments
     invoice.deliver = snapshot.debits? ? :mail : :retain

@@ -32,7 +32,6 @@ class InvoicesMaker
 
   def invoice_maker account: account
     InvoiceMaker.new(account: account,
-                     period: invoicing.period,
                      invoice_date: invoice_date,
                      comments: comments,
                      snapshot: snapshot_maker(account))
