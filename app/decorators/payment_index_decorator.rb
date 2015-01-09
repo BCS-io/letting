@@ -42,6 +42,6 @@ class PaymentIndexDecorator
 
   def balance
     number_to_currency \
-      payment.account.balance to_date: StringDate.new(booked_on).to_date
+      payment.account.balance to_time: StringDate.new(booked_on).to_date
   end
 end

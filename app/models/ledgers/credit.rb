@@ -17,6 +17,8 @@ class Credit < ActiveRecord::Base
   belongs_to :payment
   belongs_to :account
   belongs_to :charge, inverse_of: :credits
+  delegate :charge_type, to: :charge
+  delegate :automatic_payment?, to: :charge
   has_many :debits, through: :settlements
   has_many :settlements, dependent: :destroy
 
@@ -29,18 +31,16 @@ class Credit < ActiveRecord::Base
     self.on_date = Time.zone.today if on_date.blank?
   end
 
-  delegate :charge_type, to: :charge
-
   def clear_up
     mark_for_destruction if amount.nil? || amount.round(2).zero?
   end
 
   # outstanding is the amount left unpaid
-  # (credit) amount is normally negative
-  # settled starts at 0 and becomes larger until settled - amount == 0
-  # Outstanding will be initially negative trending to 0
+  # (credit) amount is normally positive
+  # settled starts at 0 and becomes larger until (settled - amount == 0)
+  # Outstanding will be initially positive trending to 0
   def outstanding
-    -amount - settled
+    amount - settled
   end
 
   def spent?
@@ -48,10 +48,19 @@ class Credit < ActiveRecord::Base
   end
 
   scope :total, -> { sum(:amount)  }
-  scope :before, -> (until_date) { where('? >= on_date', until_date) }
+  scope :until, -> (until_time) { where('? >= on_date', until_time) }
 
   def self.available charge_id
     where(charge_id: charge_id).order(:on_date).reject(&:spent?)
+  end
+
+  def to_s
+    "id: #{id || 'nil'}, " \
+    "charge_id: #{charge_id || 'nil'}, " \
+    "on_date: #{on_date.to_date}+t, " \
+    "outstanding: #{outstanding}, " \
+    "amount: #{amount}, " +
+      charge_to_s
   end
 
   private
@@ -66,5 +75,14 @@ class Credit < ActiveRecord::Base
 
   def settled
     settlements.pluck(:amount).inject(0, :+)
+  end
+
+  def charge_to_s
+    if charge
+      "charge_type: #{charge_type || 'nil' } " \
+      "auto: #{automatic_payment? || 'nil' } "
+    else
+      'charge: nil'
+    end
   end
 end

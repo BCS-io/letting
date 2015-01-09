@@ -19,7 +19,7 @@ describe AccountCreditDecorator do
 
     it '#payment' do
       credit_dec = AccountCreditDecorator.new credit_new(amount: 90.15)
-      expect(credit_dec.payment).to eq '-90.15'
+      expect(credit_dec.payment).to eq '90.15'
     end
 
     it '#amount' do

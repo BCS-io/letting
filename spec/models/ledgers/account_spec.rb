@@ -69,24 +69,24 @@ describe Account, :ledgers, type: :model do
   end
 
   describe '#balance' do
-    it 'calculates balance to_date' do
+    it 'calculates balance to_time' do
       charge = charge_create
       account = account_new
       account.debits << debit_new(on_date: '2011-3-25', amount: 10.00, charge: charge)
-      account.credits << credit_new(on_date: '2012-4-25', amount: -11.00, charge: charge)
+      account.credits << credit_new(on_date: '2012-4-25', amount: 11.00, charge: charge)
       account.save!
 
-      expect(account.balance to_date: '2013-1-1').to eq(-1.00)
+      expect(account.balance to_time: '2013-1-1').to eq(-1.00)
     end
 
     it 'ignores entries after date' do
       charge = charge_create
       account = account_new
       account.debits << debit_new(on_date: '2011-3-25', amount: 10.00, charge: charge)
-      account.credits << credit_new(on_date: '2012-4-25', amount: -11.00, charge: charge)
+      account.credits << credit_new(on_date: '2012-4-25', amount: 11.00, charge: charge)
       account.save!
 
-      expect(account.balance to_date: '2012-4-24').to eq 10.00
+      expect(account.balance to_time: '2012-4-24').to eq 10.00
     end
 
     it 'smoke test' do
@@ -94,11 +94,11 @@ describe Account, :ledgers, type: :model do
       account = account_new
       account.debits << debit_new(on_date: '4/3/2012', amount: 10.00, charge: charge)
       account.debits << debit_new(on_date: '4/3/2013', amount: 10.00, charge: charge)
-      account.credits << credit_new(on_date: '4/3/2012', amount: -30.00, charge: charge)
-      account.credits << credit_new(on_date: '4/3/2012', amount: -30.00, charge: charge)
+      account.credits << credit_new(on_date: '4/3/2012', amount: 30.00, charge: charge)
+      account.credits << credit_new(on_date: '4/3/2012', amount: 30.00, charge: charge)
       account.save!
 
-      expect(account.balance to_date: '2013-4-1').to eq(-40.00)
+      expect(account.balance to_time: '2013-4-1').to eq(-40.00)
     end
   end
 
@@ -110,20 +110,20 @@ describe Account, :ledgers, type: :model do
                                     amount: 11.00,
                                     charge: charge
       account.credits.push credit_new on_date: '25/4/2012',
-                                      amount: -10.00,
+                                      amount: 10.00,
                                       charge: charge
       account.save!
-      expect(Account.balance_all.first.balance).to eq(1.00)
+      expect(Account.balance_all.first.amount).to eq(1.00)
     end
 
     it 'calculates balance when only credits' do
       charge = charge_create
       account = account_new id: 3, property: property_new(id: 4)
       account.credits.push credit_new on_date: '25/4/2012',
-                                      amount: 11.00, # normally negative
+                                      amount: 11.00,
                                       charge: charge
       account.save!
-      expect(Account.balance_all.first.balance).to eq(11.00)
+      expect(Account.balance_all(greater_than: -12).first.amount).to eq(-11.00)
     end
 
     it 'calculates balance when only debits' do
@@ -133,7 +133,7 @@ describe Account, :ledgers, type: :model do
                                     amount: 10.00,
                                     charge: charge
       account.save!
-      expect(Account.balance_all.first.balance).to eq(10.00)
+      expect(Account.balance_all.first.amount).to eq(10.00)
     end
 
     it 'calculates simple balance' do
@@ -148,14 +148,34 @@ describe Account, :ledgers, type: :model do
 
     it 'smoke test' do
       charge = charge_create
-      debit_1 = debit_new amount: 3, on_date: Date.new(2012, 3, 4), charge: charge
-      debit_2 = debit_new amount: 3, on_date: Date.new(2013, 3, 4), charge: charge
-      credit_1 = credit_new amount: -1, on_date: Date.new(2012, 3, 4), charge: charge
-      credit_2 = credit_new amount: -1, on_date: Date.new(2013, 3, 4), charge: charge
+      credit_1 = credit_new amount: 3, on_date: Date.new(2012, 3, 4), charge: charge
+      credit_2 = credit_new amount: 1, on_date: Date.new(2013, 3, 4), charge: charge
+      debit_1 = debit_new amount: 7, on_date: Date.new(2012, 3, 4), charge: charge
+      debit_2 = debit_new amount: 5, on_date: Date.new(2013, 3, 4), charge: charge
       account_create credits: [credit_1, credit_2],
                      debits: [debit_1, debit_2]
 
-      expect(Account.balance_all.first.balance).to eq(4.00)
+      expect(Account.balance_all.first.amount).to eq(8.00)
+    end
+
+    describe 'greater_than' do
+      it 'removes those accounts less than' do
+        charge = charge_create
+        debit = debit_new amount: 10, on_date: Date.new(2012, 3, 4), charge: charge
+        credit = credit_new amount: 9, on_date: Date.new(2012, 3, 4), charge: charge
+        account_create credits: [credit], debits: [debit]
+
+        expect(Account.balance_all(greater_than: 10).size).to eq 0
+      end
+
+      it 'includes accounts greater than than' do
+        charge = charge_create
+        debit = debit_new amount: 20, on_date: Date.new(2012, 3, 4), charge: charge
+        credit = credit_new amount: 5, on_date: Date.new(2012, 3, 4), charge: charge
+        account_create credits: [credit], debits: [debit]
+
+        expect(Account.balance_all(greater_than: 10).size).to eq 1
+      end
     end
   end
 

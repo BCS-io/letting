@@ -38,6 +38,10 @@ class AccountCreditDecorator
   end
 
   def payment
-    number_with_precision(-credit.amount, precision: 2)
+    number_with_precision(credit.amount, precision: 2)
+  end
+
+  def balance
+    -credit.amount
   end
 end

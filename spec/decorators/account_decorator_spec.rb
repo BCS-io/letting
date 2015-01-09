@@ -9,8 +9,8 @@ describe AccountDecorator do
       account = AccountDecorator.new account_new charges: [charge_new]
       account.debits.push debit_new on_date: '25/9/2012', amount: 5.00
       account.debits.push debit_new on_date: '25/9/2013', amount: 10.00
-      account.credits.push credit_new on_date: '25/9/2014', amount: -12.00
-      expect(account.items.map(&:running_balance)).to \
+      account.credits.push credit_new on_date: '25/9/2014', amount: 12.00
+      expect(account.all_items.map(&:running_balance)).to \
         contain_exactly \
            5.00,
            15.00,
@@ -30,7 +30,7 @@ describe AccountDecorator do
     end
 
     it 'orders items by date' do
-      expect(account.items.map(&:on_date)).to contain_exactly \
+      expect(account.all_items.map(&:on_date)).to contain_exactly \
         Time.zone.local(2013, 3, 25, 0, 0, 0, '+0').to_s,
         Time.zone.local(2013, 4, 30, 0, 0, 0, '+1').to_s,
         Time.zone.local(2013, 9, 25, 0, 0, 0, '+1').to_s
@@ -70,7 +70,7 @@ describe AccountDecorator do
                                     amount: 10.00
       account.credits.push credit_new charge: charge,
                                       on_date: '25/4/2012',
-                                      amount: -5.50
+                                      amount: 5.50
       account.save!
       dec = AccountDecorator.new account
 

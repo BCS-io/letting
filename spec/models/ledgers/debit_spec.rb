@@ -48,7 +48,7 @@ describe Debit, :ledgers, type: :model do
       it 'a debit settled by a credit is not available' do
         charge = charge_create
         debit = debit_create charge: charge, on_date: '2012-4-1', amount: 15
-        credit_create charge: charge, on_date: '2012-5-1', amount: -15
+        credit_create charge: charge, on_date: '2012-5-1', amount: 15
         expect(debit).to be_paid
 
         expect(Debit.available charge.id).to eq []
@@ -82,7 +82,7 @@ describe Debit, :ledgers, type: :model do
       it 'a credit values are removed' do
         charge = charge_create
         debit_create charge: charge, on_date: '2012-4-1', amount: 15
-        credit_create charge: charge, on_date: '2012-5-1', amount: -5
+        credit_create charge: charge, on_date: '2012-5-1', amount: 5
 
         expect(Debit.debt_on_charge charge.id).to eq 10
       end
@@ -103,14 +103,17 @@ describe Debit, :ledgers, type: :model do
 
     describe '#outstanding' do
       it 'returns amount if nothing paid' do
-        expect(debit_new.outstanding).to eq 88.08
+        debit = debit_create amount: 14, charge: charge_create
+
+        expect(debit.outstanding).to eq(14.00)
       end
 
-      it 'multiple credits are added' do
-        charge = charge_create(debits:  [debit_new(amount: 88.08)],
-                               credits: [credit_new(amount: -44.04)])
-        charge.save!
-        expect(Debit.first.outstanding).to eq 44.04
+      it 'credits reduce the outstanding amount' do
+        charge = charge_create
+        credit_create amount: 4.00, charge: charge
+        debit_create amount: 6.00, charge: charge
+
+        expect(Debit.first.outstanding).to eq 2
       end
     end
 
@@ -123,7 +126,7 @@ describe Debit, :ledgers, type: :model do
 
       it 'true when paid in full' do
         charge = charge_new(debits:  [debit_new(amount: 88.08)],
-                            credits: [credit_new(amount: -88.08)])
+                            credits: [credit_new(amount: 88.08)])
         charge.save!
         expect(Debit.first).to be_paid
       end
@@ -186,12 +189,13 @@ describe Debit, :ledgers, type: :model do
 
     describe '#to_s' do
       it 'without charge' do
-        expect(debit_new.to_s)
+        expect(debit_new(amount: 5).to_s)
           .to eq 'id: nil, ' \
                  'charge_id: nil, ' \
                  'on_date: 2013-03-25+t, ' \
                  'period: 2013-03-25..2013-06-30, ' \
-                 'amount: 88.08, ' \
+                 'outstanding: 5.0, ' \
+                 'amount: 5.0, ' \
                  'charge: nil'
       end
 

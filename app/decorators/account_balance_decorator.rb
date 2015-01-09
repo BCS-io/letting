@@ -45,4 +45,8 @@ class AccountBalanceDecorator
   def payment
     ''
   end
+
+  def balance
+    amount
+  end
 end

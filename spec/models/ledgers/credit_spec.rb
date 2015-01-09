@@ -57,7 +57,7 @@ describe Credit, :ledgers, type: :model do
                     amount: 30,
                     on_date: Time.zone.local(2008, 3, 2, 0, 0, 0)
 
-      expect(Credit.before(Time.zone.local(2008, 3, 2, 12, 0, 0)).size).to eq 1
+      expect(Credit.until(Time.zone.local(2008, 3, 2, 12, 0, 0)).size).to eq 1
     end
 
     it 'ignores charges later than a date' do
@@ -65,14 +65,14 @@ describe Credit, :ledgers, type: :model do
                     amount: 30,
                     on_date: Time.zone.local(2008, 3, 2, 12, 0, 0)
 
-      expect(Credit.before(Time.zone.local(2008, 3, 2, 0, 0, 0)).size).to eq 0
+      expect(Credit.until(Time.zone.local(2008, 3, 2, 0, 0, 0)).size).to eq 0
     end
 
     it 'finds income with multiple numbers' do
       charge = charge_create
-      credit_create charge: charge, amount: -20
-      credit_create charge: charge, amount: -10
-      expect(Credit.total).to eq(-30.00)
+      credit_create charge: charge, amount: 20
+      credit_create charge: charge, amount: 10
+      expect(Credit.total).to eq(30.00)
     end
   end
 
@@ -105,8 +105,8 @@ describe Credit, :ledgers, type: :model do
       end
 
       it 'orders credits by date' do
-        last  = credit_new on_date: Date.new(2013, 4, 1)
-        first = credit_new on_date: Date.new(2012, 4, 1)
+        last  = credit_new on_date: '2013-4-1'
+        first = credit_new on_date: '2012-4-1'
         charge = charge_create credits: [last, first]
 
         expect(Credit.available charge.id).to eq [first, last]
@@ -128,29 +128,33 @@ describe Credit, :ledgers, type: :model do
 
     describe '#outstanding' do
       it 'returns amount if nothing paid' do
-        skip 'has not settled records so cannot work'
-        expect(credit_new.outstanding).to eq(88.08)
+        credit = credit_create amount: 14, charge: charge_create
+
+        expect(credit.outstanding).to eq(14.00)
       end
 
-      it 'multiple credits are added' do
-        skip 'has not settled records so cannot work'
-        charge = charge_create(debits:  [debit_new(amount: 4.00)],
-                               credits: [credit_new(amount: 6.00)])
-        charge.save!
+      it 'debit reduces the outstanding amount' do
+        charge = charge_create
+        debit_create amount: 4.00, charge: charge
+        credit_create amount: 6.00, charge: charge
+
         expect(Credit.first.outstanding).to eq(2.00)
       end
     end
 
     describe '#spent?' do
       it 'false without credit' do
-        expect(credit_create charge: charge_new, amount: (-88.07))
-          .to_not be_spent
+        charge = charge_create
+        credit_create amount: 8.00, charge: charge
+
+        expect(Credit.first).to_not be_spent
       end
 
       it 'true when spent' do
-        charge = charge_new(debits:  [debit_new(amount: 8.00)],
-                            credits: [credit_new(amount: 8.00)])
-        charge.save!
+        charge = charge_create
+        debit_create amount: 8.00, charge: charge
+        credit_create amount: 8.00, charge: charge
+
         expect(Credit.first).to be_spent
       end
     end

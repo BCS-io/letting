@@ -11,7 +11,7 @@ def credit_new payment_id: 1,
                charge_id: nil,
                charge: nil,
                on_date: '30/4/2013 00:00:00',
-               amount: -88.08
+               amount: 88.08
 
   credit = Credit.new payment_id: payment_id,
                       account_id: account_id,
@@ -29,7 +29,7 @@ def credit_create payment_id: 1,
                   charge_id: nil,
                   charge: nil,
                   on_date: '30/4/2013 00:00:00',
-                  amount: -88.08
+                  amount: 88.08
   credit = credit_new payment_id: payment_id,
                       account_id: account_id,
                       charge_id: charge_id,

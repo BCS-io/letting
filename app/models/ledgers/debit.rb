@@ -76,7 +76,7 @@ class Debit < ActiveRecord::Base
   end
 
   scope :total, -> { sum(:amount)  }
-  scope :before, -> (until_date) { where('? >= on_date', until_date) }
+  scope :until, -> (until_time) { where('? >= on_date', until_time) }
 
   # charge_id - the charge's being queried for unpaid debits.
   # returns unpaid debits for the charge_id
@@ -85,6 +85,8 @@ class Debit < ActiveRecord::Base
     where(charge_id: charge_id).order(:on_date).reject(&:paid?)
   end
 
+  # Calculation of the outstanding debt on a charge
+  #
   def self.debt_on_charge charge_id
     available(charge_id).to_a.sum(&:outstanding)
   end
@@ -94,6 +96,7 @@ class Debit < ActiveRecord::Base
     "charge_id: #{charge_id || 'nil'}, " \
     "on_date: #{on_date.to_date}+t, " \
     "period: #{period}, " \
+    "outstanding: #{outstanding}, " \
     "amount: #{amount}, " +
       charge_to_s
   end

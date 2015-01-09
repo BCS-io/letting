@@ -55,6 +55,6 @@
     </div>
 
     <%= render 'account_items/header' %>
-    <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).items %>
+    <%= render partial: 'account_items/account_item', collection: AccountDecorator.new(@property.account).all_items %>
   </div>
 </div> <!-- grid  shell js-toggle-selection -->
