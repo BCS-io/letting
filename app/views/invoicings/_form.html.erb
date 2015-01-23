@@ -1,7 +1,7 @@
 <%= form_for invoicing do |f| %>
   <%= render 'shared/errors', object: invoicing %>
 
-  <fieldset id='invoicing' <%= invoicing.actionable? ? '' : disabled="disabled" %> class='grid  shell-1-25  overlay-parent'>
+  <fieldset id='invoicing' class='grid  shell-1-25  overlay-parent'>
     <div class='col-1-2  spacer-column'>
 
       <div class='col-12-24  grid-row  bottom-half-line-spacer'>
@@ -12,7 +12,7 @@
         Invoice Properties
       </div>
       <div class='col-12-24  bottom-half-line-spacer'>
-        <%= f.text_field :property_range, readonly: true %>
+        <%= f.text_field :property_range %>
       </div>
 
       <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
@@ -35,10 +35,10 @@
     <div class='col-1-2  spacer-column'>
 
       <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
+
       <div class='col-16-24  top-2-line-spacer'>
         <%= render 'forms/buttons', f: f, path: new_invoicing_path, disabled: !invoicing.actionable? %>
       </div>
-    </div>
 
     <div class='col-6-24  grid-row  bottom-spacer  faded'>Comments</div>
     <div class='col-17-24  bottom-spacer  faded'>
@@ -55,7 +55,6 @@
     <%= render 'invoices/invoices', run: invoicing.runs.last, action: false %>
 
   <% else %>
-    <%= render partial: 'teachings/invoicing' %>
     <%= render 'account_debits/show', search_terms: params[:search_terms], start_date: params[:start_date], end_date: params[:end_date] if params[:search_terms] %>
   <% end %>
   </fieldset> <!-- grid  shell -->
