@@ -95,31 +95,6 @@ describe Invoicing, type: :feature do
     Timecop.return
   end
 
-  describe 'disabled' do
-    it 'disables fieldset on first visit' do
-      Timecop.travel '2013-6-1'
-
-      invoicing_page.enter
-      expect(invoicing_page.form).to be_disabled
-
-      Timecop.return
-    end
-
-    it 'enables fieldset when able to do invoicing' do
-      Timecop.travel '2013-6-1'
-
-      create_account human_ref: 87,
-                     cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
-
-      invoicing_page.enter
-      invoicing_page.search_term('87').search
-
-      expect(invoicing_page.form).to_not be_disabled
-
-      Timecop.return
-    end
-  end
-
   describe 'errors when the property range' do
     it 'excludes all existing properties' do
       Timecop.travel '2013-6-1'

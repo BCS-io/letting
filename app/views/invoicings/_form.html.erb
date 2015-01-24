@@ -2,51 +2,44 @@
   <%= render 'shared/errors', object: invoicing %>
 
   <fieldset id='invoicing' class='grid  shell-1-25  overlay-parent'>
-    <div class='col-1-2  spacer-column'>
-
-      <div class='col-12-24  grid-row  bottom-half-line-spacer'>
-        <h3 class='faded'>Search Terms</h3>
-      </div>
+    <div class='col-2-3  spacer-column'>  <!-- column 1 -->
 
       <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
-        Invoice Properties
+        <h3>Search Terms</h3>
       </div>
-      <div class='col-12-24  bottom-half-line-spacer'>
+
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
+        Invoice Accounts
+      </div>
+      <div class='col-16-24  bottom-half-line-spacer'>
         <%= f.text_field :property_range %>
       </div>
 
-      <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
-        Invoice Between
-      </div>
-      <div class='col-12-24  bottom-half-line-spacer'>
-        <%= salient_date_range start_date: invoicing.period_first, end_date: invoicing.period_last %>
-          <%= f.hidden_field :period_first %>
-          <%= f.hidden_field :period_last %>
-      </div>
+      <%= render 'invoicings/search', f: f %>
 
-      <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
         Invoice Date
       </div>
-      <div class='col-12-24  bottom-half-line-spacer'>
+      <div class='col-16-24  bottom-half-line-spacer'>
         <%= date_field_tag :invoice_date, params[:invoice_date] || Time.zone.today  %>
       </div>
     </div>
 
-    <div class='col-1-2  spacer-column'>
-
-      <div class='col-4-24  grid-row  bottom-spacer'>&nbsp;</div>
-
-      <div class='col-16-24  top-2-line-spacer'>
-        <%= render 'forms/buttons', f: f, path: new_invoicing_path, disabled: !invoicing.actionable? %>
+    <div class='col-1-3  spacer-column'>  <!-- column 2 -->
+      <div class='top-2-line-spacer'>
+        <%= render 'forms/buttons', f: f, path: new_invoicing_path %>
       </div>
+    </div>
 
-    <div class='col-6-24  grid-row  bottom-spacer  faded'>Comments</div>
-    <div class='col-17-24  bottom-spacer  faded'>
+    <!-- across page -->
+
+    <div class='col-4-24  grid-row  bottom-spacer  faded'>Comments</div>
+    <div class='col-16-24  bottom-spacer  faded'>
       <%= text_field_tag 'comment[]' %>
     </div>
 
-    <div class='col-6-24  grid-row  bottom-spacer  faded'>&nbsp;</div>
-    <div class='col-17-24  bottom-spacer  faded'>
+    <div class='col-4-24  grid-row  bottom-spacer  faded'>&nbsp;</div>
+    <div class='col-16-24  bottom-spacer  faded'>
       <%= text_field_tag 'comment[]' %>
     </div>
 

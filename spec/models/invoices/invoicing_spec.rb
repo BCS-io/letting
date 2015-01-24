@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Invoicing, type: :model do
-  it('is valid') { expect(invoicing_new).to be_valid }
+  it 'is valid' do
+    property_create human_ref: 1, account: account_new
+    expect(invoicing_new).to be_valid
+  end
   describe 'validates presence' do
     it 'property_range' do
       expect(invoicing_new property_range: nil).to_not be_valid

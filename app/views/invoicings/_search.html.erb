@@ -1,21 +1,20 @@
-<div class='js-toggle-selection  invoicings-padded'>
-  <div class='js-togglable  c-align  <%= expose_if_invoicing_dates_default %>'>
-    <h4>Search within the next <%= Invoicing::WEEKS_AHEAD %> weeks
-      <%= choosing_dates_link %>&nbsp;
-      <%= link_to fa_icon('calendar lg'), '#',title: 'Choose Dates with calendar', class: 'js-toggle  inverted-link' %>
-    </h4>
+<div class='col-6-24  grid-row  js-togglable  bottom-half-line-spacer  faded'>
+  Search Dates
+</div>
+<div class='js-toggle-selection   bottom-half-line-spacer'>
+  <div class='col-16-24  js-togglable'>
+    within <%= Invoicing::WEEKS_AHEAD %> weeks
+    <%= choosing_dates_link %>
   </div>
-  <div class='js-togglable  <%= hide_if_invoicing_dates_default %>'>
-    <h4 class='c-align'>Search within chosen dates
-      <%= default_date_link %>
-    </h4>
+  <div class='col-16-24  js-togglable js-revealable   bottom-half-line-spacer  '>
+    <%= default_date_link %>
     <div class='col-1-2'>
       <%= label_tag :start_date %>
-      <%= date_field_tag :start_date, invoicing_start_date  %>
+      <%= f.date_field :period_first  %>
     </div>
     <div class='col-1-2'>
       <%= label_tag :end_date %>
-      <%= date_field_tag :end_date, invoicing_end_date %>
+      <%= f.date_field :period_last %>
     </div>
   </div>
 </div>

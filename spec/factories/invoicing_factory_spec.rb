@@ -2,7 +2,10 @@ require 'rails_helper'
 
 describe 'Invoicing Factory' do
   describe 'default' do
-    it('is valid') { expect(invoicing_new).to be_valid }
+    it "is valid if covers an account's human_ref" do
+      property_create human_ref: 1, account: account_new
+      expect(invoicing_new).to be_valid
+    end
     describe 'presence' do
       it 'property_range' do
         expect(invoicing_new property_range: nil).to_not be_valid

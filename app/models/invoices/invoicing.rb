@@ -33,6 +33,13 @@ class Invoicing < ActiveRecord::Base
     AccountFinder.new(property_range: property_range).matching
   end
 
+  validate :mininum_accounts
+  def mininum_accounts
+    return if accounts.size > 0
+
+    errors.add(:invoice_accounts, 'does not match any accounts.')
+  end
+
   # valid_arguments?
   # Does this invoicing have enough arguments to call generate on?
   # Nil values for property_range and period are nil cause problems.

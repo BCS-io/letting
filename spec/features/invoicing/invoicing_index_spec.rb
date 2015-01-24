@@ -7,6 +7,7 @@ describe Invoicing, type: :feature do
 
   describe '#index' do
     it 'basic' do
+      property_create human_ref: 2, account: account_new
       invoicing_create property_range: '1-200',
                        period_first: '2013/06/30',
                        period_last: '2013/08/30'
@@ -18,6 +19,7 @@ describe Invoicing, type: :feature do
     end
 
     it 'deletes' do
+      property_create human_ref: 2, account: account_new
       invoicing_create property_range: '1-200',
                        period_first: "#{Time.zone.now.year}/06/30",
                        period_last: "#{Time.zone.now.year}/08/30"

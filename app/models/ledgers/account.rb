@@ -120,7 +120,7 @@ class Account < ActiveRecord::Base
     Account.between?(human_ref).first
   end
 
-  # Searches for matching accounts between a range
+  # Searches for matching accounts human_ref between a range
   # query - an account or account range, '2002 - 3000'
   #
   def self.between? human_ref_range

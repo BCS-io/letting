@@ -7,6 +7,7 @@
 ####
 #
 class InvoicingsController < ApplicationController
+  include InvoicingHelper
   # Print button on index allows printing of complete run
   #
   def index
@@ -22,7 +23,7 @@ class InvoicingsController < ApplicationController
   def new
     @invoicing = Invoicing.new \
                    property_range: SpaceOut.process(params[:search_terms]),
-                   period: params[:start_date]..params[:end_date]
+                   period: invoicing_start_date..invoicing_end_date
     @invoicing.generate if @invoicing.valid_arguments?
   end
 

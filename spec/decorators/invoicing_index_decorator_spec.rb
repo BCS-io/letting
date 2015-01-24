@@ -3,7 +3,10 @@ require 'rails_helper'
 describe InvoicingIndexDecorator do
   it '#created_at' do
     Timecop.travel(Time.zone.local(2008, 9, 1, 10, 5, 1))
-    invoicing_dec = InvoicingIndexDecorator.new invoicing_create
+    property_create human_ref: 1, account: account_new
+    invoicing_dec = InvoicingIndexDecorator.new \
+      invoicing_create property_range: '1-2'
+
     expect(invoicing_dec.created_at).to eq '01 Sep 2008 10:05'
     Timecop.return
   end
