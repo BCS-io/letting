@@ -55,6 +55,8 @@ module Searchable
       }
     )
 
+    # https://github.com/elasticsearch/elasticsearch-rails/issues/206
+
     mapping _all: { index_analyzer: :nGram_analyzer,
                     search_analyzer: :whitespace_analyzer } do
       indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
@@ -68,9 +70,14 @@ module Searchable
       indexes :updated_at, index: :not_analyzed
     end
 
-    def self.search(query)
-      __elasticsearch__.search(
-        query: {
+    def self.search(query, sort)
+      @search_definition = {
+        query: {},
+        filter: {},
+      }
+
+      unless query.blank?
+        @search_definition[:query] = {
           match: {
             _all: {
               query: query,
@@ -78,7 +85,12 @@ module Searchable
             }
           }
         }
-      )
+        @search_definition[:size]  = 100
+      else
+        @search_definition[:query] = { match_all: {} }
+        @search_definition[:size]  = 100
+      end
+      __elasticsearch__.search(@search_definition)
     end
   end
 end

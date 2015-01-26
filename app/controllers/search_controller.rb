@@ -19,7 +19,7 @@ class SearchController < ApplicationController
     if literal_search_hit? literal_search
       redirect_to redirect_params(literal_search).merge(repack_search_params)
     else
-      @records = full_text_search[:records].page(params[:page])
+      @records = full_text_search[:records].page(params[:page]).order(:human_ref)
       render full_text_search[:render]
     end
   end

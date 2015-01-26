@@ -41,7 +41,7 @@ class FullTextSearch
       { success: success, records: records, render: 'clients/index' }
     when 'Payment'
       success = true
-      records = Payment.search(query).records
+      records = Payment.search(query, '').records
       if records.count.zero?
         success = false
         records = Payment.all
@@ -50,8 +50,10 @@ class FullTextSearch
         records: records,
         render: 'payments/add_new_payment_index' }
     else
+      # HERE
+      #
       success = true
-      records = Property.search(query).records.order(:human_ref)
+      records = Property.search(query, 'human_ref').records
       if records.count.zero?
         success = false
         records = Property.all
