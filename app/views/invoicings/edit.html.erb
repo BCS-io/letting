@@ -9,4 +9,65 @@
     <% end %>
   </ul>
 </div>
-<%= render 'invoicings/form', invoicing: @invoicing %>
+
+<% invoicing = @invoicing %>
+
+<%= form_for invoicing do |f| %>
+  <%= render 'shared/errors', object: invoicing %>
+
+  <fieldset id='invoicing' class='grid  shell-1-25'>
+    <div class='col-2-3  spacer-column'>  <!-- column 1 -->
+
+      <div class='col-12-24  grid-row  bottom-half-line-spacer  faded'>
+        <h3>Search Terms</h3>
+      </div>
+
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
+        <%= f.label :property_range, class: 'required' %>
+      </div>
+      <div class='col-16-24  bottom-half-line-spacer'>
+        <%= f.text_field :property_range, disabled: true %>
+      </div>
+
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
+        Search Dates
+      </div>
+      <div class='col-16-24  bottom-half-line-spacer'>
+        <div class='col-1-2'>
+          <%= label_tag :period_first, 'Start date' %>
+          <%= f.date_field :period_first, disabled: true %>
+        </div>
+        <div class='col-1-2'>
+          <%= label_tag :period_last, 'End date' %>
+          <%= f.date_field :period_last , disabled: true %>
+        </div>
+      </div>
+
+      <div class='col-6-24  grid-row  bottom-half-line-spacer  faded'>
+        Invoice Date
+      </div>
+      <div class='col-16-24  bottom-half-line-spacer'>
+        <%= date_field_tag :invoice_date, params[:invoice_date] %>
+      </div>
+    </div>
+
+    <div class='col-1-3  spacer-column'>  <!-- column 2 -->
+      <div class='top-2-line-spacer'>
+        <%= render 'forms/buttons', f: f, path: new_invoicing_path %>
+      </div>
+    </div>
+
+    <!-- across page -->
+
+    <div class='col-4-24  grid-row  bottom-spacer  faded'>Comments</div>
+    <div class='col-16-24  bottom-spacer  faded'>
+      <%= text_field_tag 'comment[]' %>
+    </div>
+
+    <div class='col-4-24  grid-row  bottom-spacer  faded'>&nbsp;</div>
+    <div class='col-16-24  bottom-spacer  faded'>
+      <%= text_field_tag 'comment[]' %>
+    </div>
+  </fieldset> <!-- grid  shell -->
+<% end %> <!-- form -->
+
