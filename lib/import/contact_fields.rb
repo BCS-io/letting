@@ -70,7 +70,10 @@ module DB
     end
 
     def county_map
-      { 'Staffs' => 'Stafford', 'Warks' => 'Warwickshire' }
+      { 'Staffs' => 'Stafford',
+        'Warks' => 'Warwickshire',
+        'Worcs' => 'Worcestershire',
+        'Worcsestershire' => 'Worcestershire' }
     end
   end
 end
