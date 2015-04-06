@@ -43,6 +43,7 @@ This document covers the following sections
   * 6\. Reset the database
   * 7\. Running rails console in production
   * 8\. Truncating a file without changing ownership
+  *.9\. Recursive diff of two directories
 6. Production Client
 <br><br><br>
 
@@ -541,6 +542,11 @@ Sometimes when you are changing a project the database will not allow you to del
 cat /dev/null > /file/you/want/to/wipe-out
 `````
 
+####5.9 Recursive diff of two directories
+
+````
+diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
+````
 
 ####6 Production Client
 On release of the version go through the checklist in docs/production_checklist
