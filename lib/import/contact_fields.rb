@@ -44,7 +44,7 @@ module DB
         road:       row[:road],
         district:   row[:district],
         town:       town,
-        county:     row[:county],
+        county:     county,
         postcode:   row[:postcode],
         nation:     row[:nation],
       }
@@ -52,7 +52,25 @@ module DB
 
     def town
       return if row[:town].nil?
+      return town_map[row[:town]] if town_map.include?(row[:town])
+
       row[:town].titleize
+    end
+
+    def county
+      return county_map[row[:county]] if county_map.include?(row[:county])
+
+      row[:county]
+    end
+
+    # transformation map
+    #
+    def town_map
+      { 'Harbourne' => 'Harborne' }
+    end
+
+    def county_map
+      { 'Staffs' => 'Stafford', 'Warks' => 'Warwickshire' }
     end
   end
 end
