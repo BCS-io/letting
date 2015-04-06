@@ -1,31 +1,20 @@
 <% @title='Clients' %>
 <% clients = @records %>
-<div  id='help-me',  data-summit='5'></div>
-<%= render 'index_help' %>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'clients/index_help' %>
 <div class='Bubble-search'>
   <%= render 'bubbles/search', line1: 'Client Search Box', line2: 'Search by number, name or part address' %>
 </div>
 
 <div class='grid  Shell  u-padding-1-25'>
 
-  <div class='col-3-24  grid-row'>&nbsp;</div>
-  <div class='col-18-24  Bubble-pt-right'>
-    <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg',  line1: 'View Client Details',  line2: "Click on a client row for that client's details" %>
-    &nbsp;
-  </div>
-  <div class='col-2-24  Bubble-anchor'>
-    <%= render 'bubbles/help_3',  pic: 'fa fa-edit  fa-lg', line1: 'Edit Button',  line2: "Edits a client's details" %>
-    &nbsp;
-  </div>
-  <div class='col-1-24  Bubble-anchor'>
-    <%= render 'bubbles/help_4',  pic: 'fa fa-trash-o  fa-lg', line1: 'Delete Button', line2: 'Deletes a client record and all its accounts' %>
-    &nbsp;
-  </div>
-
   <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
     Client ID
   </div>
-  <div class='col-9-24  bottom-spacer  grid-header'>Name</div>
+  <div class='col-9-24  bottom-spacer  grid-header'>
+    Name
+    <%= render 'bubbles/help_2_view',  data_type: 'client' %>
+  </div>
   <div class='col-2-24  bottom-spacer  grid-header  r-align'>No</div>
   <div class='col-7-24  bottom-spacer  grid-header'>Road</div>
   <div class='col-3-24  bottom-spacer  grid-header  no-print'>Actions</div>

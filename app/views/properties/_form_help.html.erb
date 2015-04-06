@@ -1,1 +1,10 @@
-<%= render 'bubbles/help_main',  content: 'account',  line1: "The Account's Edit",  line2: 'This page gives the account property details, agent details, charges and accounts. Property details and the accounts can be expanded to give more details.',  line3:'The print button, at the top right-hand corner, will print out the page.',  line4:'The search box at the top of the page is for account searches.',  icon2: 'fa fa-file-o fa-lg',  icon3: '',  icon4: '',  icon5: '',  icon_line2: 'Link to view',  icon_line3: '',  icon_line4: '',  icon_line5: '' %>
+<%= render 'bubbles/help_intro',
+  heading: 'Create New Account and Account Update',
+  search_on: 'accounts',
+  lines: [ 'This form allows the creation of a new account or the update of an existing account. Account details include property address, occupier name, agent details and charges and accounts. The form can be expanded to include more details.',
+        'The print button, at the top right-hand corner, will print out the page.',
+        'The search box at the top of the page is for account searches.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Link to view, if not greyed out'),
+        IconData.new('fa fa-plus-square-o', 'Allows this otherwise blank line to be filled in'),
+        IconData.new('fa fa-trash-o', 'Deletes, if not greyed out')]
+%>

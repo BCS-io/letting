@@ -1,6 +1,6 @@
 <% @title='Arrears' %>
 <% accounts = @records %>
-<div  id='help-me',  data-summit='3'></div>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
 <%= render 'index_help' %>
 <%= render 'bubbles/search_account' %>
 
@@ -11,7 +11,7 @@
     <div class='col-4-12  grid-row  bottom-spacer'>
       <h3>Accounts with arrears of at least:</h3>
       <span class='Bubble-arrears'>
-      <%= render 'bubbles/help_2',  pic: 'fa fa-edit  fa-lg',  line1:'Arrears search box',  line2: "Fill with the amount to search on" %>
+      <%= render 'bubbles/help_2',  pic: 'fa fa-search  fa-lg',  line1:'Arrears search box',  line2: "Fill with the amount to search for" %>
       </span>
     </div>
     <div class='col-3-12  pair-focus  cell  bottom-spacer  c-align  Panel'>

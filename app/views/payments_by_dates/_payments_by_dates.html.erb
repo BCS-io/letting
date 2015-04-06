@@ -3,15 +3,10 @@
   <h2>Payments by Date</h2>
 </div>
 
-  <div  id='help-me',  data-summit='6',  class='col-2-24  grid-row  Bubble-search'>
-    <%= render 'index_help' %>
-    &nbsp;
-  </div>
-
-<div   class='no-print'>
-  <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg',  line1: 'Payment Details',  line2: 'Click on a date row for details of payments made on that date' %>
+<div class='col-2-24  grid-row'>
+  &nbsp;
 </div>
-
+<%= render 'bubbles/help_2_view',  data_type: 'payment' %>
 
 <div class='col-10-24  grid-row  vertical-spacer  grid-header'>
   Booked At

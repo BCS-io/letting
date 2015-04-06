@@ -1,27 +1,9 @@
 <% @title='Invoicing - Second Runs Needed' %>
-<div  id='help-me',  data-summit='6'></div>
-<%= render 'index_help' %>
 <%= render 'bubbles/search_account' %>
+<div  id='help-me',  data-summit='1',  data-setLow='0'></div>
+<%= render 'second_runs_needed/index_help' %>
 
 <div class='grid  Shell  u-padding-1-25'>
-
-  <div  class='col-4-24  grid-row'>&nbsp;</div>
-  <div class='col-13-24  Bubble-anchor'>
-    <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg' , line1: 'View  Run Details',  line2: "Click on a run row for that run's details" %>
-    &nbsp;
-  </div>
-  <div class='col-2-24  Bubble-blue '>
-    <%= render 'bubbles/help_3',  pic: 'fa fa-print  fa-lg', line1:'Print Button',  line2: 'Prints complete run of invoices' %>
-    &nbsp;
-  </div>
-  <div class='col-2-24  Bubble-blue'>
-    <%= render 'bubbles/help_4',  pic: 'fa fa-print  fa-lg',  line1:'2nd Invoice Button', line2: 'Creates blue run of invoices' %>
-    &nbsp;
-  </div>
-  <div class='col-2-24  Bubble-blue '>
-    <%= render 'bubbles/help_5',  pic: 'fa fa-trash-o  fa-lg', line1: 'Delete Button', line2: 'Deletes all invoices in this run' %>
-    &nbsp;
-  </div>
 
  <%= render 'invoicings/invoicing_header' %>
  <% @invoicings.each do |invoicing| %>

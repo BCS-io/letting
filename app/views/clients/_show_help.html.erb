@@ -1,14 +1,9 @@
-<%= render 'bubbles/help_main',
-  content: 'client',
-  line1: "The Client's View",
-  line2:  'This screen gives the client own details, properties associated with the client, and ground rent payment details. Client details and the property list can be expanded to give more details. For details of Ground Rent Payments click on the month of the year of interest.',
-  line3: 'The search box at the top of the page is for client searches.',
-  line4: 'The print button, at the top right-hand corner, will print out the screen as at the time the button is clicked.',
-  icon2: 'fa fa-edit fa-lg',  icon3: 'fa fa-chevron-circle-down fa-lg',
-  icon4: 'fa fa-chevron-circle-up fa-lg',
-  icon5: '',
-  icon_line2: 'Link to edit, to update data',
-  icon_line3: 'Expand data',
-  icon_line4: 'Contract data',
-  icon_line5: ''
-%>
+<%= render 'bubbles/help_intro',
+  heading:  "The Client's View",
+  search_on: 'clients',
+  lines:   ['This screen gives the client own details, properties associated with the client, and ground rent payment details. Client details and the property list can be expanded to give more details. For details of Ground Rent Payments click on the month of the year of interest.',
+            'The search box at the top of the page is for client searches.'],
+  ikon:  [ IconData.new('fa fa-edit', 'Link to edit, to update user'),
+           IconData.new('fa fa-chevron-circle-down', 'Expands data'),
+           IconData.new('fa fa-chevron-circle-up', 'Contracts data')]
+ %>

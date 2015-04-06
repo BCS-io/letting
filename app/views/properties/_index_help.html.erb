@@ -1,1 +1,8 @@
-  <%= render 'bubbles/help_main',  content: 'account', line1: 'The Accounts Index', line2: 'This is the home page as well as the account index. The search box at the top of the page is for account searches. Any searches made by occupier name, agent name or property address will be listed on this page.', line3: 'Clicking on a name or address in the list  will lead you to visit those account details.', line4: 'To get a complete list printed out of all properties on the data base use the big, red full property list button. The print button, at the top right-hand corner, will print out the page.',  icon2: 'fa fa-fa fa-gbp fa-lg',  icon3: 'fa fa-edit fa-lg',  icon4: 'fa fa-trash-o fa-lg',  icon5: '',  icon_line2: 'Link to make a new payment',  icon_line3: 'Link to edit',  icon_line4: 'Delete record',  icon_line5: '' %>
+<%= render 'bubbles/help_acc',
+  heading: 'The Accounts Index',
+  lines: [ 'This is the home page as well as the account index. It contains the full list of all accounts, held over several pages.'],
+   ikon:  [ IconData.new('fa fa-file-o', 'Click on a name or address to link to account view'),
+        IconData.new('fa fa-gbp', 'Link to make a new payment'),
+        IconData.new('fa fa-edit', 'Link to edit, to update a record'),
+        IconData.new('fa fa-trash-o', 'Deletes an account record')]
+%>

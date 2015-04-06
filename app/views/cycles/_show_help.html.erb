@@ -1,14 +1,6 @@
-<%= render 'bubbles/help_main',
-  content: 'cycle',
-  line1: 'The Cycles View',
-  line2: 'The details of this cycle: name, dates and  order number are shown on this page.',
-  line3: 'The search box at the top of the page is for account searches.',
-  line4: 'The print button, at the top right-hand corner, will print out the page.',
-  icon2: 'fa fa-edit fa-lg',
-  icon3: '',  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to edit, to update data',
-  icon_line3: '',
-  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'The Cycles View',
+  search_on: 'accounts',
+  lines: [ 'The details of this cycle: name, dates and  order number are shown on this page.'],
+  ikon:  [ IconData.new('fa fa-edit', 'Link to edit, to update cycle')]
 %>

@@ -1,1 +1,8 @@
-  <%= render 'bubbles/help_main',  content: 'payments', line1: 'Payments Index', line2: 'This is the Payments index, giving payments in date order, most recent first.', line3: 'Clicking on an item will lead you to visit those payment details. The edit button allows editing of payment details.', line4: 'The print button, at the top right-hand corner, allows printing of the list.',  icon2: 'fa fa-edit fa-lg',  icon3: 'fa fa-trash-o fa-lg',  icon4: '',  icon5: '',  icon_line2: 'Link to edit',  icon_line3: 'Delete record',  icon_line4: '',  icon_line5: '' %>
+  <%= render 'bubbles/help_intro',
+  heading: 'Payments Index',
+  search_on: 'accounts',
+  lines: [ 'This is the Payments index, giving payments in date order, most recent first.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Click on a row to link to payment view'),
+           IconData.new('fa fa-edit', 'Link to edit, to update payments'),
+        IconData.new('fa fa-trash-o', 'Deletes payment')]
+%>

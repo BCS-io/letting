@@ -1,24 +1,14 @@
 <% @title='Cycles' %>
-<div  id='help-me',  data-summit='5'></div>
-<%= render 'index_help' %>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'cycles/index_help' %>
 <%= render 'bubbles/search_account' %>
 
 <div class='grid  Shell  u-padding-1-6'>
 
-  <div class='col-2-24  grid-row'>&nbsp;</div>
-  <div class='col-17-24  Bubble-pt-right'>
-    <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View Cycle Details', line2: "Click on a row for that cycle's details"%>
-    &nbsp;
+  <div class='col-12-24  grid-row  bottom-spacer  grid-header'>
+    Name
+    <%= render 'bubbles/help_2_view',  data_type: 'cycle' %>
   </div>
-  <div class='col-2-24  Bubble-anchor'>
-    <%= render 'bubbles/help_3',  pic: 'fa fa-edit  fa-lg',  line1: 'Edit Button',  line2: 'Edits this cycle details' %>
-    &nbsp;
-  </div>
-  <div class='col-1-24  Bubble-anchor'>
-    <%= render 'bubbles/help_4',  pic: 'fa fa-trash-o  fa-lg',  line1: 'Delete Button',  line2: 'Deletes this cycle' %>
-  </div>
-
-  <div class='col-12-24  grid-row  bottom-spacer  grid-header'>Name</div>
   <div class='col-2-24  bottom-spacer  grid-header  r-align'>Order</div>
   <div class='col-1-24  bottom-spacer'>&nbsp;</div>
   <div class='col-4-24  bottom-spacer  grid-header'>Type</div>

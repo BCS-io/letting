@@ -1,1 +1,9 @@
-    <%= render 'bubbles/help_main',  content: 'payment', line1: 'Payments Index', line2: 'Payments can be found, by date, and edited on this page', line3: "Clicking on a date in the 'Payments by Date' list will set up all payments made on that date in the right hand block.", line4: "Clicking on the right hand side, 'Payments on', list goes to a view of the payment.",  icon2: 'fa fa-edit fa-lg',  icon3: 'fa fa-trash-o fa-lg',  icon4: '',  icon5: '',  icon_line2: 'Link to edit payment',  icon_line3: 'Delete payment record',  icon_line4: '',  icon_line5: '' %>
+<%= render 'bubbles/help_intro',
+  heading: 'Payments By Date',
+  search_on: 'accounts',
+  lines: ['Payments can be found, by date, and edited on this page.',
+           "Clicking on a date in the 'Payments by Date' list will set up all payments made on that date in the right hand block. Clicking on the right hand side, 'Payments on', list goes to a view of the payment."],
+  ikon:  [ IconData.new('fa fa-file-o', 'Click on a row to link to payment view'),
+           IconData.new('fa fa-edit', 'Link to edit, to update payment'),
+           IconData.new('fa fa-trash-o', 'Deletes payment')]
+%>

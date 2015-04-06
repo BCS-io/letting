@@ -1,6 +1,6 @@
 <% @title='View User' %>
-<div id='help-me',  data-summit='3'></div>
-<%= render 'show_help' %>
+<div id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'users/show_help' %>
 <%= render 'bubbles/search_account' %>
 
 <div class='grid  Shell  u-padding-1-6'>
@@ -17,10 +17,8 @@
     <div class='col-4-6  bottom-1-line-spacer'><%= @user.role %></div>
   </div>
 
-   <div class='col-1-24  bottom-spacer'>     <!-- 2nd column -->
+  <div class='col-1-24  bottom-spacer'>     <!-- 2nd column -->
     <%= edit_link @user %>
-    <div class='Bubble-point-right'>
-      <%= render 'bubbles/help_2',  pic: 'fa fa-edit  fa-lg',  line1:'User Edit Button',  line2: "Use to edit this user's details" %>
-     </div>
+    <%= render 'bubbles/help_edit',  data_type: 'user' %>
   </div>
 </div> <!-- grid  Shell  u-padding-1-100 -->

@@ -1,4 +1,7 @@
 <% @title='View Payment' %>
+<div id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'bubbles/search_account' %>
+<%= render 'payments/show_help' %>
 <% payment_dec = @payment %>
 
 <fieldset id='payment'  class='grid  Shell  overlay-parent'>
@@ -10,6 +13,7 @@
   <div class='col-6-24  top-spacer  vertical-spacer'>&nbsp;</div>
   <div class='col-2-24  top-spacer  vertical-spacer'>
     <%= edit_link @payment %>
+    <%= render 'bubbles/help_edit',  data_type: 'payment' %>
   </div>
 
   <%= render 'payments/received_header' %>

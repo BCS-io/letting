@@ -1,14 +1,8 @@
-<%= render 'bubbles/help_main',
-  content: 'account',
-  line1: "The Cycle's Edit",
-  line2: 'This page allows the update of cycle name, whether in advance or arrears, order number and dates.',
-  line3: 'The search box at the top of the page is for account searches.',
-  line4: 'The print button, at the top right-hand corner, will print out the page.',
-  icon2: 'fa fa-file-o fa-lg',
-  icon3: '',
-  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to view, if not greyed out',
-  icon_line3: '',  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'Create New Cycle and Cycle Update',
+  search_on: 'accounts',
+  lines: [ 'This form allows the creation of a new cycle or the update of an existing cycle. Cycle details are name, whether in advance or arrears, order number and dates.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Link to view, if not greyed out'),
+           IconData.new('fa fa-plus-square-o', 'Allows this otherwise blank line to be filled in'),
+           IconData.new('fa fa-trash-o', 'Deletes item, if not greyed out')]
 %>

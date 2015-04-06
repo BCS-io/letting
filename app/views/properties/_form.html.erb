@@ -1,5 +1,5 @@
-<div  id='help-me',  data-summit='3'></div>
-<%= render 'form_help' %>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'properties/form_help' %>
 <%= render 'bubbles/search_account' %>
 
 <%= form_for property do |f| %>
@@ -27,9 +27,7 @@
     </div>
     <div class='col-1-24  bottom-spacer  grid-label  no-r-pad'>
       <%= view_link property %>
-      <div class='Bubble-point-right'>
-        <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg',  line1:'View Button',  line2: 'Views this account details. Grey, create, button cannot be viewed. ' %>
-      </div>
+      <%= render 'bubbles/help_view',  data_type: 'account' %>
     </div>
 
     <hr>

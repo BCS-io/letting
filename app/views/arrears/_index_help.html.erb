@@ -1,1 +1,7 @@
-  <%= render 'bubbles/help_main',  content: 'account', line1: 'The Arrears List', line2: 'While the search box at the top of the page is for account searches, the text box lower down is for the arrears list.', line3: 'Choose an amount to put in this box, to give the list of those who owe that amount or more.', line4: 'The print button, at the top right-hand corner, will print out the page.',  icon2: '',  icon3: '',  icon4: '',  icon5: '',  icon_line2: '',  icon_line3: '',  icon_line4: '',  icon_line5: '' %>
+  <%= render 'bubbles/help_arrears',
+   heading: 'The Arrears List',
+   search_on: 'accounts',
+   lines: ['While the search box at the top of the page is for an account search, the text box lower down is for the search for the arrears list.',
+           'Choose an amount to put in the arrears search box, to give the list of those who owe that amount or more.'],
+ ikon:  [ IconData.new('fa fa-search', 'Arrears search box. How much?')]
+%>

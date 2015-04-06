@@ -5,6 +5,7 @@ $( document ).ready(function() {
   $('.js-start-help').click(function() {
     boxReveal = 0;
     summit =  parseInt($("#help-me").attr('data-summit'));
+    setLow =  parseInt($("#help-me").attr('data-setLow'));
     // alert('boxReveal is '+boxReveal+' summit is '+summit);
     cover(summit);
     $('#help_0')[0].style.display = 'block';
@@ -12,6 +13,7 @@ $( document ).ready(function() {
   });
 
   //Summit values are normally set to 4 or 6
+  //setLow: 0 does not show print or logout, -2 does
 
   $('.js-help').click(function() {
 
@@ -22,8 +24,8 @@ $( document ).ready(function() {
     if (boxReveal >= summit )
     {
       cover(summit);
-      $('#help_-2')[0].style.display = 'block';
-      boxReveal = -2;
+      $('#help_' + (setLow ))[0].style.display = 'block';
+      boxReveal = setLow;
     }
 
     if(boxReveal >= -1)

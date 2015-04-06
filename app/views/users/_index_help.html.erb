@@ -1,15 +1,9 @@
-<%= render 'bubbles/help_main',
-  content: 'user',
-  line1: 'User Details',
-  line2: 'This is the user index. It gives details of each user: nickname, email and role. The role can be either user or admin. The admin role allows use of the admin menu, and the update and creation of other users.',
-  line3: 'Clicking on a user name will lead you to visit the user details. ',
-  line4: 'The print button, at the top right-hand corner, allows printing of this list. At no time is there a print made of passwords.',
-  icon2: 'fa fa-edit fa-lg',
-  icon3: 'fa fa-trash-o fa-lg',
-  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to edit, to update data',
-  icon_line3: 'Delete record',
-  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'User Index',
+  search_on: 'accounts',
+  lines: ['This is the user index. It gives details of each user: nickname, email and role. The role can be either user or admin. Only the admin role allows use of the admin menu, and the update and creation of other users.',
+           'Although the print button, allows printing of this page, at no time is there a print made of passwords.'],
+  ikon: [ IconData.new('fa fa-file-o', 'Click on a nickname, email or role to link to user view'),
+          IconData.new('fa fa-edit', 'Link to edit, to update user'),
+          IconData.new('fa fa-trash-o', 'Deletes user')]
 %>

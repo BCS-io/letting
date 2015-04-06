@@ -34,16 +34,19 @@
   }
 
   .icons-in-box {
-    margin-left: 11em;
+    margin-left: 6em;
     padding-right: 1em;
   }
 
+  .button-underline {
+    text-decoration: underline;
+  }
 
   @mixin buttonlet {
     color: $color-ternary-shade-0;
     display: inline-block;
     margin-left: 10px;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 8px;
   }
 
@@ -53,6 +56,26 @@
     border: 1px solid $scheme-help-color;
     border-radius: 3px;
     color: $link-text-primary-color;
+  }
+
+  .help-button-red {
+    @include buttonlet;
+    background: $primary-action-background;
+    border: 1px solid darken($primary-action-background, $border-color-darken);
+    border-radius: 3px;
+    color: $primary-action-color;
+    padding: 10px;
+  }
+
+  .help-button-orange {
+    @include buttonlet;
+    background: $primary-action-background;
+    border-color: $color-complimentary-shade-3;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 5px;
+    color: $primary-action-color;
+    padding: 10px;
   }
 
   .cancel-button {
@@ -73,8 +96,14 @@
 // Used in properties index for big red print button
   .Bubble-allprint {
     position: relative;
-    right: 16em;
+    right: 11em;
     top: -1.9em;
+  }
+
+  .Bubble-arrears {
+    left: 6.5em;
+    position: relative;
+    top: -5em;
   }
 
 // This places box to point exactly where it is set up,
@@ -85,31 +114,29 @@
     top: 1em;
   }
 
-// Used in blue invoicing
-  .Bubble-blue {
+  .Bubble-centre {
+    left: 35em;
     position: relative;
-    right: 19.7em;
-    top: 1em;
+    top: 3em;
   }
 
   .Bubble-log {
     position: relative;
-    right: 1em;
+    right: 2.5em;
     top: 1.5em;
   }
 
  // Used in properties index
   .Bubble-move-right {
     position: relative;
-    right: 4.6em;
+    right: 3.9em;
     top: 5em;
   }
 
-// Used in payments
-  .Bubble-pt-down {
+  .Bubble-pay-search {
+    left: 5em;
     position: relative;
-    right: 29em;
-    top: 5em;
+    top: 6.5em;
   }
 
 // Bubble-point-right used in most shows & forms
@@ -121,7 +148,7 @@
 
   .Bubble-print {
     position: relative;
-    right: 7em;
+    right: 11em;
     top: 1.5em;
   }
 
@@ -131,17 +158,6 @@
     top: -2em;
   }
 
-  .Bubble-main {
-    left: 20em;
-    position: relative;
-    top: 3em;
-  }
-
-  .Bubble-arrears {
-    left: 6.5em;
-    position: relative;
-    top: -5em;
-  }
 
   @mixin bubblet {
     background-color: $scheme-help-background;
@@ -163,11 +179,28 @@
     width: 290px;
   }
 
-/*Main speech bubble used for intro*/
+/*Main speech bubble used for account intro*/
+  .bubble-account {
+    @include bubblet;
+    height: 800px;
+    padding: 20px;
+    width: 600px;
+  }
+
+/*Main speech bubble used for most intro*/
   .bubble-intro {
     @include bubblet;
-    height: 580px;
-    width: 580px;
+    height: 650px;
+    padding: 20px;
+    width: 600px;
+  }
+
+/*Speech bubble used for short intro*/
+  .bubble-short {
+    @include bubblet;
+    height: 300px;
+    padding: 20px;
+    width: 500px;
   }
 
 /*Wider speech bubble */
@@ -216,24 +249,25 @@
 
   .speech:after {
     @include triangle;
-    border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
+    border-color: $scheme-help-background $transparent; /*colour should be the same as the container background set above*/
     border-width: 20px 20px 0;
     bottom: -20px; /* value = -(border-top-width - border-bottom-width) */
     left: 37px; /* value = (:before left) + (:before border-left) - (:after border-left) */
   }
 
 
-/*Used in up pointing bubble with bubble. This is outside triangle */
+/*Used in up pointing bubble with bubble. This is the outside triangle */
 
   .speech-up:before {
     @include triangle;
-    border-color: $scheme-help-border $transparent; /*colour should be the same as bubble border set above*/
+    border-color: $scheme-help-border $transparent; /*colour should be the same as the container background */
     border-width: 0 26px 26px; /*size of the triangle*/
     bottom: 174px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
     left: 81px; /*horizontal position of the triangle*/
   }
 
-/*Used in up pointing bubble with bubble. This is inside triangle */
+/*Used in up pointing bubble for print, which is close to right hand edge of screen.
+ This is the inside triangle */
 
   .speech-up:after {
     @include triangle;
@@ -242,6 +276,29 @@
     bottom: 174px; /* value = -(border-top-width - border-bottom-width) */
     left: 87px; /* value = (:before left) + (:before border-left) - (:after border-left) */
   }
+
+
+/*Used in up pointing bubble for print, which is close to right hand edge of screen.
+ This is the outside triangle */
+
+  .speech-print:before {
+    @include triangle;
+    border-color: $scheme-help-border $transparent; /*colour should be the same as the container background */
+    border-width: 0 26px 26px; /*size of the triangle*/
+    bottom: 174px; /* value = -(border-top-width) - (border-bottom-width) in this case -(35px - 0px)= -35px*/
+    left: 161px; /*horizontal position of the triangle*/
+  }
+
+/*Used in up pointing bubble with bubble. This is the inside triangle */
+
+  .speech-print:after {
+    @include triangle;
+    border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
+    border-width: 0 20px 20px;
+    bottom: 174px; /* value = -(border-top-width - border-bottom-width) */
+    left: 167px; /* value = (:before left) + (:before border-left) - (:after border-left) */
+  }
+
 
  /*Used in right pointing bubble with pt-right. This is the outside triangle */
 
@@ -266,16 +323,15 @@
 @media print {
 
   .Button,
+  .Bubble-arrears,
   .Bubble-anchor,
-  .Bubble-intro,
+  .Bubble-centre,
   .Bubble-log,
   .Bubble-move-right,
-  .Bubble-pt-down,
+  .Bubble-pay-search,
   .Bubble-point-right,
   .Bubble-print,
   .Bubble-search {
     display: none;
   }
 }
-
-

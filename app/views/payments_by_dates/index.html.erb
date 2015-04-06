@@ -1,12 +1,11 @@
 <% @title='Payments by Date' %>
-<div class='Bubble-search'>
-  <%= render 'bubbles/wide_search', line1: 'New Payments Search Box', line2: 'Give the account number,to create the new payment' %>
-</div>
+<div id='help-me',  data-summit='4',  data-setLow='0'></div>
+<%= render 'payments_by_dates/index_help' %>
+<%= render 'bubbles/search_account' %>
 
 <div class='grid'>
 
   <div class='col-7-24  Shell  u-padding-1-100 grid-row  vertical-spacer  grid-label'>
-
     <%= render 'payments_by_dates/payments_by_dates', payments_by_dates: @payments_by_dates %>
   </div> <!-- column 1 -->
   <div class='col-1-24  vertical-spacer'>&nbsp;</div> <!-- column 2 -->

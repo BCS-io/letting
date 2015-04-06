@@ -1,15 +1,7 @@
-<%= render 'bubbles/help_main',
-  content: 'invoice text',
-  line1: 'The Invoice Text Edit',
-  line2: 'The form allows details of this invoice page to be updated. These are the hard coded texts used on the invoice page.',
-  line3: 'The search box at the top of the page is for account searches.',
-  line4: 'The print button, at the top right-hand corner, will print out this screen.',
-  icon2: 'fa fa-file-o fa-lg',
-  icon3: 'fa fa-plus-square-o fa-lg',
-  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to view',
-  icon_line3: 'Allows this otherwise blank line to be filled in',
-  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'The Invoice Text Edit',
+  search_on: 'accounts',
+  lines: [ 'This form allows details of this invoice page to be updated. There is no create available. Within the form are the hard coded texts used on the invoice page.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Link to view'),
+          IconData.new('fa fa-plus-square-o', 'Allows this otherwise blank line to be filled in')]
 %>

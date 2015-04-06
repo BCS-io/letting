@@ -1,15 +1,8 @@
-<%= render 'bubbles/help_main',
-  content: 'client',
-  line1: 'Client Index',
-  line2: 'The search box at the top of the page is for client searches. Any searches made by client name or client id will be listed on this page.',
-  line3: 'Clicking on a name or address will lead you to visit those client details.',
-  line4: 'The print button, at the top right-hand corner, will print out the page. The edit button takes you through to the edit form.',
-  icon2: 'fa fa-edit fa-lg',
-  icon3: 'fa fa-trash-o fa-lg',
-  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to edit, to update data',
-  icon_line3: 'Delete record',
-  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'Client Index',
+  search_on: 'clients',
+  lines: [ 'The search box at the top of the page is for client searches. Any searches made by client name or client id will be listed on this page.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Click on an id, name or address to link to client view'),
+           IconData.new('fa fa-edit', 'Link to edit, to update client data'),
+           IconData.new('fa fa-trash-o', 'Deletes client')]
 %>

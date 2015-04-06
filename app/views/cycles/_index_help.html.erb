@@ -1,13 +1,8 @@
-<%= render 'bubbles/help_main',
-  content: 'cycles',
-  line1: 'Cycles Index',
-  line2: 'This is the Cycles index, giving name, order number and type.',
-  line3: 'Clicking on a name or order number will lead you to visit those cycle details. The edit button allows editing of cycle details.',
-  line4: 'The print button, at the top right-hand corner, allows printing of the list.',  icon2: 'fa fa-edit fa-lg',  icon3: 'fa fa-trash-o fa-lg',
-  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to edit',
-  icon_line3: 'Delete record',
-  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'Cycles Index',
+  search_on: 'accounts',
+  lines: [ 'This is the Cycles index, giving name, order number and type.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Click on a name, order, or type to link to cycle view'),
+           IconData.new('fa fa-edit', 'Link to edit, to update cycle'),
+           IconData.new('fa fa-trash-o', 'Deletes cycle')]
 %>

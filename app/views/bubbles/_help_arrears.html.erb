@@ -1,0 +1,41 @@
+<div id='help_0'  class='hide  bubble-intro  Bubble-centre'>
+  <p>
+    <h3 class='help-heading  bottom-1-line-spacer'>&nbsp; &nbsp;
+      <i class='fa fa-info-circle fa-lg'></i>
+      <%= heading %>
+    </h3>
+  </p>
+
+  <div class='text-in-box'>
+    <% lines.each do |lines| %>
+        <p><%= lines %></p>
+    <% end %>
+  </div>
+
+  <div class='icons-in-box'>
+
+    <p>
+      <i class='fa fa-search fa-lg  help-button-red  Button', text:'Full Account List'></i>&nbsp; Searches <%= search_on %> by id, name or address
+    </p>
+
+    <p>
+      <i class='fa fa-print fa-lg  help-button  Button'></i>&nbsp; Found upper right hand corner, prints this page only
+    </p>
+
+    <% ikon.each do |ikon| %>
+        <p>
+          <i class='<%= ikon.name %> fa-lg  help-button-orange'></i>
+          &nbsp; <%= ikon.text %>
+        </p>
+    <% end %>
+
+  </div>
+
+  <div class='text-in-box'>
+    <br>Click next for more information.
+  </div>
+
+  <div class = 'buttons-in-box'>
+    <%= render 'bubbles/box' %>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <% @title='Payments' %>
-<div  id='help-me',  data-summit='5'></div>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
 <%= render 'payments/index_help' %>
 <%= render 'bubbles/search_account' %>
 
@@ -8,25 +8,13 @@
 
 <div class='Shell'>
 
-  <div class='col-9-24  grid-row'>&nbsp;</div>
-  <div class='col-12-24   Bubble-anchor'>
-    <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View Payment Details', line2: 'Click on line for payment details' %>
-    &nbsp;
-  </div>
-
-  <div class='col-2-24  Bubble-anchor'>
-    <%= render 'bubbles/help_3',  pic: 'fa fa-edit  fa-lg', line1: 'Edit Payment Button', line2:  'Edits this payment' %>
-    &nbsp;
-  </div>
-  <div class='col-1-24  Bubble-anchor'>&nbsp;
-    <%= render 'bubbles/help_4',  pic: 'fa fa-trash-o  fa-lg',  line1: 'Delete Button',  line2: 'Deletes this payment from the accounts' %>
-    &nbsp;
-  </div>
-
   <div class='col-3-24  grid-row  vertical-spacer  grid-header  r-align'>
     Property ID
   </div>
-  <div class='col-5-24  vertical-spacer  grid-header'>Name</div>
+  <div class='col-5-24  vertical-spacer  grid-header'>
+    Name
+    <%= render 'bubbles/help_2_view',  data_type: 'payments' %>
+  </div>
   <div class='col-4-24  vertical-spacer  grid-header  r-align'>Booked At</div>
   <div class='col-4-24  vertical-spacer  grid-header  r-align'>Amount</div>
   <div class='col-4-24  vertical-spacer  grid-header  r-align'>Balance</div>

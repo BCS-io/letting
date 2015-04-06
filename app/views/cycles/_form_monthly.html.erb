@@ -1,6 +1,6 @@
 <%= render 'shared/errors', object: cycle %>
-<div  id='help-me',  data-summit='3'></div>
-<%= render 'form_help' %>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'cycles/form_help' %>
 <%= render 'bubbles/search_account' %>
 
 <fieldset id='cycle' class='grid  Shell  u-padding-1-12'>
@@ -56,8 +56,6 @@
 
   <div class='col-1-24  spacer-column  bottom-1-line-spacer  no-r-pad'>
     <%= view_link cycle %>
-    <div class='Bubble-point-right'>
-      <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg',  line1:'View Button', line2: 'Views this cycle details, unless greyed out, when it is disabled' %>
-    </div>
+    <%= render 'bubbles/help_view',  data_type: 'cycle' %>
   </div>
 </fieldset>

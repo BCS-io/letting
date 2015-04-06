@@ -1,6 +1,6 @@
-<div id='help-me',  data-summit='3'></div>
+<div id='help-me',  data-summit='4',  data-setLow='0'></div>
 <%= render 'bubbles/search_account' %>
-<%= render 'form_help' %>
+<%= render 'payments/form_help' %>
 
   <div class='grid  Shell-thin'>
 
@@ -25,18 +25,17 @@
         </div>
       <% end %>
     </div>
+
     <div class='col-2-24'>    <!-- 2nd column -->
       &nbsp;
-      <%= render 'bubbles/help_2',  pic: 'fa fa-file-o  fa-lg', line1:'Payments View Button', line2: "Use this button to view user's details. Gray button cannot be viewed." %>
     </div>
     <div class='col-8-24  Shell  u-padding-1-100'>    <!-- 3rd column -->
       <h4>Payment Summary</h4>
-
       <div class='table-link-row' data-link='<%= edit_payment_path(Payment.last_created_at) %>'>
         <div class='col-8-12  grid-row  bottom-half-line-spacer  inherit-row'>
           Last Payment&nbsp;(<%= payment_dec.last_human_ref %>)
-          <div  class='col-14-24  Bubble-pt-right'>
-            <%= render 'bubbles/help_2',  pic: 'fa fa-gbp fa-lg', line1: 'Last Payment', line2: "Last item entered on data base"%>
+          <div  class='col-14-24  Bubble-point-right'>
+            <%= render 'bubbles/help_2',  pic: 'fa fa-gbp fa-lg', line1: 'Last Payment', line2: "Last payment entered on data base"%>
             &nbsp;
           </div>
         </div>
@@ -55,6 +54,9 @@
     </div>
     <div class='col-1-24   top-spacer  r-align'>    <!-- 5th column -->
       <%= view_link payment_dec.payment %>
+      <div  class='Bubble-point-right'>
+         <%= render 'bubbles/help_3',  pic: 'fa fa-file-o  fa-lg', line1:'Payments View Button', line2: "Use this button to view user's details. Gray button cannot be viewed." %>
+      </div>
     </div>
   </div>
   <fieldset id='payment' class='grid  Shell  overlay-parent'>

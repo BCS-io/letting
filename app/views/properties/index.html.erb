@@ -1,38 +1,12 @@
 <% @title='Accounts' %>
 <% properties = @records %>
-<div  id='help-me',  data-summit='7'></div>
+<div  id='help-me',  data-summit='7',  data-setLow='-2'></div>
 <%= render 'properties/index_help' %>
 <%= render 'bubbles/search_account' %>
 
-
 <div class='grid  Shell  u-padding-1-100'>
 
-  <div class='col-2-24  grid-row'>&nbsp;</div>
-  <div class='col-13-24  Bubble-pt-right'>
-    <%= render 'bubbles/help_2_down',  pic: 'fa fa-file-o  fa-lg', line1: 'View Account Details', line2: "Click on an account row for that account's details"%>
-    &nbsp;
-  </div>
-
-  <div class='col-1-24  Bubble-move-right'>
-    <%= render 'bubbles/help_3',  pic: 'fa fa-gbp fa-lg',  line1: 'Payment Button',  line2: 'Use to make a new payment'%>
-    &nbsp;
-  </div>
-  <div class='col-1-24  Bubble-move-right'>
-      <%= render 'bubbles/help_4',  pic: 'fa fa-edit fa-lg',  line1: 'Edit Button',  line2: "Edits an account's details" %>
-    &nbsp;
-  </div>
-
-  <div class='col-1-24  Bubble-move-right'>
-    <%= render 'bubbles/help_5',  pic: 'fa fa-trash-o fa-lg',  line1: 'Delete Button', line2: 'Deletes this property details and its account' %>
-    &nbsp;
-  </div>
-  <div class='col-1-24  Bubble-allprint'>
-    <%= render 'bubbles/help_6',  pic: 'fa fa-print fa-lg',  line1: 'Property Print',  line2: 'Printout of Complete Property Record List' %>
-    &nbsp;
-  </div>
-  <div class='col-4-24 r-align'>
-    <%= print_link text:'Full Account List', path: property_lists_path, title: 'Property List', css: 'Button ButtonSecondary' %>
-  </div>
+<%= render 'properties/print_full_help_bubbles' %>
 
   <div class='col-2-24  grid-row  bottom-spacer  grid-header r-align'>
     Property ID

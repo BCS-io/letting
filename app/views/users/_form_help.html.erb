@@ -1,14 +1,7 @@
-<%= render 'bubbles/help_main',
-  content: 'user',
-  line1: "The User's Edit",
-  line2: "This form allows details of the user: nickname, email, password, password confirmation and role to be updated. With an admin role the admin menu is available.",
-  line3: 'The search box at the top of the page is for account searches.',
-  line4: 'The print button, at the top right-hand corner, allows printing of this page, but passwords cannot be seen, either in view or print.',
-  icon2: 'fa fa-file fa-lg',
-  icon3: '',
-  icon4: '',
-  icon5: '',
-  icon_line2: 'Link to view',
-  icon_line3: '',  icon_line4: '',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'Create New User and User Update',
+  search_on: 'accounts',
+  lines: [  'This form allows the creation of a new user or the update of an existing user. User details are nickname, email, password, password confirmation and role. With an admin role the admin menu is available.',
+           'The print button, allows printing of this page, but passwords cannot be seen.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Link to view, if not greyed out')]
 %>

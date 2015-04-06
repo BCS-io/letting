@@ -1,11 +1,9 @@
-<%= render 'bubbles/help_main',  content: 'client',
-  line1: "The Client's Edit",
-  line2:  "This screen allows update of the client's details.",
-  line3:  'The search box at the top of the page is for client searches.',
-  line4:  'The print button, at the top right-hand corner, will print out the screen as at the time the button is clicked.',
-  icon2: 'fa fa-file-o fa-lg',
-  line2: 'Link to view',
-  icon_line3: 'Expand data by a line',
-  icon_line4: 'Delete that line of data',
-  icon_line5: ''
+<%= render 'bubbles/help_intro',
+  heading: 'Create New Client and Client Update',
+  search_on: 'clients',
+  lines: ['This form allows the creation of a new client or the update of an existing client. Client details are client ID, name and address.',
+         'The search box at the top of the page is for client searches. Search by client name or ID.'],
+  ikon:  [ IconData.new('fa fa-file-o', 'Link to view, if not greyed out'),
+          IconData.new('fa fa-plus-square-o', 'Allows this otherwise blank line to be filled in'),
+          IconData.new('fa fa-trash-o', 'Deletes item, if not greyed out')]
 %>

@@ -1,1 +1,11 @@
-<%= render 'bubbles/help_main',  content: 'account',  line1: "The Account's View",  line2: 'This page gives the account property details, agent details, charges and accounts. Property details and the accounts can be expanded to give more details.',  line3:'The print button, at the top right-hand corner, will print out the page. The edit button takes you through to the edit form.',  line4:'The search box at the top of the page is for account searches.',  icon2: 'fa fa-edit fa-lg',  icon3: '',  icon4: '',  icon5: '',  icon_line2: 'Link to edit',  icon_line3: '',  icon_line4: '',  icon_line5: '' %>
+<%= render 'bubbles/help_intro',
+  heading: "The Account's View",
+  search_on: 'accounts',
+  lines: [ 'This page gives the account property details, agent details, charges and accounts. Property details and the accounts can be expanded to give more details.',
+          'The print button, at the top right-hand corner, will print out the page. The edit button takes you through to the edit form.',
+          'The search box at the top of the page is for account searches.'],
+  ikon:  [ IconData.new('fa fa-chevron-left', 'Moves to above account'),
+           IconData.new('fa fa-chevron-right', 'Moves to next account'),
+           IconData.new('fa fa-edit', 'Link to edit, to update account'),
+           IconData.new('fa fa-chevron-circle-down', 'Expands data')]
+%>
