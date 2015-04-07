@@ -155,6 +155,11 @@ Monit connection: http://<ip-address>:2812
 * Connection Uses the ['monit']['web_interface'] user/password as defined in letting-<environment>
 <br><br><br>
 
+#####3.2 Logstash
+
+Logstash is available - listing the messages recorded in monitored system's
+logs. Navigate to the server with a browser. See http://logstash.net/
+
 ===
 
 ###4 Cheatsheet
