@@ -14,7 +14,7 @@ class AccountDetails < ActiveRecord::Base
   # at_time: the time when we see if an account was balanced
   # returns accounts that were balanced.
   #
-  def self.balanced at_time: (Time.now - 2.years).to_date
+  def self.balanced at_time: (Time.zone.now - 2.years).to_date
     AccountDetails.select('account_id, property_id')
       .where('at_time < ?', at_time)
       .group(:account_id, :property_id, :human_ref)

@@ -85,7 +85,7 @@ module DueOns
       end
 
       def find_max_size
-        monthly? ?  MAX_DUE_ONS  :  MAX_DISPLAYED_DUE_ONS
+        monthly? ? MAX_DUE_ONS : MAX_DISPLAYED_DUE_ONS
       end
     end
 

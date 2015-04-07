@@ -122,11 +122,11 @@ class Account < ActiveRecord::Base
 
     Credit.where('account_id in (?)', account_ids)
       .where('at_time < ?', delete_before)
-      .each(&:fake_delete)
+      .find_each(&:fake_delete)
 
     Debit.where('account_id in (?)', account_ids)
       .where('at_time < ?', delete_before)
-      .each(&:fake_delete)
+      .find_each(&:fake_delete)
   end
 
   private

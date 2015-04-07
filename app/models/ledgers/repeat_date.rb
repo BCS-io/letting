@@ -30,7 +30,7 @@ class RepeatDate
   delegate :year, to: :date
 
   def yesterday
-    @date -=  1.day
+    @date -= 1.day
     self
   end
 

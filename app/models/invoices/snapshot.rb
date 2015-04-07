@@ -43,10 +43,9 @@ class Snapshot < ActiveRecord::Base
   # matches on the second and subsequent runs.
   #
   def self.find(account:, period:)
-    where(account: account,
-          period_first: period.first,
-          period_last: period.last)
-      .first
+    find_by(account: account,
+            period_first: period.first,
+            period_last: period.last)
   end
 
   def only_one_invoice?

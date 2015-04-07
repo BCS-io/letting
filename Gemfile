@@ -156,7 +156,7 @@ group :development do
   gem 'brakeman', '~>3.0.0', require: false
   gem 'bullet', '~>4.14.0'
   gem 'rails_best_practices', '~>1.15.0'
-  gem 'rubocop', '~> 0.29.0', require: false
+  gem 'rubocop', '~> 0.30.0', require: false
   gem 'rubycritic', require: false
   gem 'scss-lint'
   gem 'traceroute'

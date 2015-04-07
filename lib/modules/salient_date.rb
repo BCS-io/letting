@@ -7,7 +7,7 @@ module SalientDate
   def salient_date_range(start_date:, end_date:)
     if start_date && end_date &&
        start_date.year == Time.zone.today.year &&
-       end_date.year   == Time.zone.today.year &&
+       end_date.year == Time.zone.today.year &&
        start_date.year == end_date.year
       "#{safe_date(date: start_date, format: :month_date)} - "\
       "#{safe_date(date: end_date, format: :month_date)}"

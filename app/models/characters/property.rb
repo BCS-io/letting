@@ -63,7 +63,7 @@ class Property < ActiveRecord::Base
   end
 
   def next
-    Property.where('human_ref > ?', human_ref).first
+    Property.find_by('human_ref > ?', human_ref)
   end
 
   def prev
@@ -80,7 +80,7 @@ class Property < ActiveRecord::Base
                  only: [:full_name, :to_address] }
       },
       except: [:id, :created_at, :updated_at]
-      )
+    )
   end
 
   def self.find_by_human_ref human_ref

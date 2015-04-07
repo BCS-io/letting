@@ -18,7 +18,7 @@ module DB
   #
   ####
   #
-  class ImportProperty  < ImportBase
+  class ImportProperty < ImportBase
     def initialize  contents, range
       super Property, contents, range
     end

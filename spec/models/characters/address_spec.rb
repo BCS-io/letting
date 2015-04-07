@@ -14,7 +14,7 @@ describe Address, type: :model do
     describe 'house_name' do
       it('allows blanks') { expect(address_new house_name: '').to be_valid }
       it 'has max' do
-        expect(address_new house_name: 'a' *  (MAX_STRING + 1)).to_not be_valid
+        expect(address_new house_name: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
       it 'has min' do
         expect(address_new house_name: 'a' * (MIN_STRING - 1)).to_not be_valid
@@ -81,7 +81,7 @@ describe Address, type: :model do
     describe 'nation' do
       it('allows blanks') { expect(address_new nation: '').to be_valid }
       it 'has min' do
-        expect(address_new nation: 'a'  * (MIN_STRING - 1)).to_not be_valid
+        expect(address_new nation: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
       it 'has max' do
         expect(address_new nation: 'a' * (MAX_STRING + 1)).to_not be_valid

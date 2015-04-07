@@ -20,7 +20,7 @@ namespace :db do
                 instructions: [PatchAccItems.new(patch: patch_acc_items),
                                ExtractAccItems.new(extracts: extract_acc_items),
                                InsertAccItems.new(insert: insert_acc_items)]
-                ).stage
+               ).stage
     end
 
     def acc_items_legacy

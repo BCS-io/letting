@@ -199,7 +199,7 @@ module DB
                      headers: FileHeader.charge,
                      header_converters: :symbol,
                      converters: -> (field) { field ? field.strip : nil }
-                     )
+                    )
     end
   end
 end
