@@ -13,6 +13,6 @@ if %w(development test).include? Rails.env
   SCSSLint::RakeTask.new
 
   task(:default).clear
-  task default: [:scss_lint, :rubocop, 'spec:fast', 'spec:feature']
-  task test: ['spec:fast', 'spec:feature']
+  task default: [:scss_lint, :rubocop, 'spec:fast', 'spec:features']
+  task test: ['spec:fast', 'spec:features']
 end
