@@ -18,6 +18,12 @@
     </li>
   </ul>
 
+  Behaviour
+  drop-down.js
+
+  TODO: js behaviour should not link to class which is adding styling
+        which is the case with .drop-down-menu
+
 \*-----------------------------------------------*/
 
 @import 'settings.colors';
@@ -30,6 +36,7 @@
 }
 
 // menu list item
+// TODO: separate from js
 .drop-down-menu {
   float: right;
   list-style: none;

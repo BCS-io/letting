@@ -6,6 +6,16 @@
 
 @import 'settings.colors';
 
+%ellipsis-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+label {
+  @extend %ellipsis-text;
+}
+
 input,
 textarea {
   border: 1px solid $color-line;

@@ -1,6 +1,18 @@
 @import 'settings.colors';
 @import 'tools.mixins';
 
+@media all {
+
+  .page-break {
+    display: none;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+}
+
+
 @media screen {
 
 /*------------------------------------------------*\
@@ -8,6 +20,18 @@
   INVOICES SCREEN VALUES
 
 \*------------------------------------------------*/
+
+  .print-only {
+    display: none;
+  }
+
+  .side-wrap {
+    width: 150pt;
+  }
+
+  .wrap-print {
+    width: 640pt;
+  }
 
 
 /*------------------------------------------------*\
@@ -79,6 +103,17 @@
   INVOICES PRINT
 
 \*------------------------------------------------*/
+
+  .page-break {
+    display: block;
+    page-break-after: always;
+  }
+
+  // Buttons and main heading need to be invisible in printouts. Fonts are in pt.
+
+  .no-print {
+    display: none;
+  }
 
 /*------------------------------------------------*\
 
