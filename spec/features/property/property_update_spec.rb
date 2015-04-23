@@ -62,7 +62,7 @@ describe 'Property#Update', type: :feature  do
       account.address selector: '#property_address',
                       address: address_new(road: '')
       account.button 'Update'
-      expect(page).to have_css '[data-role="errors"]'
+      expect(page).to have_css '[data-role="error_messages"]'
     end
   end
 

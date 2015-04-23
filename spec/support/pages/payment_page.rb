@@ -74,7 +74,7 @@ class PaymentPage
   end
 
   def errored?
-    has_css? '[data-role="errors"]'
+    has_css? '[data-role="error_messages"]'
   end
 
   def successful?

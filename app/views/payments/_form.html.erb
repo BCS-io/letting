@@ -62,7 +62,7 @@
   <fieldset id='payment' class='grid  Shell  overlay-parent'>
 
     <%= form_for payment_dec do |payment_form| %>
-      <%= render 'shared/errors', object: payment_dec.payment %>
+      <%= render 'shared/error_messages', object: payment_dec.payment %>
 
     <% if payment_dec.account_exists? %>
 

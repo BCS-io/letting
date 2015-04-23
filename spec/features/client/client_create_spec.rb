@@ -30,7 +30,7 @@ describe 'Client#create', type: :feature do
     client_page.load
     client_page.button 'Create'
 
-    expect(page).to have_css '[data-role="errors"]'
+    expect(page).to have_css '[data-role="error_messages"]'
   end
 
   it 'can cancel' do

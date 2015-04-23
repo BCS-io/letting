@@ -35,7 +35,7 @@ describe 'Client#update', type: :feature do
       client_page.fill_in_client_id(-1) # invalidate_page
       client_page.button 'Update'
 
-      expect(page).to have_css '[data-role="errors"]'
+      expect(page).to have_css '[data-role="error_messages"]'
     end
 
     it 'adds a second entity', js: true do

@@ -46,7 +46,7 @@ describe 'InvoiceText#update', type: :feature do
       expect(page.title).to eq 'Letting - Edit Invoice Text'
       fill_in 'Main Heading', with: ''
       click_on 'Update Invoice Text'
-      expect(page).to have_css '[data-role="errors"]'
+      expect(page).to have_css '[data-role="error_messages"]'
     end
   end
 end

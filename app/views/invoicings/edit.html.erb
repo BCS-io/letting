@@ -13,7 +13,7 @@
 <% invoicing = @invoicing %>
 
 <%= form_for invoicing do |f| %>
-  <%= render 'shared/errors', object: invoicing %>
+  <%= render 'shared/error_messages', object: invoicing %>
 
   <fieldset id='invoicing' class='grid  Shell  u-padding-1-25  tab-contents'>
     <div class='col-2-3  spacer-column'>  <!-- column 1 -->

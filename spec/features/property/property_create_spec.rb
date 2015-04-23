@@ -39,7 +39,7 @@ describe 'Property#create', type: :feature do
   it 'displays form errors' do
     account.load
     account.button 'Create'
-    expect(page).to have_css '[data-role="errors"]'
+    expect(page).to have_css '[data-role="error_messages"]'
   end
 
   def fill_in_account(property_ref:, client_ref:)
