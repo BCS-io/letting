@@ -14,15 +14,16 @@
  *                     CONTENT
  *
  * SETTINGS
- * Colors ............... Color variables.
- * Global ............... Globally-available variables and config.
+ * colors ............... Color variables.
+ * global ............... Globally-available variables and config.
  *
  * TOOLS
- * Mixins ............... Useful mixins.
+ * mixins ............... Useful mixins.
+ * sizes ................ generates width classes
  *
  * GENERIC
- * Normalize.css ........ A level playing field.
- * Box-sizing ........... Better default `box-sizing`.
+ * box-sizing ........... Better default `box-sizing`.
+ * normalize.css ........ A level playing field.
  *
  *
  * BASE
