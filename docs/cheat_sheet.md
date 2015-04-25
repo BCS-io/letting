@@ -2,6 +2,23 @@
 
 ###4 Cheatsheet
 
+4. Cheatsheet
+  * 1\. QEMU
+    * 1\. Basic Commands
+    * 2\. Removing an instance from
+  * 2\. SSH
+  * 3\. Firewalls
+    * 1\. Listing Firewall
+    * 2\. Adding Ranges to the firewall
+    * 3\. Disabling the Firewall
+  * 4\. Chef
+    * 1\. Updating a cookbook
+    * 2\. Updating a server
+  * 5\. Ruby
+    * 1\. Updating Ruby Build
+  * 6\. Postgresql
+  * 7\. Elasticsearch
+
 #####4.1 QEMU
 
 Source files on host: `/var/lib/libvirt/images/`
@@ -161,8 +178,20 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 3. Run chef again: `knife solo bootstrap root@example.com`
 4. Step 1 confirm situation.
 
+#####4.5 Ruby
 
-#####4.5 Postgresql
+1. Updating Ruby Build
+  Ruby Build does not know about the newest Ruby versions unless you update it.
+
+  ````
+  cd ~/.rbenv
+  git pull
+  cd plugins/ruby-build
+  git pull
+  ````
+
+
+#####4.6 Postgresql
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
 2. Listing Users (roles) and attributes: `\du`
 3. Listing all databases: `\list`
@@ -170,7 +199,7 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
 6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
 
-#####4.6 Elasticsearch
+#####4.7 Elasticsearch
 
 * Java application that improves usability of Lucene. [1]
 * Recommend giving half of heap to Elasticsearch - Lucene will use the rest. [2]

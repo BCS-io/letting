@@ -30,8 +30,12 @@ This document covers the following sections
     * 2\. Adding Ranges to the firewall
     * 3\. Disabling the Firewall
   * 4\. Chef
-  * 5\. Postgresql
-  * 6\. Elasticsearch
+    * 1\. Updating a cookbook
+    * 2\. Updating a server
+  * 5\. Ruby
+    * 1\. Updating Ruby Build
+  * 6\. Postgresql
+  * 7\. Elasticsearch
 5. Troubleshooting - docs/trouble_shooting.md
   * 1\. Net::SSH::HostKeyMismatch
   * 2\. How to fix duplicate source.list entry
