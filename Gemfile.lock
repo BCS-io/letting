@@ -105,6 +105,8 @@ GEM
       capistrano-bundler (~> 1.1)
     capistrano-rails-collection (0.0.3)
       capistrano-rails (~> 1.1.0)
+    capistrano-rails-console (0.5.2)
+      capistrano (>= 3.0.0, < 4.0.0)
     capistrano-rbenv (2.0.3)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
@@ -461,6 +463,7 @@ DEPENDENCIES
   capistrano-postgresql (~> 4.2.0)
   capistrano-rails (~> 1.1.2)
   capistrano-rails-collection (~> 0.0.3)
+  capistrano-rails-console (~> 0.5.0)
   capistrano-rbenv (~> 2.0.0)
   capistrano-unicorn-nginx!
   capybara (~> 2.4.0)
