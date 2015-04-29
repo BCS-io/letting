@@ -18,13 +18,13 @@ describe 'Property#show', type: :feature   do
     expect_agent_info entity: 'Bell', road: 'Wiggiton'
   end
 
-  def expect_property entity: entity
+  def expect_property(entity:)
     expect(page).to have_text entity
     expect(page).to have_text '1000'
     expect(page).to have_text 'Edgbaston'
   end
 
-  def expect_agent_info entity: entity, road: road
+  def expect_agent_info(entity:, road:)
     expect(page).to have_text entity
     [road].each do |line|
       expect(page).to have_text line

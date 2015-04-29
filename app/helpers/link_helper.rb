@@ -18,7 +18,7 @@ module LinkHelper
     end
   end
 
-  def edit_link model, size: '2x', title: title
+  def edit_link model, size: '2x'
     app_link icon: 'edit',
              size: size,
              path: [:edit, model],

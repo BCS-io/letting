@@ -6,7 +6,7 @@ def payment_new id: nil,
                 account: nil,
                 booked_at: Time.zone.local(2013, 4, 30, 1, 0, 0),
                 amount: 88.08,
-                credit: credit
+                credit: nil
   payment = Payment.new id: id,
                         account_id: account_id,
                         booked_at: booked_at
@@ -22,7 +22,7 @@ def payment_create id: nil,
                    account: nil,
                    booked_at: Time.zone.local(2013, 4, 30, 1, 0, 0),
                    amount: 88.08,
-                   credit: credit
+                   credit: nil
   payment = payment_new id: id,
                         account_id: account_id,
                         account: account,

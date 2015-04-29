@@ -8,7 +8,7 @@ module DB
   # debit_row and credit_row.
   #
   module AccountingRow
-    def account human_ref: human_ref
+    def account human_ref: nil
       Property.find_by!(human_ref: human_ref).account
       rescue ActiveRecord::RecordNotFound
         raise DB::PropertyRefUnknown,
@@ -16,7 +16,7 @@ module DB
               caller
     end
 
-    def charge account: account, charge_type: charge_type
+    def charge account:, charge_type:
       Charge.find_by!(account_id: account.id, charge_type: charge_type)
       rescue ActiveRecord::RecordNotFound
         raise DB::ChargeUnknown,
@@ -25,7 +25,7 @@ module DB
               caller
     end
 
-    def charge_code_to_s charge_code: charge_code, human_ref: human_ref
+    def charge_code_to_s(charge_code:, human_ref:)
       charge = ChargeCode.to_string charge_code
       fail DB::ChargeCodeUnknown,
            "Property #{human_ref}: Charge code #{charge_code} not convertible",
