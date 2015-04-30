@@ -33,7 +33,7 @@ This document covers the following sections
     * 1\. Updating a cookbook
     * 2\. Updating a server
   * 5\. Ruby
-    * 1\. Updating Ruby Build
+    * 1\. Updating Ruby
   * 6\. Postgresql
   * 7\. Elasticsearch
 5. Troubleshooting - docs/trouble_shooting.md
