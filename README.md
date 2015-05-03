@@ -20,7 +20,7 @@ This document covers the following sections
   * 1\. rake db:import
 3. Monitoring
   * 1\. [Monit](#monit)
-  * 2\. Logstash
+  * 2\. [Logstash](#logstash)
 
 4. [Cheatsheet](#cheatsheet)
   * 1\. [Chef](#chef)
@@ -48,13 +48,14 @@ This document covers the following sections
     * 2\. Capistrano failing to deploy - with github.com port-22
   * 4\. [Cron](#cron)
   * 5\. [Missing secret_key_base](#missing-secret_key_base)
-  * 6\. [Production Server](#production-server)
+  * 6\. [NGINX](#nginx)
+  * 7\. [Production Server](#production-server)
     * 1\. [Clean application](#clean-application)
     * 2\. [Database reset](#database-reset)
     * 3\. [Rails console](#rails-console)
     * 4\. [Rake Tasks](#rake-tasks)
-  * 7\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
-  * 8\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
+  * 8\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
+  * 9\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
 6. Production Client
 <br><br><br>
 
@@ -165,12 +166,15 @@ My Reference: Webserver alias: `ssh arran`
 
 #####3.1 Monit<a name='monit'></a>
 
-Monit connection: http://<ip-address>:2812
-* Connection Must be from BCS Network
-* Connection Uses the ['monit']['web_interface'] user/password as defined in letting-<environment>
-<br><br><br>
+* `monit status` - current situation  
+* `sudo service monit reload` - if config files have been updated
 
-#####3.2 Logstash
+Monit connection: http://<ip-address>:2812
+* Connection Must be from BCS Network - a firewall blocks every other address
+* Connection Uses the ['monit']['web_interface'] user/password as defined in letting-<environment>
+<br><br>
+
+#####3.2 Logstash<a name='logstash'></a>
 
 Logstash is available - listing the messages recorded in monitored system's
 logs. Navigate to the server with a browser. See http://logstash.net/
@@ -210,17 +214,18 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 ###### Basic Commands
 `pgrep cron` - cron daemon running
 `crontab -l` - lists the crontab for the current user, `-u` to set the user
-`cat /var/log/syslog` - cron outputs into syslog when it runs
+`cat /var/log/syslog | grep CRON` - cron outputs into syslog when it runs
 
 ###### Files
 1. `cat /etc/crontab` 
   * system wide crontab
   * runs the files in cron.daily, cron.weekly, and cron.monthly
+  * must be executable (have a * by the name of the file in directory ll)
 2. `ls /etc/cron*`
   * lists the scripts to be run under the system wide cron table.
-3. `ls /var/spool/cron/*`
+3. `# ls /var/spool/cron/*`
   * list user contabs
-4. `cat /var/spool/cron/*/*`
+4. `# cat /var/spool/cron/*/*`
   * lists the user scripts
 
 * Cron user scripts will be under 'deployer'
@@ -577,7 +582,14 @@ Solution
 5. Restart the server - another deployment did this otherwise `sudo service unicorn_<name of process> reload` worth trying.
 
 
-####5.6 Production Server<a name='production-server'></a>
+#### 5.6 NGINX<a name='nginx'></a>
+
+`Reload nginx configuration nginx [fail]`
+  * `sudo nginx -t`  - test configuration and exit
+    * without the sudo you are running nginx as standard user and you get permission problems.
+    * gives an error if the <application>/shared/log directory is missing
+
+####5.7 Production Server<a name='production-server'></a>
 
 1. Clean application<a name='clean-application'></a>
 
@@ -627,13 +639,13 @@ Solution
   
 
 
-####5.7 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
+####5.8 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
 `````
 
-####5.11 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
+####5.9 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
 
 ````
 diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
