@@ -79,9 +79,9 @@ This document covers the following sections
     * Clone the *private* data repository into the import_data directory
     * Can be imported into the database
 
-6. Create .env file - for *private* application data - not kept in the repository
-  * 1\. `cp ~/code/letting/.env.example  .env`
-  * 2\. `rake secret`  and copy the generated key into .env
+6. Create secret file - for *private* application data - not kept in the repository
+  * 1\. `cp ~/code/letting/config/secrets.example.yml  secrets.yml`
+  * 2\. `rake secret`  and copy the generated keys into secrets.yml
 
 7. `rake db:reboot`
   * drops the database (if any), creates and runs migrations.

@@ -144,8 +144,8 @@ group :development do
   gem 'capistrano-rails-console', '~> 0.5.0'
   gem 'capistrano-rbenv', '~> 2.0.0'
   gem 'capistrano-rails-collection', '~> 0.0.3'
+  gem 'capistrano-secrets-yml', '~> 1.0.0'
   gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx'
-  gem 'mascherano', '~> 1.1.0'
 end
 
 #

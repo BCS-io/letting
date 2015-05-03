@@ -10,8 +10,9 @@ require 'capistrano/rails'
 require 'capistrano/rails/console'
 require 'capistrano/rbenv'
 require 'capistrano/rails/collection'
+require 'capistrano/secrets_yml'
 require 'capistrano/unicorn_nginx'
-require 'mascherano/env' # manage dotenv
+
 require 'whenever/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.

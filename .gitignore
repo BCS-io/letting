@@ -38,8 +38,9 @@ todo/work.TODO
 # brakeman
 brakeman.html
 
-# Ignore environmental secrets file
+# Ignore files with secrets
 .env
+config/secrets.yml
 
 # capistrano-db-tasks - dump files
 /db/*.sql.*
