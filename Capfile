@@ -1,18 +1,20 @@
-require 'airbrussh/capistrano'
-# Load DSL and Setup Up Stages
-require 'capistrano/setup'
+# Capistrano Main Gem
 require 'capistrano/deploy'
+require 'capistrano/setup'
 
+#
+# Capistrano gems
+#
+require 'airbrussh/capistrano'
 require 'capistrano/bundler'
 require 'capistrano-db-tasks'
 require 'capistrano/postgresql'
 require 'capistrano/rails'
+require 'capistrano/rails/collection'
 require 'capistrano/rails/console'
 require 'capistrano/rbenv'
-require 'capistrano/rails/collection'
 require 'capistrano/secrets_yml'
 require 'capistrano/unicorn_nginx'
-
 require 'whenever/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.

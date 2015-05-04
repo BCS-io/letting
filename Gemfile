@@ -131,8 +131,9 @@ gem 'whenever', require: false
 # Capistrano deployment
 #
 group :development do
-  gem 'airbrussh', require: false
   gem 'capistrano', '~> 3.4.0'
+
+  gem 'airbrussh', require: false
   gem 'capistrano-bundler', '~> 1.1.3'
 
   #
