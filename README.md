@@ -16,9 +16,9 @@ This document covers the following sections
     * 1\. Install Ubuntu Linux 14.04 LTS
     * 2\. Deploy the Software stack using Chef
     * 3\. Deploy the application
-2. Commands
+2. [Commands](#commands)
   * 1\. rake db:import
-3. Monitoring
+3. [Monitoring](#monitoring)
   * 1\. [Monit](#monit)
   * 2\. [Logstash](#logstash)
 
@@ -29,9 +29,9 @@ This document covers the following sections
   * 2\. [Cron](#cron)
   * 3\. [Elasticsearch](#elasticsearch)
   * 4\. [Firewall](#firewall)
-    * 1\. Listing Firewall
-    * 2\. Adding Ranges to the firewall
-    * 3\. Disabling the Firewall
+    * 1\. [Listing Rules](#firewall-listing-rules)
+    * 2\. [Adding Ranges](#firewall-adding-ranges)
+    * 3\. [Disabling](#firewall-disabling)
   * 5\. [Postgresql](#postgresql)
   * 6\. [QEMU](#qemu)
     * 1\. Basic Commands
@@ -142,7 +142,7 @@ My Reference: Webserver alias: `ssh arran`
 
 
 
-##2. COMMANDS
+##2. COMMANDS<a name='commands'></a>
 
 ####2.1. rake db:import
   `rake db:import` is a command for importing production data from the old system to the new system.
@@ -162,7 +162,7 @@ My Reference: Webserver alias: `ssh arran`
   
   
   
-##3 Monitoring
+##3 Monitoring<a name='monitoring'></a>
 
 #####3.1 Monit<a name='monit'></a>
 
@@ -186,7 +186,14 @@ logs. Navigate to the server with a browser. See http://logstash.net/
 
 #####4.1 Chef<a name='chef'></a>
 
-######4.1.1 Updating a cookbook
+######4.1.1 Running A Script on a machine for the first time
+
+1. `ssh-copy-id deployer@example.com`
+  * confirm ssh in without any password
+2. `knife solo bootstrap deployer@<name|ipaddress>`
+3. Requires you to respond to password many times and takes 
+
+######4.1.2 Updating a cookbook
 
 1. Clone the cookbook to the local machine under ~/code/chef/
 2. Make changes to the cookbook increment the version in the meta data and commit and push back.
@@ -197,7 +204,7 @@ logs. Navigate to the server with a browser. See http://logstash.net/
   1. Don't bother around 5 - 11 pm in the evening as you get failed to connect.
 
 
-######4.1.2 Updating a server
+######4.1.3 Updating a server
 
 Chef is installed on servers - I've seen this get out of date. Removing it and then doing a knife solo bootstrap puts on a later version. Running chef on existing server may have firewall problems.
 
@@ -321,11 +328,11 @@ Somtimes it won't delete the Elasticsearch pid file.
 
 ####4.4 Firewall<a name='firewall'></a>
 
-###### 4.4.1 Listing Firewall
+###### 4.4.1 Listing Rules<a name='firewall-listing-rules'></a>
 
 `sudo iptables --list`
 
-###### 4.4.2 Adding Ranges to the wall
+###### 4.4.2 Adding Ranges<a name='firewall-adding-ranges'></a>
 
 1. ssh to the server which is having packets blocked.
 2. What address is being blocked? `cat /var/log/kern.log`
@@ -336,7 +343,7 @@ Somtimes it won't delete the Elasticsearch pid file.
   2. whois 23.23.181.189
   3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
 
-###### 4.4.3 Disabling the Firewall
+###### 4.4.3 Disabling<a name='firewall-disabling'></a>
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
@@ -368,6 +375,9 @@ Source files on host: `/var/lib/libvirt/images/`
 ````
 virsh list --all     -  List running virtual servers
 
+virsh suspend <vm-name> - Pause a virtual server
+virsh Resume <vm-name> - Restore a suspended virtual server
+
 virsh reboot <vm-name>  - restarts the virtual server
 virsh shutdown <vm-name> - quit of virtual server
 virsh destroy <vm-name> - forced quit of virtual server
@@ -388,7 +398,7 @@ Removing an instance called <vm-name>
   virsh destroy <vm-name>
 
   lvremove /dev/<volume-group-name>/<vm-name> -f
-    * lvremove /dev/fla-2014/papa -f
+    * lvremove /dev/fla-2014-vg/papa -f
 
   virsh undefine <vm-name>
   rm -rf /var/lib/libvirt/images/<vm-name>
@@ -400,6 +410,7 @@ Removing an instance called <vm-name>
 `````
   sudo su
   mkdir -p /var/lib/libvirt/images/<vm-name>
+  cd /var/lib/libvirt/images/<vm-name>
   nano builder_script
   Insert builder script (Scripts saved in repository: bcs-network under: /configs/vm)
   chmod +x builder_script
@@ -415,7 +426,7 @@ swap 3000
 EOF
 ````
 
-Run the builder script
+Run the builder script (10mins+)
 
 `./builder_script`
 
@@ -439,23 +450,23 @@ Changing
       * Example: `<source file='/dev/fla2014-vg/scarp'>`
 
 
-Create the logical volume
-
+Create the logical volume  
 `lvcreate -L 20G --name <vm-name> <volume-group-name>`
  1. `lvcreate -L 20G --name scarp fla2014-vg`
 
-Conversion
-
+Conversion  
 `qemu­-img convert /var/lib/libvirt/images/<vm-name>/ubuntu-kvm/tmp???????.qcow2 ­-O raw /dev/<volume-group-name>/<vm-name>`
 
-Configuration
-`virsh autostart <vm-name>`
-`virsh start <vm-name>`
+Configuration  
+`virsh autostart <vm-name>`  
+`virsh start <vm-name>`  
 
-Verify
-`ping 10.0.0.X`
-`ssh deployer@10.0.0.x`
-  `ping 8.8.8.8`
+Verify  
+* `ping 10.0.0.X`
+* `ssh deployer@10.0.0.x`
+* `ping 8.8.8.8`
+
+* Now, apply Chef script
 
 ===
 
@@ -465,7 +476,7 @@ Verify
 
 1. Updating Ruby
 
-  1. Ruby Build does not know about the newest Ruby versions unless you update it.
+  * Ruby Build does not know about the newest Ruby versions unless you update it.
 
   ````
   cd ~/.rbenv
@@ -474,7 +485,7 @@ Verify
   git pull
   ````
 
-  2. Application
+  * Applications need these changes to support a new Ruby
     * Gemfile `ruby '2.2.2'`
     * .ruby-version `2.2.2`
     * config/deploy  `set :rbenv_ruby, '2.2.2'`
@@ -550,7 +561,7 @@ cap production ssh:doctor
 The agent has no identities.
 ````
 
-#####2. Capistrano failing to deploy - with github.com port-22
+#####2. Fail with github.com port-22
 
 Occasionally a deployment fails with an unable to connect to github.
 Any network service is not completely reliable. Wait for a while and try again.
@@ -560,10 +571,25 @@ DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
 DEBUG [44051a0f]  fatal: Could not read from remote repository.
 ````
 
+#####3. Fail with Unicorn not restarting
+
+````
+DEBUG [e912b64e]  /etc/init.d/unicorn_letting_staging: line 26: kill: (4370) - No such process
+DEBUG [ee25176c]  Couldn't reload, starting 'export HOME; true /home/deployer ; cd /home/letting_staging/current && ( RBENV_ROOT=/opt/rbenv/ RBENV_VERSION=2.2.2 /opt/rbenv//bin/rbenv exec bundle exec unicorn -D -c /home/letting_staging/shared/config/unicorn.rb -E staging )' instead
+DEBUG [69e7a669]  master failed to start, check stderr log for details
+````
+
+* Investigate: 
+  - `sudo service letting_<environment> status`
+  - `sudo service letting_<environment> reload`
+  - `tail -80 ~/apps/letting_staging/shared/logs/unicorn.stderr.log`
+    * `Address already in use  - connect(2) for /tmp/unicorn.letting_staging.sock (Errno::EADDRINUSE)`
+* Remove: `# rm tmp/unicorn.chic_staging.sock`
+
 #### 5.4 Cron<a name='cron'></a>
 
 1. Is Cron running? `ps uww -C cron`
-2. Has Cron run? 
+2. Has Cron run?  check syslog:  `tail -200 /var/log/syslog`
 
 #### 5.5 Missing secret_key_base<a name='missing-secret_key_base'></a>
 
@@ -633,8 +659,8 @@ Solution
 
 5. Reload Service
 
-  1\. `cat /var/log/syslog` => 'bcs_unicorn' process is not running  
-  2\. `sudo service unicorn_bcs_production reload`  
+  1\. `cat /var/log/syslog` => 'letting_unicorn' process is not running  
+  2\. `sudo service unicorn_letting_production reload`  
     * Couldn't reload, starting ' error message continued and included the problem 
   
 
