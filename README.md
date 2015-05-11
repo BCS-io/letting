@@ -24,8 +24,10 @@ This document covers the following sections
 
 4. [Cheatsheet](#cheatsheet)
   * 1\. [Chef](#chef)
-    * 1\. Updating a cookbook
-    * 2\. Updating a server
+    * 1\. Running A Script on a machine for the first time
+    * 2\. Updating a cookbook
+    * 3\. Updating a server
+    *.4\. Adding on a new cookbook to a recipe
   * 2\. [Cron](#cron)
   * 3\. [Elasticsearch](#elasticsearch)
   * 4\. [Firewall](#firewall)
@@ -212,6 +214,14 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 2. Remove package: `sudo apt-get purge chef`
 3. Run chef again: `knife solo bootstrap root@example.com`
 4. Step 1 confirm situation.
+
+
+######4.1.4 Adding on a new cookbook to a recipe
+1. Create a new cookbook - take note of the name in the metadata
+2. Use the name in
+  * repo berksfile `cookbook '<name>' github: 'BCS-io-provision/<name>-cookbook'`
+  * metadata `depends '<name>'`
+3. Call the recipe in the dependent cookbook `<name>::<my-recipe>`
 
 ##### 4.2 Cron<a name='cron'></a>
 
