@@ -49,15 +49,16 @@ This document covers the following sections
     * 1\. SSH Doctor
     * 2\. Capistrano failing to deploy - with github.com port-22
   * 4\. [Cron](#cron)
-  * 5\. [Missing secret_key_base](#missing-secret_key_base)
-  * 6\. [NGINX](#nginx)
-  * 7\. [Production Server](#production-server)
+  * 5\. [Elasticsearch Faraday::ConnectionFailed](#elasticsearch-connection-failed)
+  * 6\. [Missing secret_key_base](#missing-secret_key_base)
+  * 7\. [NGINX](#nginx)
+  * 8\. [Production Server](#production-server)
     * 1\. [Clean application](#clean-application)
     * 2\. [Database reset](#database-reset)
     * 3\. [Rails console](#rails-console)
     * 4\. [Rake Tasks](#rake-tasks)
-  * 8\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
-  * 9\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
+  * 9\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
+  * 10\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
 6. Production Client
 <br><br><br>
 
@@ -301,33 +302,6 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
     }
 ````
 
-When Elasticsearch Breaks the build during testing:
-
-````
-   Failure/Error: Client.import force: true, refresh: true
-       Faraday::ConnectionFailed:
-         Connection refused - connect(2) for "localhost" port 9200
-````
-
-Reset Elasticsearch
-
-````
-sudo service elasticsearch restart
-````
-
-Somtimes it won't delete the Elasticsearch pid file.
-
-````
-    Stopping elasticsearch...PID file found, but no matching process running?
-    Removing PID file...
-    rm: cannot remove ‘/usr/local/var/run/10_0_0_101.pid’: Permission denied
-
-    To Remove
-    sudo rm /usr/local/var/run/10_0_0_101.pid
-
-    Repeat Restart
-
-````
 
 ######Further Reading
 
@@ -601,7 +575,37 @@ DEBUG [69e7a669]  master failed to start, check stderr log for details
 1. Is Cron running? `ps uww -C cron`
 2. Has Cron run?  check syslog:  `tail -200 /var/log/syslog`
 
-#### 5.5 Missing secret_key_base<a name='missing-secret_key_base'></a>
+
+#### 5.5 Elasticsearch Faraday::ConnectionFailed<a name='elasticsearch-connection-failed'></a>
+
+````
+   Failure/Error: Client.import force: true, refresh: true
+       Faraday::ConnectionFailed:
+         Connection refused - connect(2) for "localhost" port 9200
+````
+
+Reset Elasticsearch
+
+````
+sudo service elasticsearch restart
+````
+
+Somtimes it won't delete the Elasticsearch pid file.
+
+````
+    Stopping elasticsearch...PID file found, but no matching process running?
+    Removing PID file...
+    rm: cannot remove ‘/usr/local/var/run/10_0_0_101.pid’: Permission denied
+
+    To Remove
+    sudo rm /usr/local/var/run/10_0_0_101.pid
+
+    Repeat Restart
+
+````
+
+
+#### 5.6 Missing secret_key_base<a name='missing-secret_key_base'></a>
 
 Without the secret_key being set - nothing works 2 diagnostics:
 
@@ -618,14 +622,14 @@ Solution
 5. Restart the server - another deployment did this otherwise `sudo service unicorn_<name of process> reload` worth trying.
 
 
-#### 5.6 NGINX<a name='nginx'></a>
+#### 5.7 NGINX<a name='nginx'></a>
 
 `Reload nginx configuration nginx [fail]`
   * `sudo nginx -t`  - test configuration and exit
     * without the sudo you are running nginx as standard user and you get permission problems.
     * gives an error if the <application>/shared/log directory is missing
 
-####5.7 Production Server<a name='production-server'></a>
+#### 5.8 Production Server<a name='production-server'></a>
 
 1. Clean application<a name='clean-application'></a>
 
@@ -675,13 +679,13 @@ Solution
   
 
 
-####5.8 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
+####5.9 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
 `````
 
-####5.9 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
+####5.10 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
 
 ````
 diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
