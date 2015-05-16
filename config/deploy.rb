@@ -34,7 +34,7 @@ set :branch, ENV['REVISION'] || ENV['BRANCH_NAME']
 # db-tasks (and assets) - sgruhier/capistrano-db-tasks
 #
 set :db_local_clean, true      # remove the local dump file after loading
-set :db_remote_clean, true     # remove the dump file from the server after downloading
+set :db_remote_clean, true     # rm the dump file from the server after download
 
 set :assets_dir, %w(public/assets public/att)
 set :local_assets_dir, %w(public/assets public/att)
