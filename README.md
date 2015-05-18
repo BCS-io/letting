@@ -48,17 +48,19 @@ This document covers the following sections
   * 3\. [Capistrano](#capistrano)
     * 1\. SSH Doctor
     * 2\. Capistrano failing to deploy - with github.com port-22
-  * 4\. [Cron](#cron)
-  * 5\. [Elasticsearch Faraday::ConnectionFailed](#elasticsearch-connection-failed)
-  * 6\. [Missing secret_key_base](#missing-secret_key_base)
-  * 7\. [NGINX](#nginx)
-  * 8\. [Production Server](#production-server)
+  * 4\. Chef
+    * 1\. [Bootstrapping a none-default Chef Client](#bootstrapping-a-none-default-chef-client)
+  * 5\. [Cron](#cron)
+  * 6\. [Elasticsearch Faraday::ConnectionFailed](#elasticsearch-connection-failed)
+  * 7\. [Missing secret_key_base](#missing-secret_key_base)
+  * 8\. [NGINX](#nginx)
+  * 9\. [Production Server](#production-server)
     * 1\. [Clean application](#clean-application)
     * 2\. [Database reset](#database-reset)
     * 3\. [Rails console](#rails-console)
     * 4\. [Rake Tasks](#rake-tasks)
-  * 9\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
-  * 10\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
+  * 10\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
+  * 11\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
 6. Production Client
 <br><br><br>
 
@@ -570,13 +572,25 @@ DEBUG [69e7a669]  master failed to start, check stderr log for details
     * `Address already in use  - connect(2) for /tmp/unicorn.letting_staging.sock (Errno::EADDRINUSE)`
 * Remove: `# rm tmp/unicorn.chic_staging.sock`
 
-#### 5.4 Cron<a name='cron'></a>
+#### 5.4 Chef
+
+#####1. Bootstrapping a none-default Chef Client<a name='bootstrapping-a-none-default-chef-client'></a>
+
+During the bootstrap operation the chef-client is uploaded to the target system, typically the latest version currently 12.3 ish - rolling-back the client to an earlier version is one workaround:
+
+Setting Chef-Client Bootstrap Version
+
+````
+knife solo bootstrap < ip-address | FQDN > --bootstrap-version 11.16.4
+````
+
+#### 5.5 Cron<a name='cron'></a>
 
 1. Is Cron running? `ps uww -C cron`
 2. Has Cron run?  check syslog:  `tail -200 /var/log/syslog`
 
 
-#### 5.5 Elasticsearch Faraday::ConnectionFailed<a name='elasticsearch-connection-failed'></a>
+#### 5.6 Elasticsearch Faraday::ConnectionFailed<a name='elasticsearch-connection-failed'></a>
 
 ````
    Failure/Error: Client.import force: true, refresh: true
@@ -605,7 +619,7 @@ Somtimes it won't delete the Elasticsearch pid file.
 ````
 
 
-#### 5.6 Missing secret_key_base<a name='missing-secret_key_base'></a>
+#### 5.7 Missing secret_key_base<a name='missing-secret_key_base'></a>
 
 Without the secret_key being set - nothing works 2 diagnostics:
 
@@ -622,14 +636,14 @@ Solution
 5. Restart the server - another deployment did this otherwise `sudo service unicorn_<name of process> reload` worth trying.
 
 
-#### 5.7 NGINX<a name='nginx'></a>
+#### 5.8 NGINX<a name='nginx'></a>
 
 `Reload nginx configuration nginx [fail]`
   * `sudo nginx -t`  - test configuration and exit
     * without the sudo you are running nginx as standard user and you get permission problems.
     * gives an error if the <application>/shared/log directory is missing
 
-#### 5.8 Production Server<a name='production-server'></a>
+#### 5.9 Production Server<a name='production-server'></a>
 
 1. Clean application<a name='clean-application'></a>
 
@@ -679,13 +693,13 @@ Solution
   
 
 
-####5.9 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
+####5.10 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
 `````
 
-####5.10 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
+####5.11 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
 
 ````
 diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
