@@ -32,8 +32,10 @@ This document covers the following sections
   * 3\. [Elasticsearch](#elasticsearch)
   * 4\. [Firewall](#firewall)
     * 1\. [Listing Rules](#firewall-listing-rules)
-    * 2\. [Adding Ranges](#firewall-adding-ranges)
-    * 3\. [Disabling](#firewall-disabling)
+    * 2\. [What is being blocked?](#firewall-what-is being blocked)
+    * 3\. [Adding Ranges](#firewall-adding-ranges)
+    * 4\. [Disabling](#firewall-disabling)
+    * 5\. [Enabling](#firewall-enabling)
   * 5\. [Postgresql](#postgresql)
   * 6\. [QEMU](#qemu)
     * 1\. Basic Commands
@@ -318,21 +320,32 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 
 `sudo iptables --list`
 
-###### 4.4.2 Adding Ranges<a name='firewall-adding-ranges'></a>
+###### 4.4.2 What is being blocked?<a name='firewall-what-is being blocked'></a>
+
+####### Firewall blocks
 
 1. ssh to the server which is having packets blocked.
 2. What address is being blocked? `cat /var/log/kern.log`
   1. The logs contains blocked ip packets - to summarize the import things. DST is the ip address of the server we have been blocked to getting and DPT is the port number. We want to allow this combination through.
   Mar 13 ... iptables denied: IN= OUT=eth0 ... DST=23.23.181.189 ... DPT=443
-3. What range does the blocked ip address belong to?
+
+####### FQDN to ip address (Fully Qualified Domain Name)
+
+ `dig <domain-name>`
+ * Answer section - check the A records for ip addresses
+
+###### 4.4.3 Adding Ranges<a name='firewall-adding-ranges'></a>
+
+1. From ip address
+  * What range does the blocked ip address belong to?
   1. Install whois if not already installed
   2. whois 23.23.181.189
   3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
 
-###### 4.4.3 Disabling<a name='firewall-disabling'></a>
+###### 4.4.4 Disabling<a name='firewall-disabling'></a>
 
 If an operation is not completing and you suspect a firewall issue
-these commands completely remove it. (Rebooting the box, if applicable, restores the firewall)
+these commands completely remove it. 
 
 ````
     sudo su
@@ -341,6 +354,13 @@ these commands completely remove it. (Rebooting the box, if applicable, restores
     iptables -P FORWARD ACCEPT
     iptables -F
 ````
+
+###### 4.4.5 Enabling<a name='firewall-enabling'></a>
+
+`sudo iptables-restore /etc/iptables-rules`
+
+* Rebooting the box, if applicable, will also restore the firewall
+
 
 ##### 4.5 Postgresql<a name='postgresql'></a>
 1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
