@@ -37,6 +37,9 @@ This document covers the following sections
     * 4\. [Disabling](#firewall-disabling)
     * 5\. [Enabling](#firewall-enabling)
   * 5\. [Postgresql](#postgresql)
+    * 1\.[Login](#postgresql-login)
+    * 2\.[psql prompt](#postgresql-psql-prompt)
+    * 3\.[Execute SQL](#postgresql-execute-sql)
   * 6\. [QEMU](#qemu)
     * 1\. Basic Commands
     * 2\. Removing an instance from
@@ -363,13 +366,20 @@ these commands completely remove it.
 
 
 ##### 4.5 Postgresql<a name='postgresql'></a>
-1. change to Postgres user and open psql prompt `sudo -u postgres psql postgres`
-2. Listing Users (roles) and attributes: `\du`
-3. Listing all databases: `\list`
-4. Connect to a database: `\c db_name`
-5. Execute SQL file:  `psql -f thefile.sql letting_<envionrment>`
-6. Logging In: `psql -d letting_<envionment> -U letting_<environment>`
 
+###### 4.5.1 Login<a name='postgresql-login'></a>
+ Server:  `psql -U postgres`
+ Database: `psql -d letting_<envionment> -U letting_<environment>`
+
+###### 4.5.2  psql prompt<a name='postgresql-psql-prompt'></a>
+
+* Listing Users (roles) and attributes: `\du`
+* Listing all databases: `\list`
+* Connect to a database: `\c db_name`
+
+###### 4.5.3  Execute SQL <a name='postgresql-prompt'></a>
+
+* Execute SQL file:  `psql -f thefile.sql letting_<environment>`
 
 
 ##### 4.6 QEMU<a name='qemu'></a>
