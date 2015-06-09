@@ -45,8 +45,8 @@ config/secrets.yml
 # capistrano-db-tasks - dump files
 /db/*.sql.*
 
-# Ignore application configuration
-/config/application.yml
+# Ignore secret configuration
+/config/secret.yml
 
 # sequence png files
 /sequence/*.png
