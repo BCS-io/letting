@@ -139,8 +139,10 @@ This document covers the following sections
     `cap <environment> db:push`
     or use fake data `cap <environment> rails:rake:db:seed`
 
-5. `cap <environment> 'invoke[elasticsearch:sync]'`
+5. `cap <environment> elasticsearch:sync`
   * Import Data Into Elasticsearch Indexes
+  * step not always needed - to delete all indexes - ssh to the server and run this.
+    `curl -XDELETE 'http://localhost:9200/_all'`
 
 
 
