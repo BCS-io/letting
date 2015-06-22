@@ -18,6 +18,7 @@ before_script:
   - bundle exec rake db:create RAILS_ENV=test
 
 script:
+  - cp config/secrets.example.yml config/secrets.yml
   - bundle exec rake db:migrate
   - bundle exec xvfb-run rspec
   - bundle exec rake db:seed RAILS_ENV=test
