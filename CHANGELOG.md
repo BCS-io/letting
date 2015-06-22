@@ -7,3 +7,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
   - CHANGELOG file
   - travis required secrets.yml
+
+### Removed
+  - capistrano-rbenv - production system has removed rbenv in preference to brightbox's ruby.

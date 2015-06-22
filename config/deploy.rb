@@ -40,13 +40,6 @@ set :assets_dir, %w(public/assets public/att)
 set :local_assets_dir, %w(public/assets public/att)
 
 #
-# rbenv
-#
-set :rbenv_type, :system
-set :rbenv_ruby, '2.2.2'
-set :rbenv_custom_path, '/opt/rbenv'
-
-#
 # Unicorn
 #
 set :unicorn_workers, 2

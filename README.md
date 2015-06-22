@@ -495,16 +495,12 @@ Verify
   * Ruby Build does not know about the newest Ruby versions unless you update it.
 
   ````
-  cd ~/.rbenv
-  git pull
-  cd plugins/ruby-build
-  git pull
+  checkout brightbox-ruby
   ````
 
   * Applications need these changes to support a new Ruby
     * Gemfile `ruby '2.2.2'`
     * .ruby-version `2.2.2`
-    * config/deploy  `set :rbenv_ruby, '2.2.2'`
     * `gem install bundler`
     * `bundle install`
     * `cap <environment> setup`  - updates unicorn
