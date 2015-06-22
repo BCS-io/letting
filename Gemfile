@@ -87,8 +87,6 @@ ruby '2.2.2'
 #
 # Production
 #
-gem 'dotenv-rails', '~> 1.0.0'  # needs to be at the top!
-
 gem 'autoprefixer-rails', '~> 5.1.0'
 gem 'bcrypt', '~> 3.1.9'
 gem 'coffee-rails', '~> 4.1.0'

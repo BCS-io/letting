@@ -132,9 +132,7 @@ This document covers the following sections
 
 3. Deploy the application with Capistrano
   * 1\. `cap <environment> setup`
-  * 2\. `cap <environment> env:upload`
-    * 1\. .env file uploaded to shared directory
-  * 3\. `cap <environment> deploy`
+  * 2\. `cap <environment> deploy`
 
 4. Add Data
     On your *local* system Add Data (see 1.1.9 above). Then copy to the server.
