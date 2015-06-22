@@ -10,3 +10,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
   - capistrano-rbenv - production system has removed rbenv in preference to brightbox's ruby.
+  - .env are not being read from anymore - .env code removed
