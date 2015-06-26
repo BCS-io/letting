@@ -45,7 +45,8 @@ This document covers the following sections
     * 2\. Removing an instance from
   * 7\. [Ruby](#ruby)
     * 1\. Updating Ruby
-  * 8\. [SSH](#ssh)
+  * 8\. [SCP](#scp)
+  * 9\. [SSH](#ssh)
   
 5. [Troubleshooting](#troubleshooting)
   * 1\. [Net::SSH::HostKeyMismatch](#net-ssh-hostkeymismatch)
@@ -239,7 +240,14 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 ###### Basic Commands
 `pgrep cron` - cron daemon running
 `crontab -l` - lists the crontab for the current user, `-u` to set the user
+  - Example for a user: `crontab -u deployer -l`
 `cat /var/log/syslog | grep CRON` - cron outputs into syslog when it runs
+
+###### Whenever
+* whenever is a gem that allows you to write ruby and have it convert into CRON
+1. whenever code into cron:
+  -  'cd apps/<my-app>/current; bundle exec whenever .'
+
 
 ###### Files
 1. `cat /etc/crontab` 
@@ -368,7 +376,7 @@ these commands completely remove it.
 ##### 4.5 Postgresql<a name='postgresql'></a>
 
 ###### 4.5.1 Login<a name='postgresql-login'></a>
- Server:  `psql -U postgres`
+ Server:  `psql -U postgres`  
  Database: `psql -d letting_<envionment> -U letting_<environment>`
 
 ###### 4.5.2  psql prompt<a name='postgresql-psql-prompt'></a>
@@ -506,8 +514,14 @@ Verify
     * `cap <environment> setup`  - updates unicorn
     * `cap <environment> deploy`
 
+####4.8 scp<a name='scp'></a>
 
-####4.8 SSH<a name='ssh'></a>
+* for copying files between servers
+
+scp -r user@your.server.example.com:/path/to/file /home/user/Desktop/file
+
+
+####4.9 SSH<a name='ssh'></a>
 
 1. brew install ssh-copy-id
 2. ssh-copy-id deployer@example.com
@@ -738,3 +752,4 @@ diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
 On release of the version go through the [production checklist](https://github.com/BCS-io/letting/blob/master/docs/production_checklist.md)
 
 ===
+

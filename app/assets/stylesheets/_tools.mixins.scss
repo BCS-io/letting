@@ -9,6 +9,12 @@
 
   This is a mixin because extending code across different media queries is
   complicated.
+
+  Usage
+  @include clearfix;
+
+  Example clearfix class by:   .clear-fix { @include clearfix; }
+
 */
 
 @mixin clearfix {
