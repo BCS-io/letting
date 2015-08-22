@@ -56,6 +56,8 @@ This document covers the following sections
     * 2\. Capistrano failing to deploy - with github.com port-22
   * 4\. Chef
     * 1\. [Bootstrapping a none-default Chef Client](#bootstrapping-a-none-default-chef-client)
+    * 2\. [chef-solo - command not found](#chef-solo-command-not-found)
+    * 3\. [Postgres will not start another instance already running](#postgres-will-not-start-another-instance-already-running)
   * 5\. [Cron](#cron)
   * 6\. [Elasticsearch Faraday::ConnectionFailed](#elasticsearch-connection-failed)
   * 7\. [Missing secret_key_base](#missing-secret_key_base)
@@ -139,6 +141,7 @@ This document covers the following sections
     On your *local* system Add Data (see 1.1.9 above). Then copy to the server.
     `cap <environment> db:push`
     or use fake data `cap <environment> rails:rake:db:seed`
+      - login: admin@example.com / password, user@example.com / password
 
 5. `cap <environment> elasticsearch:sync`
   * Import Data Into Elasticsearch Indexes
@@ -614,7 +617,7 @@ DEBUG [69e7a669]  master failed to start, check stderr log for details
 
 #### 5.4 Chef
 
-#####1. Bootstrapping a none-default Chef Client<a name='bootstrapping-a-none-default-chef-client'></a>
+##### 1. Bootstrapping a none-default Chef Client<a name='bootstrapping-a-none-default-chef-client'></a>
 
 During the bootstrap operation the chef-client is uploaded to the target system, typically the latest version currently 12.3 ish - rolling-back the client to an earlier version is one workaround:
 
@@ -623,6 +626,78 @@ Setting Chef-Client Bootstrap Version
 ````
 knife solo bootstrap < ip-address | FQDN > --bootstrap-version 11.16.4
 ````
+
+##### 2. chef-solo - command not found<a name='chef-solo-command-not-found'></a>
+
+[Knife-solo - the application I use to provision the server. The first thing it does is install Chef on a given host.](http://matschaffer.github.io/knife-solo/). It gets the Chef application from opscode.com (Opscode was the original name of the company). If it doesn't the output looks like this:
+
+
+````
+...
+Enter the password for deployer@cava:
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: www.opscode.com
+...
+sudo: chef-solo: command not found
+````
+
+Fix  
+Traffic on the server cannot resolve the host. Either DNS traffic is being prevented, DNS cannot answer the request or you could get similar problems if the download from opscode was prevented. 
+
+Start with dns - the request if failing
+
+````
+nslookup google.com
+;; connection timed out; no servers could be reached
+
+nslookup www.opscode.com 
+;; connection timed out; no servers could be reached
+````
+Confirm that the network interfaces:  /etc/network/interfaces has been set correctly.
+Confirm the main network interface, et0, em0 etc, is up: ifconfig
+
+
+
+Firewall on the server. This is what an empty iptables looks like.
+
+````
+sudo iptables -L
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination
+````
+
+See Cheatsheet - Firewall
+
+
+##### 3. Postgres will not start another instance already running<a name='postgres-will-not-start-another-instance-already-running'></a>
+
+Postgresql cookbook is able to install new versions of postgres but does not clear them. 
+You can end up with multiple instances, visible under `cd /etc/postgresql` with Chef showing:
+
+````
+  ---- Begin output of /etc/init.d/postgresql start ----
+  STDOUT: * Starting PostgreSQL 9.3 database server
+  ...done.
+  * Starting PostgreSQL 9.4 database server
+  * Error: Port conflict: another instance is already running on /var/run/postgresql with port 5432
+  ...fail!
+  STDERR:
+````
+
+Fix  
+WARNING: This deleted the data! It also removed the older instance.  
+`sudo apt-get --purge autoremove postgresql-9-3`  
+
+Try something else next time!
+
 
 #### 5.5 Cron<a name='cron'></a>
 
@@ -707,7 +782,7 @@ Solution
     * 2\. Production: *need a cap version*  
 
   3\. `cap <environment> deploy`  
-    * Should see the migrations being run.  
+    * Should see the migrations being run.
 
   4\. `cap <environment> db:push`  
     * The data has been deleted by the drop this puts it back.  
