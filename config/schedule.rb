@@ -28,7 +28,7 @@ when 'development'
 
 else
 
-  job_type :rake, %{ cd :path && :environment_variable=:environment bundle exec rake :task --silent :output }
+  job_type :rake, %( cd :path && :environment_variable=:environment bundle exec rake :task --silent :output )
   every 1.day, at: '4:30 am' do
     rake 'hide_monotonous_account_details'
   end
