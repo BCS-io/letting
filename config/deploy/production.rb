@@ -8,11 +8,11 @@
 set :stage, :production
 set :branch, 'master'
 
-role :app, %w(deployer@10.0.0.36)
-role :web, %w(deployer@10.0.0.36)
-role :db,  %w(deployer@10.0.0.36)
+role :app, %w(deployer@10.0.0.30)
+role :web, %w(deployer@10.0.0.30)
+role :db,  %w(deployer@10.0.0.30)
 
-server '10.0.0.36', user: 'deployer', roles: %w(web app db), primary: true
+server '10.0.0.30', user: 'deployer', roles: %w(web app db), primary: true
 set :rails_env, :production
 
 #-------------------------------------------------------------------------------
@@ -20,4 +20,4 @@ set :rails_env, :production
 #
 # Unicorn
 #
-set :nginx_server_name, 'letting.local.bcs.io'
+set :nginx_server_name, 'letting.adams.bcs.io'

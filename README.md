@@ -13,9 +13,10 @@ This document covers the following sections
 1. [Project Setup](#project-setup)
   * 1\. Development Setup
   * 2\. Server Setup
-    * 1\. Install Ubuntu Linux 14.04 LTS
-    * 2\. Deploy the Software stack using Chef
-    * 3\. Deploy the application
+    * 1\. Provision 
+    * 2\. Deployment
+      * 1\. [Code Setup](#deployment-code-setup)
+      * 2\. Data
 2. [Commands](#commands)
   * 1\. rake db:import
 3. [Monitoring](#monitoring)
@@ -76,9 +77,9 @@ This document covers the following sections
 
 
 
-##1. PROJECT SETUP<a name='project-setup'></a>
+## 1. PROJECT SETUP<a name='project-setup'></a>
 
-####1.1. Development Setup
+#### 1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
 
@@ -120,30 +121,59 @@ This document covers the following sections
   * Re-index Elasticsearch
 <br><br>
 
-####1.2. Server Setup
+#### 1.2. Server Setup
 
-1. Install Ubuntu Linux 14.04 LTS
+##### 1.2.1. Provision
+* Provisioning is a one time setup of the server which will then be ready for deployment. If another application is already deployed this will have been done.
 
-2. Provision the software stack with Chef
+1. Install Ubuntu-14.04 LTS x86_64-minimal
+2. `ssh-keygen -R <server-name | server ip>`
+  * removes any previous keys that will prevent keyless ssh-ing.
+3. `ssh-copy-id root@<server-name | server ip>`
+  * Adds the key to the server
+  * confirm passwordless entry `ssh root@<server-name | server ip>`
+4. Provision the software stack with Chef
   * change to a machine configured for Chef Solo
   * 1\. `cd ~/code/chef/repo`
   * 2\. `knife solo bootstrap root@example.com'
     * 1\. Once complete reboot box before webserver working
     * 2\. Once System set up use `knife solo cook deployer@example.com' for further updates.
+      * root has been disabled and logging on is through the user deployer
   * 3\. `ssh deployer@example.com`
     * Verify you can passwordlessly log on.
+  * 4\. `sudo reboot`
+    * A number of changes have been made - NGINX is not serving pages until reboot.
 
-3. Deploy the application with Capistrano
+##### 1.2.2. Deployment
+
+###### 1.2.2.1. Code Setup<a name='deployment-code-setup'></a>
+1. Identify yourself as an agent with correct permissions
+  * Linux seems lax about this - once you identified - it keeps working.
+  * OSX you need to re-identify each time you each session
+    * 1\. remove existing identities
+    * 2\. copy the lines & run them
+    * 3\. uses the output from above
+
+    ````
+     ssh-add -D
+     ssh-agent
+     ssh-add
+    ````
+
+2. Deploy the application with Capistrano
   * 1\. `cap <environment> setup`
   * 2\. `cap <environment> deploy`
 
-4. Add Data
-    On your *local* system Add Data (see 1.1.9 above). Then copy to the server.
-    `cap <environment> db:push`
-    or use fake data `cap <environment> rails:rake:db:seed`
-      - login: admin@example.com / password, user@example.com / password
 
-5. `cap <environment> elasticsearch:sync`
+###### 1.2.2.2. Data 
+1. Database
+On your *local* system Add Data (see 1.1.9 above). Then copy to the server.
+  `cap <environment> db:push`
+or use fake data `cap <environment> rails:rake:db:seed`
+ - login: admin@example.com / password, user@example.com / password
+
+2. Elasticsearch
+  `cap <environment> elasticsearch:sync`
   * Import Data Into Elasticsearch Indexes
   * step not always needed - to delete all indexes - ssh to the server and run this.
     `curl -XDELETE 'http://localhost:9200/_all'`
