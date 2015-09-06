@@ -21,7 +21,9 @@ set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:full_app_name)}"
 
 set :keep_releases, 3
 
-SSHKit.config.command_map[:bundle] = '~/.gem/ruby/2.2.0/bin/bundle'
+set :default_env, {
+  'PATH' => 'PATH=$PATH:~/.gem/ruby/2.2.0/bin'
+}
 
 #
 # SCM
