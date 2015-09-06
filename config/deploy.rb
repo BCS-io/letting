@@ -49,6 +49,11 @@ set :local_assets_dir, %w(public/assets public/att)
 set :unicorn_workers, 2
 
 #
+# capistrano-backup
+#
+set :backup_model_file, "#{fetch(:full_app_name)}.rb"
+
+#
 # Whenever a cron scheduler
 #
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
