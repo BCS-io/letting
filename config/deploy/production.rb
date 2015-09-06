@@ -5,14 +5,18 @@
 #-------------------------------------------------------------------------------
 # Capistrano Standard environment settings
 #
+def ip_address
+  '10.0.0.30'
+end
+
 set :stage, :production
 set :branch, 'master'
 
-role :app, %w(deployer@10.0.0.30)
-role :web, %w(deployer@10.0.0.30)
-role :db,  %w(deployer@10.0.0.30)
+role :app, ip_address
+role :web, ip_address
+role :db,  ip_address
 
-server '10.0.0.30', user: 'deployer', roles: %w(web app db), primary: true
+server ip_address, user: 'deployer', roles: %w(web app db), primary: true
 set :rails_env, :production
 
 #-------------------------------------------------------------------------------
