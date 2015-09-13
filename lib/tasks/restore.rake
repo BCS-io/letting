@@ -20,7 +20,8 @@ namespace :db do
 
     # Import
     database_config = Rails.configuration.database_configuration[Rails.env]
-    system "psql --username=#{database_config['username']} -no-password #{database_config['database']} < #{import_path}/#{sql_file}"
+    system "psql --username=#{database_config['username']} " \
+      "-no-password #{database_config['database']} < #{import_path}/#{sql_file}"
 
     system "rm  #{import_path}#{sql_file}"
   end

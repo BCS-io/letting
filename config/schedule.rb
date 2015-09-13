@@ -37,7 +37,6 @@ else
   job_type :backup, ':environment_variable=:environment '\
                     'backup perform -t :task :output'
 
-
   every 1.day, at: '2:03 am' do
     backup 'letting'
   end

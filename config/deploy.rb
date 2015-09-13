@@ -21,9 +21,7 @@ set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:full_app_name)}"
 
 set :keep_releases, 3
 
-set :default_env, {
-  'PATH' => 'PATH=$PATH:~/.gem/ruby/2.2.0/bin'
-}
+set :default_env, 'PATH' => 'PATH=$PATH:~/.gem/ruby/2.2.0/bin'
 
 #
 # SCM
