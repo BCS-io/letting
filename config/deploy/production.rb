@@ -6,7 +6,7 @@
 # Capistrano Standard environment settings
 #
 def ip_address
-  '10.0.0.30'
+  '192.168.2.3'
 end
 
 set :stage, :production
