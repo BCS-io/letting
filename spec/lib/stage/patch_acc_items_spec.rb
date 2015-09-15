@@ -1,4 +1,5 @@
 require_relative '../../../lib/stage/patch_acc_info'
+require_relative '../../../lib/stage/patch_acc_items'
 
 describe PatchAccItems, :stage do
   def row human_ref: 10,

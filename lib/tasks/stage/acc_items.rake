@@ -23,21 +23,33 @@ namespace :db do
                ).stage
     end
 
+    # acc_items_legacy
+    #   - source of the raw legacy data rows
+    #
     def acc_items_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/acc_items.csv',
                            headers: DB::FileHeader.account
     end
 
+    # patch_acc_items
+    #   - rows to replace source rows
+    #
     def patch_acc_items
       DB::CSVTransform.new(file_name: 'import_data/patch/acc_items_patch.csv',
                            headers: DB::FileHeader.account).to_a
     end
 
+    # extract_acc_items
+    #  - rows to remove from source rows
+    #
     def extract_acc_items
       DB::CSVTransform.new(file_name: 'import_data/patch/acc_items_extract.csv',
                            headers: DB::FileHeader.account).to_a
     end
 
+    # insert_acc_items
+    #   - rows to add to source rows
+    #
     def insert_acc_items
       DB::CSVTransform.new(file_name: 'import_data/patch/acc_items_insert.csv',
                            headers: DB::FileHeader.account).to_a

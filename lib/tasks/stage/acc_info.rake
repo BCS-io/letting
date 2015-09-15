@@ -22,11 +22,17 @@ namespace :db do
                ).stage
     end
 
+    # acc_infos_legacy
+    #  - source of the raw legacy data rows
+    #
     def acc_infos_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/acc_info.csv',
                            headers: DB::FileHeader.charge
     end
 
+    # patch_acc_info
+    #   - altering rows
+    #
     def patch_acc_info
       DB::CSVTransform.new(file_name: 'import_data/patch/acc_info_patch.csv',
                            headers: DB::FileHeader.charge).to_a
