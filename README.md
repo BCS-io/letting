@@ -52,9 +52,11 @@ This document covers the following sections
 5. [Troubleshooting](#troubleshooting)
   * 1\. [Net::SSH::HostKeyMismatch](#net-ssh-hostkeymismatch)
   * 2\. [How to fix duplicate source.list entry](#how-to-fix-duplicate-source-list-entry)
-  * 3\. [Capistrano](#capistrano)
+  * 3\. [Capistrano](#troubleshooting-capistrano)
     * 1\. SSH Doctor
     * 2\. Capistrano failing to deploy - with github.com port-22
+    * 3\. Rubygems not installing 
+    * 4\. Fail with Unicorn not restarting
   * 4\. Chef
     * 1\. [Bootstrapping a none-default Chef Client](#bootstrapping-a-none-default-chef-client)
     * 2\. [chef-solo - command not found](#chef-solo-command-not-found)
@@ -606,7 +608,7 @@ Further Reading
 http://askubuntu.com/questions/120621/how-to-fix-duplicate-sources-list-entry
 
 
-####5.3 Capistrano<a name='capistrano'></a>
+####5.3 Capistrano<a name='troubleshooting-capistrano'></a>
 
 #####1. SSH Doctor
 
@@ -630,7 +632,20 @@ DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
 DEBUG [44051a0f]  fatal: Could not read from remote repository.
 ````
 
-#####3. Fail with Unicorn not restarting
+
+#####3. Rubygems not installing
+
+Rubygems ip address keeps changing. If it does then gem installation fails because of the outbound firewall: 
+
+````
+DEBUG [42445bc5] An error occurred while installing minitest (5.8.0), and Bundler cannot continue.
+DEBUG [42445bc5] Make sure that `gem install minitest -v '5.8.0'` succeeds before bundling.
+````
+
+Fix the firewall or remove the outbound firewall then reset the firewall after bundle completed.
+
+
+#####4. Fail with Unicorn not restarting
 
 ````
 DEBUG [e912b64e]  /etc/init.d/unicorn_letting_staging: line 26: kill: (4370) - No such process
