@@ -8,7 +8,7 @@ require_relative 'insert'
 # Insert is part of the staging process - specifically it is called by
 # all of the stage/*.rake tasks.
 #
-####
+# Uses lib/stage/insert
 #
 class InsertAccItems < Insert
   def sort originals

@@ -1,9 +1,12 @@
 STDOUT.sync = true
 
 #
-# Creates the files in the staging directory.
-# Takes legacy/ data overwrites it with patch/ data when necessary.
-# The result is put into the staging/ directory
+# Creates the 5 files (clients, properties, address2, acc_info, acc_items)
+# in the staging directory.
+# These  are created by  overwriting  the legacy/ data with patch/ data
+# when necessary.
+# The legacy files are the csv files  created from the adams data backup.
+# The new patched files are put into the staging/ directory
 #
 namespace :db do
   desc 'Legacy data overwritten by patch data and saved in staging.'

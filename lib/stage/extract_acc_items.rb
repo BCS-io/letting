@@ -5,6 +5,9 @@ require_relative 'extract'
 #
 # Removes records, array elements, from an array.
 #
+# Uses lib/stage/extract
+####
+#
 class ExtractAccItems < Extract
   def match original, extract
     original[:human_ref] == extract[:human_ref] &&
