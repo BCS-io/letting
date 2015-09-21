@@ -8,8 +8,8 @@ STDOUT.sync = true
 # Creates the acc_info staging file in the staging/ directory.
 #
 # stage task - stage tasks take legacy data and overwrite, when necessary,
-#              any changes by the patch files and puts the resultant data
-#              into the stage directory.
+#              any changes by the patch files.
+#              The resultant data is put into the stage directory.
 #
 namespace :db do
   namespace :stage do

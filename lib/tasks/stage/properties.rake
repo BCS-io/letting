@@ -20,12 +20,18 @@ namespace :db do
                 instructions: [PatchRef.new(patch: patch_properties)]).stage
     end
 
+    # properties_legacy
+    #   - source of the raw legacy data rows
+    #
     def properties_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/properties.csv',
                            headers: DB::FileHeader.property,
                            drop_rows: 32
     end
 
+    # patch_properties
+    #   - rows to replace source rows
+    #
     def patch_properties
       DB::CSVTransform.new(file_name: 'import_data/patch/properties_patch.csv',
                            headers: DB::FileHeader.property).to_a

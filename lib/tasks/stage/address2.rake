@@ -21,11 +21,17 @@ namespace :db do
                 instructions: [PatchRef.new(patch: patch_address2)]).stage
     end
 
+    # address2_legacy
+    #   - source of the raw legacy data rows
+    #
     def address2_legacy
       DB::CSVTransform.new file_name: 'import_data/legacy/address2.csv',
                            headers: DB::FileHeader.agent
     end
 
+    # patch_acc_items
+    #   - rows to replace source rows
+    #
     def patch_address2
       DB::CSVTransform.new(file_name: 'import_data/patch/address2_patch.csv',
                            headers: DB::FileHeader.agent_patch).to_a
