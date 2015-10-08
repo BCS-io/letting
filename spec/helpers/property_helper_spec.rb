@@ -6,6 +6,6 @@ describe PropertyHelper, type: :helper do
                   human_ref: '8008',
                   entities: [Entity.new(title: 'Mr', name: 'Bell')]
 
-    expect(client_list.first).to eq label: '8008 Mr Bell', value: 1
+    expect(client_list.first).to eq ['8008 Mr Bell', 1]
   end
 end

@@ -34,15 +34,26 @@ class AccountPage
     click_on 'Delete Charge', exact: true
   end
 
+  # expect values in property
+  #  - property_id the property's id
+  #  - client_id the client's id
+  #
+  #  Note: we select visual text and expect index id's
+  #
   def expect_property(spec, property_id:, client_id:)
     spec.expect(find_field('Property ID').value).to spec.have_text property_id
-    spec.expect(find_field('property_client_ref').value).to spec.have_text \
-      client_id
+    spec.expect(find_field('Client ID').value).to spec.have_text client_id
   end
 
-  def property(spec, property_id:, client_id:)
+  # set property values
+  #  - property_id - database index's id
+  #  - client_ref - the human readable id of the client
+  #      where client ref != client_id
+  #  Note: we select visual text and expect index id's
+  #
+  def property(property_id:, client_ref:)
     fill_in 'Property ID', with: property_id
-    spec.fill_autocomplete('property_client_ref', with: client_id)
+    select(client_ref, from: 'Client ID')
   end
 
   def expect_entity(spec, type:, order: 0, title: '', initials: '', name:)
@@ -108,7 +119,7 @@ class AccountPage
 
   def successful? spec
     spec.expect(page.title).to spec.eq 'Letting - Accounts'
-    spec.expect(page).to spec.have_text /created|updated/i
+    spec.expect(page).to spec.have_text(/created|updated/i)
     self
   end
 end

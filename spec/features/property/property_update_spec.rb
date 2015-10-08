@@ -20,7 +20,9 @@ describe 'Property#Update', type: :feature  do
     it 'opens valid page', js: true  do
       account.load id: 1
       expect(account.title).to eq 'Letting - Edit Account'
-      account.expect_property self, property_id: '80', client_id: '90'
+      account.expect_property self,
+                              property_id: '80',
+                              client_id: Client.first.id
       account.expect_address self,
                              type: '#property_address',
                              address: address_new
@@ -28,12 +30,13 @@ describe 'Property#Update', type: :feature  do
     end
 
     it 'updates account', js: true do
+      new_client = client_create(human_ref: 101)
       account.load id: 1
-      account.property self, property_id: '81', client_id: '90'
+      account.property property_id: '81', client_ref: '101'
       account.address selector: '#property_address', address: address_new
       account.entity type: 'property', **company_attributes
       account.button('Update').successful?(self).load id: 1
-      account.expect_property self, property_id: '81', client_id: '90'
+      account.expect_property self, property_id: '81', client_id: new_client.id
       account.expect_address self,
                              type: '#property_address',
                              address: address_new
