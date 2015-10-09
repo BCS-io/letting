@@ -6,6 +6,8 @@
 #
 # Used by search Controller
 #
+# rubocop: disable Style/AccessorMethodName
+#
 ####
 #
 class LiteralSearch
@@ -24,8 +26,7 @@ class LiteralSearch
   # returns LiteralResult - a wrapper for the search results
   #
   def go
-    captured = query_by_referrer
-    return captured if captured.found?
+    return query_by_referrer if query_by_referrer.found?
 
     default_ordered_query
   end
@@ -38,6 +39,13 @@ class LiteralSearch
   end
 
   def query_by_referrer
+    @query_by_referrer ||= get_query_by_referrer
+  end
+
+  # get_query_by_referrer
+  #  - search depending on the request's original controller
+  #
+  def get_query_by_referrer
     case referrer.controller
     when 'clients' then client_search(query)
     when 'payments' then payments_search(query)
