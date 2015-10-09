@@ -46,15 +46,15 @@ class Run < ActiveRecord::Base
   end
 
   def deliver
-    invoices.select(&:mail?)
+    invoices.select(&:mail?).sort_by(&:property_ref)
   end
 
   def retain
-    invoices.select(&:retain?)
+    invoices.select(&:retain?).sort_by(&:property_ref)
   end
 
   def forget
-    invoices.select(&:forget?)
+    invoices.select(&:forget?).sort_by(&:property_ref)
   end
 
   # Is run the last one (so far)?

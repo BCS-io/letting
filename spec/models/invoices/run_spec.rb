@@ -36,6 +36,12 @@ RSpec.describe Run, type: :model do
       expect(run_new(invoices: [invoice_new(deliver: 'retain')]).deliver.size)
         .to eq 0
     end
+
+    it 'sorts on property_ref' do
+      run = run_new(invoices: [Invoice.new(property_ref: 10, deliver: 'mail'),
+                               Invoice.new(property_ref: 8, deliver: 'mail')])
+      expect(run.deliver.map(&:property_ref)).to eq [8, 10]
+    end
   end
 
   describe '#retain' do
@@ -47,6 +53,12 @@ RSpec.describe Run, type: :model do
     it 'sends invoice that has deliver attribute' do
       expect(run_new(invoices: [invoice_new(deliver: 'mail')]).retain.size)
         .to eq 0
+    end
+
+    it 'sorts on property_ref' do
+      run = run_new(invoices: [Invoice.new(property_ref: 10, deliver: 'retain'),
+                               Invoice.new(property_ref: 8, deliver: 'retain')])
+      expect(run.retain.map(&:property_ref)).to eq [8, 10]
     end
   end
 
