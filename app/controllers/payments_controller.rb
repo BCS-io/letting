@@ -19,20 +19,20 @@
 #
 class PaymentsController < ApplicationController
   def index
-    @records = Payment.includes(include_account)
+    @records = Payment.includes(join_account)
                .by_booked_at
                .page(params[:page])
                .load
   end
 
   def show
-    @payment = PaymentDecorator.new Payment.includes(include_payment_tables)
+    @payment = PaymentDecorator.new Payment.includes(join_payment_tables)
                .find params[:id]
   end
 
   # params[:id] is the account_id returned from search_controller
   def new
-    account = Account.includes(include_property)
+    account = Account.includes(join_property)
               .find_by_human_ref params[:account_payment_search]
     set_focus account ? 'submit' : 'payment_search'
     @payment = PaymentDecorator.new(Payment.new account: account)
@@ -93,18 +93,26 @@ class PaymentsController < ApplicationController
     session[:payments_booked_on] = date
   end
 
-  def include_account
+  # join_NAME
+  #  - specifies the relationships to be included in the result set
+  #
+
+  def join_account
     [account: [property: [:entities]]]
   end
 
-  def include_property
+  def join_property
     [property: [:address, :entities]]
   end
 
-  def include_payment_tables
+  def join_payment_tables
     [account: [property: [:address, :entities]]]
   end
 
+  # payment_params
+  #   - white listing of user supplied data as action controller forbids
+  #     mass assignment until params have been specifically allowed.
+  #
   def payment_params
     params.require(:payment)
       .permit %i(id account_id booked_at amount human_ref),

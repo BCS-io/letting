@@ -22,7 +22,7 @@ class PropertiesController < ApplicationController
 
   def show
     @property = PropertyDecorator.new \
-      Property.includes(include_property).find params[:id]
+      Property.includes(join_property).find params[:id]
   end
 
   def new
@@ -73,11 +73,17 @@ class PropertiesController < ApplicationController
     end
   end
 
-  def include_property
+  # join_property
+  #   - specifies the relationships to be included in the result set
+  #
+  def join_property
     [client: [:entities],
      account: [charges: [:cycle], credits: [:charge], debits:  [:charge]]]
   end
 
+  # property_params
+  #   - white listing of user supplied data
+  #
   def property_params
     params.require(:property)
       .permit :human_ref,

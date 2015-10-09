@@ -56,6 +56,9 @@ class UsersController < ApplicationController
 
   private
 
+  # users_params
+  #   - white listing of user supplied data
+  #
   def users_params
     params.require(:user).permit user_attributes
   end

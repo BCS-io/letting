@@ -60,7 +60,7 @@ class InvoicingsController < ApplicationController
   end
 
   def edit
-    @invoicing = Invoicing.includes(including).find params[:id]
+    @invoicing = Invoicing.includes(join_tables).find params[:id]
     @invoicing.generate if @invoicing.valid_arguments?
     set_invoice_date date: get_invoice_date
   end
@@ -153,13 +153,19 @@ class InvoicingsController < ApplicationController
     session[:invoicings_invoice_date] = params[:invoice_date] = date
   end
 
+  # invoicing_params
+  #  - white listing of user supplied data
+  #
   def invoicing_params
     params
       .require(:invoicing)
       .permit %i(property_range period_first period_last)
   end
 
-  def including
+  # join_tables
+  #  - specifies the relationships to be included in the result set
+  #
+  def join_tables
     { runs: [invoices: [snapshot: [debits: [:charge]]]] }
   end
 

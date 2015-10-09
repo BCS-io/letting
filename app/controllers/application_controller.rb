@@ -40,11 +40,18 @@ class ApplicationController < ActionController::Base
                  action: session[:search_action]
   end
 
+  # address_params
+  #  - white listing of user supplied data as action controller forbids
+  #    mass assignment until params has been specifically allowed.
+  #
   def address_params
     %i(county district flat_no house_name nation road road_no town type \
        postcode)
   end
 
+  # entities_params
+  #  - white listing of user supplied data
+  #
   def entities_params
     %i(entity_type _destroy id title initials name)
   end

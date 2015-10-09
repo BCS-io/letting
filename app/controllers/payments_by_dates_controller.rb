@@ -8,7 +8,7 @@ class PaymentsByDatesController < ApplicationController
     params[:date] ||= Payment.last_booked_at
 
     @records = Payment.booked_on(date: params[:date])
-               .includes(joined_tables)
+               .includes(join_tables)
                .load
 
     @payments_by_dates = Payment.recent.by_booked_at_date
@@ -23,7 +23,10 @@ class PaymentsByDatesController < ApplicationController
 
   private
 
-  def joined_tables
+  # join_tables
+  #   - specifies the relationships to be included in the result set
+  #
+  def join_tables
     [account: [property: [:entities]]]
   end
 

@@ -65,6 +65,10 @@ class ClientsController < ApplicationController
 
   private
 
+  # clients_params
+  #   - white listing of user supplied data as action controller forbids
+  #     mass assignment until params have been specifically allowed.
+  #
   def clients_params
     params
       .require(:client)
