@@ -7,7 +7,7 @@
 #
 class LiteralResult
   include Comparable
-  attr_reader :action, :controller, :do_not_search, :records
+  attr_reader :action, :controller, :records
 
   # initialize
   # args:
@@ -16,18 +16,15 @@ class LiteralResult
   #   records - when more than one record is being returned
   #   do_not_search - do not search
   #
-  def initialize(controller:, action:, records: [], do_not_search: false)
+  def initialize(controller:, action:, records: [])
     @controller = controller
     @action = action
     @records = records.is_a?(Array) ? records : [records]
-    @do_not_search = do_not_search
   end
 
   # The search not only completed but it also found a result.
   #
   def found?
-    return false if do_not_search
-
     records.present?
   end
 
@@ -57,24 +54,15 @@ class LiteralResult
 
   def <=> other
     return nil unless other.is_a?(self.class)
-    [action, controller, records, do_not_search] <=>
-      [other.action, other.controller, other.records, other.do_not_search]
-  end
-
-  # self.without_a_search
-  #
-  # The model does not have any literal search query find any specific record.
-  #
-  def self.without_a_search
-    LiteralResult.new action: '', controller: '', records: []
+    [action, controller, records] <=>
+      [other.action, other.controller, other.records]
   end
 
   # self.no_record_found
   #
   # completes LiteralResult - no literal match has been found
-  # Same as without_a_search but makes more sense when reading code.
   #
   def self.no_record_found
-    LiteralResult.new action: '', controller: '', records: [], do_not_search: true
+    LiteralResult.new action: '', controller: '', records: []
   end
 end

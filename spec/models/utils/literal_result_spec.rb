@@ -15,15 +15,6 @@ describe LiteralResult do
                                action: 'arbitary',
                                records: []).found?).to be false
     end
-
-    describe 'no_search argument' do
-      it 'if true will not find anything regardless of id and records' do
-        expect(LiteralResult.new(controller: 'arbitary',
-                                 action: 'arbitary',
-                                 records: [1],
-                                 do_not_search: true).found?).to be false
-      end
-    end
   end
 
   describe 'to_params' do
@@ -70,30 +61,24 @@ describe LiteralResult do
 
   describe '#<=>' do
     it 'returns 0 when equal' do
-      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1,
-                              do_not_search: false
-      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1,
-                              do_not_search: false
+      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
+      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
 
       expect(lhs <=> rhs).to eq(0)
     end
 
     describe 'returns 1 when lhs > rhs' do
       it 'compares records' do
-        lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 2,
-                                do_not_search: false
-        rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1,
-                                do_not_search: false
+        lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 2
+        rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
 
         expect(lhs <=> rhs).to eq(1)
       end
     end
 
     it 'returns -1 when lhs < rhs' do
-      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1,
-                              do_not_search: false
-      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 2,
-                              do_not_search: false
+      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
+      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 2
 
       expect(lhs <=> rhs).to eq(-1)
     end

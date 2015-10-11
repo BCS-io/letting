@@ -51,7 +51,7 @@ class LiteralSearch
     when 'payments', 'payments_by_date' then payments_search(query)
     when 'properties' then property_search(query)
     when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
-      LiteralResult.without_a_search
+      LiteralResult.no_record_found
     else
       fail NotImplementedError, "Missing: #{referrer}"
     end
