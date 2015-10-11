@@ -4,7 +4,7 @@
 #
 # Responsible for exact match searches for the application.
 #
-# Used by search Controller
+# Used by search Controller - returns results as LiteralResults
 #
 # rubocop: disable Style/AccessorMethodName
 #
@@ -38,6 +38,9 @@ class LiteralSearch
     @query = query
   end
 
+  # query_by_referrer
+  #   - cache method
+  #
   def query_by_referrer
     @query_by_referrer ||= get_query_by_referrer
   end
@@ -47,44 +50,59 @@ class LiteralSearch
   #
   def get_query_by_referrer
     case referrer.controller
-    when 'clients' then client_search(query)
-    when 'payments', 'payments_by_date' then payments_search(query)
-    when 'properties' then property_search(query)
+    when 'clients' then client_search
+    when 'payments', 'payments_by_date'
+      results action: 'index', controller: 'payments', records: payments_query
+
+    when 'properties' then property_search
     when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
-      LiteralResult.no_record_found
+      results records: []
+
     else
       fail NotImplementedError, "Missing: #{referrer}"
     end
   end
 
-  def client_search query
-    LiteralResult.new action: 'show',
-                      controller: 'clients',
-                      records: id_or_empty(Client.find_by_human_ref query)
+  def client_search
+    results action: 'show', controller: 'clients', records: client_query
   end
 
-  def payments_search query
-    LiteralResult.new \
-      action: 'index',
-      controller: 'payments',
-      records: Payment.includes(account: [property: [:entities]])
-        .human_ref(query).by_booked_at.to_a
+  def property_search
+    results action: 'show', controller: 'properties', records: property_query
   end
 
-  def property_search query
-    LiteralResult.new action: 'show',
-                      controller: 'properties',
-                      records: id_or_empty(Property.find_by_human_ref query)
+  # default_ordered_query
+  #  - when we don't find anything under the initial controller we check if
+  #    it would have matched literal searches in other important controllers
+  #    before giving up.
+  #
+  #    returns literal search matches for the query
+  #
+  def default_ordered_query
+    return property_search if property_search.found?
+    return client_search if client_search.found?
+
+    results records: []
+  end
+
+  def client_query
+    id_or_empty(Client.find_by_human_ref query)
+  end
+
+  def payments_query
+    Payment.includes(account: [property: [:entities]]).human_ref(query)
+      .by_booked_at.to_a
+  end
+
+  def property_query
+    id_or_empty(Property.find_by_human_ref query)
   end
 
   def id_or_empty record
     record ? record.id : []
   end
 
-  def default_ordered_query
-    return property_search(query) if property_search(query).found?
-    return client_search(query) if client_search(query).found?
-
-    LiteralResult.no_record_found
+  def results(action: '', controller: '', records:)
+    LiteralResult.new action: action, controller: controller, records: records
   end
 end
