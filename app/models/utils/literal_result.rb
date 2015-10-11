@@ -3,40 +3,40 @@
 #
 # Wraps up the search results
 #
+# rubocop: disable  Metrics/LineLength
+#
 class LiteralResult
-  attr_reader :action, :controller, :id, :no_search, :records
+  include Comparable
+  attr_reader :action, :controller, :do_not_search, :records
 
   # initialize
   # args:
-  #   action: - rest action
   #   controller - controller the action is called on
-  #   id - record id returned - when one record is returned
+  #   action: - rest action
   #   records - when more than one record is being returned
-  #   no_search - do not search
+  #   do_not_search - do not search
   #
-  def initialize(action:, controller:, id: nil, records: nil, no_search: false)
-    @action = action
+  def initialize(controller:, action:, records: [], do_not_search: false)
     @controller = controller
-    @id = id
-    @records = records
-    @no_search = no_search
+    @action = action
+    @records = records.is_a?(Array) ? records : [records]
+    @do_not_search = do_not_search
   end
 
   # The search not only completed but it also found a result.
   #
   def found?
-    return false if no_search
+    return false if do_not_search
 
-    id.present? || records.present?
+    records.present?
   end
 
   # to_params
   # returns - action, controller, id - enough information to redirect
   #
   def to_params
-    params = { action: action, controller:  controller }
-    params.merge!(id: id) if id
-    params.merge!(records: records) if records
+    params = { controller: controller, action: action }
+    single_record? ? params.merge!(id: records.first) : params.merge!(records: records)
     params
   end
 
@@ -52,7 +52,13 @@ class LiteralResult
   # If we are displaying a single record
   #
   def single_record?
-    id.present?
+    records.length == 1
+  end
+
+  def <=> other
+    return nil unless other.is_a?(self.class)
+    [action, controller, records, do_not_search] <=>
+      [other.action, other.controller, other.records, other.do_not_search]
   end
 
   # self.without_a_search
@@ -60,7 +66,7 @@ class LiteralResult
   # The model does not have any literal search query find any specific record.
   #
   def self.without_a_search
-    LiteralResult.new action: '', controller: '', id: nil
+    LiteralResult.new action: '', controller: '', records: []
   end
 
   # self.no_record_found
@@ -69,6 +75,6 @@ class LiteralResult
   # Same as without_a_search but makes more sense when reading code.
   #
   def self.no_record_found
-    LiteralResult.new action: '', controller: '', id: nil, no_search: true
+    LiteralResult.new action: '', controller: '', records: [], do_not_search: true
   end
 end

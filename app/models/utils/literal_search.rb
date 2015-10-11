@@ -48,7 +48,7 @@ class LiteralSearch
   def get_query_by_referrer
     case referrer.controller
     when 'clients' then client_search(query)
-    when 'payments' then payments_search(query)
+    when 'payments', 'payments_by_date' then payments_search(query)
     when 'properties' then property_search(query)
     when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
       LiteralResult.without_a_search
@@ -60,7 +60,7 @@ class LiteralSearch
   def client_search query
     LiteralResult.new action: 'show',
                       controller: 'clients',
-                      id: id_or_nil(Client.find_by_human_ref query)
+                      records: id_or_empty(Client.find_by_human_ref query)
   end
 
   def payments_search query
@@ -68,17 +68,17 @@ class LiteralSearch
       action: 'index',
       controller: 'payments',
       records: Payment.includes(account: [property: [:entities]])
-        .human_ref(query).by_booked_at
+        .human_ref(query).by_booked_at.to_a
   end
 
   def property_search query
     LiteralResult.new action: 'show',
                       controller: 'properties',
-                      id: id_or_nil(Property.find_by_human_ref query)
+                      records: id_or_empty(Property.find_by_human_ref query)
   end
 
-  def id_or_nil record
-    record ? record.id : nil
+  def id_or_empty record
+    record ? record.id : []
   end
 
   def default_ordered_query
