@@ -93,10 +93,23 @@ class Property < ActiveRecord::Base
     order(:human_ref)
   end
 
+  # self.houses
+  #   - returns the properties in house range
+  #   - above this range is flats
+  #
   def self.houses
     where("human_ref <= #{MAX_HOUSE_HUMAN_REF}")
   end
 
+  # self.quarter_day_in
+  #  - properties that have an account on specified quarter day. Quarter days
+  #    are pairs of months Mar - Sep and Jun - Dec when ground rents become due
+  #
+  #  - arg
+  #    month - the quarter day month one of [Mar, Jun, Sep, Dec]
+  #
+  #  - returns property active relations for the matching records
+  #
   def self.quarter_day_in month
     joins(account: [charges: [cycle: [:due_ons]]])
       .where('due_ons_count = 2 AND month = ?', month)

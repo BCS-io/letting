@@ -45,6 +45,13 @@ class BatchMonths
     time.to_date..(time + 6.months - 1.day).to_date
   end
 
+  # payment_period
+  #  - the period you count incoming payments beings before the actual period
+  #
+  def payment_period(year:)
+    period(year: year).first - 1.month..period(year: year).last - 1.month
+  end
+
   def to_s join: '/'
     "#{first_to_s}#{join}#{last_to_s}"
   end

@@ -61,6 +61,38 @@ describe Property, type: :model do
     end
   end
 
+  describe 'class methods' do
+    describe 'quarter_day_in' do
+      it 'matches properties with quarter day charges' do
+        property = property_create(
+          account: account_create(
+            charges: [charge_new(
+              cycle: cycle_new(name: 'Feb-due-on',
+                               due_ons: [DueOn.new(month: 3, day: 4),
+                                         DueOn.new(month: 9, day: 4)])
+            )]
+          )
+        )
+
+        expect(Property.quarter_day_in 3).to eq [property]
+      end
+
+      it 'rejects properties without quarter day charges' do
+        property_create(
+          account: account_create(
+            charges: [charge_new(
+              cycle: cycle_new(name: 'Feb-due-on',
+                               due_ons: [DueOn.new(month: 2, day: 4),
+                                         DueOn.new(month: 9, day: 4)])
+            )]
+          )
+        )
+
+        expect(Property.quarter_day_in 3).to eq []
+      end
+    end
+  end
+
   describe 'search', :search do
     before :each do
       property_create address: address_new(house_name: 'Hill')

@@ -112,6 +112,20 @@ class Payment < ActiveRecord::Base
       .where(properties: { human_ref: human_ref })
   end
 
+  # payments are grouped on which quarter day to apply them to
+  #   - quarter day is the domain name for dates that happen in Mar/Jun/Sep/Dec
+  #   - Typically around the 21st of the month but can vary
+  #   - payments begin to be applied to the quarter day a month before the
+  #     actual date
+  #
+  # year:         - the year the payments will be summed over
+  # batch_months: - period which payments are summed over
+  #
+  def self.by_quarter_day(year:, batch_months:)
+    period = batch_months.payment_period(year: year)
+    where(booked_at: period.first.beginning_of_day...period.last.end_of_day)
+  end
+
   include Searchable
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})

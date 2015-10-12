@@ -193,24 +193,49 @@ describe Payment, :payment, :ledgers, type: :model do
       end
     end
 
-    describe '.booked_on' do
-      it 'returns payments on queried day' do
-        account = account_create property: property_new
-        payment = payment_create account_id: account.id,
-                                 booked_at: '2014-9-1 16:29:30'
-        expect(Payment.booked_on(date: '2014-09-01').to_a).to eq [payment]
+    describe '.by_quarter_day' do
+      it 'returns payments within payment period' do
+        payment = payment_create \
+          booked_at: Time.zone.local(2013, 2, 1, 00, 00),
+          account: account_create(property: property_new(human_ref: 10))
+
+        expect(Payment.by_quarter_day(
+                 year: 2013,
+                 batch_months: BatchMonths.make(month: BatchMonths::MAR)))
+          .to eq [payment]
       end
 
-      it 'returns nothing on days without a transaction.' do
-        account = account_create property: property_new
-        payment_create account_id: account.id
-        expect(Payment.booked_on(date: '2000-1-1').to_a).to eq []
+      it 'returns payments within payment period' do
+        payment = payment_create \
+          booked_at: Time.zone.local(2013, 7, 31, 23, 59),
+          account: account_create(property: property_new(human_ref: 10))
+
+        expect(Payment.by_quarter_day(
+                 year: 2013,
+                 batch_months: BatchMonths.make(month: BatchMonths::MAR)))
+          .to eq [payment]
       end
 
-      it 'returns nothing if invalid date' do
-        account = account_create property: property_new
-        payment_create account_id: account.id
-        expect(Payment.booked_on date: '2012-x').to eq []
+      it 'rejects payments before payment period' do
+        payment_create \
+          booked_at: Time.zone.local(2013, 1, 31, 23, 59),
+          account: account_create(property: property_new(human_ref: 10))
+
+        expect(Payment.by_quarter_day(
+                 year: 2013,
+                 batch_months: BatchMonths.make(month: BatchMonths::MAR)))
+          .to eq []
+      end
+
+      it 'rejects payments after payment period' do
+        payment_create \
+          booked_at: Time.zone.local(2013, 8, 1, 00, 00),
+          account: account_create(property: property_new(human_ref: 10))
+
+        expect(Payment.by_quarter_day(
+                 year: 2013,
+                 batch_months: BatchMonths.make(month: BatchMonths::MAR)))
+          .to eq []
       end
     end
   end

@@ -93,26 +93,14 @@ class ClientPayment
   # Arg:
   # batch_months: - period which payments are summed over
   #               - either Mar/Sep or Jun/Dec
-  # returns: accounts which have charges in Mar/Sep or Jun/Dec
+  # returns: accounts (actually relations) which have charges in Mar/Sep
+  #          or Jun/Dec
   #          - accounts can be in one, both, or neither.
   #
   def accounts_with_period(batch_months:)
     Account.joins(:property)
-      .includes(:property)
       .merge(client.properties.houses.quarter_day_in(batch_months.first))
       .order('properties.human_ref ASC')
-  end
-
-  # client payments from one account for a year given batch_month
-  #
-  # account:      - account to total
-  # year:         - the year the payments will be summed over
-  # batch_months: - period which payments are summed over
-  #
-  def period_total_by_account(account:, year:, batch_months:)
-    period = batch_months.period(year: year)
-    Payment.where(booked_at: period.first...period.last)
-      .where(account_id: account.id).pluck(:amount).sum
   end
 
   # client payments summed for all accounts for a year given batch_month
@@ -121,8 +109,7 @@ class ClientPayment
   # month:   - the period of payment governed by start month
   #
   def period_totals(year:, batch_months:)
-    period = batch_months.period(year: year)
-    Payment.where(booked_at: period.first...period.last)
+    Payment.by_quarter_day(year: year, batch_months: batch_months)
       .where(account_id: accounts_with_period(batch_months: batch_months)
         .pluck(:account_id))
       .pluck(:amount).sum

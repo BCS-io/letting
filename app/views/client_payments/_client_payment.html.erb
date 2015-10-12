@@ -6,9 +6,10 @@
     <%= print_link text: "Print #{batch_months.now_to_s} #{client_payment.year}", path: client_payment_path(client_payment.client_id, year: client_payment.year, month: batch_months.now), css: 'Button  ButtonPrimary' %>
   </div>
   <div class='col-1-1  grid-row  bottom-spacer'>
-    <% period = batch_months.period(year: client_payment.year) %>
+    <% period = batch_months.payment_period(year: client_payment.year) %>
+    <h2><%= "Payments in #{batch_months.now_to_s} #{client_payment.year} Quarter for Client #{client_payment.client.id}" %></h2>
 
-    <h3>Payments collected for <%= "#{client_payment.client.full_names} (id: #{client_payment.client.id}) " %> between <%= "#{format_short_date(period.first.to_date)} - #{format_short_date(period.last.to_date)}" %></h3>
+    <h4>Payments collected for <%= "#{client_payment.client.full_names} (id: #{client_payment.client.id}) " %> between <%= "#{format_short_date(period.first.to_date)} - #{format_short_date(period.last.to_date)}" %></h4>
   </div>
 
   <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
@@ -30,7 +31,7 @@
       <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
         <%= format_empty_string_as_dash property.address.first_no %>
       </div>
-      <div class='col-7-24  bottom-spacer  inherit-row'>
+      <div class='col-7-24  bottom-spacerer  inherit-row'>
         <%= format_empty_string_as_dash property.address.first_text %>
       </div>
       <div class='col-5-24  bottom-spacer  inherit-row  nowrap'>
@@ -38,7 +39,7 @@
       </div>
       <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
         <!-- charge_period.first_period  (6 months date_range) -->
-        <%= to_decimal client_payment.period_total_by_account(account: account, year: client_payment.year, batch_months: batch_months) %>
+        <%= to_decimal account.payments.by_quarter_day(year: client_payment.year, batch_months: batch_months).pluck(:amount).sum %>
       </div>
     </div>
   <% end %>
