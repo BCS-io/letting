@@ -53,3 +53,6 @@ config/secrets.yml
 
 # Mac hidden file - of no relevance
 .DS_Store
+
+# ctags - navigation of a codebase
+/tags
