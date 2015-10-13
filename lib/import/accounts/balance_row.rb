@@ -20,7 +20,6 @@ module DB
   # Paid             credit
   # Balance          balance
   #
-  # rubocop: disable Style/TrivialAccessors
   #
   ####
   #

@@ -41,7 +41,8 @@ class Consecutize
   def make
     actual = elements.first
     @classified_numbers = elements.slice_before do |e|
-      expected, actual = actual.next, e
+      expected = actual.next
+      actual = e
       expected != actual
     end.to_a
     self

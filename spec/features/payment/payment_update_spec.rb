@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Style/Documentation
 
 describe 'Payment#update', :ledgers, type: :feature do
   before { log_in }

@@ -8,7 +8,6 @@ require_relative '../../lib/modules/method_missing'
 # Used when the property has need for behaviour outside of the core
 # of the model. Specifically for display information.
 #
-# rubocop: disable Style/TrivialAccessors
 #
 ####
 #

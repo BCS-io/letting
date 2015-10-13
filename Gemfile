@@ -107,7 +107,7 @@ gem 'kaminari', '~> 0.16.0'
 gem 'lograge'
 gem 'pg', '~>0.18.0'
 gem 'rails', '4.2.1'
-gem 'rack-dev-mark', '~> 0.7.0'     # corner banner on staging environment
+gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
 gem 'rails-env-favicon'
 
 # BREAKING GEM
@@ -156,7 +156,7 @@ group :development do
   gem 'brakeman', '~>3.0.0', require: false
   gem 'bullet', '~>4.14.0'
   gem 'rails_best_practices', '~>1.15.0'
-  gem 'rubocop', '~> 0.30.0', require: false
+  gem 'rubocop', '~> 0.34.0', require: false
   gem 'rubycritic', require: false
   gem 'scss-lint'
   gem 'traceroute'

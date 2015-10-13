@@ -26,7 +26,7 @@ describe InvoiceDecorator do
   describe 'billing address' do
     it 'pads address' do
       property = property_new(address: address_new)
-      invoice_dec  = InvoiceDecorator.new invoice_new(property: property)
+      invoice_dec = InvoiceDecorator.new invoice_new(property: property)
 
       expect(invoice_dec.billing_address.lines.count).to eq 8
     end
@@ -37,7 +37,7 @@ describe InvoiceDecorator do
                                district: 'b',
                                postcode: 'NW1 1AA',
                                nation: 'Spain'))
-      invoice_dec  = InvoiceDecorator.new invoice_new(property: property)
+      invoice_dec = InvoiceDecorator.new invoice_new(property: property)
 
       expect(invoice_dec.billing_address.lines.count).to eq 8
     end

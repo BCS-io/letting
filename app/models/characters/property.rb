@@ -8,7 +8,6 @@
 #
 # The code is part of the representation of a property.
 #
-# rubocop: disable Lint/UnusedMethodArgument
 ####
 #
 class Property < ActiveRecord::Base
@@ -48,7 +47,7 @@ class Property < ActiveRecord::Base
     account.clear_up_form if account.present?
   end
 
-  def invoice billing_period: nil
+  def invoice(*)
     {
       property_ref: human_ref,
       occupiers: occupiers,

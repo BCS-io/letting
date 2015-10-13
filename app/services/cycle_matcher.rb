@@ -1,5 +1,4 @@
 require_relative '../../lib/import/errors'
-# rubocop: disable Rails/Output
 
 ####
 #

@@ -54,7 +54,7 @@ class Credit < ActiveRecord::Base
     self.at_time = payment.booked_at
   end
 
-  scope :total, -> { sum(:amount)  }
+  scope :total, -> { sum(:amount) }
   scope :until, -> (until_time) { where('? >= at_time', until_time) }
 
   def self.available charge_id
@@ -86,8 +86,8 @@ class Credit < ActiveRecord::Base
 
   def charge_to_s
     if charge
-      "charge_type: #{charge_type || 'nil' } " \
-      "auto: #{automatic? || 'nil' } "
+      "charge_type: #{charge_type || 'nil'} " \
+      "auto: #{automatic? || 'nil'} "
     else
       'charge: nil'
     end

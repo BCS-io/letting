@@ -7,7 +7,6 @@ require_relative '../../lib/modules/method_missing'
 # AccountDecorator prepares credits and debits and allows them
 # to be viewed
 #
-# rubocop: disable Style/TrivialAccessors
 ####
 #
 class RunDecorator

@@ -3,7 +3,7 @@ include AddressDefaults
 
 describe Address, type: :model do
   describe 'validations' do
-    it('valid')   { expect(address_new).to be_valid }
+    it('valid') { expect(address_new).to be_valid }
     describe 'flat_no' do
       it('allows blanks') { expect(address_new flat_no: '').to be_valid }
       it 'has max' do

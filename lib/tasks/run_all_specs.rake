@@ -10,9 +10,9 @@ begin
 
   task 'spec:all' => 'db:test:prepare'
 
- rescue LoadError
-   desc 'Run all tests regardless of tags'
-   task 'spec:all' do
-     abort 'spec:all rake task is not available.'
-   end
+rescue LoadError
+  desc 'Run all tests regardless of tags'
+  task 'spec:all' do
+    abort 'spec:all rake task is not available.'
+  end
 end

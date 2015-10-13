@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/MethodLength
 def invoicing_new id: nil,
                   property_range: '1-100',
                   period: '2014/06/30'..'2014/08/30',

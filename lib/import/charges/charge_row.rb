@@ -3,8 +3,6 @@ require_relative '../charge_code'
 require_relative '../payment_type'
 require_relative '../errors'
 require_relative 'legacy_charged_in_fields'
-# rubocop: disable Rails/Output
-# rubocop: disable Style/MethodCallParentheses
 
 module DB
   #####
@@ -18,7 +16,7 @@ module DB
   # for charge data from it. This object is providing a smoother interface
   # for the process - a layer of indirection between CSV and ImportCharge.
   #
-  # rubocop: disable Style/TrivialAccessors, Metrics/ClassLength
+  # rubocop: disable Metrics/ClassLength
   #
   #####
   #
@@ -47,16 +45,16 @@ module DB
     def charged_in
       LegacyChargedInFields.new(charged_in_code: charged_in_code,
                                 charge_type: charge_type).modern_id
-      rescue KeyError
-        raise ChargedInCodeUnknown, charged_in_code_message, caller
+    rescue KeyError
+      raise ChargedInCodeUnknown, charged_in_code_message, caller
     end
 
     def cycle_id
       CycleMatcher.new(charged_in: charged_in,
                        due_on_importables: day_months).id
-      rescue CycleUnknown
-        warn "Property #{human_ref} charge row does not match a cycle" \
-          " (For legacy charge_type: '#{charge_code}') "
+    rescue CycleUnknown
+      warn "Property #{human_ref} charge row does not match a cycle" \
+        " (For legacy charge_type: '#{charge_code}') "
     end
 
     def amount

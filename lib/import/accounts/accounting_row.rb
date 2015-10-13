@@ -10,19 +10,19 @@ module DB
   module AccountingRow
     def account human_ref: nil
       Property.find_by!(human_ref: human_ref).account
-      rescue ActiveRecord::RecordNotFound
-        raise DB::PropertyRefUnknown,
-              "Property ref: #{human_ref} is unknown.",
-              caller
+    rescue ActiveRecord::RecordNotFound
+      raise DB::PropertyRefUnknown,
+            "Property ref: #{human_ref} is unknown.",
+            caller
     end
 
     def charge account:, charge_type:
       Charge.find_by!(account_id: account.id, charge_type: charge_type)
-      rescue ActiveRecord::RecordNotFound
-        raise DB::ChargeUnknown,
-              "Property: #{account.property.human_ref} "\
-              "charge_type: #{charge_type}",
-              caller
+    rescue ActiveRecord::RecordNotFound
+      raise DB::ChargeUnknown,
+            "Property: #{account.property.human_ref} "\
+            "charge_type: #{charge_type}",
+            caller
     end
 
     def charge_code_to_s(charge_code:, human_ref:)

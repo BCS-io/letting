@@ -10,9 +10,6 @@
 # rubocop: disable Metrics/ParameterLists
 # rubocop: disable Metrics/MethodLength
 #
-# Temporary until start_date / end_date used
-# rubocop: disable Lint/UnusedMethodArgument
-#
 class AccountPage
   include Capybara::DSL
 

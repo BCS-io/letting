@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Style/Documentation
 
 class PaymentsPage
   include Capybara::DSL

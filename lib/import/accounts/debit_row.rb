@@ -20,7 +20,6 @@ module DB
   # Errors do not go to logger
   # rubocop: disable Rails/Output
   #
-  # rubocop: disable Style/TrivialAccessors
   #
   ####
   #

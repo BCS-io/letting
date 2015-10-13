@@ -36,3 +36,6 @@ Style/UnneededPercentQ:
 # We want this to be removed
 Metrics/AbcSize:
   Enabled: false
+
+Performance/Count:
+  Enabled: false

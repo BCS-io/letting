@@ -18,7 +18,6 @@ module DB
   # for instantiating the appropriate row which is then responsible for the
   # remaining import.
   #
-  # rubocop: disable Style/TrivialAccessors
   #
   ####
   #

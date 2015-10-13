@@ -6,7 +6,6 @@ require_relative '../../lib/modules/method_missing'
 #
 # Adds display logic to the debit business object.
 #
-# rubocop: disable Style/TrivialAccessors
 ##
 #
 class AccountDebitDecorator

@@ -4,7 +4,6 @@
 #
 # Adds display logic to payment business object.
 #
-# rubocop: disable Style/TrivialAccessors
 #
 class PaymentIndexDecorator
   include MethodMissing

@@ -10,7 +10,7 @@ describe 'Client#update', type: :feature do
       client_page.load id: 1
     end
 
-    it 'opens valid page', js: true  do
+    it 'opens valid page', js: true do
       expect(client_page.title).to eq 'Letting - Edit Client'
       expect(page).to have_css '.spec-entity-count', count: 1
     end

@@ -1,5 +1,4 @@
-# rubocop: disable Metrics/ParameterLists, Metrics/MethodLength, Metrics/LineLength
-# rubocop: disable Lint/UnusedMethodArgument
+# rubocop: disable Metrics/ParameterLists, Metrics/MethodLength
 
 # invoice_new and invoice_create require that a invoice_text with id 1 has been
 # created BEFORE invoice.prepare is called.

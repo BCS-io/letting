@@ -5,7 +5,6 @@
 # The amount is required to so that it behaves like a credit_decorator and
 # debit_decorator
 #
-# rubocop: disable Style/TrivialAccessors
 #
 class AccountBalanceDecorator
   include DateHelper

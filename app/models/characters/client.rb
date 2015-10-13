@@ -10,7 +10,6 @@ require_relative '../../../lib/modules/string_utils'
 # Clients have a number of properties. Clients have an address
 # and contact information (address and entity).
 #
-# rubocop: disable Lint/UnusedMethodArgument
 ####
 #
 class Client < ActiveRecord::Base

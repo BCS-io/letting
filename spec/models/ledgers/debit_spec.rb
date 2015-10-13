@@ -1,4 +1,3 @@
-# rubocop: disable  Lint/UselessComparison
 require 'rails_helper'
 
 describe Debit, :ledgers, type: :model do

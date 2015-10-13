@@ -4,7 +4,7 @@ describe 'Client#create', type: :feature do
   before { log_in }
   let(:client_page) { ClientPage.new }
 
-  it 'opens valid page', js: true  do
+  it 'opens valid page', js: true do
     client_page.load
 
     expect(client_page.title).to eq 'Letting - New Client'

@@ -18,14 +18,16 @@ RSpec.describe Invoice, type: :model do
 
   describe 'when child invoices destroyed' do
     it 'destroys associated snapshot if it has no surviving child invoices' do
-      snapshot, property = snapshot_new(account: account_new), property_create
+      snapshot = snapshot_new(account: account_new)
+      property = property_create
       invoice = invoice_create snapshot: snapshot,
                                property: property
       expect { invoice.destroy }.to change(Snapshot, :count).by(-1)
     end
     it 'preserves associated snapshot while account still has other'\
        'surviving child invoices' do
-      snapshot, property = snapshot_new(account: account_new), property_create
+      snapshot = snapshot_new(account: account_new)
+      property = property_create
       invoice_create snapshot: snapshot, property: property
       invoice = invoice_create snapshot: snapshot,
                                property: property

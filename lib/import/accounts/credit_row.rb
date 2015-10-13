@@ -20,7 +20,6 @@ module DB
   # ImportCredit to create/assign database objects (Credits) and their related
   # fields.
   #
-  # rubocop: disable Style/TrivialAccessors
   #
   ####
   #

@@ -57,7 +57,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
       before(:each) { Timecop.travel Date.new(2013, 1, 31) }
       after(:each)  { Timecop.return }
 
-      it 'charges if billing period crosses a due_on'  do
+      it 'charges if billing period crosses a due_on' do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
 
         expect(ch.coming Date.new(2013, 3, 5)..Date.new(2013, 3, 5))

@@ -17,7 +17,7 @@ namespace :db do
     filename = 'import_data/new/due_ons.csv'
 
     desc 'Import due_ons from CSV file'
-    task :due_ons, [:test] => :environment  do
+    task :due_ons, [:test] => :environment do
       puts "DueOns import: missing #{filename}" \
         unless File.exist?(filename)
       CSV.foreach(filename, headers: true) do |row|

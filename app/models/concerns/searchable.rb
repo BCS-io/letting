@@ -102,11 +102,11 @@ module Searchable
             }
           }
         }
-        @search_definition[:sort]  = [{
+        @search_definition[:sort] = [{
           _score: { order: 'desc' },
           sort.to_sym => { order: 'asc' }
         }]
-        @search_definition[:size]  = 100
+        @search_definition[:size] = 100
       end
       __elasticsearch__.search(@search_definition)
     end

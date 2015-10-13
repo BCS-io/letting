@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Style/Documentation
 
 module DB
   describe ChargesMatcher do

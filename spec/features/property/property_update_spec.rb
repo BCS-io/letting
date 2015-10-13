@@ -5,7 +5,7 @@ require 'rails_helper'
 # Tests for creating charges onto a property have been moved to
 # charge_create_spec.rb
 #
-describe 'Property#Update', type: :feature  do
+describe 'Property#Update', type: :feature do
   let(:account) { AccountPage.new }
 
   context 'Agentless' do
@@ -17,7 +17,7 @@ describe 'Property#Update', type: :feature  do
                       client: client_new(human_ref: 90)
     end
 
-    it 'opens valid page', js: true  do
+    it 'opens valid page', js: true do
       account.load id: 1
       expect(account.title).to eq 'Letting - Edit Account'
       account.expect_property self,

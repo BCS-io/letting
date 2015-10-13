@@ -17,7 +17,7 @@
 # range and returns this to the caller.
 #
 # A useless assignment which increases human reader's comprehension.
-# rubocop: disable  Lint/UselessAssignment
+#
 ####
 #
 class Advance

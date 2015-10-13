@@ -59,8 +59,6 @@
 #      content written here
 #    </div>
 #
-# rubocop: disable  Metrics/LineLength
-#
 class ClientPayment
   attr_reader :client_id, :year, :month
   def initialize(client_id:)

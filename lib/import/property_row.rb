@@ -14,7 +14,6 @@ module DB
   # ImportProperty. ImportProperty is then only concerned with building and
   # assigning Property classes and not how to get this information.
   #
-  # rubocop: disable Style/TrivialAccessors
   #
   ####
   #
@@ -45,8 +44,8 @@ module DB
 
     def client_ref_to_id
       Client.find_by!(human_ref: client_ref).id
-      rescue ActiveRecord::RecordNotFound
-        raise ClientRefUnknown, client_ref_unknown_msg, caller
+    rescue ActiveRecord::RecordNotFound
+      raise ClientRefUnknown, client_ref_unknown_msg, caller
     end
 
     def client_ref_unknown_msg

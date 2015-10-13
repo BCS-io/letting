@@ -2,7 +2,6 @@ require 'csv'
 require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/accounts/credit_row'
-# rubocop: disable Style/Documentation
 
 module DB
   describe CreditRow, :import do

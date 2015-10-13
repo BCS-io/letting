@@ -23,19 +23,19 @@ describe 'Invoicing#create', type: :feature do
   end
 
   describe 'choose_dates'do
-    it 'defaults to "or choose dates"', js: true  do
+    it 'defaults to "or choose dates"', js: true do
       invoicing_page.load
 
       expect(invoicing_page).to have_link('or choose dates')
     end
 
-    it 'toggles to "or default to"', js: true  do
+    it 'toggles to "or default to"', js: true do
       invoicing_page.load.choose_dates
 
       expect(invoicing_page).to have_link('or default to the next 7 weeks')
     end
 
-    it 'remembers toggle state', js: true  do
+    it 'remembers toggle state', js: true do
       invoicing_page.load.choose_dates.button 'Create'
       invoicing_page.load
 

@@ -4,7 +4,6 @@
 # Adds display logic to the product business object used by invoice_page1
 # to output the data for an invoice.
 #
-# rubocop: disable Style/TrivialAccessors
 ##
 #
 class ProductDecorator

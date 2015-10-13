@@ -70,8 +70,8 @@ class Invoice < ActiveRecord::Base
     self.property = property
     self.color = color
     self.snapshot = snapshot
-    self.products = snapshot.make_products(invoice_date: invoice_date, color: color).products  # rubocop: disable Metrics/LineLength
-    self.deliver = snapshot.make_products(invoice_date: invoice_date, color: color).state  # rubocop: disable Metrics/LineLength
+    self.products = snapshot.make_products(invoice_date: invoice_date, color: color).products # rubocop: disable Metrics/LineLength
+    self.deliver = snapshot.make_products(invoice_date: invoice_date, color: color).state # rubocop: disable Metrics/LineLength
     self.invoice_date = invoice_date
     self.comments = generate_comments comments: comments
     self

@@ -8,13 +8,13 @@ describe 'Property#create', type: :feature do
   let(:account) { AccountPage.new }
   before(:each) { log_in }
 
-  it 'opens valid page', js: true  do
+  it 'opens valid page', js: true do
     account.load
     expect(account.title).to eq 'Letting - New Account'
     expect(page).to have_css('.spec-entity-count', count: 1)
   end
 
-  it '#create', js: true   do
+  it '#create', js: true do
     client_create id: 15, human_ref: 8008
 
     account.load

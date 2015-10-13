@@ -78,7 +78,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
         it 'adds on_date' do
           cycle_create due_ons: [DueOn.new(month: 6, day: 24)]
           (cycle = Cycle.first).prepare
-          cycle.due_ons[1].attributes =  { 'day' => '14', 'month' => '9' }
+          cycle.due_ons[1].attributes = { 'day' => '14', 'month' => '9' }
           cycle.save!
           expect(Cycle.first.due_ons.size).to eq(2)
         end
@@ -87,7 +87,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
           cycle_create due_ons: [DueOn.new(month: 6, day: 24),
                                  DueOn.new(month: 12, day: 25)]
           (cycle = Cycle.first).prepare
-          cycle.due_ons[1].attributes =  { 'day' => '', 'month' => '' }
+          cycle.due_ons[1].attributes = { 'day' => '', 'month' => '' }
           cycle.save!
           expect(Cycle.first.due_ons.size).to eq(1)
         end

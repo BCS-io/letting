@@ -77,7 +77,7 @@ class Debit < ActiveRecord::Base
     }
   end
 
-  scope :total, -> { sum(:amount)  }
+  scope :total, -> { sum(:amount) }
   scope :until, -> (until_time) { where('? >= at_time', until_time) }
 
   # charge_id - the charge's being queried for unpaid debits.
@@ -120,8 +120,8 @@ class Debit < ActiveRecord::Base
 
   def charge_to_s
     if charge
-      "charge_type: #{charge_type || 'nil' } " \
-      "auto: #{payment_type || 'nil' } "
+      "charge_type: #{charge_type || 'nil'} " \
+      "auto: #{payment_type || 'nil'} "
     else
       'charge: nil'
     end

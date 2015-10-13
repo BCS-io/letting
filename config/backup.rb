@@ -10,14 +10,14 @@
 # http://backup.github.io/backup
 #
 Model.new(:letting, 'Letting') do
-  rails_env       = ENV['RAILS_ENV'] || 'production'
+  rails_env = ENV['RAILS_ENV'] || 'production'
   config_dir = "#{ENV['HOME']}/apps/letting_#{rails_env}/shared/config/"
 
   database_config_file = "#{config_dir}/database.yml"
-  db_config       = YAML.load_file(database_config_file)[rails_env]
+  db_config = YAML.load_file(database_config_file)[rails_env]
 
   application_config_file = "#{config_dir}/secrets.yml"
-  ap_config       = YAML.load_file(application_config_file)[rails_env]
+  ap_config = YAML.load_file(application_config_file)[rails_env]
 
   ##
   # PostgreSQL [Database]

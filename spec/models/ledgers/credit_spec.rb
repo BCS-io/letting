@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/LineLength
 require 'rails_helper'
 
 describe Credit, :ledgers, type: :model do
@@ -97,7 +96,7 @@ describe Credit, :ledgers, type: :model do
 
       it 'a debit settled by a credit is not available' do
         charge = charge_create
-        credit  = credit_create charge: charge, at_time: '2012-5-1', amount: -15
+        credit = credit_create charge: charge, at_time: '2012-5-1', amount: -15
         debit_create charge: charge, at_time: '2012-4-1', amount: 15
         expect(credit).to be_spent
 

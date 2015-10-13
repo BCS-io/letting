@@ -2,7 +2,6 @@ require_relative '../../../lib/stage/stage'
 require_relative '../../../lib/stage/patch_ref'
 require_relative '../../../lib/stage/extract_ref'
 require_relative '../../../lib/csv/csv_transform'
-# rubocop: disable Metrics/LineLength
 
 describe Stage, :stage do
   describe 'initialize' do
@@ -45,7 +44,7 @@ describe Stage, :stage do
   end
 
   it 'extracts' do
-    extract = ExtractRef.new extracts: [{ human_ref: 1,  }]
+    extract = ExtractRef.new extracts: [{ human_ref: 1, }]
     ref = Stage.new file_name: 'blah.csv',
                     input: [{ human_ref: 1, other: 'world' }],
                     instructions: [extract],

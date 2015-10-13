@@ -1,5 +1,3 @@
-# rubocop: disable Metrics/LineLength
-
 require 'rails_helper'
 
 describe 'Cycle Factory', :cycle, :ledgers do

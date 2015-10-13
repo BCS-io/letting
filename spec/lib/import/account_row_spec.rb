@@ -12,7 +12,7 @@ require_relative '../../../lib/import/accounts/account_row'
 # rubocop: disable  Metrics/LineLength
 ####
 module DB
-  describe AccountRow,  :import do
+  describe AccountRow, :import do
     def row human_ref: 9,
             charge_code: 'GR',
             date: '2012-03-25',

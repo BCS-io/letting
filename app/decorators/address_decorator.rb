@@ -30,7 +30,6 @@ require_relative '../../lib/modules/method_missing'
 # css - js-toggle, js-togglable, js-revealable
 # js - toggle.js
 #
-# rubocop: disable Style/TrivialAccessors
 #####
 #
 class AddressDecorator

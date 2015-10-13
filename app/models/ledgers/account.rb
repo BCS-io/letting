@@ -18,8 +18,6 @@
 # Associations
 # Provides queries for account records - required by Payment and debits.
 #
-# rubocop: disable Metrics/MethodLength, Metrics/LineLength
-#
 ####
 #
 class Account < ActiveRecord::Base

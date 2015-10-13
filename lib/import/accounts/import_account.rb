@@ -18,11 +18,10 @@ module DB
   # Debit is called when the account is to be debited by a charge.
   # Credit is called when the account is to be credited by a charge
   #
-  # rubocop: disable Metrics/MethodLength
   ####
   #
   class ImportAccount < ImportBase
-    def initialize  contents, range
+    def initialize contents, range
       super Property, contents, range
     end
 

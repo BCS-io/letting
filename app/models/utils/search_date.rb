@@ -31,8 +31,8 @@ class SearchDate
 
   def parse_date?
     Time.zone.parse date
-    rescue
-      false
+  rescue
+    false
   end
 
   def parse_date

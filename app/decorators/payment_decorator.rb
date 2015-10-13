@@ -17,7 +17,6 @@ require_relative '../../lib/modules/method_missing'
 # credits_decorated  - negative to positive.
 # initializer        - positive to negative.
 #
-# rubocop: disable Style/TrivialAccessors
 #
 ####
 #

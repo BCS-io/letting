@@ -5,7 +5,7 @@
 #
 # Shared helper methods
 #
-# rubocop: disable Metrics/LineLength, Metrics/MethodLength,  Metrics/ParameterLists
+# rubocop: disable Metrics/LineLength, Metrics/MethodLength,  Metrics/ParameterLists, Metrics/ModuleLength
 #
 ####
 #
@@ -83,7 +83,7 @@ module LinkHelper
   def toggle_link direction:, size: 'lg', title: ''
     app_link icon: "chevron-circle-#{direction}",
              size: size,
-             js_css: "js-toggle  #{hover direction: direction } ",
+             js_css: "js-toggle  #{hover direction: direction} ",
              title: title
   end
 

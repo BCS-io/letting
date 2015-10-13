@@ -1,5 +1,4 @@
 require_relative '../../../lib/csv/csv_transform'
-# rubocop: disable Style/Documentation
 
 module DB
   describe CSVTransform, :import, :stage do

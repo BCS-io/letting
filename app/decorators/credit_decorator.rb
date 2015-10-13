@@ -8,7 +8,6 @@ require_relative '../../lib/modules/method_missing'
 #
 # Used by payment decorator .
 #
-# rubocop: disable Style/TrivialAccessors
 ##
 #
 class CreditDecorator

@@ -19,7 +19,7 @@ describe Account, :ledgers, type: :model do
     after { Timecop.return }
 
     describe '#debits_coming' do
-      it 'debits if accounting_period crosses a due date'  do
+      it 'debits if accounting_period crosses a due date' do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
         account = account_new charges: [ch]
 
@@ -27,7 +27,7 @@ describe Account, :ledgers, type: :model do
           .to eq [Debit.new(at_time: Date.new(2013, 3, 5), amount: 88.08)]
       end
 
-      it 'no debit if accounting_period misses due date'  do
+      it 'no debit if accounting_period misses due date' do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
         account = account_new charges: [ch]
 
@@ -47,13 +47,13 @@ describe Account, :ledgers, type: :model do
     end
 
     describe '#exclusive' do
-      it 'allows unique charges'  do
+      it 'allows unique charges' do
         debit = debit_new(at_time: '2013-3-25', charge: charge_new)
         account = account_new
 
         expect(account.exclusive query_debits: [debit]).to eq [debit]
       end
-      it 'rejects duplicate charges'  do
+      it 'rejects duplicate charges' do
         debit = debit_new(at_time: '2013-3-25', charge: charge_new)
         account = account_new debits: [debit]
 

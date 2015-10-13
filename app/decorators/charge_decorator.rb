@@ -2,7 +2,6 @@
 # ChargeDecorator
 #
 # Adds display logic to the charge business object.
-# rubocop: disable  Style/TrivialAccessors
 ##
 #
 class ChargeDecorator

@@ -105,16 +105,16 @@ describe Property, type: :model do
       it 'human id' do
         expect(Property.search('2002', sort: 'human_ref').results.total).to eq 1
       end
-      it 'names'  do
+      it 'names' do
         expect(Property.search('Grac', sort: 'human_ref').count).to eq 1
       end
-      it 'house'  do
+      it 'house' do
         expect(Property.search('Hil', sort: 'human_ref').count).to eq 1
       end
-      it 'roads'  do
+      it 'roads' do
         expect(Property.search('Edg', sort: 'human_ref').count).to eq 1
       end
-      it 'towns'  do
+      it 'towns' do
         expect(Property.search('Bir', sort: 'human_ref').count).to eq 1
       end
     end

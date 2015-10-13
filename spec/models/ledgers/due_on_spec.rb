@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Style/Documentation
-# rubocop: disable Style/TrivialAccessors
 # rubocop: disable Lint/UselessComparison
 # rubocop: disable Metrics/LineLength
 
@@ -21,7 +19,7 @@ describe DueOn, :ledgers, :cycle, type: :model do
       it('is required')   { expect(due_on_new month: nil).to_not be_valid }
       it('is numeric')    { expect(due_on_new month: 'ab').to_not be_valid }
       it('is an integer') { expect(due_on_new month: 8.3).to_not be_valid }
-      it('is > -1')        { expect(due_on_new month: -2).to_not be_valid }
+      it('is > -1') { expect(due_on_new month: -2).to_not be_valid }
       it('is < 13')       { expect(due_on_new month: 13).to_not be_valid }
     end
 
@@ -33,7 +31,7 @@ describe DueOn, :ledgers, :cycle, type: :model do
     end
 
     describe 'show month' do
-      it 'is required'   do
+      it 'is required' do
         expect(due_on_new show_month: nil, show_day: 1).to_not be_valid
       end
       it('is numeric')    { expect(due_on_new show_month: 'a').to_not be_valid }
@@ -43,7 +41,7 @@ describe DueOn, :ledgers, :cycle, type: :model do
     end
 
     describe 'show_day' do
-      it 'is required'   do
+      it 'is required' do
         expect(due_on_new show_month: 1, show_day: nil).to_not be_valid
       end
       it('is numeric')    { expect(due_on_new show_day: 'a').to_not be_valid }

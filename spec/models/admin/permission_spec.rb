@@ -80,7 +80,7 @@ describe Permission, type: :model do
   context 'admin' do
     subject { Permission.new(user_create role: 'admin') }
 
-    it('session#destroy')  { is_expected.to allow?('sessions', 'destroy') }
+    it('session#destroy') { is_expected.to allow?('sessions', 'destroy') }
     it('clients#destroy') { is_expected.to allow?('clients', 'destroy') }
     it('properties#destroy') { is_expected.to allow?('properties', 'destroy') }
 

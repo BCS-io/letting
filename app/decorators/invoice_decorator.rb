@@ -8,7 +8,6 @@ require_relative '../../lib/modules/method_missing'
 # Used when the property has need for behaviour outside of the core
 # of the model. Specifically for display information.
 #
-# rubocop: disable Style/TrivialAccessors
 #
 ####
 #
@@ -50,7 +49,7 @@ class InvoiceDecorator
     return 'No charges' if invoice.products.drop_arrears.size.zero?
 
     invoice.products.drop_arrears.first(2).map do |product|
-      "#{product.charge_type} £#{to_decimal product.amount }"
+      "#{product.charge_type} £#{to_decimal product.amount}"
     end.join ', '
   end
 
