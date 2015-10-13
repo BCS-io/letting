@@ -19,7 +19,7 @@ class LiteralResult
   def initialize(controller:, action:, records: [])
     @controller = controller
     @action = action
-    @records = records.is_a?(Array) ? records : [records]
+    @records = Array(records)
   end
 
   # The search not only completed but it also found a result.
