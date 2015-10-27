@@ -51,7 +51,7 @@ class LiteralSearch
   def get_query_by_referrer
     case referrer.controller
     when 'clients' then client_search
-    when 'payments', 'payments_by_date'
+    when 'payments', 'payments_by_dates'
       results action: 'index', controller: 'payments', records: payments_query
 
     when 'properties' then property_search

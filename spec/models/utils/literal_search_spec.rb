@@ -37,18 +37,18 @@ describe 'LiteralSearch #go', type: :model do
         .to eq LiteralResult.no_record_found
     end
 
-    describe 'payments_by_date' do
+    describe 'payments_by_dates' do
       it 'returns an exact account' do
         payment = payment_new credit: credit_new(amount: 30, charge: charge_new)
         account_create property: property_new(human_ref: '10'), payment: payment
-        referrer = Referrer.new controller: 'payments_by_date', action: ''
+        referrer = Referrer.new controller: 'payments_by_dates', action: ''
 
         expect(LiteralSearch.search(referrer: referrer, query: '10').go)
           .to eq LiteralResult.new(controller: 'payments', action: 'index', records: payment)
       end
 
       it 'returns no record found when no match' do
-        referrer = Referrer.new controller: 'payments_by_date', action: ''
+        referrer = Referrer.new controller: 'payments_by_dates', action: ''
 
         expect(LiteralSearch.search(referrer: referrer, query: '10').go)
           .to eq LiteralResult.no_record_found
