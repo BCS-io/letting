@@ -123,7 +123,7 @@ class Payment < ActiveRecord::Base
   #
   def self.by_quarter_day(year:, batch_months:)
     period = batch_months.payment_period(year: year)
-    where(booked_at: period.first.beginning_of_day...period.last.end_of_day)
+    where(booked_at: period.first.beginning_of_day..period.last.end_of_day)
   end
 
   include Searchable

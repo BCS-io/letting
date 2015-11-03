@@ -47,9 +47,12 @@ class BatchMonths
 
   # payment_period
   #  - the period you count incoming payments beings before the actual period
+  #  - payment period if offset backwards one month
   #
   def payment_period(year:)
-    period(year: year).first - 1.month..period(year: year).last - 1.month
+    offset_start_period = (period(year: year).first - 1.day).beginning_of_month
+    offset_end_period = period(year: year).last.beginning_of_month - 1.day
+    offset_start_period..offset_end_period
   end
 
   def to_s join: '/'
