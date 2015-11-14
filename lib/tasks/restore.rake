@@ -17,7 +17,7 @@ namespace :db do
       unpackage_dump
       restore_from_dump
       cleaning_dump
-      logger.info 'Complete. Ignore ERROR: role unless restoring on production system.' 
+      logger.info 'Complete.' 
     end
   end
 
@@ -38,8 +38,7 @@ namespace :db do
 
   def restore_from_dump
     logger.info "Restoring from: #{dump_file}" 
-    system "psql --single-transaction --username=#{database_config['username']} " \
-      "-no-password #{database_config['database']} < #{dump_file}"
+    system "pg_restore --host localhost --username=#{database_config['username']} -d #{database_config['database']} #{dump_file}"
   end
 
   def database_config

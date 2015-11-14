@@ -28,7 +28,11 @@ Model.new(:letting, 'Letting') do
     db.password           = db_config['password']
     db.host               = 'localhost'
     db.port               = 5432
-    db.additional_options = ['-c']
+    db.additional_options = ['--host localhost ' +
+                             '--blobs ' +
+                             '--verbose ' +
+                             '--format custom ' ]
+
   end
 
   ##
