@@ -12,6 +12,7 @@
 # property     - the property to invoice
 # invoice_date - the date which the invoice is dated on
 #                affects the date which the arrears balance is created for.
+# snapshot     - the state of the accounts at the time
 # comments     - information string to be applied to the invoice.
 #
 class InvoicesMaker

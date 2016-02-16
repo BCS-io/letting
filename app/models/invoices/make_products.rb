@@ -26,7 +26,7 @@ class MakeProducts
 
   def make_products
     products = product_arrears + product_debits
-    products = apply_balance totalables: products
+    products = apply_balance_to_each totalables: products
     products
   end
 
@@ -41,7 +41,7 @@ class MakeProducts
     end
   end
 
-  def apply_balance(totalables:)
+  def apply_balance_to_each(totalables:)
     sum = 0
     totalables.map do |totalable|
       totalable.balance = sum += totalable.amount
@@ -53,13 +53,13 @@ class MakeProducts
     product_debits.to_a.count { |debit| !debit.automatic? }.zero?
   end
 
+  def settled
+    final_balance <= 0
+  end
+
   def final_balance
     return 0 if products.empty?
 
     products.last.balance
-  end
-
-  def settled
-    final_balance <= 0
   end
 end
