@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Metrics/LineLength
 require_relative '../../../lib/modules/charge_types'
 include ChargeTypes
 

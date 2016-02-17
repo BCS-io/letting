@@ -3,8 +3,6 @@
 #
 # Wraps up the search results
 #
-# rubocop: disable  Metrics/LineLength
-#
 class LiteralResult
   include Comparable
   attr_reader :action, :controller, :records

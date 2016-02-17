@@ -8,7 +8,6 @@ require_relative '../../lib/import/charges/charge_row'
 # cycle_matcher_spec.rb
 #
 # unit testing for cycle_matcher
-# rubocop: disable Metrics/LineLength
 #
 ####
 #

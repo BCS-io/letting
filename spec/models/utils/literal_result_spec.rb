@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable  Metrics/LineLength
-#
 describe LiteralResult do
   describe '#found?' do
     it 'is found if records set' do

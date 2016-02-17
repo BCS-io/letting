@@ -8,7 +8,6 @@ require_relative '../../../lib/import/accounts/import_balance'
 # import_debit_spec.rb
 #
 # unit testing for ImportDebit
-# rubocop: disable Metrics/LineLength
 #
 ####
 #

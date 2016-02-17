@@ -1,6 +1,5 @@
 require 'rails_helper'
 require_relative '../../../app/models/admin/permission'
-# rubocop: disable Metrics/LineLength
 
 RSpec::Matchers.define :allow? do |*args|
   match do |permission|

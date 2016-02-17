@@ -13,7 +13,7 @@ require_relative '../../../../lib/import/charges/due_on_importable'
 #
 # ChargeRow wraps up acc_info.csv rows - used by ImportCharge
 #
-# rubocop: disable Metrics/ParameterLists, Metrics/LineLength
+# rubocop: disable Metrics/ParameterLists
 #
 ####
 module DB

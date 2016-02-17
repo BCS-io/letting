@@ -24,12 +24,15 @@ Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Style/MethodDefParentheses:
   Enabled: false
+Metrics/LineLength:
+  Max: 95
 Metrics/MethodLength:
   Max: 10
 Style/TrailingComma:
   Enabled: false
 Style/UnneededPercentQ:
   Enabled: false
+
 
 #
 # Ignored

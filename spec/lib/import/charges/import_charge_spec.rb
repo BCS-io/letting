@@ -8,7 +8,6 @@ require_relative '../../../../lib/import/charges/import_charge'
 # import_charge_spec.rb
 #
 # unit testing for charge_row
-# rubocop: disable Metrics/LineLength
 #
 ####
 #

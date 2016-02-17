@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Metrics/LineLength
-
 describe AccountDetails, :ledgers, type: :model do
   describe '.balanced' do
     it 'returns accounts that were balanced a time ago' do

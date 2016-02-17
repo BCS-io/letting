@@ -65,13 +65,13 @@ class Invoice < ActiveRecord::Base
   # snapshot      - debits generated for the invoicing period
   # comments      - array of strings to appear on invoice for special info.
   #
-  def prepare property:, color:, snapshot:, invoice_date: Time.zone.today, comments: [] # rubocop: disable Metrics/LineLength
+  def prepare property:, color:, snapshot:, invoice_date: Time.zone.today, comments: []
     letters.build invoice_text: InvoiceText.first
     self.property = property
     self.color = color
     self.snapshot = snapshot
-    self.products = snapshot.make_products(invoice_date: invoice_date, color: color).products # rubocop: disable Metrics/LineLength
-    self.deliver = snapshot.make_products(invoice_date: invoice_date, color: color).state # rubocop: disable Metrics/LineLength
+    self.products = snapshot.make_products(invoice_date: invoice_date, color: color).products
+    self.deliver = snapshot.make_products(invoice_date: invoice_date, color: color).state
     self.invoice_date = invoice_date
     self.comments = generate_comments comments: comments
     self

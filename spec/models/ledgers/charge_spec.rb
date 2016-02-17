@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Metrics/LineLength
-
 describe Charge, :ledgers, :range, :cycle, type: :model do
   describe 'validations' do
     it('is valid') { expect(charge_new).to be_valid }

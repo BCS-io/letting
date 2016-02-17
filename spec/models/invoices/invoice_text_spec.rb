@@ -1,5 +1,3 @@
-# rubocop: disable Metrics/LineLength
-
 require 'rails_helper'
 
 describe InvoiceText, type: :model do

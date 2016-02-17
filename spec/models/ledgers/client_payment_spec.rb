@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Metrics/LineLength
-
 describe ClientPayment, :ledgers do
   it 'creates years' do
     payment = ClientPayment.query

@@ -1,4 +1,3 @@
-# rubocop:disable LineLength
 require 'rails_helper'
 
 # Invoices#show
