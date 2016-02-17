@@ -6,10 +6,10 @@
 # - snapshot uses it to initialize products in invoice
 #
 class MakeProducts
-  attr_reader :account, :color, :debits, :invoice_date
-  def initialize(account:, debits:, invoice_date:, color: :blue)
+  attr_reader :account, :color, :debits, :arrears_date
+  def initialize(account:, debits:, arrears_date:, color: :blue)
     @account = account
-    @invoice_date = invoice_date
+    @arrears_date = arrears_date
     @debits = debits
     @color = color
   end
@@ -35,7 +35,7 @@ class MakeProducts
   end
 
   def product_arrears
-    product_arrears = Product.arrears(account: account, date_due: invoice_date)
+    product_arrears = Product.arrears(account: account, date_due: arrears_date)
     product_arrears.amount.nonzero? ? [product_arrears] : []
   end
 

@@ -10,7 +10,7 @@ RSpec.describe MakeProducts, type: :model do
 
         make_products = MakeProducts.new account: account,
                                          debits: [debit],
-                                         invoice_date: '1999-1-1'
+                                         arrears_date: '1999-1-1'
 
         expect(make_products.products.first.balance).to eq 10
       end
@@ -23,7 +23,7 @@ RSpec.describe MakeProducts, type: :model do
 
         make_products = MakeProducts.new account: account,
                                          debits: [recent_debit],
-                                         invoice_date: '2001-1-1'
+                                         arrears_date: '2001-1-1'
 
         expect(make_products.products.first.balance).to eq 10
         expect(make_products.products.second.balance).to eq 30
@@ -37,7 +37,7 @@ RSpec.describe MakeProducts, type: :model do
 
         make_products = MakeProducts.new account: account,
                                          debits: [recent_debit, next_debit],
-                                         invoice_date: '2001-1-1'
+                                         arrears_date: '2001-1-1'
 
         expect(make_products.products.first.balance).to eq 10
         expect(make_products.products.second.balance).to eq 30
@@ -49,7 +49,7 @@ RSpec.describe MakeProducts, type: :model do
     it 'forgets if no debits' do
       make_products = MakeProducts.new account: account_create,
                                        debits: [],
-                                       invoice_date: '1999-1-1'
+                                       arrears_date: '1999-1-1'
 
       expect(make_products.state).to eq :forget
     end
@@ -57,13 +57,13 @@ RSpec.describe MakeProducts, type: :model do
     context 'retain' do
       it 'blue invoice - retains if the account settled' do
         charge = charge_create payment_type: 'manual'
-        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+        debit = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 11)
-        account = account_create charges: [charge], debits: [debit_1], credits: [credit]
+        account = account_create charges: [charge], debits: [debit], credits: [credit]
 
         make_products = MakeProducts.new account: account,
-                                         debits: [debit_1],
-                                         invoice_date: '1999-12-31',
+                                         debits: [debit],
+                                         arrears_date: '1999-12-31',
                                          color: :blue
 
         expect(make_products.state).to eq :retain
@@ -77,7 +77,7 @@ RSpec.describe MakeProducts, type: :model do
 
         make_products = MakeProducts.new account: account,
                                          debits: [debit_1],
-                                         invoice_date: '1999-12-31',
+                                         arrears_date: '1999-12-31',
                                          color: :red
 
         expect(make_products.state).to eq :retain
@@ -92,7 +92,7 @@ RSpec.describe MakeProducts, type: :model do
 
         make_products = MakeProducts.new account: account,
                                          debits: [debit_1],
-                                         invoice_date: '1999-1-1',
+                                         arrears_date: '1999-1-1',
                                          color: :red
 
         expect(make_products.state).to eq :mail
@@ -106,7 +106,7 @@ RSpec.describe MakeProducts, type: :model do
 
           make_products = MakeProducts.new account: account,
                                            debits: [debit_1],
-                                           invoice_date: '1999-1-1',
+                                           arrears_date: '1999-1-1',
                                            color: :blue
 
           expect(make_products.state).to eq :mail
@@ -119,7 +119,7 @@ RSpec.describe MakeProducts, type: :model do
 
           make_products = MakeProducts.new account: account,
                                            debits: [debit_1],
-                                           invoice_date: '1999-1-1',
+                                           arrears_date: '1999-1-1',
                                            color: :blue
 
           expect(make_products.state).to eq :retain

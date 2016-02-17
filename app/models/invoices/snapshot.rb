@@ -33,7 +33,7 @@ class Snapshot < ActiveRecord::Base
   def make_products(invoice_date:, color:)
     MakeProducts.new(account: account,
                      debits: debits,
-                     invoice_date: invoice_date,
+                     arrears_date: invoice_date,
                      color: color)
   end
 
