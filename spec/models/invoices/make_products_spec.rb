@@ -3,6 +3,14 @@ require 'rails_helper'
 RSpec.describe MakeProducts, type: :model do
   describe '#products' do
     describe '#state' do
+      it 'forgets if no debits' do
+        make_products = MakeProducts.new account: account_create,
+                                         debits: [],
+                                         invoice_date: '1999-1-1'
+
+        expect(make_products.state).to eq :forget
+      end
+
       it 'retains if the account settled' do
         charge = charge_create payment_type: Charge::MANUAL
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
@@ -19,27 +27,17 @@ RSpec.describe MakeProducts, type: :model do
         expect(make_products.state).to eq :retain
       end
 
-      it 'forgets if no debits' do
-        make_products = MakeProducts.new account: account_create,
-                                         debits: [],
-                                         invoice_date: '1999-1-1'
+      it 'red invoice - mailed provided there are debits' do
+        charge = charge_create payment_type: Charge::AUTOMATIC
+        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+        account = account_create charges: [charge], debits: [debit_1]
 
-        expect(make_products.state).to eq :forget
-      end
+        make_products = MakeProducts.new account: account,
+                                         debits: [debit_1],
+                                         invoice_date: '1999-1-1',
+                                         color: :red
 
-      context 'red invoice' do
-        it 'mails provided there are debits' do
-          charge = charge_create payment_type: Charge::AUTOMATIC
-          debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-          account = account_create charges: [charge], debits: [debit_1]
-
-          make_products = MakeProducts.new account: account,
-                                           debits: [debit_1],
-                                           invoice_date: '1999-1-1',
-                                           color: :red
-
-          expect(make_products.state).to eq :mail
-        end
+        expect(make_products.state).to eq :mail
       end
 
       context 'blue invoice' do

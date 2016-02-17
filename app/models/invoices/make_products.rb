@@ -17,9 +17,9 @@ class MakeProducts
   def state
     return :forget if debits.empty?
     return :retain if settled
-    return :mail if color == :red
+    return :mail if :red == color
 
-    no_invoice_required? ? :retain : :mail
+    invoice_required? ? :mail : :retain
   end
 
   private
@@ -49,8 +49,8 @@ class MakeProducts
     end
   end
 
-  def no_invoice_required?
-    product_debits.to_a.count { |debit| !debit.automatic? }.zero?
+  def invoice_required?
+    product_debits.to_a.count { |debit| !debit.automatic? }.nonzero?
   end
 
   def settled
