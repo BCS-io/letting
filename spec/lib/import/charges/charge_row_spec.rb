@@ -179,7 +179,7 @@ module DB
         row = ChargeRow.new parse_line charge_row
         expect(row.attributes[:charge_type]).to eq 'Ground Rent'
         expect(row.attributes[:amount]).to eq 50.5
-        expect(row.attributes[:payment_type]).to eq Charge::AUTOMATIC
+        expect(row.attributes[:payment_type]).to eq 'automatic'
       end
     end
 

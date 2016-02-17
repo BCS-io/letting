@@ -8,7 +8,7 @@ RSpec.describe ChargeDecorator do
   end
 
   it '#payment returns capitalized string' do
-    charge = ChargeDecorator.new charge_new payment_type: Charge::AUTOMATIC
+    charge = ChargeDecorator.new charge_new payment_type: 'automatic'
     expect(charge.payment).to eq 'Automatic'
   end
 

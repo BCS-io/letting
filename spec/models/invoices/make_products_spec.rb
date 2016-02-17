@@ -12,7 +12,7 @@ RSpec.describe MakeProducts, type: :model do
       end
 
       it 'retains if the account settled' do
-        charge = charge_create payment_type: Charge::MANUAL
+        charge = charge_create payment_type: 'manual'
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge],
                                  debits: [debit_1],
@@ -28,7 +28,7 @@ RSpec.describe MakeProducts, type: :model do
       end
 
       it 'red invoice - mailed provided there are debits' do
-        charge = charge_create payment_type: Charge::AUTOMATIC
+        charge = charge_create payment_type: 'automatic'
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit_1]
 
@@ -42,7 +42,7 @@ RSpec.describe MakeProducts, type: :model do
 
       context 'blue invoice' do
         it 'retain if the only debits are automated' do
-          charge = charge_create payment_type: Charge::AUTOMATIC
+          charge = charge_create payment_type: 'automatic'
           debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
           account = account_create charges: [charge], debits: [debit_1]
 
@@ -55,7 +55,7 @@ RSpec.describe MakeProducts, type: :model do
         end
 
         it 'mails if it has debit' do
-          charge = charge_create payment_type: Charge::MANUAL
+          charge = charge_create payment_type: 'manual'
           debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
           account = account_create charges: [charge], debits: [debit_1]
 

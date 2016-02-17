@@ -21,7 +21,7 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
         expect(charge_new payment_type: 'manual').to be_valid
       end
       it 'accepts const' do
-        expect(charge_new payment_type: Charge::MANUAL).to be_valid
+        expect(charge_new payment_type: 'manual').to be_valid
       end
       it('rejects nil') { expect(charge_new payment_type: nil).to_not be_valid }
     end
@@ -97,12 +97,12 @@ describe Charge, :ledgers, :range, :cycle, type: :model do
 
     describe '#automatic?' do
       it 'returns automatic payment when standing order' do
-        charge = charge_new payment_type: Charge::AUTOMATIC
+        charge = charge_new payment_type: 'automatic'
         expect(charge).to be_automatic
       end
 
       it 'returns automatic payment when standing order' do
-        charge = charge_new payment_type: Charge::MANUAL
+        charge = charge_new payment_type: 'manual'
         expect(charge).to_not be_automatic
       end
     end
