@@ -25,6 +25,7 @@ RSpec.describe Snapshot, type: :model do
       second_invoice = invoice_new
       snapshot = Snapshot.new
       snapshot.invoices = [invoice_new, second_invoice]
+
       expect(snapshot).to_not be_first_invoice second_invoice
     end
   end
