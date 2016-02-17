@@ -1,5 +1,9 @@
 #
-# Creates Products required, finally, for invoices
+# MakeProducts
+# Creates collection of Products required for invoices
+#   - first product is arrears if in arrears
+#
+# - snapshot uses it to initialize products in invoice
 #
 class MakeProducts
   attr_reader :account, :color, :debits, :invoice_date
@@ -36,9 +40,7 @@ class MakeProducts
   end
 
   def product_debits
-    debits.map do |debit|
-      Product.new debit.to_debitable
-    end
+    debits.map { |debit| Product.new debit.to_debitable }
   end
 
   def apply_balance_to_each(totalables:)
