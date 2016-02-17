@@ -5,7 +5,7 @@ require 'rails_helper'
 describe ClientPayment, :ledgers do
   it 'creates years' do
     payment = ClientPayment.query
-    expect(payment.years).to eq %w(2015 2014 2013 2012 2011)
+    expect(payment.years).to eq %w(2016 2015 2014 2013 2012)
   end
 
   describe '#accounts_with_period' do
