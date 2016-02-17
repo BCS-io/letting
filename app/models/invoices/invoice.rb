@@ -65,7 +65,7 @@ class Invoice < ActiveRecord::Base
   # snapshot      - debits generated for the invoicing period
   # comments      - array of strings to appear on invoice for special info.
   #
-  def prepare property:, color:, snapshot:, invoice_date: Time.zone.today, comments: []
+  def prepare property:, snapshot:, color:, invoice_date: Time.zone.today, comments: []
     letters.build invoice_text: InvoiceText.first
     self.property = property
     self.color = color
