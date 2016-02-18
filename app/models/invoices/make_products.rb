@@ -29,7 +29,7 @@ class MakeProducts
   private
 
   def make_products
-    products = product_arrears + product_debits
+    products = product_arrears + debits_to_products.sort
     products = apply_balance_to_each totalables: products
     products
   end
@@ -39,7 +39,7 @@ class MakeProducts
     product_arrears.amount.nonzero? ? [product_arrears] : []
   end
 
-  def product_debits
+  def debits_to_products
     debits.map { |debit| Product.new debit.to_debitable }
   end
 
@@ -52,7 +52,7 @@ class MakeProducts
   end
 
   def invoice_required?
-    product_debits.to_a.count { |debit| !debit.automatic? }.nonzero?
+    debits_to_products.to_a.count { |debit| !debit.automatic? }.nonzero?
   end
 
   def settled
