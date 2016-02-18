@@ -41,9 +41,11 @@ RSpec.describe Invoice, type: :model do
       it 'prepares invoice_date' do
         invoice_text_create id: 1
         property = property_create account: account_new
+        snapshot = Snapshot.new(account: property.account)
+        snapshot.period_first = '2000-01-01'
 
         (invoice = Invoice.new).prepare property: property.invoice,
-                                        snapshot: Snapshot.new(account: property.account),
+                                        snapshot: snapshot,
                                         color: :blue,
                                         invoice_date: '2014-06-30'
 
@@ -54,9 +56,11 @@ RSpec.describe Invoice, type: :model do
         invoice_text_create id: 1
         invoice = Invoice.new
         property = property_create human_ref: 55, account: account_new
+        snapshot = Snapshot.new(account: property.account)
+        snapshot.period_first = '2000-01-01'
 
         invoice.prepare property: property.invoice,
-                        snapshot: Snapshot.new(account: property.account),
+                        snapshot: snapshot,
                         color: :blue
 
         expect(invoice.property_ref).to eq 55
@@ -67,9 +71,11 @@ RSpec.describe Invoice, type: :model do
         invoice = Invoice.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_create agent: agent, account: account_new
+        snapshot = Snapshot.new(account: property.account)
+        snapshot.period_first = '2000-01-01'
 
         invoice.prepare property: property.invoice,
-                        snapshot: Snapshot.new(account: account_new),
+                        snapshot: snapshot,
                         color: :blue
 
         expect(invoice.billing_address).to eq "Lock\nEdgbaston Road\nBirmingham\nWest Midlands"
@@ -117,9 +123,11 @@ RSpec.describe Invoice, type: :model do
         it 'prepares without comments' do
           invoice_text_create id: 1
           property = property_create account: account_new
+          snapshot = Snapshot.new(account: property.account)
+          snapshot.period_first = '2000-01-01'
 
           (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: Snapshot.new(account: property.account),
+                                          snapshot: snapshot,
                                           color: :blue
 
           expect(invoice.comments.size).to eq 0
@@ -128,9 +136,11 @@ RSpec.describe Invoice, type: :model do
         it 'prepares with comments' do
           invoice_text_create id: 1
           property = property_create account: account_new
+          snapshot = Snapshot.new(account: property.account)
+          snapshot.period_first = '2000-01-01'
 
           (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: Snapshot.new(account: property.account),
+                                          snapshot: snapshot,
                                           color: :blue,
                                           comments: ['comment']
 
@@ -141,9 +151,11 @@ RSpec.describe Invoice, type: :model do
         it 'ignores empty comments' do
           invoice_text_create id: 1
           property = property_create account: account_new
+          snapshot = Snapshot.new(account: property.account)
+          snapshot.period_first = '2000-01-01'
 
           (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: Snapshot.new(account: property.account),
+                                          snapshot: snapshot,
                                           color: :blue,
                                           comments: ['comment', '']
 
@@ -174,6 +186,7 @@ RSpec.describe Invoice, type: :model do
       it 'returns false if on a red invoice' do
         debit = debit_new charge: charge_new(charge_type: GROUND_RENT)
         snapshot = Snapshot.new invoices: [invoice_new, invoice_new], debits: [debit]
+        snapshot.period_first = '2000-01-01'
 
         invoice = invoice_new snapshot: snapshot
 

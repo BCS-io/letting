@@ -1,15 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Snapshot, type: :model do
-  it 'requires debits' do
+  it 'can have a period' do
     snapshot = Snapshot.new
-    expect(snapshot).to be_valid
+    snapshot.period = '2000-01-01'..'2010-01-01'
+
+    expect(snapshot.period).to eq Date.parse('2000-01-01')..Date.parse('2010-01-01')
   end
 
   it 'can be debited' do
     snapshot = Snapshot.new
     snapshot.debited debits: [debit_new(charge: charge_new)]
+
     expect(snapshot).to be_valid
+  end
+
+  describe '#before_period' do
+    it 'is the day before the invoicing range' do
+      snapshot = Snapshot.new
+      snapshot.period = '2000-01-01'..'2010-01-01'
+
+      expect(snapshot.before_period).to eq Date.parse '1999-12-31'
+    end
   end
 
   describe '#first_invoice?' do

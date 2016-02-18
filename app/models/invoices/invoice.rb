@@ -70,8 +70,8 @@ class Invoice < ActiveRecord::Base
     self.property = property
     self.color = color
     self.snapshot = snapshot
-    self.products = snapshot.make_products(invoice_date: invoice_date, color: color).products
-    self.deliver = snapshot.make_products(invoice_date: invoice_date, color: color).state
+    self.products = snapshot.make_products(color: color).products
+    self.deliver = snapshot.make_products(color: color).state
     self.invoice_date = invoice_date
     self.comments = generate_comments comments: comments
     self

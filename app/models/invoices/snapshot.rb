@@ -30,11 +30,19 @@ class Snapshot < ActiveRecord::Base
     self.debits = debits
   end
 
-  def make_products(invoice_date:, color:)
+  def make_products(color:)
     MakeProducts.new(account: account,
                      debits: debits,
-                     arrears_date: invoice_date,
+                     arrears_date: before_period,
                      color: color)
+  end
+
+  def before_period
+    period_first - 1.day
+  end
+
+  def first_invoice? invoice
+    invoices.first == invoice
   end
 
   # find
@@ -44,13 +52,5 @@ class Snapshot < ActiveRecord::Base
   #
   def self.find(account:, period:)
     find_by(account: account, period_first: period.first, period_last: period.last)
-  end
-
-  def only_one_invoice?
-    invoices.size <= 1
-  end
-
-  def first_invoice? invoice
-    invoices.first == invoice
   end
 end
