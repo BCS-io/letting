@@ -90,6 +90,10 @@ class Account < ActiveRecord::Base
     debits.until(to_time).total - credits.until(to_time).total
   end
 
+  def balance_all_credits to_time: Time.zone.today
+    debits.until(to_time).total - credits.total
+  end
+
   # Finds and returns a matching Account
   # human_ref - account reference number, '2002'
   #

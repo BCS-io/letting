@@ -94,6 +94,47 @@ describe Account, :ledgers, type: :model do
     end
   end
 
+  describe '#balance_all_credits' do
+    it 'always includes credits' do
+      charge = charge_create
+      account = account_new
+      account.credits << credit_new(at_time: '2100/2/28', amount: 30.00, charge: charge)
+      account.save!
+
+      expect(account.balance_all_credits to_time: '2013-1-1').to eq(-30.00)
+    end
+
+    it 'calculates balance of debits to_time' do
+      charge = charge_create
+      account = account_new
+      account.debits << debit_new(at_time: '2011-3-25', amount: 10.00, charge: charge)
+      account.save!
+
+      expect(account.balance_all_credits to_time: '2013-1-1').to eq(10.00)
+    end
+
+    it 'ignores entries after date' do
+      charge = charge_create
+      account = account_new
+      account.debits << debit_new(at_time: '2012-4-25', amount: 10.00, charge: charge)
+      account.save!
+
+      expect(account.balance_all_credits to_time: '2012-4-24').to eq 0
+    end
+
+    it 'smoke test' do
+      charge = charge_create
+      account = account_new
+      account.debits << debit_new(at_time: '4/3/2012', amount: 10.00, charge: charge)
+      account.debits << debit_new(at_time: '4/3/2013', amount: 10.00, charge: charge)
+      account.credits << credit_new(at_time: '4/3/2012', amount: 30.00, charge: charge)
+      account.credits << credit_new(at_time: '4/3/2012', amount: 30.00, charge: charge)
+      account.save!
+
+      expect(account.balance_all_credits to_time: '2013-4-1').to eq(-40.00)
+    end
+  end
+
   describe 'search' do
     before { property_create human_ref: 5, account: account_new }
 
