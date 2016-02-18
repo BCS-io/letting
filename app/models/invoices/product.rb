@@ -37,8 +37,8 @@ class Product < ActiveRecord::Base
     Product.new charge_type: ChargeTypes::ARREARS,
                 date_due: date_due,
                 payment_type: 'automatic',
-                amount: account.balance(to_time: date_due),
-                balance: account.balance(to_time: date_due)
+                amount: account.balance_all_credits(to_time: date_due),
+                balance: account.balance_all_credits(to_time: date_due)
   end
 
   # Scope to return products that trigger the back page of the invoice
