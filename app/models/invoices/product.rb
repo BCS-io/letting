@@ -65,12 +65,8 @@ class Product < ActiveRecord::Base
 
   def <=> other
     return nil unless other.is_a?(self.class)
-    [charge_type, date_due, amount, period_first, period_last] <=>
-      [other.charge_type,
-       other.date_due,
-       other.amount,
-       other.period_first,
-       other.period_last]
+    [date_due, charge_type, amount, period_first, period_last] <=>
+      [other.date_due, other.charge_type, other.amount, other.period_first, other.period_last]
   end
 
   def to_s

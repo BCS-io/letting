@@ -44,7 +44,7 @@ class Invoice < ActiveRecord::Base
     def total_arrears
       return 0 if last.nil?
 
-      last.balance
+      sort.last.balance
     end
   end
   validates :deliver, inclusion: { in: delivers.keys }
