@@ -31,3 +31,5 @@
  <% end %>
  <%= render 'information/lacking', objects: @invoicings, message: 'No invoicings.' %>
 </div>
+
+<%= paginate @invoicings %>
