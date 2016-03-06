@@ -16,7 +16,7 @@ class InvoicingsController < ApplicationController
   include InvoicingHelper
 
   def index
-    @invoicings = Invoicing.page(params[:page]).default.load
+    @invoicings = Invoicing.includes(runs: [:invoices]).page(params[:page]).default.load
   end
 
   # show lists out each invoice from an invoice run
