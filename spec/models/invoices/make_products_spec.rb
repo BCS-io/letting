@@ -8,11 +8,11 @@ RSpec.describe MakeProducts, type: :model do
         debit = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit]
 
-        make_products = MakeProducts.new account: account,
-                                         debits: [debit],
-                                         arrears_date: '1999-1-1'
+        make = MakeProducts.new account: account,
+                                debits: [debit],
+                                arrears_date: '1999-1-1'
 
-        expect(make_products.products.first.balance).to eq 10
+        expect(make.products.first.balance).to eq 10
       end
 
       it 'includes past arrears in the balance' do
@@ -21,12 +21,12 @@ RSpec.describe MakeProducts, type: :model do
         recent_debit = debit_new charge: charge, at_time: '2003-1-1', amount: 20
         account = account_create charges: [charge], debits: [past_debit, recent_debit]
 
-        make_products = MakeProducts.new account: account,
-                                         debits: [recent_debit],
-                                         arrears_date: '2001-1-1'
+        make = MakeProducts.new account: account,
+                                debits: [recent_debit],
+                                arrears_date: '2001-1-1'
 
-        expect(make_products.products.first.balance).to eq 10
-        expect(make_products.products.second.balance).to eq 30
+        expect(make.products.first.balance).to eq 10
+        expect(make.products.second.balance).to eq 30
       end
 
       it 'sums products balance (with 0 arrears)' do
@@ -35,23 +35,23 @@ RSpec.describe MakeProducts, type: :model do
         next_debit = debit_new charge: charge, at_time: '2003-1-1', amount: 20
         account = account_create charges: [charge], debits: [recent_debit, next_debit]
 
-        make_products = MakeProducts.new account: account,
-                                         debits: [recent_debit, next_debit],
-                                         arrears_date: '2001-1-1'
+        make = MakeProducts.new account: account,
+                                debits: [recent_debit, next_debit],
+                                arrears_date: '2001-1-1'
 
-        expect(make_products.products.first.balance).to eq 10
-        expect(make_products.products.second.balance).to eq 30
+        expect(make.products.first.balance).to eq 10
+        expect(make.products.second.balance).to eq 30
       end
     end
   end
 
   describe '#state' do
     it 'forgets if no debits' do
-      make_products = MakeProducts.new account: account_create,
-                                       debits: [],
-                                       arrears_date: '1999-1-1'
+      make = MakeProducts.new account: account_create,
+                              debits: [],
+                              arrears_date: '1999-1-1'
 
-      expect(make_products.state).to eq :forget
+      expect(make.state).to eq :forget
     end
 
     context 'retain' do
@@ -61,12 +61,12 @@ RSpec.describe MakeProducts, type: :model do
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 11)
         account = account_create charges: [charge], debits: [debit], credits: [credit]
 
-        make_products = MakeProducts.new account: account,
-                                         debits: [debit],
-                                         arrears_date: '1999-12-31',
-                                         color: :blue
+        make = MakeProducts.new account: account,
+                                debits: [debit],
+                                arrears_date: '1999-12-31',
+                                color: :blue
 
-        expect(make_products.state).to eq :retain
+        expect(make.state).to eq :retain
       end
 
       it 'red invoice - retains if the account settled' do
@@ -75,12 +75,12 @@ RSpec.describe MakeProducts, type: :model do
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 10)
         account = account_create charges: [charge], debits: [debit_1], credits: [credit]
 
-        make_products = MakeProducts.new account: account,
-                                         debits: [debit_1],
-                                         arrears_date: '1999-12-31',
-                                         color: :red
+        make = MakeProducts.new account: account,
+                                debits: [debit_1],
+                                arrears_date: '1999-12-31',
+                                color: :red
 
-        expect(make_products.state).to eq :retain
+        expect(make.state).to eq :retain
       end
     end
 
@@ -90,12 +90,12 @@ RSpec.describe MakeProducts, type: :model do
         debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit_1]
 
-        make_products = MakeProducts.new account: account,
-                                         debits: [debit_1],
-                                         arrears_date: '1999-1-1',
-                                         color: :red
+        make = MakeProducts.new account: account,
+                                debits: [debit_1],
+                                arrears_date: '1999-1-1',
+                                color: :red
 
-        expect(make_products.state).to eq :mail
+        expect(make.state).to eq :mail
       end
 
       context 'blue invoice' do
@@ -104,12 +104,12 @@ RSpec.describe MakeProducts, type: :model do
           debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
           account = account_create charges: [charge], debits: [debit_1]
 
-          make_products = MakeProducts.new account: account,
-                                           debits: [debit_1],
-                                           arrears_date: '1999-1-1',
-                                           color: :blue
+          make = MakeProducts.new account: account,
+                                  debits: [debit_1],
+                                  arrears_date: '1999-1-1',
+                                  color: :blue
 
-          expect(make_products.state).to eq :mail
+          expect(make.state).to eq :mail
         end
 
         it 'retain if the only debits are automated' do
@@ -117,12 +117,12 @@ RSpec.describe MakeProducts, type: :model do
           debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
           account = account_create charges: [charge], debits: [debit_1]
 
-          make_products = MakeProducts.new account: account,
-                                           debits: [debit_1],
-                                           arrears_date: '1999-1-1',
-                                           color: :blue
+          make = MakeProducts.new account: account,
+                                  debits: [debit_1],
+                                  arrears_date: '1999-1-1',
+                                  color: :blue
 
-          expect(make_products.state).to eq :retain
+          expect(make.state).to eq :retain
         end
       end
     end
