@@ -35,8 +35,8 @@ class MakeProducts
   end
 
   def product_arrears
-    product_arrears = Product.arrears(account: account, date_due: arrears_date)
-    product_arrears.amount.nonzero? ? [product_arrears] : []
+    product_in_arrear = Product.arrears(account: account, date_due: arrears_date)
+    product_in_arrear.amount.nonzero? ? [product_in_arrear] : []
   end
 
   def debits_to_products
