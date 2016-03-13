@@ -7,9 +7,8 @@
 #
 class MakeProducts
   attr_reader :account, :color, :debits, :arrears_date
-  def initialize(account:, debits:, arrears_date:, color: :blue)
+  def initialize(account:, debits:, color: :blue)
     @account = account
-    @arrears_date = arrears_date
     @debits = debits
     @color = color
   end
@@ -35,12 +34,19 @@ class MakeProducts
   end
 
   def product_arrears
-    product_in_arrear = Product.arrears(account: account, date_due: arrears_date)
+    product_in_arrear = Product.arrears(account: account, date_due: arrears_cut_off)
     product_in_arrear.amount.nonzero? ? [product_in_arrear] : []
   end
 
   def debits_to_products
     debits.map { |debit| Product.new debit.to_debitable }
+  end
+
+  def arrears_cut_off
+    return Date.new(1980, 1, 1) if debits_to_products.empty?
+
+    # ledgers/Debit.until < does not behave as I expect so I am removing 1 day here
+    debits_to_products.map(&:date_due).min - 1.day
   end
 
   def apply_balance_to_each(totalables:)

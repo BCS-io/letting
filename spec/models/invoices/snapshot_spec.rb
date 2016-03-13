@@ -15,15 +15,6 @@ RSpec.describe Snapshot, type: :model do
     expect(snapshot).to be_valid
   end
 
-  describe '#before_period' do
-    it 'is the day before the invoicing range' do
-      snapshot = Snapshot.new
-      snapshot.period = '2000-01-01'..'2010-01-01'
-
-      expect(snapshot.before_period).to eq Date.parse '1999-12-31'
-    end
-  end
-
   describe '#first_invoice?' do
     it 'is not invoiced if one invoice' do
       invoice = invoice_new

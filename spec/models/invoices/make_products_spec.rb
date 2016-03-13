@@ -9,21 +9,19 @@ RSpec.describe MakeProducts, type: :model do
         account = account_create charges: [charge], debits: [debit]
 
         make = MakeProducts.new account: account,
-                                debits: [debit],
-                                arrears_date: '1999-1-1'
+                                debits: [debit]
 
         expect(make.products.first.balance).to eq 10
       end
 
       it 'includes past arrears in the balance' do
         charge = charge_create
-        past_debit = debit_new charge: charge, at_time: '1999-1-1', amount: 10
-        recent_debit = debit_new charge: charge, at_time: '2003-1-1', amount: 20
+        past_debit = debit_create charge: charge, at_time: '1999-1-1', amount: 10
+        recent_debit = debit_create charge: charge, at_time: '2003-1-1', amount: 20
         account = account_create charges: [charge], debits: [past_debit, recent_debit]
 
         make = MakeProducts.new account: account,
-                                debits: [recent_debit],
-                                arrears_date: '2001-1-1'
+                                debits: [recent_debit]
 
         expect(make.products.first.balance).to eq 10
         expect(make.products.second.balance).to eq 30
@@ -36,8 +34,7 @@ RSpec.describe MakeProducts, type: :model do
         account = account_create charges: [charge], debits: [recent_debit, next_debit]
 
         make = MakeProducts.new account: account,
-                                debits: [recent_debit, next_debit],
-                                arrears_date: '2001-1-1'
+                                debits: [recent_debit, next_debit]
 
         expect(make.products.first.balance).to eq 10
         expect(make.products.second.balance).to eq 30
@@ -48,8 +45,7 @@ RSpec.describe MakeProducts, type: :model do
   describe '#state' do
     it 'forgets if no debits' do
       make = MakeProducts.new account: account_create,
-                              debits: [],
-                              arrears_date: '1999-1-1'
+                              debits: []
 
       expect(make.state).to eq :forget
     end
@@ -57,13 +53,12 @@ RSpec.describe MakeProducts, type: :model do
     context 'retain' do
       it 'blue invoice - retains if the account settled' do
         charge = charge_create payment_type: 'manual'
-        debit = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+        debit = debit_create charge: charge, at_time: '2000-1-1', amount: 10
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 11)
         account = account_create charges: [charge], debits: [debit], credits: [credit]
 
         make = MakeProducts.new account: account,
                                 debits: [debit],
-                                arrears_date: '1999-12-31',
                                 color: :blue
 
         expect(make.state).to eq :retain
@@ -77,7 +72,6 @@ RSpec.describe MakeProducts, type: :model do
 
         make = MakeProducts.new account: account,
                                 debits: [debit_1],
-                                arrears_date: '1999-12-31',
                                 color: :red
 
         expect(make.state).to eq :retain
@@ -92,7 +86,6 @@ RSpec.describe MakeProducts, type: :model do
 
         make = MakeProducts.new account: account,
                                 debits: [debit_1],
-                                arrears_date: '1999-1-1',
                                 color: :red
 
         expect(make.state).to eq :mail
@@ -106,7 +99,6 @@ RSpec.describe MakeProducts, type: :model do
 
           make = MakeProducts.new account: account,
                                   debits: [debit_1],
-                                  arrears_date: '1999-1-1',
                                   color: :blue
 
           expect(make.state).to eq :mail
@@ -119,7 +111,6 @@ RSpec.describe MakeProducts, type: :model do
 
           make = MakeProducts.new account: account,
                                   debits: [debit_1],
-                                  arrears_date: '1999-1-1',
                                   color: :blue
 
           expect(make.state).to eq :retain

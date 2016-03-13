@@ -33,12 +33,7 @@ class Snapshot < ActiveRecord::Base
   def make_products(color:)
     MakeProducts.new(account: account,
                      debits: debits,
-                     arrears_date: before_period,
                      color: color)
-  end
-
-  def before_period
-    period_first - 1.day
   end
 
   def first_invoice? invoice
