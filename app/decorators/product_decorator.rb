@@ -20,6 +20,7 @@ class ProductDecorator
   end
 
   def date_due
+    return '&nbsp;'.html_safe if product.arrears?
     format_short_date product.date_due
   end
 
