@@ -8,8 +8,7 @@ describe ProductDecorator, :invoice do
     end
 
     it 'returns #period formatted' do
-      product_dec =
-        ProductDecorator.new product_new period: '2010-9-30'..'2011-3-25'
+      product_dec = ProductDecorator.new product_new period: '2010-9-30'..'2011-3-25'
       expect(product_dec.period).to eq '30/Sep/10 - 25/Mar/11'
     end
 
@@ -20,8 +19,7 @@ describe ProductDecorator, :invoice do
 
     it 'returns the amount_on_time' do
       product = product_new amount: 20.05, date_due: Date.new(2010, 9, 30)
-      expect(ProductDecorator.new(product).amount_on_time)
-        .to eq '£20.05 on 30/Sep/10'
+      expect(ProductDecorator.new(product).amount_on_time) .to eq '£20.05 on 30/Sep/10'
     end
   end
 end

@@ -2,15 +2,13 @@ require 'rails_helper'
 
 describe InvoiceDecorator do
   it '#invoice_date - displays formatted date' do
-    invoice_dec = InvoiceDecorator.new \
-      invoice_new invoice_date: Date.new(2010, 3, 25)
+    invoice_dec = InvoiceDecorator.new invoice_new invoice_date: Date.new(2010, 3, 25)
     expect(invoice_dec.invoice_date).to eq '25/Mar/10'
   end
 
   it '#property_address' do
     invoice_dec = InvoiceDecorator.new invoice_new
-    expect(invoice_dec.property_address)
-      .to eq "Edgbaston Road\nBirmingham\nWest Midlands"
+    expect(invoice_dec.property_address).to eq "Edgbaston Road\nBirmingham\nWest Midlands"
   end
 
   it '#billing_agent' do
@@ -46,8 +44,7 @@ describe InvoiceDecorator do
   describe '#products_display' do
     it 'returns products if it has debits' do
       debit = debit_new(amount: 8, charge: charge_new)
-      dec =
-        InvoiceDecorator.new invoice_new snapshot: snapshot_new(debits: [debit])
+      dec = InvoiceDecorator.new invoice_new snapshot: snapshot_new(debits: [debit])
       expect(dec.products_display).to eq 'Ground Rent £8.00'
     end
 
