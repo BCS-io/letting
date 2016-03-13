@@ -34,7 +34,8 @@ class Invoice < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :products, dependent: :destroy, inverse_of: :invoice do
     def earliest_date_due
-      map(&:date_due).min
+      drop_arrears.map(&:date_due).min or
+        fail InvoiceMissingProducts, 'Invoice being created without any products.'
     end
 
     def drop_arrears
@@ -47,6 +48,7 @@ class Invoice < ActiveRecord::Base
       sort.last.balance
     end
   end
+  InvoiceMissingProducts = Class.new(StandardError)
   validates :deliver, inclusion: { in: delivers.keys }
   validates :invoice_date, :property_ref, :property_address, presence: true
   has_many :invoice_texts, through: :letters

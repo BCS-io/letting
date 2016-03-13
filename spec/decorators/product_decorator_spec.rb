@@ -9,7 +9,8 @@ describe ProductDecorator, :invoice do
       end
 
       it 'blanks out arrears' do
-        product_dec = ProductDecorator.new product_new charge_type: ChargeTypes::ARREARS, date_due: '2014-06-07'
+        product_dec = ProductDecorator.new product_new charge_type: ChargeTypes::ARREARS,
+                                                       date_due: '2014-06-07'
         expect(product_dec.date_due).to eq '&nbsp;'
       end
     end

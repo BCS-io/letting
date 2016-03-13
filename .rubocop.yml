@@ -28,11 +28,12 @@ Metrics/LineLength:
   Max: 95
 Metrics/MethodLength:
   Max: 10
+Style/AndOr:
+  Enabled: false
 Style/TrailingComma:
   Enabled: false
 Style/UnneededPercentQ:
   Enabled: false
-
 
 #
 # Ignored

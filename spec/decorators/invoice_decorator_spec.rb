@@ -65,14 +65,14 @@ describe InvoiceDecorator do
       expect(invoice_dec.earliest_date_due).to eq '25/Mar/10'
     end
 
-    it 'sets it to invoice_date if no products available' do
+    it 'errors trying to find earliest date if no no products available' do
       snapshot = Snapshot.new
       snapshot.period_first = '2000-01-01'
 
       invoice_dec = InvoiceDecorator.new invoice_new invoice_date: '2000/1/1',
                                                      snapshot: snapshot
 
-      expect(invoice_dec.earliest_date_due).to eq '01/Jan/00'
+      expect { invoice_dec.earliest_date_due }.to raise_error Invoice::InvoiceMissingProducts
     end
   end
 end

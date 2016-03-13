@@ -98,18 +98,52 @@ RSpec.describe Invoice, type: :model do
                  'period: 2010-09-30..2011-03-25, balance: 30.05'
       end
 
-      it 'finds the earliest due_date' do
-        invoice_text_create id: 1
-        property = property_create account: account_new
-        debit = debit_new at_time: '2000-01-01', charge: charge_new
+      describe '#earliest_date_due' do
+        it 'finds the earliest' do
+          invoice_text_create id: 1
+          property = property_create account: account_new
+          debit = debit_create at_time: '2000-01-01', charge: charge_new
 
-        (invoice = Invoice.new).prepare property: property.invoice,
-                                        snapshot: snapshot_new(account: property.account,
-                                                               debits: [debit]),
-                                        color: :blue,
-                                        invoice_date: '2014-06-30'
+          (invoice = Invoice.new).prepare property: property.invoice,
+                                          snapshot: snapshot_new(account: property.account,
+                                                                 debits: [debit]),
+                                          color: :blue,
+                                          invoice_date: '2014-06-30'
+          expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
+        end
 
-        expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
+        it 'ignores the earlier arrears date' do
+          invoice_text_create id: 1
+          arrears = debit_create at_time: '1999-01-01', charge: charge_new
+          debit = debit_create at_time: '2000-01-01', charge: charge_new
+
+          property = property_create account: account_new(debits: [arrears, debit])
+
+          invoice = Invoice.new
+          invoice.prepare property: property.invoice,
+                          snapshot: snapshot_new(account: property.account,
+                                                 period: '2000/01/01'..'2000/03/01',
+                                                 debits: [debit]),
+                          color: :blue,
+                          invoice_date: '2014-06-30'
+          expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
+        end
+
+        it 'returns arrears date if nothing else is available' do
+          invoice_text_create id: 1
+          arrears = debit_create at_time: '1999-01-01', charge: charge_new
+
+          property = property_create account: account_new(debits: [arrears])
+
+          invoice = Invoice.new
+          invoice.prepare property: property.invoice,
+                          snapshot: snapshot_new(account: property.account,
+                                                 period: '2000/01/01'..'2000/03/01',
+                                                 debits: []),
+                          color: :blue,
+                          invoice_date: '2014-06-30'
+          expect { invoice.earliest_date_due }.to raise_error Invoice::InvoiceMissingProducts
+        end
       end
 
       it 'prepares invoice total_arrears' do
