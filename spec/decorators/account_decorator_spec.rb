@@ -31,9 +31,9 @@ describe AccountDecorator do
 
     it 'orders items by date' do
       expect(account.all_items.map(&:at_time)).to contain_exactly \
-        Time.zone.local(2013, 3, 25, 0, 0, 0, '+0').to_s,
-        Time.zone.local(2013, 4, 30, 0, 0, 0, '+1').to_s,
-        Time.zone.local(2013, 9, 25, 0, 0, 0, '+1').to_s
+        Time.zone.local(2013, 3, 25, 0, 0, 0),
+        Time.zone.local(2013, 4, 30, 0, 0, 0),
+        Time.zone.local(2013, 9, 25, 0, 0, 0)
     end
 
     it 'orders abbrev-items by date' do
