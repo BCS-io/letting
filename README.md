@@ -145,6 +145,8 @@ This document covers the following sections
     * Verify you can passwordlessly log on.
   * 4\. `sudo reboot`
     * A number of changes have been made - NGINX is not serving pages until reboot.
+5. (Hack) gem install bundler
+  * this will be installed to `~.gem/ruby/x.x.x/gems` - required for the `cap <environment> deploy`
 
 ##### 1.2.2. Deployment
 
