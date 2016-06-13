@@ -69,6 +69,7 @@
   height: 1em;
   position: absolute;
   visibility: hidden;
+  z-index: 10;   /*cannot think why menu shouldn't be on the top*/
 }
 
 // sub menu item
