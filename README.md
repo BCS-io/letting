@@ -151,20 +151,7 @@ This document covers the following sections
 ##### 1.2.2. Deployment
 
 ###### 1.2.2.1. Code Setup<a name='deployment-code-setup'></a>
-1. Identify yourself as an agent with correct permissions
-  * Linux seems lax about this - once you identified - it keeps working.
-  * OSX you need to re-identify each time you each session
-    * 1\. remove existing identities
-    * 2\. copy the lines & run them
-    * 3\. uses the output from above
-
-    ````
-     ssh-add -D
-     ssh-agent
-     ssh-add
-    ````
-
-2. Deploy the application with Capistrano
+Deploy the application with Capistrano
   * 1\. `cap <environment> setup`
   * 2\. `cap <environment> deploy`
 
