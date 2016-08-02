@@ -172,10 +172,10 @@ group :development, :test do
   # Throwing exceptions when it hits breakpoints
   #
   gem 'byebug', '3.5.1'
-  gem 'capybara', '~> 2.4.0'
+  gem 'capybara', '~> 2.7.0'
 
-  gem 'capybara-webkit', '~> 1.4.1'
-  gem 'capybara-screenshot'
+  gem 'capybara-webkit', '~> 1.11.0'
+  gem 'capybara-screenshot', '~> 1.0.0'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
   # gem 'capybara-slow_finder_errors', '0.1.0'
@@ -184,15 +184,15 @@ group :development, :test do
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'rack-mini-profiler', '~>0.9.0'
   gem 'rb-readline'
-  gem 'rspec-rails', '~> 3.2.0'
-  gem 'selenium-webdriver', '~>2.45.0'
+  gem 'rspec-rails', '~> 3.5.0'
+  gem 'selenium-webdriver', '~>2.53.0'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'table_print'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  gem 'zonebie'
+  gem 'zonebie', '~> 0.6.0'
 end
 
 #
@@ -200,9 +200,9 @@ end
 #
 group :test do
   gem 'coveralls', '~>0.7.0', require: false
-  gem 'database_cleaner', '~> 1.4.0'
+  gem 'database_cleaner', '~> 1.5.0'
 
   # Create e.s. test node
   gem 'elasticsearch-extensions'
-  gem 'timecop', '~>0.7.0'
+  gem 'timecop', '~>0.8.0'
 end
