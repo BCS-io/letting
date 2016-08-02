@@ -76,9 +76,10 @@
 #
 # Gem                     Using      Last tested   Gem Bug
 # byebug                  3.5.1            4.0.3         Y
+# Capistrano              3.5.0            3.6.0         Y
 # capistrano-db-tasks       0.3              0.4         Y
 # jquery-ui-rails         4.1.2            5.0.3         N
-# rake                   10.1.0           10.4.2         ?
+# rake                   10.1.0           11.2.2         ?
 #
 #
 source 'https://rubygems.org'
@@ -125,26 +126,26 @@ gem 'uglifier', '~> 2.7.0'
 gem 'unicorn', '~> 4.8.0'
 gem 'whenever', require: false
 
-#
 # Capistrano deployment
 #
 group :development do
-  gem 'capistrano', '~> 3.4.0'
+  # rake has to be ver 11 - bug in 3.6.0
+  gem 'capistrano', '~> 3.5.0', require: false
 
-  gem 'airbrussh', require: false
+  gem 'airbrussh', '~> 1.1.0', require: false
   gem 'capistrano-backup', github: 'BCS-io/capistrano-backup', require: false
-  gem 'capistrano-bundler', '~> 1.1.3'
+  gem 'capistrano-bundler', '~> 1.1.3', require: false
 
   #
   # Upgrading to 0.4.0 caused
   # createdb: database creation failed: ERROR:  permission denied to create
   gem 'capistrano-db-tasks', '0.3', require: false
-  gem 'capistrano-postgresql', '~> 4.2.0'
-  gem 'capistrano-rails', '~> 1.1.2'
-  gem 'capistrano-rails-collection', '~> 0.0.3'
-  gem 'capistrano-rails-console', '~> 0.5.0'
-  gem 'capistrano-secrets-yml', '~> 1.0.0'
-  gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx'
+  gem 'capistrano-postgresql', '~> 4.2.0', require: false
+  gem 'capistrano-rails', '~> 1.1.3', require: false
+  gem 'capistrano-rails-collection', '~> 0.0.3', require: false
+  gem 'capistrano-rails-console', '~> 1.0.0', require: false
+  gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
+  gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx', require: false
 end
 
 #
