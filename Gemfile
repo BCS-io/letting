@@ -159,7 +159,7 @@ group :development do
   gem 'rails_best_practices', '~>1.15.0'
   gem 'rubocop', '~> 0.34.0', require: false
   gem 'rubycritic', require: false
-  gem 'scss-lint'
+  gem 'scss_lint', '~> 0.49.0', require: false
   gem 'traceroute'
 end
 
