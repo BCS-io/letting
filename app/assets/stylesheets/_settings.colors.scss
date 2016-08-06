@@ -71,8 +71,11 @@ $color-complimentary-shade-4:  rgba(197, 111,   0, 1);     // $color-indochine
 // Neutral Colors
 //
 
+// Black
+$color-black:                  rgba(0, 0, 0, 1);             // black
+
 // Whites
-$color-white:                  white;
+$color-white:                  rgba(255, 255, 255, 1);      // white
 $color-alabaster:              rgba(248, 248, 248, 1);      // off-white
 $color-cream:                  rgba(255, 255, 204, 1);      // ffffcc Cream
 
@@ -109,7 +112,7 @@ $color-snowy-mint:             rgba(219, 255, 221, 1);      // Pale Green
 $color-neutral:                       $color-alabaster;           // off white
 
 $color-line:                          $color-grey-alto;           // Very Pale Grey
-$color-line-print:                    black;                      // When printing out we want black
+$color-line-print:                    $color-black;                      // When printing out we want black
 $color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
 
 $transparent:                         transparent;
@@ -119,7 +122,7 @@ $transparent:                         transparent;
 //
 $color-text-primary:                  $color-tundora;    // Very Dark Gray
 $color-text-faded:                    $color-boulder;    // Medium Gray
-$color-text-black:                    black;
+$color-text-black:                    $color-black;
 
 // Scheme
 //
@@ -139,7 +142,7 @@ $scheme-light-foreground:        $color-tundora;
 
 // dark
 $scheme-dark-background:         $color-primary-shade-0;
-$scheme-dark-foreground:         white;
+$scheme-dark-foreground:         $color-white;
 
 // active   (color: white, back dark-blue)
 // 1) $link-text-primary-active-*
@@ -149,7 +152,7 @@ $scheme-dark-foreground:         white;
 //
 $scheme-active-background:       $color-primary-shade-4;
 $scheme-active-border:           darken($scheme-active-background, $border-color-darken);
-$scheme-active-foreground:       white;
+$scheme-active-foreground:       $color-white;
 
 //
 // Form Field Color
@@ -193,9 +196,9 @@ $schme-overlay-color:            $color-text-primary;
 //
 
 $primary-action-background:           $color-ternary-shade-0;                   // Pink
-$primary-action-color:                white;
+$primary-action-color:                $color-white;
 $primary-action-active-background:    lighten($primary-action-background, 5%);  // Blue
-$primary-action-active-color:         white;
+$primary-action-active-color:         $color-white;
 
 
 
@@ -204,7 +207,7 @@ $primary-action-active-color:         white;
 //
 
 // Icon
-$button-icon-background:              white;
+$button-icon-background:              $color-white;
 $button-icon-border:                  darken($button-icon-background, $border-color-icon-darken);
 $button-icon-color:                   $color-primary-shade-4;    // venice-blue
 $button-icon-active-background:       $scheme-active-background;    // venice-blue
@@ -221,7 +224,7 @@ $button-icon-disabled-color:          $scheme-disabled-foreground;
 // $module.debug
 //
 
-$color-debug:                         black;
+$color-debug:                         $color-black;
 
 
 //
@@ -265,7 +268,7 @@ $link-text-primary-color:             $color-primary-shade-4;       // venice-bl
 $link-text-primary-active-color:      $color-primary-shade-2;
 
 $link-text-white-color:               $color-alabaster;
-$link-text-white-active-color:        white;
+$link-text-white-active-color:        $color-white;
 
 
 // $Drop Down Menu

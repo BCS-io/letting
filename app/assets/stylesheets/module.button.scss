@@ -105,7 +105,10 @@
 
 @media print {
 
-  .Button, .ButtonIcon, .ButtonIcon-inactive, .ButtonPrimary {
+  .Button,
+  .ButtonIcon,
+  .ButtonIcon-inactive,
+  .ButtonPrimary {
     display: none;
   }
 }

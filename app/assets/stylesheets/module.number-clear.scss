@@ -29,7 +29,7 @@ $icon-size: 1.2em;
   width: 100%;
 }
 
-.close-icon:after {
+.close-icon::after {
   background-color: $number-clear-background;
   border-radius: 50%;
   bottom: 0;

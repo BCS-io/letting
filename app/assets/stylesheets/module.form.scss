@@ -10,7 +10,7 @@
 .required {
   font-weight: bold;
 
-  &:after {
+  &::after {
     content: ' *';
   }
 }
@@ -31,7 +31,6 @@
 .hidden {
   display: none;
 }
-
 
 //
 // Disableable

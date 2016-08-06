@@ -237,7 +237,7 @@
 
 /*Used in down pointing bubble with bubble. This is outside triangle */
 
-  .speech:before {
+  .speech::before {
     @include triangle;
     border-color: $scheme-help-border $transparent; /*colour should be the same as bubble border set above*/
     border-width: 26px 26px 0; /*size of the triangle*/
@@ -247,7 +247,7 @@
 
 /*Used in down pointing bubble with bubble. This is inside triangle */
 
-  .speech:after {
+  .speech::after {
     @include triangle;
     border-color: $scheme-help-background $transparent; /*colour should be the same as the container background set above*/
     border-width: 20px 20px 0;
@@ -258,7 +258,7 @@
 
 /*Used in up pointing bubble with bubble. This is the outside triangle */
 
-  .speech-up:before {
+  .speech-up::before {
     @include triangle;
     border-color: $scheme-help-border $transparent; /*colour should be the same as the container background */
     border-width: 0 26px 26px; /*size of the triangle*/
@@ -269,7 +269,7 @@
 /*Used in up pointing bubble for print, which is close to right hand edge of screen.
  This is the inside triangle */
 
-  .speech-up:after {
+  .speech-up::after {
     @include triangle;
     border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
     border-width: 0 20px 20px;
@@ -281,7 +281,7 @@
 /*Used in up pointing bubble for print, which is close to right hand edge of screen.
  This is the outside triangle */
 
-  .speech-print:before {
+  .speech-print::before {
     @include triangle;
     border-color: $scheme-help-border $transparent; /*colour should be the same as the container background */
     border-width: 0 26px 26px; /*size of the triangle*/
@@ -291,7 +291,7 @@
 
 /*Used in up pointing bubble with bubble. This is the inside triangle */
 
-  .speech-print:after {
+  .speech-print::after {
     @include triangle;
     border-color: $scheme-help-background $transparent; /*colour should be the same as the container background*/
     border-width: 0 20px 20px;
@@ -302,7 +302,7 @@
 
  /*Used in right pointing bubble with pt-right. This is the outside triangle */
 
-  .speech-right:before {
+  .speech-right::before {
     @include triangle;
     border-color: $transparent  $color-ternary-shade-0; /*colour should be the same as bubble border set above*/
     border-width: 22px 0 22px 22px; /*size of the triangle*/
@@ -312,7 +312,7 @@
 
 /*Used in right pointing bubble with pt-right. This is the inside triangle */
 
-  .speech-right:after {
+  .speech-right::after {
     @include triangle;
     border-color: $transparent  $scheme-help-background; /*colour should be the same as background*/
     border-width: 18px 0 18px 18px; /*size of the triangle, 2px less than outside triangle*/
@@ -320,6 +320,7 @@
     left: 284px; /*horizontal position of the triangle, inside & outside triangles same value*/
   }
 }
+
 @media print {
 
   .Button,

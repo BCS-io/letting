@@ -9,10 +9,6 @@ linters:
   Comment:
     enabled: false
 
-  # write white as #FFF etc
-  ColorKeyword:
-    enabled: false
-
   # ButtonIcon => .button-icon
   SelectorFormat:
     enabled: false
