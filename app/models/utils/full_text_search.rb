@@ -2,9 +2,9 @@
 #
 # FullTextSearch
 #
-# Returns the full-text search results for a query
+# Returns the full text search results for a query
 #
-# Interface between the full-text-search application (Elasticsearch)
+# Interface between the full text search application (Elasticsearch)
 # and the application. Calls search methods which are generated
 # by the Elasticsearch gem and the searchable module.
 #

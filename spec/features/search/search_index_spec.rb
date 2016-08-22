@@ -19,7 +19,7 @@ describe 'Search index', type: :feature do
       expect(page).to have_text '222'
     end
 
-    it 'indexes full-text search' do
+    it 'indexes full text search' do
       client = client_create
       property_create human_ref: 111,
                       client: client,
@@ -88,7 +88,7 @@ describe 'Search index', type: :feature do
         expect(find_field('search_terms').value).to have_text '111'
       end
 
-      it 'remembered for full-text search' do
+      it 'remembered for full text search' do
         property_create human_ref: 111,
                         account: account_new,
                         address: address_new(county: 'Worcester')

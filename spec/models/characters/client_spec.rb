@@ -42,7 +42,7 @@ describe Client, type: :model do
       .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
   end
 
-  describe '#search', :search do
+  describe 'full text .search', :search do
     before(:each) do
       client_create \
         human_ref: '80',

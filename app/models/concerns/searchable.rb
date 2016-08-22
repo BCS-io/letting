@@ -4,8 +4,8 @@
 #
 # Configures the Elasticsearch searching method
 #
-# Adds a 'search' method to any class it is included into allowing full-text
-# search - currently Client, Payment and Property.
+# Adds a 'search' method to any class it is included into allowing full text search
+#   - currently Client, Payment and Property.
 #
 # NGrams don't always seem to work - seems to occasional match whole word but
 # not the ngrame (so for London: matches London and not Lond)
