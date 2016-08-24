@@ -21,12 +21,14 @@ describe 'Payment#create', :ledgers, type: :feature do
       account_create property: property_create(human_ref: 2003),
                      charges: [charge_new(debits: [debit_new(amount: 20.05)])]
 
+      Payment.import force: true, refresh: true
       payment_page.load
       expect(find_field(:account_payment_search)[:autofocus]).to be_present
       payment_page.human_ref('2003').search
       expect(find('#submit')[:autofocus]).to be_present
       payment_page.pay
       expect(find_field(:account_payment_search)[:autofocus]).to be_present
+      Payment.__elasticsearch__.delete_index!
     end
 
     it 'stays on search when no account found', js: true do
