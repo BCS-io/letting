@@ -97,6 +97,6 @@ class Address < ActiveRecord::Base
       county,
       postcode,
       nation
-    ].compact.delete_if(&:empty?)
+    ].reject(&:blank?)
   end
 end
