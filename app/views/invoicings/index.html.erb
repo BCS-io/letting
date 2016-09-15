@@ -18,16 +18,16 @@
      <div class='col-7-24  bottom-spacer  inherit-row'>
        <%= invoicing_dec.period_between %>
      </div>
-     <div class='col-1-24  bottom-spacer'>
-       <%= print_link path: print_run_path(invoicing.runs.last), disabled: !invoicing.deliverable?  %>
-     </div>
-     <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-     <div class='col-1-24  bottom-spacer'>
-       <%= add_link path: [:edit, invoicing], title: 'New Run', css: 'Button  ButtonIcon-action' %>
-     </div>
-     <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-     <div class='col-1-24  bottom-spacer'><%= delete_link path: invoicing %></div>
+   </div> <!-- div closes grid row click simulation -->
+   <div class='col-1-24  bottom-spacer'>
+     <%= print_link path: print_run_path(invoicing.runs.last), disabled: !invoicing.deliverable?  %>
    </div>
+   <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+   <div class='col-1-24  bottom-spacer'>
+     <%= add_link path: [:edit, invoicing], title: 'New Run', css: 'Button  ButtonIcon-action' %>
+   </div>
+   <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+   <div class='col-1-24  bottom-spacer'><%= delete_link path: invoicing %></div>
  <% end %>
  <%= render 'information/lacking', objects: @invoicings, message: 'No invoicings.' %>
 </div>

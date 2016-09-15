@@ -27,14 +27,14 @@
       <div class='col-4-24  bottom-spacer  inherit-row'>
         <%= cycle.cycle_type %>
       </div>
-      <nav class='col-1-24  bottom-spacer'>
-        <%= edit_link cycle, size: 'lg' %>
-      </nav>
-      <div class='col-1-24  bottom-spacer'>&nbsp;</div>
-      <nav class='col-1-24  bottom-spacer'>
-        <%= delete_link path: cycle %>
-      </nav>
-      <div class='col-2-24  bottom-spacer'>&nbsp;</div>
-    </div>
+    </div> <!-- div closes grid row click simulation -->
+    <nav class='col-1-24  bottom-spacer'>
+      <%= edit_link cycle, size: 'lg' %>
+    </nav>
+    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+    <nav class='col-1-24  bottom-spacer'>
+      <%= delete_link path: cycle %>
+    </nav>
+    <div class='col-2-24  bottom-spacer'>&nbsp;</div>
   <% end %>
 </div>

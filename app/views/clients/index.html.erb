@@ -34,7 +34,7 @@
         <%= format_empty_string_as_dash client.address.first_text %>
         <%= testing_link path: client_path(client) %>
       </div>
-    </div>
+    </div>  <!-- div closes grid row click simulation -->
     <div class='col-1-24  bottom-spacer'><%= edit_link client, size: 'lg' %></div>
     <div class='col-1-24  bottom-spacer'>&nbsp;</div>
     <div class='col-1-24  bottom-spacer'><%= delete_link path: client, confirm: "Deleting a client also deletes its properties. If you are sure press 'OK' to delete?" %></div>

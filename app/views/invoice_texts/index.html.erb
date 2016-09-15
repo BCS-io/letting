@@ -25,9 +25,9 @@
           <%= invoice_text.description %>
           <%= testing_link path: invoice_text_path(invoice_text) %>
         </div>
-        <div class='col-1-24  bottom-spacer'><%= edit_link invoice_text, size: 'lg' %></div>
-        <div class='col-2-24'>&nbsp;</div>
-      </div>
+      </div> <!-- div closes grid row click simulation -->
+      <div class='col-1-24  bottom-spacer'><%= edit_link invoice_text, size: 'lg' %></div>
+      <div class='col-2-24'>&nbsp;</div>
     <% end %>
   <% end %> <!-- @invoice_texts.present? -->
 </div>
