@@ -28,6 +28,12 @@ set :system_ruby, '~/.gem/ruby/2.2.0'
 set :default_env, 'PATH' => "PATH=$PATH:#{fetch(:system_ruby)}/bin"
 
 #
+# PG - database
+#
+# this is the default code but I often refer to it.
+set :pg_database, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+
+#
 # SCM
 #
 set :scm, :git
