@@ -158,26 +158,26 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    elasticsearch (1.0.8)
-      elasticsearch-api (= 1.0.7)
-      elasticsearch-transport (= 1.0.7)
-    elasticsearch-api (1.0.7)
+    elasticsearch (1.1.0)
+      elasticsearch-api (= 1.1.0)
+      elasticsearch-transport (= 1.1.0)
+    elasticsearch-api (1.1.0)
       multi_json
     elasticsearch-extensions (0.0.17)
       ansi
       ruby-prof
-    elasticsearch-model (0.1.6)
+    elasticsearch-model (0.1.9)
       activesupport (> 3)
       elasticsearch (> 0.4)
       hashie
-    elasticsearch-rails (0.1.6)
-    elasticsearch-transport (1.0.7)
+    elasticsearch-rails (0.1.9)
+    elasticsearch-transport (1.1.0)
       faraday
       multi_json
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.6.0)
-    faraday (0.9.1)
+    faraday (0.10.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.14)
     flay (2.4.0)
@@ -190,7 +190,7 @@ GEM
       railties (>= 3.2, < 5.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    hashie (3.4.0)
+    hashie (3.4.6)
     hike (1.2.3)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -227,7 +227,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.99.2)
     mini_portile2 (2.1.0)
-    minitest (5.9.0)
+    minitest (5.10.1)
     multi_json (1.12.1)
     multipart-post (2.0.0)
     net-scp (1.2.1)
@@ -462,10 +462,10 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   coveralls (~> 0.7.0)
   database_cleaner (~> 1.5.0)
-  elasticsearch (~> 1.0.0)
+  elasticsearch (~> 1.1.0)
   elasticsearch-extensions
-  elasticsearch-model (~> 0.1.6)
-  elasticsearch-rails (~> 0.1.6)
+  elasticsearch-model (~> 0.1.0)
+  elasticsearch-rails (~> 0.1.0)
   equalizer
   font-awesome-rails
   jbuilder (~> 2.2.0)
@@ -509,4 +509,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.6
