@@ -9,7 +9,7 @@ Letting is an application for handling the accounts of a letting agency company 
 
 This document covers the following sections
 
-####Content
+#### Content
 1. [Project Setup](#project-setup)
   * 1\. Development Setup
   * 2\. Server Setup
@@ -323,9 +323,8 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 4. Document Mapping:  `curl -XGET "localhost:9200/development_properties/_mapping?pretty=true"`  <br>
 5. Find All indexes:   `curl -XGET "localhost:9200/_stats/indices?pretty=true"`  <br>
                        example: development_properties<br>
-6. Index Structure:    `curl -XGET 'http://127.0.0.1:9200/my_index/_mapping?pretty=1'` <br>
-7. Return Records:     `curl -XGET "localhost:9200/my_index/_search?pretty=true"`  <br>
-8. 'Simple' Query
+6. Return Records:     `curl -XGET "localhost:9200/my_index/_search?pretty=true"`  <br>
+7. 'Simple' Query
 
 ````
     GET development_properties/_search
