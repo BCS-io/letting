@@ -9,7 +9,7 @@ namespace :db do
   #  - file created by backup gem and put into projects's 'tmp/'
   #
   desc 'Loads a database from dump file'
-  task restore: :environment do
+  task restore: [:environment, :drop, :create] do
     include Logging
 
     Dir.chdir(import_path) do
@@ -38,10 +38,11 @@ namespace :db do
 
   def restore_from_dump
     logger.info "Restoring from: #{dump_file}"
-    system 'pg_restore' \
-             '--host localhost ' \
+    success = system 'pg_restore  --no-owner ' \
              "--username=#{database_config['username']} " \
-             " -d #{database_config['database']} #{dump_file}"
+             "-d #{database_config['database']} #{dump_file} " \
+             '2>&1 '
+    logger.info(success ? 'Success' : 'Fail')
   end
 
   def database_config
