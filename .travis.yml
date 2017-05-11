@@ -2,7 +2,11 @@ language: ruby
 
 sudo: false
 
-# ruby version from .ruby-version
+rvm:
+  - 2.3.4
+  # does not handle fuzzy matching (travis uses an older version of rvm)
+  # without the rvm value it would get irb version from .ruby-version
+  # however I am using rbenv which does not have fuzzy matching
 
 env:
   - DB=postgresql
