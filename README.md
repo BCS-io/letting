@@ -104,14 +104,23 @@ This document covers the following sections
   * drops the database (if any), creates and runs migrations.
   * Repeat each time you want to delete and restore the database.
 
-8. Elasticsearch (chef configures this)
-  * 1\. Configure Elasticsearch memory limit (a memory greedy application)
-    `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
-    1. Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
-    2. Change: ES_JAVA_OPS => -Xms1500m - Xmx1500m =>  -Xms1g -Xmx1g
-  * 2\. `sudo service elasticsearch restart`
-    * verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
-    * Not unusual pid file (see Elasticsearch configuration below)
+8. Elasticsearch 
+  * 1a\. Foreground
+    - brew switch elasticsearch 1.1.1 # if not available
+    - Open tab and enter `elasticsearch` 
+  * 1b\. Background
+    - Can also run elasticsearch as service
+    - 'Reboot' instance with `sudo service elasticsearch restart`
+    - Verify as it also says 'ok' when it fails.   `sudo service elasticsearch restart`
+    - Not unusual pid file (see Elasticsearch configuration below)
+
+  * 2\. Either Foreground or background Elasticsearch node will be discovered immediately.
+
+  * 3\. Configure Elasticsearch memory limit (a memory greedy application)
+     -  (chef configures this)
+     - `sudo nano /usr/local/etc/elasticsearch/elasticsearch-env.sh`
+     - Change: ES_HEAP_SIZE=1503m  => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
+     - Change: ES_JAVA_OPS => -Xms1500m - Xmx1500m =>  -Xms1g -Xmx1g
 
 9. Add Data - using *one* of:
   * 1\. Seed data: `rake db:seed`
@@ -169,22 +178,20 @@ or use fake data `cap <environment> rails:rake:db:seed`
   * step not always needed - to delete all indexes - ssh to the server and run this.
     `curl -XDELETE 'http://localhost:9200/_all'`
 
-
-
 My Reference: Webserver alias: `ssh arran`
 <br><br><br>
 
 
 
 
-##2. COMMANDS<a name='commands'></a>
+## 2. COMMANDS<a name='commands'></a>
 
-####2.1. rake db:import
+#### 2.1. rake db:import
   `rake db:import` is a command for importing production data from the old system to the new system.
 
   The basic command: `rake db:import`
 
-#####options
+##### options
   To add an option -- is needed after db:import to bypass the rake argument parsing.
   1. -r Range of properties to import: `rake db:import -- -r 1-200`
     * Default is import all properties
@@ -197,9 +204,9 @@ My Reference: Webserver alias: `ssh arran`
   
   
   
-##3 Monitoring<a name='monitoring'></a>
+## 3 Monitoring<a name='monitoring'></a>
 
-#####3.1 Monit<a name='monit'></a>
+##### 3.1 Monit<a name='monit'></a>
 
 * `monit status` - current situation  
 * `sudo service monit reload` - if config files have been updated
@@ -207,28 +214,27 @@ My Reference: Webserver alias: `ssh arran`
 Monit connection: http://<ip-address>:2812
 * Connection Must be from BCS Network - a firewall blocks every other address
 * Connection Uses the ['monit']['web_interface'] user/password as defined in letting-<environment>
-<br><br>
 
-#####3.2 Logstash<a name='logstash'></a>
+##### 3.2 Logstash<a name='logstash'></a>
 
 Logstash is available - listing the messages recorded in monitored system's
 logs. Navigate to the server with a browser. See http://logstash.net/
 
+<br>
 
 
+## 4 Cheatsheet<a name='cheatsheet'></a>
 
-##4 Cheatsheet<a name='cheatsheet'></a>
+##### 4.1 Chef<a name='chef'></a>
 
-#####4.1 Chef<a name='chef'></a>
-
-######4.1.1 Running A Script on a machine for the first time
+###### 4.1.1 Running A Script on a machine for the first time
 
 1. `ssh-copy-id deployer@example.com`
   * confirm ssh in without any password
 2. `knife solo bootstrap deployer@<name|ipaddress>`
 3. Requires you to respond to password many times and takes 
 
-######4.1.2 Updating a cookbook
+###### 4.1.2 Updating a cookbook
 
 1. Clone the cookbook to the local machine under ~/code/chef/
 2. Make changes to the cookbook increment the version in the meta data and commit and push back.
@@ -239,7 +245,7 @@ logs. Navigate to the server with a browser. See http://logstash.net/
   1. Don't bother around 5 - 11 pm in the evening as you get failed to connect.
 
 
-######4.1.3 Updating a server
+###### 4.1.3 Updating a server
 
 Chef is installed on servers - I've seen this get out of date. Removing it and then doing a knife solo bootstrap puts on a later version. Running chef on existing server may have firewall problems.
 
@@ -249,7 +255,7 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 4. Step 1 confirm situation.
 
 
-######4.1.4 Adding on a new cookbook to a recipe
+###### 4.1.4 Adding on a new cookbook to a recipe
 1. Create a new cookbook - take note of the name in the metadata
 2. Use the name in
   * repo berksfile `cookbook '<name>' github: 'BCS-io-provision/<name>-cookbook'`
@@ -341,14 +347,14 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 ````
 
 
-######Further Reading
+###### Further Reading
 
 [1] http://exploringelasticsearch.com/overview.html  
 [2] http://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html  
 [3] http://zapone.org/benito/2015/01/21/elasticsearch-reports-default-heap-memory-size-after-setting-environment-variable/  
 
 
-####4.4 Firewall<a name='firewall'></a>
+#### 4.4 Firewall<a name='firewall'></a>
 
 ###### 4.4.1 Listing Rules<a name='firewall-listing-rules'></a>
 
@@ -356,14 +362,14 @@ Chef is installed on servers - I've seen this get out of date. Removing it and t
 
 ###### 4.4.2 What is being blocked?<a name='firewall-what-is being blocked'></a>
 
-####### Firewall blocks
+Firewall blocks
 
 1. ssh to the server which is having packets blocked.
 2. What address is being blocked? `cat /var/log/kern.log`
   1. The logs contains blocked ip packets - to summarize the import things. DST is the ip address of the server we have been blocked to getting and DPT is the port number. We want to allow this combination through.
   Mar 13 ... iptables denied: IN= OUT=eth0 ... DST=23.23.181.189 ... DPT=443
 
-####### FQDN to ip address (Fully Qualified Domain Name)
+FQDN to ip address (Fully Qualified Domain Name)
 
  `dig <domain-name>`
  * Answer section - check the A records for ip addresses
@@ -519,7 +525,7 @@ Verify
 
 
 
-#####4.7 Ruby<a name='ruby'></a>
+##### 4.7 Ruby<a name='ruby'></a>
 
 1. Updating Ruby
 
@@ -537,14 +543,14 @@ Verify
     * `cap <environment> setup`  - updates unicorn
     * `cap <environment> deploy`
 
-####4.8 scp<a name='scp'></a>
+#### 4.8 scp<a name='scp'></a>
 
 * for copying files between servers
 
 scp -r user@your.server.example.com:/path/to/file /home/user/Desktop/file
 
 
-####4.9 SSH<a name='ssh'></a>
+#### 4.9 SSH<a name='ssh'></a>
 
 1. brew install ssh-copy-id
 2. ssh-copy-id deployer@example.com
@@ -556,7 +562,7 @@ scp -r user@your.server.example.com:/path/to/file /home/user/Desktop/file
 ## 5 Trouble Shooting<a name='troubleshooting'></a>
 
 
-####5.1 Net::SSH::HostKeyMismatch<a name='net-ssh-hostkeymismatch'></a>
+#### 5.1 Net::SSH::HostKeyMismatch<a name='net-ssh-hostkeymismatch'></a>
 
 Error seen as something like:
 
@@ -570,7 +576,7 @@ Solution
 `ssh-keygen -R <ip address> | <name>`
 
 
-####5.2 How to fix duplicate source.list entry<a name='how-to-fix-duplicate-source-list-entry'></a>
+#### 5.2 How to fix duplicate source.list entry<a name='how-to-fix-duplicate-source-list-entry'></a>
 
 Format of Repository Source List found in `/etc/apt/sources.list` and `/etc/apt/sources.list.d/`
 `<type of repository>  <location>  <dist-name> <components>`
@@ -596,9 +602,9 @@ Further Reading
 http://askubuntu.com/questions/120621/how-to-fix-duplicate-sources-list-entry
 
 
-####5.3 Capistrano<a name='troubleshooting-capistrano'></a>
+#### 5.3 Capistrano<a name='troubleshooting-capistrano'></a>
 
-#####1. SSH Doctor
+##### 1. SSH Doctor
 
 Diagnostic tool
 
@@ -610,7 +616,7 @@ cap production ssh:doctor
 The agent has no identities.
 ````
 
-#####2. Fail with github.com port-22
+##### 2. Fail with github.com port-22
 
 Occasionally a deployment fails with an unable to connect to github.
 Any network service is not completely reliable. Wait for a while and try again.
@@ -621,7 +627,7 @@ DEBUG [44051a0f]  fatal: Could not read from remote repository.
 ````
 
 
-#####3. Rubygems not installing
+##### 3. Rubygems not installing
 
 Rubygems ip address keeps changing. If it does then gem installation fails because of the outbound firewall: 
 
@@ -633,7 +639,7 @@ DEBUG [42445bc5] Make sure that `gem install minitest -v '5.8.0'` succeeds befor
 Fix the firewall or remove the outbound firewall then reset the firewall after bundle completed.
 
 
-#####4. Fail with Unicorn not restarting
+##### 4. Fail with Unicorn not restarting
 
 ````
 DEBUG [e912b64e]  /etc/init.d/unicorn_letting_staging: line 26: kill: (4370) - No such process
@@ -841,13 +847,13 @@ Solution
   
 
 
-####5.10 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
+#### 5.10 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
 
 ````
 cat /dev/null > /file/you/want/to/wipe-out
 `````
 
-####5.11 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
+#### 5.11 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
 
 ````
 diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
@@ -856,7 +862,7 @@ diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
 
 ===
 
-###6 Production Client
+### 6 Production Client
 On release of the version go through the [production checklist](https://github.com/BCS-io/letting/blob/master/docs/production_checklist.md)
 
 ===
