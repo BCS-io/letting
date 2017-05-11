@@ -172,6 +172,7 @@ group :development, :test do
   # Throwing exceptions when it hits breakpoints
   #
   gem 'byebug', '3.5.1'
+  gem 'bundler-audit'
   gem 'capybara', '~> 2.13.0'
 
   gem 'capybara-webkit', '~> 1.14.0'

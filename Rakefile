@@ -11,8 +11,11 @@ if %w(development test).include? Rails.env
   RuboCop::RakeTask.new
   require 'scss_lint/rake_task'
   SCSSLint::RakeTask.new
+  require 'bundler/audit/task'
+  Bundler::Audit::Task.new
 
+  task audit: 'bundle:audit'
   task(:default).clear
-  task default: [:scss_lint, :rubocop, 'spec:fast', 'spec:features']
+  task default: ['bundle:audit', :scss_lint, :rubocop, 'spec:fast', 'spec:features']
   task test: ['spec:fast', 'spec:features']
 end
