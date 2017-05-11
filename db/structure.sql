@@ -2,12 +2,17 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -30,7 +35,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: accounts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE accounts (
@@ -42,7 +47,7 @@ CREATE TABLE accounts (
 
 
 --
--- Name: credits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: credits; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE credits (
@@ -59,7 +64,7 @@ CREATE TABLE credits (
 
 
 --
--- Name: debits; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: debits; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE debits (
@@ -78,7 +83,7 @@ CREATE TABLE debits (
 
 
 --
--- Name: properties; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: properties; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE properties (
@@ -99,7 +104,7 @@ CREATE VIEW account_details AS
     accounts.property_id,
     properties.human_ref,
     credits.at_time,
-    COALESCE((credits.amount * ((-1))::numeric), (0)::numeric) AS amount
+    COALESCE((credits.amount * ('-1'::integer)::numeric), (0)::numeric) AS amount
    FROM ((accounts
      LEFT JOIN credits ON ((credits.account_id = accounts.id)))
      JOIN properties ON ((properties.id = accounts.property_id)))
@@ -134,7 +139,7 @@ ALTER SEQUENCE accounts_id_seq OWNED BY accounts.id;
 
 
 --
--- Name: addresses; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: addresses; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE addresses (
@@ -175,7 +180,7 @@ ALTER SEQUENCE addresses_id_seq OWNED BY addresses.id;
 
 
 --
--- Name: agents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: agents; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE agents (
@@ -207,7 +212,7 @@ ALTER SEQUENCE agents_id_seq OWNED BY agents.id;
 
 
 --
--- Name: charges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: charges; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE charges (
@@ -243,7 +248,7 @@ ALTER SEQUENCE charges_id_seq OWNED BY charges.id;
 
 
 --
--- Name: clients; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: clients; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE clients (
@@ -274,7 +279,7 @@ ALTER SEQUENCE clients_id_seq OWNED BY clients.id;
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE comments (
@@ -325,7 +330,7 @@ ALTER SEQUENCE credits_id_seq OWNED BY credits.id;
 
 
 --
--- Name: cycles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: cycles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE cycles (
@@ -379,7 +384,7 @@ ALTER SEQUENCE debits_id_seq OWNED BY debits.id;
 
 
 --
--- Name: due_ons; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: due_ons; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE due_ons (
@@ -415,7 +420,7 @@ ALTER SEQUENCE due_ons_id_seq OWNED BY due_ons.id;
 
 
 --
--- Name: entities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: entities; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE entities (
@@ -450,7 +455,7 @@ ALTER SEQUENCE entities_id_seq OWNED BY entities.id;
 
 
 --
--- Name: guides; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: guides; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE guides (
@@ -484,7 +489,7 @@ ALTER SEQUENCE guides_id_seq OWNED BY guides.id;
 
 
 --
--- Name: invoice_texts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: invoice_texts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE invoice_texts (
@@ -522,7 +527,7 @@ ALTER SEQUENCE invoice_texts_id_seq OWNED BY invoice_texts.id;
 
 
 --
--- Name: invoices; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: invoices; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE invoices (
@@ -562,7 +567,7 @@ ALTER SEQUENCE invoices_id_seq OWNED BY invoices.id;
 
 
 --
--- Name: invoicings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: invoicings; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE invoicings (
@@ -596,7 +601,7 @@ ALTER SEQUENCE invoicings_id_seq OWNED BY invoicings.id;
 
 
 --
--- Name: letters; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: letters; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE letters (
@@ -628,7 +633,7 @@ ALTER SEQUENCE letters_id_seq OWNED BY letters.id;
 
 
 --
--- Name: payments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE payments (
@@ -661,7 +666,7 @@ ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
 
 
 --
--- Name: products; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE products (
@@ -718,7 +723,7 @@ ALTER SEQUENCE properties_id_seq OWNED BY properties.id;
 
 
 --
--- Name: runs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: runs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE runs (
@@ -750,7 +755,7 @@ ALTER SEQUENCE runs_id_seq OWNED BY runs.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -759,7 +764,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: search_suggestions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: search_suggestions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE search_suggestions (
@@ -791,7 +796,7 @@ ALTER SEQUENCE search_suggestions_id_seq OWNED BY search_suggestions.id;
 
 
 --
--- Name: settlements; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: settlements; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE settlements (
@@ -824,7 +829,7 @@ ALTER SEQUENCE settlements_id_seq OWNED BY settlements.id;
 
 
 --
--- Name: snapshots; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: snapshots; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE snapshots (
@@ -857,7 +862,7 @@ ALTER SEQUENCE snapshots_id_seq OWNED BY snapshots.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -891,175 +896,175 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY accounts ALTER COLUMN id SET DEFAULT nextval('accounts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: addresses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: agents id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY agents ALTER COLUMN id SET DEFAULT nextval('agents_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: charges id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY charges ALTER COLUMN id SET DEFAULT nextval('charges_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: clients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY clients ALTER COLUMN id SET DEFAULT nextval('clients_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: credits id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY credits ALTER COLUMN id SET DEFAULT nextval('credits_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: cycles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cycles ALTER COLUMN id SET DEFAULT nextval('cycles_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: debits id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY debits ALTER COLUMN id SET DEFAULT nextval('debits_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: due_ons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY due_ons ALTER COLUMN id SET DEFAULT nextval('due_ons_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: entities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY entities ALTER COLUMN id SET DEFAULT nextval('entities_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: guides id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY guides ALTER COLUMN id SET DEFAULT nextval('guides_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: invoice_texts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice_texts ALTER COLUMN id SET DEFAULT nextval('invoice_texts_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: invoices id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoices ALTER COLUMN id SET DEFAULT nextval('invoices_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: invoicings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoicings ALTER COLUMN id SET DEFAULT nextval('invoicings_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: letters id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY letters ALTER COLUMN id SET DEFAULT nextval('letters_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: payments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: properties id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY properties ALTER COLUMN id SET DEFAULT nextval('properties_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: runs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY runs ALTER COLUMN id SET DEFAULT nextval('runs_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: search_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY search_suggestions ALTER COLUMN id SET DEFAULT nextval('search_suggestions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: settlements id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY settlements ALTER COLUMN id SET DEFAULT nextval('settlements_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: snapshots id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY snapshots ALTER COLUMN id SET DEFAULT nextval('snapshots_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- Name: accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY accounts
@@ -1067,7 +1072,7 @@ ALTER TABLE ONLY accounts
 
 
 --
--- Name: addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: addresses addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY addresses
@@ -1075,7 +1080,7 @@ ALTER TABLE ONLY addresses
 
 
 --
--- Name: agents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: agents agents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY agents
@@ -1083,7 +1088,7 @@ ALTER TABLE ONLY agents
 
 
 --
--- Name: charges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: charges charges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY charges
@@ -1091,7 +1096,7 @@ ALTER TABLE ONLY charges
 
 
 --
--- Name: clients_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: clients clients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY clients
@@ -1099,7 +1104,7 @@ ALTER TABLE ONLY clients
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -1107,7 +1112,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: credits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: credits credits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY credits
@@ -1115,7 +1120,7 @@ ALTER TABLE ONLY credits
 
 
 --
--- Name: cycles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: cycles cycles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY cycles
@@ -1123,7 +1128,7 @@ ALTER TABLE ONLY cycles
 
 
 --
--- Name: debits_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: debits debits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY debits
@@ -1131,7 +1136,7 @@ ALTER TABLE ONLY debits
 
 
 --
--- Name: due_ons_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: due_ons due_ons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY due_ons
@@ -1139,7 +1144,7 @@ ALTER TABLE ONLY due_ons
 
 
 --
--- Name: entities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: entities entities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY entities
@@ -1147,7 +1152,7 @@ ALTER TABLE ONLY entities
 
 
 --
--- Name: guides_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: guides guides_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY guides
@@ -1155,7 +1160,7 @@ ALTER TABLE ONLY guides
 
 
 --
--- Name: invoice_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: invoice_texts invoice_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoice_texts
@@ -1163,7 +1168,7 @@ ALTER TABLE ONLY invoice_texts
 
 
 --
--- Name: invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: invoices invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoices
@@ -1171,7 +1176,7 @@ ALTER TABLE ONLY invoices
 
 
 --
--- Name: invoicings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: invoicings invoicings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY invoicings
@@ -1179,7 +1184,7 @@ ALTER TABLE ONLY invoicings
 
 
 --
--- Name: letters_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: letters letters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY letters
@@ -1187,7 +1192,7 @@ ALTER TABLE ONLY letters
 
 
 --
--- Name: payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY payments
@@ -1195,7 +1200,7 @@ ALTER TABLE ONLY payments
 
 
 --
--- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY products
@@ -1203,7 +1208,7 @@ ALTER TABLE ONLY products
 
 
 --
--- Name: properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: properties properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY properties
@@ -1211,7 +1216,7 @@ ALTER TABLE ONLY properties
 
 
 --
--- Name: runs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: runs runs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY runs
@@ -1219,7 +1224,7 @@ ALTER TABLE ONLY runs
 
 
 --
--- Name: search_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: search_suggestions search_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY search_suggestions
@@ -1227,7 +1232,7 @@ ALTER TABLE ONLY search_suggestions
 
 
 --
--- Name: settlements_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: settlements settlements_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY settlements
@@ -1235,7 +1240,7 @@ ALTER TABLE ONLY settlements
 
 
 --
--- Name: snapshots_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: snapshots snapshots_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY snapshots
@@ -1243,7 +1248,7 @@ ALTER TABLE ONLY snapshots
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -1251,203 +1256,203 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: index_accounts_on_property_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_accounts_on_property_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_accounts_on_property_id ON accounts USING btree (property_id);
 
 
 --
--- Name: index_addresses_on_addressable_id_and_addressable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_addresses_on_addressable_id_and_addressable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_addresses_on_addressable_id_and_addressable_type ON addresses USING btree (addressable_id, addressable_type);
 
 
 --
--- Name: index_agents_on_property_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_agents_on_property_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_agents_on_property_id ON agents USING btree (property_id);
 
 
 --
--- Name: index_charges_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_charges_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_charges_on_account_id ON charges USING btree (account_id);
 
 
 --
--- Name: index_charges_on_cycle_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_charges_on_cycle_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_charges_on_cycle_id ON charges USING btree (cycle_id);
 
 
 --
--- Name: index_comments_on_invoice_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_invoice_id ON comments USING btree (invoice_id);
 
 
 --
--- Name: index_credits_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_credits_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_credits_on_account_id ON credits USING btree (account_id);
 
 
 --
--- Name: index_credits_on_charge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_credits_on_charge_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_credits_on_charge_id ON credits USING btree (charge_id);
 
 
 --
--- Name: index_credits_on_payment_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_credits_on_payment_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_credits_on_payment_id ON credits USING btree (payment_id);
 
 
 --
--- Name: index_debits_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_debits_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_debits_on_account_id ON debits USING btree (account_id);
 
 
 --
--- Name: index_debits_on_charge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_debits_on_charge_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_debits_on_charge_id ON debits USING btree (charge_id);
 
 
 --
--- Name: index_debits_on_charge_id_and_at_time; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_debits_on_charge_id_and_at_time; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_debits_on_charge_id_and_at_time ON debits USING btree (charge_id, at_time);
 
 
 --
--- Name: index_debits_on_snapshot_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_debits_on_snapshot_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_debits_on_snapshot_id ON debits USING btree (snapshot_id);
 
 
 --
--- Name: index_due_ons_on_cycle_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_due_ons_on_cycle_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_due_ons_on_cycle_id ON due_ons USING btree (cycle_id);
 
 
 --
--- Name: index_entities_on_entitieable_id_and_entitieable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_entities_on_entitieable_id_and_entitieable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_entities_on_entitieable_id_and_entitieable_type ON entities USING btree (entitieable_id, entitieable_type);
 
 
 --
--- Name: index_guides_on_invoice_text_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_guides_on_invoice_text_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_guides_on_invoice_text_id ON guides USING btree (invoice_text_id);
 
 
 --
--- Name: index_invoices_on_run_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_invoices_on_run_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_invoices_on_run_id ON invoices USING btree (run_id);
 
 
 --
--- Name: index_invoices_on_snapshot_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_invoices_on_snapshot_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_invoices_on_snapshot_id ON invoices USING btree (snapshot_id);
 
 
 --
--- Name: index_letters_on_invoice_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_letters_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_letters_on_invoice_id ON letters USING btree (invoice_id);
 
 
 --
--- Name: index_letters_on_invoice_text_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_letters_on_invoice_text_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_letters_on_invoice_text_id ON letters USING btree (invoice_text_id);
 
 
 --
--- Name: index_payments_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_payments_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_payments_on_account_id ON payments USING btree (account_id);
 
 
 --
--- Name: index_products_on_invoice_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_products_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_products_on_invoice_id ON products USING btree (invoice_id);
 
 
 --
--- Name: index_properties_on_client_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_properties_on_client_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_properties_on_client_id ON properties USING btree (client_id);
 
 
 --
--- Name: index_runs_on_invoicing_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_runs_on_invoicing_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_runs_on_invoicing_id ON runs USING btree (invoicing_id);
 
 
 --
--- Name: index_settlements_on_credit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_settlements_on_credit_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_settlements_on_credit_id ON settlements USING btree (credit_id);
 
 
 --
--- Name: index_settlements_on_debit_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_settlements_on_debit_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_settlements_on_debit_id ON settlements USING btree (debit_id);
 
 
 --
--- Name: index_snapshots_on_account_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_snapshots_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_snapshots_on_account_id ON snapshots USING btree (account_id);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -1457,7 +1462,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES ('20130726152930');
 
