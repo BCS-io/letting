@@ -182,7 +182,7 @@ group :development, :test do
   gem 'meta_request'
   gem 'pry-rails', '~>0.3.0'
   gem 'pry-stack_explorer', '~>0.4.9.0'
-  gem 'rack-mini-profiler', '~>0.9.0'
+  gem 'rack-mini-profiler', '~>0.10.0'
   gem 'rb-readline'
   gem 'rspec-rails', '~> 3.5.0'
   gem 'selenium-webdriver', '~>2.53.0'
