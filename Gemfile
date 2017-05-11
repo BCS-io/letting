@@ -133,7 +133,7 @@ group :development do
   gem 'capistrano', '~> 3.5.0', require: false
 
   gem 'airbrussh', '~> 1.1.0', require: false
-  gem 'capistrano-backup', github: 'BCS-io/capistrano-backup', require: false
+  gem 'capistrano-backup', git: 'https://github.com/BCS-io/capistrano-backup.git', require: false
   gem 'capistrano-bundler', '~> 1.1.3', require: false
 
   #
@@ -145,7 +145,7 @@ group :development do
   gem 'capistrano-rails-collection', '~> 0.0.3', require: false
   gem 'capistrano-rails-console', '~> 1.0.0', require: false
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
-  gem 'capistrano-unicorn-nginx', github: 'BCS-io/capistrano-unicorn-nginx', require: false
+  gem 'capistrano-unicorn-nginx', git: 'https://github.com/BCS-io/capistrano-unicorn-nginx.git', require: false
 end
 
 #
@@ -172,9 +172,9 @@ group :development, :test do
   # Throwing exceptions when it hits breakpoints
   #
   gem 'byebug', '3.5.1'
-  gem 'capybara', '~> 2.7.0'
+  gem 'capybara', '~> 2.13.0'
 
-  gem 'capybara-webkit', '~> 1.11.0'
+  gem 'capybara-webkit', '~> 1.14.0'
   gem 'capybara-screenshot', '~> 1.0.0'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests

@@ -1,13 +1,13 @@
 GIT
-  remote: git://github.com/BCS-io/capistrano-backup.git
-  revision: 24fda195c044d06e220af9841c8c368b53c8f31a
+  remote: https://github.com/BCS-io/capistrano-backup.git
+  revision: b2debf063ce019039813bb1b18bc643460417a07
   specs:
-    capistrano-backup (0.0.4)
+    capistrano-backup (0.1.0)
       capistrano (>= 3.1)
       sshkit (>= 1.2.0)
 
 GIT
-  remote: git://github.com/BCS-io/capistrano-unicorn-nginx.git
+  remote: https://github.com/BCS-io/capistrano-unicorn-nginx.git
   revision: 81270292a92d084d5943e0525acc3c73a25e1240
   specs:
     capistrano-unicorn-nginx (3.3.0)
@@ -56,7 +56,8 @@ GEM
     adamantium (0.2.0)
       ice_nine (~> 0.11.0)
       memoizable (~> 0.4.0)
-    addressable (2.4.0)
+    addressable (2.5.1)
+      public_suffix (~> 2.0, >= 2.0.2)
     airbrussh (1.1.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ansi (1.5.0)
@@ -112,7 +113,7 @@ GEM
     capistrano-secrets-yml (1.0.0)
       capistrano (>= 3.1)
       sshkit (>= 1.2.0)
-    capybara (2.7.1)
+    capybara (2.13.0)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -122,8 +123,8 @@ GEM
     capybara-screenshot (1.0.13)
       capybara (>= 1.0, < 3)
       launchy
-    capybara-webkit (1.11.1)
-      capybara (>= 2.3.0, < 2.8.0)
+    capybara-webkit (1.14.0)
+      capybara (>= 2.3.0, < 2.14.0)
       json
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
@@ -225,7 +226,7 @@ GEM
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
-    mime-types (2.99.2)
+    mime-types (2.99.3)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
     multi_json (1.12.1)
@@ -234,13 +235,11 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
     netrc (0.10.3)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     parser (2.2.3.0)
       ast (>= 1.1, < 3.0)
     pg (0.18.3)
-    pkg-config (1.1.7)
     powerpack (0.1.1)
     procto (0.0.2)
     pry (0.10.1)
@@ -252,7 +251,8 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
-    rack (1.6.4)
+    public_suffix (2.0.5)
+    rack (1.6.6)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-dev-mark (0.7.4)
@@ -456,9 +456,9 @@ DEPENDENCIES
   capistrano-rails-console (~> 1.0.0)
   capistrano-secrets-yml (~> 1.0.0)
   capistrano-unicorn-nginx!
-  capybara (~> 2.7.0)
+  capybara (~> 2.13.0)
   capybara-screenshot (~> 1.0.0)
-  capybara-webkit (~> 1.11.0)
+  capybara-webkit (~> 1.14.0)
   coffee-rails (~> 4.1.0)
   coveralls (~> 0.7.0)
   database_cleaner (~> 1.5.0)
@@ -509,4 +509,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.14.6

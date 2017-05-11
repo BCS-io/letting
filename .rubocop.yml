@@ -26,6 +26,8 @@ Style/MethodDefParentheses:
   Enabled: false
 Metrics/LineLength:
   Max: 95
+  Exclude:
+    - Gemfile
 Metrics/MethodLength:
   Max: 10
 Style/AndOr:
