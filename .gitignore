@@ -56,3 +56,6 @@ config/secrets.yml
 
 # ctags - navigation of a codebase
 /tags
+
+# backup files
+letting.tar
