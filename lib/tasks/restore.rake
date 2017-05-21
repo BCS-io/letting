@@ -6,7 +6,7 @@ namespace :db do
   #
   # Restores
   #  - loads a database from a dump file
-  #  - file created by backup gem and put into projects's 'tmp/'
+  #  - file created by backup gem and put into project root
   #
   desc 'Loads a database from dump file'
   task restore: [:environment, :drop, :create] do
@@ -14,9 +14,9 @@ namespace :db do
 
     Dir.chdir(import_path) do
       logger.info "Current Directory: #{import_path}"
+      copy_to_temp
       unpackage_dump
       restore_from_dump
-      cleaning_dump
       logger.info 'Complete.'
     end
   end
@@ -24,36 +24,44 @@ namespace :db do
   private
 
   def import_path
-    Rails.root.join 'tmp/'
+    Rails.root
+  end
+
+  def copy_to_temp
+    FileUtils.cp(Rails.root.join(tar_file), Rails.root.join('tmp'))
   end
 
   def unpackage_dump
-    system "tar -xvf #{tar_file} --strip=2"
-    system "gzip -df #{dump_file}.gz"
+    Dir.chdir('tmp') do
+      system "tar -xvf #{tar_file} --strip=2"
+      system "gzip -df #{dump_file}.gz"
+      system "rm #{tar_file}"
+    end
   end
 
   def tar_file
     "#{Rails.application.class.parent_name.underscore}.tar"
   end
 
+  def dump_file
+    'PostgreSQL.sql'
+  end
+
   def restore_from_dump
-    logger.info "Restoring from: #{dump_file}"
-    success = system 'pg_restore  --no-owner ' \
-             "--username=#{database_config['username']} " \
-             "-d #{database_config['database']} #{dump_file} " \
-             '2>&1 '
-    logger.info(success ? 'Success' : 'Fail')
+    Dir.chdir('tmp') do
+      logger.info "Restoring from: #{dump_file}"
+
+      success = system 'pg_restore  --no-owner ' \
+               "--username=#{database_config['username']} " \
+               "-d #{database_config['database']} #{dump_file} " \
+               '2>&1 '
+
+      system "rm  #{dump_file}"
+      logger.info(success ? 'Success' : 'Fail')
+    end
   end
 
   def database_config
     Rails.configuration.database_configuration[Rails.env]
-  end
-
-  def cleaning_dump
-    system "rm  #{dump_file}"
-  end
-
-  def dump_file
-    'PostgreSQL.sql'
   end
 end
