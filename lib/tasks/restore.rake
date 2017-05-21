@@ -33,7 +33,7 @@ namespace :db do
 
   def unpackage_dump
     Dir.chdir('tmp') do
-      system "tar -xvf #{tar_file} --strip=2"
+      system "tar -xf #{tar_file} --strip=2"
       system "gzip -df #{dump_file}.gz"
       system "rm #{tar_file}"
     end
