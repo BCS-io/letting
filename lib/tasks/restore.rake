@@ -13,7 +13,7 @@ namespace :db do
     include Logging
 
     Dir.chdir(import_path) do
-      logger.info "Current Directory: #{import_path}"
+      logger.info "Restore: #{import_path.join(tar_file)}"
       copy_to_temp
       unpackage_dump
       restore_from_dump
@@ -49,7 +49,7 @@ namespace :db do
 
   def restore_from_dump
     Dir.chdir('tmp') do
-      logger.info "Restoring from: #{dump_file}"
+      logger.info "Tmp restore: #{Dir.pwd}/#{dump_file}"
 
       success = system 'pg_restore  --no-owner ' \
                "--username=#{database_config['username']} " \
