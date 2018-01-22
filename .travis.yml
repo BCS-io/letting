@@ -18,6 +18,7 @@ services:
   - elasticsearch
 
 before_script:
+  - sleep 10
   - bundle exec bundle-audit update && bundle exec bundle-audit check
   - bundle exec rake db:create RAILS_ENV=test
 
