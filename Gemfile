@@ -106,7 +106,7 @@ gem 'jquery-ui-rails', '4.1.2'
 # Kaminari before elasticsearch
 gem 'kaminari', '~> 0.16.0'
 gem 'lograge'
-gem 'nokogiri', '>= 1.8.1' # to avoid vulnerability
+gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>0.18.0'
 gem 'rails', '4.2.8'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
