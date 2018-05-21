@@ -144,7 +144,7 @@ GEM
       term-ansicolor (~> 1.3)
       thor (~> 0.19.4)
       tins (~> 1.6)
-    crass (1.0.3)
+    crass (1.0.4)
     database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     debugger-linecache (1.2.0)
@@ -208,7 +208,7 @@ GEM
       actionpack (>= 3)
       activesupport (>= 3)
       railties (>= 3)
-    loofah (2.2.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.5)
@@ -273,8 +273,8 @@ GEM
     rails-env-favicon (0.0.5)
       railties (>= 3.1)
       tinycon-rails
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     rails_best_practices (1.15.7)
       activesupport
       code_analyzer (>= 0.4.3)
@@ -492,4 +492,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.6
+   1.16.1
