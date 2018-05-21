@@ -6,7 +6,7 @@
 # Capistrano Standard environment settings
 #
 def ip_address
-  '10.0.0.30'
+  'fla2014-staging'
 end
 
 set :stage, :staging

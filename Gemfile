@@ -134,7 +134,6 @@ group :development do
   gem 'capistrano', '~> 3.5.0', require: false
 
   gem 'airbrussh', '~> 1.1.0', require: false
-  gem 'capistrano-backup', git: 'https://github.com/BCS-io/capistrano-backup.git', require: false
   gem 'capistrano-bundler', '~> 1.1.3', require: false
 
   #

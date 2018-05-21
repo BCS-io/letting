@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/BCS-io/capistrano-backup.git
-  revision: b2debf063ce019039813bb1b18bc643460417a07
-  specs:
-    capistrano-backup (0.1.0)
-      capistrano (>= 3.1)
-      sshkit (>= 1.2.0)
-
-GIT
   remote: https://github.com/BCS-io/capistrano-unicorn-nginx.git
   revision: 81270292a92d084d5943e0525acc3c73a25e1240
   specs:
@@ -439,7 +431,6 @@ DEPENDENCIES
   bundler-audit
   byebug (= 3.5.1)
   capistrano (~> 3.5.0)
-  capistrano-backup!
   capistrano-bundler (~> 1.1.3)
   capistrano-db-tasks (= 0.3)
   capistrano-postgresql (~> 4.2.0)

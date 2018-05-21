@@ -6,7 +6,6 @@ require 'capistrano/setup'
 # Capistrano gems
 #
 require 'airbrussh/capistrano'
-require 'capistrano/backup'
 require 'capistrano/bundler'
 require 'capistrano-db-tasks'
 require 'capistrano/postgresql'

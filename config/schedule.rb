@@ -32,12 +32,4 @@ else
   every 1.day, at: '4:30 am' do
     rake 'hide_monotonous_account_details'
   end
-
-  # Scheduling backup of main database
-  job_type :backup, ':environment_variable=:environment '\
-                    'backup perform -t :task :output'
-
-  every 1.day, at: '2:03 am' do
-    backup 'letting'
-  end
 end
