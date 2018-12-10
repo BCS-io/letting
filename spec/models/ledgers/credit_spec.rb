@@ -121,7 +121,7 @@ describe Credit, :ledgers, type: :model do
       end
 
       it 'errors when charge missing' do
-        expect { credit_new(charge: nil).charge_type }.to raise_error
+        expect { credit_new(charge: nil).charge_type }.to raise_error(NoMethodError)
       end
     end
 

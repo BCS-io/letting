@@ -121,7 +121,7 @@ describe Debit, :ledgers, type: :model do
       end
 
       it 'errors when charge missing' do
-        expect { debit_new.charge_type }.to raise_error
+        expect { debit_new.charge_type }.to raise_error(NoMethodError)
       end
     end
 
