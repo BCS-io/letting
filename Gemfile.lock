@@ -494,7 +494,7 @@ DEPENDENCIES
   zonebie (~> 0.6.0)
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.4.5p335
 
 BUNDLED WITH
-   1.16.1
+   1.17.1
