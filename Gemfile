@@ -108,7 +108,7 @@ gem 'kaminari', '~> 0.16.0'
 gem 'lograge'
 gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>0.18.0'
-gem 'rails', '4.2.8'
+gem 'rails', '4.2.11'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
 gem 'rails-env-favicon'
 
