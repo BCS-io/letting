@@ -244,7 +244,7 @@ GEM
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
     public_suffix (2.0.5)
-    rack (1.6.10)
+    rack (1.6.11)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-dev-mark (0.7.4)
