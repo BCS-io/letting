@@ -41,6 +41,7 @@ This document covers the following sections
     * 1\.[Login](#postgresql-login)
     * 2\.[psql prompt](#postgresql-psql-prompt)
     * 3\.[Execute SQL](#postgresql-execute-sql)
+    * 4\.[Verify](#postgresql-verify)
   * 6\. [QEMU](#qemu)
     * 1\. Basic Commands
     * 2\. Removing an instance from
@@ -417,6 +418,11 @@ these commands completely remove it.
 ###### 4.5.3  Execute SQL <a name='postgresql-prompt'></a>
 
 * Execute SQL file:  `psql -f thefile.sql letting_<environment>`
+
+###### 4.5.4 Verify<a name='postgresql-verify'></a>
+
+* brew info postgres - general information
+  - pg_ctl -D /usr/local/var/postgres status
 
 
 ##### 4.6 QEMU<a name='qemu'></a>
