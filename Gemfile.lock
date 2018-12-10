@@ -173,7 +173,7 @@ GEM
     execjs (2.6.0)
     faraday (0.10.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.14)
+    ffi (1.9.25)
     flay (2.4.0)
       ruby_parser (~> 3.0)
       sexp_processor (~> 4.0)
