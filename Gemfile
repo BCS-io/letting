@@ -176,7 +176,7 @@ group :development, :test do
   gem 'bundler-audit'
   gem 'capybara', '~> 2.13.0'
 
-  gem 'capybara-webkit', '~> 1.14.0'
+  gem 'capybara-webkit', '~> 1.15.0'
   gem 'capybara-screenshot', '~> 1.0.0'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests

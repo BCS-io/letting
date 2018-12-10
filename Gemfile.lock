@@ -115,8 +115,8 @@ GEM
     capybara-screenshot (1.0.13)
       capybara (>= 1.0, < 3)
       launchy
-    capybara-webkit (1.14.0)
-      capybara (>= 2.3.0, < 2.14.0)
+    capybara-webkit (1.15.1)
+      capybara (>= 2.3, < 4.0)
       json
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
@@ -446,7 +446,7 @@ DEPENDENCIES
   capistrano-unicorn-nginx!
   capybara (~> 2.13.0)
   capybara-screenshot (~> 1.0.0)
-  capybara-webkit (~> 1.14.0)
+  capybara-webkit (~> 1.15.0)
   coffee-rails (~> 4.1.0)
   coveralls (~> 0.8.0)
   database_cleaner (~> 1.5.0)
