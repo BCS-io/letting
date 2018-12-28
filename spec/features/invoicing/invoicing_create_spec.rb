@@ -67,7 +67,10 @@ describe 'Invoicing#create', type: :feature do
       create_account human_ref: 87,
                      cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
       invoicing_page.load.choose_dates
-      invoicing_page.period = '2013-05-10'..'2013-06-24'
+      # Capybara setting datetime field
+      #  - set depends on what the browser expects - in our case UK date
+      #
+      invoicing_page.period = '10-05-2013'..'24-06-2013'
 
       invoicing_page.search_term('87').button 'Create'
       expect(invoicing_page).to be_success

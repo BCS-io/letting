@@ -178,6 +178,7 @@ group :development, :test do
 
   gem 'capybara-webkit', '~> 1.15.0'
   gem 'capybara-screenshot', '~> 1.0.0'
+  gem 'chromedriver-helper', '~> 2.1.0'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
   # gem 'capybara-slow_finder_errors', '0.1.0'
@@ -187,7 +188,7 @@ group :development, :test do
   gem 'rack-mini-profiler', '~>0.10.0'
   gem 'rb-readline'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'selenium-webdriver', '~>2.53.0'
+  gem 'selenium-webdriver', '~>3.0'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'table_print'
