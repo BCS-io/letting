@@ -31,7 +31,7 @@ module DB
     # Mapping of imported values to application values
     # Definitive values charged_in.csv/charged_ins table;
     LEGACY_CODE_TO_CHARGED_IN = { LEGACY_ARREARS  => MODERN_ARREARS,
-                                  LEGACY_ADVANCE  =>  MODERN_ADVANCE }
+                                  LEGACY_ADVANCE  => MODERN_ADVANCE }
     def initialize(charged_in_code:, charge_type:)
       @charged_in_code = charged_in_code
       @charge_type = charge_type

@@ -24,7 +24,7 @@ class Charge < ActiveRecord::Base
   validates :charge_type, :cycle, presence: true
   validates :payment_type, inclusion: { in: payment_types.keys }
   validates :activity, inclusion: { in: activities.keys }
-  validates :amount, price_bound: true, if:  :active?
+  validates :amount, price_bound: true, if: :active?
 
   delegate :monthly?, to: :cycle
   delegate :charged_in, to: :cycle

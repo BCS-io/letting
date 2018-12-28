@@ -32,6 +32,9 @@ Metrics/MethodLength:
   Max: 10
 Style/AndOr:
   Enabled: false
+Style/ExtraSpacing:
+  Exclude:
+    - spec/models/ledgers/charge_spec.rb
 Style/TrailingComma:
   Enabled: false
 Style/UnneededPercentQ:

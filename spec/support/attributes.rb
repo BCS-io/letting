@@ -4,27 +4,27 @@
 
 def address_attributes **overrides
   {
-    flat_no:  '47',
+    flat_no:    '47',
     house_name: 'Hillbank House',
-    road_no:  '294',
-    road:     'Edgbaston Road',
-    district: 'Edgbaston',
-    town:     'Birmingham',
-    county:   'West Midlands',
-    postcode: 'B5 7QU'
+    road_no:    '294',
+    road:       'Edgbaston Road',
+    district:   'Edgbaston',
+    town:       'Birmingham',
+    county:     'West Midlands',
+    postcode:   'B5 7QU'
   }.merge overrides
 end
 
 def oval_address_attributes **overrides
   {
-    flat_no:  '33',
+    flat_no:    '33',
     house_name: 'The Oval',
-    road_no:  '207b',
-    road:     'Vauxhall Street',
-    district: 'Kennington',
-    town:     'London',
-    county:   'Greater London',
-    postcode: 'SE11 5SS'
+    road_no:    '207b',
+    road:       'Vauxhall Street',
+    district:   'Kennington',
+    town:       'London',
+    county:     'Greater London',
+    postcode:   'SE11 5SS'
   }.merge overrides
 end
 

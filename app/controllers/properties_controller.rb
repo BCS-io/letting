@@ -78,7 +78,7 @@ class PropertiesController < ApplicationController
   #
   def join_property
     [client: [:entities],
-     account: [charges: [:cycle], credits: [:charge], debits:  [:charge]]]
+     account: [charges: [:cycle], credits: [:charge], debits: [:charge]]]
   end
 
   # property_params

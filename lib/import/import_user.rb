@@ -27,11 +27,11 @@ module DB
     end
 
     def model_assignment
-      model_imported.assign_attributes nickname: row[:nickname],
-                                       email:    row[:email],
-                                       password: row[:password],
+      model_imported.assign_attributes nickname:              row[:nickname],
+                                       email:                 row[:email],
+                                       password:              row[:password],
                                        password_confirmation: row[:password],
-                                       role:    row[:role]
+                                       role:                  row[:role]
     end
   end
 end
