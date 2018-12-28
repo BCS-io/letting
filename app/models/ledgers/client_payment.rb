@@ -83,7 +83,7 @@ class ClientPayment
   # Arbitrary range of years of payments to cover
   #
   def years
-    (Time.zone.now.year.downto(Time.zone.now.year - 4)).map(&:to_s)
+    Time.zone.now.year.downto(Time.zone.now.year - 4).map(&:to_s)
   end
 
   # Accounts which include a particular batch_month:

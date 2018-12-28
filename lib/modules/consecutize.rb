@@ -65,7 +65,7 @@ class Consecutize
   end
 
   def output_discontinous_number(number:)
-    (number.first).to_s
+    number.first.to_s
   end
 
   def make_consecutive_arrays

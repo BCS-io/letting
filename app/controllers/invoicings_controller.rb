@@ -118,7 +118,7 @@ class InvoicingsController < ApplicationController
   def get_period_first
     return session[:invoicings_period_first] \
       unless session[:invoicings_period_first].blank?
-    session[:invoicings_period_first] = (Time.zone.today).to_s
+    session[:invoicings_period_first] = Time.zone.today.to_s
   end
 
   def set_period_first(date:)
