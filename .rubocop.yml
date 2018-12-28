@@ -44,6 +44,11 @@ Style/TrailingCommaInArguments:
 Style/UnneededPercentQ:
   Enabled: false
 
+# newly added - review
+Style/NestedParenthesizedCalls:
+  Enabled: false
+Style/MutableConstant:
+  Enabled: false
 #
 # Ignored
 # We want this to be removed
