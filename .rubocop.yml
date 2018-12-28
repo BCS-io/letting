@@ -45,3 +45,6 @@ Metrics/AbcSize:
 
 Performance/Count:
   Enabled: false
+
+Style/Documentation:
+  Enabled: false

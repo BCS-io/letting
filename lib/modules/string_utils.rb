@@ -1,4 +1,4 @@
-# rubocop: disable Style/DoubleNegation, Style/Documentation
+# rubocop: disable Style/DoubleNegation
 
 # StringUtils
 #
