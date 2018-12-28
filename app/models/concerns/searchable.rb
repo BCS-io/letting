@@ -27,7 +27,7 @@ module Searchable
   included do
     include Elasticsearch::Model
     # collection is pluralized version of the model_name
-    index_name [Rails.env, model_name.collection.gsub(%r{\/}, '-')].join('_')
+    index_name [Rails.env, model_name.collection.tr('/', '-')].join('_')
 
     after_commit on: [:create, :update] do
       __elasticsearch__.index_document
