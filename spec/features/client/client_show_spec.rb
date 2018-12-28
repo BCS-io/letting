@@ -27,7 +27,7 @@ describe 'Client#show', type: :feature do
     expect(page).to have_text '17.35'
   end
 
-  it '#show aggregated payments' do
+  it '#show aggregated payments', js: true do
     charge =
       charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
                                                DueOn.new(month: 9, day: 30)])
@@ -43,7 +43,7 @@ describe 'Client#show', type: :feature do
     expect(page).to have_text 'Print Mar 2014'
   end
 
-  it '#show detailed payments for an aggregation' do
+  it '#show detailed payments for an aggregation', js: true do
     charge =
       charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
                                                DueOn.new(month: 9, day: 30)])
