@@ -69,9 +69,9 @@ module DB
       describe 'translations' do
         it 'titleizes town names' do
           lower_case_town_row = \
-          %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
-          %q(Example Street, District ,example town,  Example County,  ) +
-          %q(E10 7EX, SPAIN)
+            %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
+            %q(Example Street, District ,example town,  Example County,  ) +
+            %q(E10 7EX, SPAIN)
           client = client_new address: address_new(town: 'this town is changed')
 
           ContactFields.new(parse_line lower_case_town_row).update_for client
@@ -81,8 +81,8 @@ module DB
 
         it 'maps abbreviated county names' do
           abbreviated_county = \
-          %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
-          %q(Example Street, District ,example town,  Warks, E10 7EX)
+            %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
+            %q(Example Street, District ,example town,  Warks, E10 7EX)
           client = client_new address: address_new(county: 'Warks')
 
           ContactFields.new(parse_line abbreviated_county).update_for client
