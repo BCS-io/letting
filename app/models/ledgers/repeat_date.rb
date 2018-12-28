@@ -18,10 +18,10 @@ class RepeatDate
                  month: Time.zone.now.month,
                  year:  A_YEAR_AWAY_FROM_LEAP_DAY,
                  date:  nil
-    if date
-      @date = date
+    @date = if date
+      date
     else
-      @date = Date.new(year, month, day)
+      Date.new(year, month, day)
     end
   end
 
