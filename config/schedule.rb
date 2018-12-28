@@ -22,7 +22,7 @@ when 'development'
   job_type :rbenv_rake, %{export PATH=~/.rbenv/shims:~/.rbenv/bin:/usr/bin:$PATH; eval "$(rbenv init -)"; \
                         cd :path && :environment_variable=:environment bundle exec rake :task --silent :output }
 
-  every 1.minutes do
+  every 1.minute do
     rbenv_rake 'hide_monotonous_account_details'
   end
 
