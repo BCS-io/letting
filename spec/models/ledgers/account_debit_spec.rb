@@ -78,6 +78,6 @@ RSpec.describe AccountDebit, type: :model do
 
   it '#to_s' do
     first = AccountDebit.new date_due: '2014-01-01', charge_type: 'Rent', property_ref: 4, amount: 6
-    expect(first.to_s).to eq "key: [\"2014-01-01\", \"Rent\"] - value: due: 2014-01-01, charge: Rent, refs: 4"
+    expect(first.to_s).to eq 'key: ["2014-01-01", "Rent"] - value: due: 2014-01-01, charge: Rent, refs: 4'
   end
 end
