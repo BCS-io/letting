@@ -64,7 +64,7 @@ module DueOns
       end
 
       def empty?
-        self.all?(&:empty?)
+        all?(&:empty?)
       end
 
       def day_of_month(day:)

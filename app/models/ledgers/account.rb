@@ -32,7 +32,7 @@ class Account < ActiveRecord::Base
   has_many :credits, dependent: :destroy
   has_many :debits, dependent: :destroy, inverse_of: :account do
     def exclusive? query_debit
-      self.any? { |debit| debit.like? query_debit }
+      any? { |debit| debit.like? query_debit }
     end
   end
   accepts_nested_attributes_for :debits, allow_destroy: true
