@@ -25,6 +25,6 @@ class CycleDecorator
   end
 
   def self.select_name cycle
-    "#{cycle.name}"
+    (cycle.name).to_s
   end
 end

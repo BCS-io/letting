@@ -19,6 +19,6 @@ module SalientDate
 
   def safe_date(date:, format:)
     return '' unless date
-    "#{I18n.l date, format: format}"
+    (I18n.l date, format: format).to_s
   end
 end

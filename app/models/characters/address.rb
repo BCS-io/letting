@@ -38,14 +38,14 @@ class Address < ActiveRecord::Base
   # join - the character between each line
   #
   def text join: "\n"
-    address_lines.join "#{join}"
+    address_lines.join join.to_s
   end
 
   # The most meaningful lines of the address
   # join - the character between each line
   #
   def abridged_text join: "\n"
-    [first_line, town.present? ? town : county].join "#{join}"
+    [first_line, town.present? ? town : county].join join.to_s
   end
 
   # The first line filled in - houses don't require the flat information
