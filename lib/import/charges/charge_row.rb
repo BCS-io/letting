@@ -38,7 +38,7 @@ module DB
 
     def charge_type
       charge = ChargeCode.to_string charge_code
-      fail ChargeCodeUnknown, charge_code_message, caller unless charge
+      raise ChargeCodeUnknown, charge_code_message, caller unless charge
       charge
     end
 
@@ -120,7 +120,7 @@ module DB
 
     def maximum_dates
       max_dates = ChargeCode.day_month_pairs charge_code
-      fail ChargeCodeUnknown, max_dates_message, caller unless max_dates
+      raise ChargeCodeUnknown, max_dates_message, caller unless max_dates
       max_dates
     end
 

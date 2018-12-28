@@ -84,7 +84,7 @@ module DB
     private
 
     def find_model _model_class
-      fail NotImplementedError
+      raise NotImplementedError
     end
 
     def find_model! model_class
@@ -98,7 +98,7 @@ module DB
     end
 
     def fail_parent_record_not_found model_class
-      fail ActiveRecord::RecordNotFound, no_parent_message(model_class)
+      raise ActiveRecord::RecordNotFound, no_parent_message(model_class)
     end
 
     def no_parent_message model_class

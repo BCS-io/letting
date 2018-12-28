@@ -35,7 +35,7 @@ class Invoice < ActiveRecord::Base
   has_many :products, dependent: :destroy, inverse_of: :invoice do
     def earliest_date_due
       drop_arrears.map(&:date_due).min or
-        fail InvoiceMissingProducts, 'Invoice being created without any products.'
+        raise InvoiceMissingProducts, 'Invoice being created without any products.'
     end
 
     def drop_arrears

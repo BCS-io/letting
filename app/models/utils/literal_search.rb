@@ -59,7 +59,7 @@ class LiteralSearch
       results records: []
 
     else
-      fail NotImplementedError, "Missing: #{referrer}"
+      raise NotImplementedError, "Missing: #{referrer}"
     end
   end
 

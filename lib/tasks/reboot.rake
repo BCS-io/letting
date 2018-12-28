@@ -7,7 +7,7 @@ STDOUT.sync = true
 namespace :db do
   desc 'Raise an error unless development environment'
   task :dev_warning do
-    fail 'You should only perform this task in development.' \
+    raise 'You should only perform this task in development.' \
       if Rails.env == 'production'
   end
 
