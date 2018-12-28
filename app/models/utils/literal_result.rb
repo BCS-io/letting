@@ -31,7 +31,7 @@ class LiteralResult
   #
   def to_params
     params = { controller: controller, action: action }
-    single_record? ? params.merge!(id: records.first) : params.merge!(records: records)
+    single_record? ? params[:id] = records.first : params[:records] = records
     params
   end
 
