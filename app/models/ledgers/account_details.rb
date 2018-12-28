@@ -16,17 +16,17 @@ class AccountDetails < ActiveRecord::Base
   #
   def self.balanced at_time: (Time.zone.now - 2.years).to_date
     AccountDetails.select('account_id, property_id')
-      .where('at_time < ?', at_time)
-      .group(:account_id, :property_id, :human_ref)
-      .having('Sum(amount) = 0')
-      .order(:human_ref)
+                  .where('at_time < ?', at_time)
+                  .group(:account_id, :property_id, :human_ref)
+                  .having('Sum(amount) = 0')
+                  .order(:human_ref)
   end
 
   def self.balance_all greater_than: 0
     AccountDetails.includes(property: [:client, :address, :entities])
-      .select('account_id, property_id, sum(amount) as amount')
-      .group(:account_id, :property_id, :human_ref)
-      .having('Sum(amount) >= ?', greater_than)
-      .order(:human_ref)
+                  .select('account_id, property_id, sum(amount) as amount')
+                  .group(:account_id, :property_id, :human_ref)
+                  .having('Sum(amount) >= ?', greater_than)
+                  .order(:human_ref)
   end
 end

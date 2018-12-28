@@ -63,7 +63,7 @@ describe ClockIn do
     context 'booking_date set to another day' do
       it 'books as interday-time if time on booking_date' do
         time = ClockIn.new(booking_date: Time.zone.yesterday)
-               .recorded_as booked_time: Time.zone.yesterday + 1.hour
+                      .recorded_as booked_time: Time.zone.yesterday + 1.hour
         expect(time).to eq Time.zone.yesterday + 1.hour
       end
     end

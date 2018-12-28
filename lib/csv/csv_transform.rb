@@ -48,7 +48,7 @@ module DB
                headers: @headers,
                header_converters: :symbol,
                converters: -> (field) { field ? field.strip : nil })
-        .read.drop(@drop_rows)
+         .read.drop(@drop_rows)
     end
 
     def missing_csv_message

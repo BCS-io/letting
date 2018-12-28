@@ -110,8 +110,8 @@ class Account < ActiveRecord::Base
     human_refs = human_ref_range.split('-')
     human_refs << human_refs.first if human_refs.size == 1
     Account.includes(:property)
-      .where(properties: { human_ref: human_refs[0]..human_refs[1] })
-      .order('properties.human_ref')
+           .where(properties: { human_ref: human_refs[0]..human_refs[1] })
+           .order('properties.human_ref')
   end
 
   #
@@ -123,12 +123,12 @@ class Account < ActiveRecord::Base
     account_ids = AccountDetails.balanced.map { |ad| ad.account.id }
 
     Credit.where('account_id in (?)', account_ids)
-      .where('at_time < ?', delete_before)
-      .find_each(&:fake_delete)
+          .where('at_time < ?', delete_before)
+          .find_each(&:fake_delete)
 
     Debit.where('account_id in (?)', account_ids)
-      .where('at_time < ?', delete_before)
-      .find_each(&:fake_delete)
+         .where('at_time < ?', delete_before)
+         .find_each(&:fake_delete)
   end
 
   private

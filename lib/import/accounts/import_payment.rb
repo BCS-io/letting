@@ -31,7 +31,7 @@ module DB
     def model_prepared
       @model_imported = Payment.where(account_id: row.account_id,
                                       booked_at: row.at_time)
-                        .first_or_initialize
+                               .first_or_initialize
       fail DB::NotIdempotent, import_not_idempotent_msg, caller \
         unless model_imported.new_record?
     end

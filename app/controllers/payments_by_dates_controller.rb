@@ -8,8 +8,8 @@ class PaymentsByDatesController < ApplicationController
     params[:date] ||= Payment.last_booked_at
 
     @records = Payment.booked_on(date: params[:date])
-               .includes(join_tables)
-               .load
+                      .includes(join_tables)
+                      .load
 
     @payments_by_dates = Payment.recent.by_booked_at_date
   end

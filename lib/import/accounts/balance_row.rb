@@ -69,9 +69,9 @@ module DB
     #
     def next_at_time
       charge_from_row.coming(at_time..at_time + 1.year - 1.day)
-        .first
-        .at_time
-        .beginning_of_day
+                     .first
+                     .at_time
+                     .beginning_of_day
     end
 
     # DateTime that a balance is said to have occurred.

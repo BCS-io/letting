@@ -18,6 +18,6 @@ class PropertyListsController < ApplicationController
 
   def index
     @records = Property.includes(:entities)
-               .by_human_ref.load
+                       .by_human_ref.load
   end
 end

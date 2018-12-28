@@ -17,7 +17,7 @@
 class PropertiesController < ApplicationController
   def index
     @records = Property.includes(:address, :client, :entities)
-               .by_human_ref.page(params[:page]).load
+                       .by_human_ref.page(params[:page]).load
   end
 
   def show
@@ -86,7 +86,7 @@ class PropertiesController < ApplicationController
   #
   def property_params
     params.require(:property)
-      .permit :human_ref,
+          .permit :human_ref,
               :client_id,
               address_attributes:         address_params,
               entities_attributes:        entities_params,

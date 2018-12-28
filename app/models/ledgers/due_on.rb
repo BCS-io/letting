@@ -50,9 +50,9 @@ class DueOn < ActiveRecord::Base
   def between range
     date_range = to_date_range range
     matched = date_range.to_a
-              .map(&:year)
-              .uniq.map { |year| Date.new(year, month, day) }
-              .sort & date_range.to_a
+                        .map(&:year)
+                        .uniq.map { |year| Date.new(year, month, day) }
+                        .sort & date_range.to_a
     matched.map { |date| MatchedDueOn.new date, show_date(year: date.year) }
   end
 

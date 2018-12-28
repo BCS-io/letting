@@ -23,7 +23,7 @@ class InvoicingsController < ApplicationController
   #
   def show
     @invoicing = Invoicing.includes(runs: [invoices: [:products]])
-                 .find params[:id]
+                          .find params[:id]
   end
 
   def new

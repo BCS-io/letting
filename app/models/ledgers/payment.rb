@@ -64,7 +64,7 @@ class Payment < ActiveRecord::Base
     return Payment.none unless SearchDate.new(date).valid_date?
 
     Payment.includes(account: [:property])
-      .where(booked_at: SearchDate.new(date).day_range)
+           .where(booked_at: SearchDate.new(date).day_range)
   end
 
   # Search for payments created on this date.
@@ -74,7 +74,7 @@ class Payment < ActiveRecord::Base
     return Payment.none unless SearchDate.new(date).valid_date?
 
     Payment.includes(account: [:property])
-      .where(created_at: SearchDate.new(date).day_range)
+           .where(created_at: SearchDate.new(date).day_range)
   end
 
   def self.recent after_date: (Time.zone.now - 2.years).to_date
@@ -83,7 +83,7 @@ class Payment < ActiveRecord::Base
 
   def self.by_booked_at_date
     order('DATE(booked_at) desc').group('DATE(booked_at)')
-      .pluck('DATE(booked_at) as booked_on,'\
+                                 .pluck('DATE(booked_at) as booked_on,'\
              ' count(amount) as payments_count, ' \
              ' sum(amount) as payment_sum')
   end
@@ -109,7 +109,7 @@ class Payment < ActiveRecord::Base
   #
   def self.human_ref human_ref
     Payment.includes(account: [:property])
-      .where(properties: { human_ref: human_ref })
+           .where(properties: { human_ref: human_ref })
   end
 
   # payments are grouped on which quarter day to apply them to

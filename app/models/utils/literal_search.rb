@@ -91,7 +91,7 @@ class LiteralSearch
 
   def payments_query
     Payment.includes(account: [property: [:entities]]).human_ref(query)
-      .by_booked_at.to_a
+           .by_booked_at.to_a
   end
 
   def property_query

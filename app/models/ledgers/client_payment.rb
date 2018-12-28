@@ -97,8 +97,8 @@ class ClientPayment
   #
   def accounts_with_period(batch_months:)
     Account.joins(:property)
-      .merge(client.properties.houses.quarter_day_in(batch_months.first))
-      .order('properties.human_ref ASC')
+           .merge(client.properties.houses.quarter_day_in(batch_months.first))
+           .order('properties.human_ref ASC')
   end
 
   # client payments summed for all accounts for a year given batch_month
@@ -108,8 +108,8 @@ class ClientPayment
   #
   def period_totals(year:, batch_months:)
     Payment.by_quarter_day(year: year, batch_months: batch_months)
-      .where(account_id: accounts_with_period(batch_months: batch_months)
+           .where(account_id: accounts_with_period(batch_months: batch_months)
         .pluck(:account_id))
-      .pluck(:amount).sum
+           .pluck(:amount).sum
   end
 end
