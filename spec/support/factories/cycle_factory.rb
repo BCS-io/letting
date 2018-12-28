@@ -2,12 +2,12 @@
 # rubocop: disable Metrics/ParameterLists
 
 def cycle_new id: nil,
-                  name: 'Mar',
-                  charged_in: 'advance',
-                  order: 1,
-                  cycle_type: 'term',
-                  due_ons: [DueOn.new(month: 3, day: 25)],
-                  prepare: false
+              name: 'Mar',
+              charged_in: 'advance',
+              order: 1,
+              cycle_type: 'term',
+              due_ons: [DueOn.new(month: 3, day: 25)],
+              prepare: false
   cycle = Cycle.new id: id,
                     name: name,
                     charged_in: charged_in,
@@ -22,12 +22,12 @@ def cycle_new id: nil,
 end
 
 def cycle_create id: 1,
-                     name: 'Mar',
-                     charged_in: 'advance',
-                     order: 1,
-                     cycle_type: 'term',
-                     due_ons: [DueOn.new(month: 3, day: 25)],
-                     prepare: false
+                 name: 'Mar',
+                 charged_in: 'advance',
+                 order: 1,
+                 cycle_type: 'term',
+                 due_ons: [DueOn.new(month: 3, day: 25)],
+                 prepare: false
   cycle = cycle_new id: id,
                     name: name,
                     charged_in: charged_in,
