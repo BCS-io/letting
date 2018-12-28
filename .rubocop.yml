@@ -10,7 +10,7 @@
 # Ignored Files
 
 AllCops:
-  RunRailsCops: true
+  TargetRubyVersion: 2.3
   Exclude:
     - db/**/*
     - bin/**/*
@@ -30,12 +30,16 @@ Metrics/LineLength:
     - Gemfile
 Metrics/MethodLength:
   Max: 10
+Rails:
+  Enabled: true
 Style/AndOr:
   Enabled: false
 Style/ExtraSpacing:
   Exclude:
     - spec/models/ledgers/charge_spec.rb
-Style/TrailingComma:
+Style/TrailingCommaInLiteral:
+  Enabled: false
+Style/TrailingCommaInArguments:
   Enabled: false
 Style/UnneededPercentQ:
   Enabled: false
