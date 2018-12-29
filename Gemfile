@@ -108,8 +108,8 @@ gem 'kaminari', '~> 0.16.0'
 gem 'lograge'
 gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>0.18.0'
-gem 'rails', '4.2.11'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
+gem 'rails', '4.2.11'
 gem 'rails-env-favicon'
 
 # BREAKING GEM
@@ -172,12 +172,12 @@ group :development, :test do
   # BREAKING GEM
   # Throwing exceptions when it hits breakpoints
   #
-  gem 'byebug', '3.5.1'
   gem 'bundler-audit'
+  gem 'byebug', '3.5.1'
   gem 'capybara', '~> 2.13.0'
 
-  gem 'capybara-webkit', '~> 1.15.0'
   gem 'capybara-screenshot', '~> 1.0.0'
+  gem 'capybara-webkit', '~> 1.15.0'
   gem 'chromedriver-helper', '~> 2.1.0'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
