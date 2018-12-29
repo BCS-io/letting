@@ -22,7 +22,7 @@ describe 'Invoicing#create', type: :feature do
     Timecop.return
   end
 
-  describe 'choose_dates'do
+  describe 'choose_dates' do
     it 'defaults to "or choose dates"', js: true do
       invoicing_page.load
 
