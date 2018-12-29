@@ -9,7 +9,6 @@ begin
   end
 
   task 'spec:all' => 'db:test:prepare'
-
 rescue LoadError
   desc 'Run all tests regardless of tags'
   task 'spec:all' do
