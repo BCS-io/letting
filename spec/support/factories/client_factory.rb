@@ -5,7 +5,8 @@ def client_new(
   human_ref: 354,
   address: address_new,
   entities: [Entity.new(title: 'Mr', initials: 'M', name: 'Prior')],
-  properties: nil)
+  properties: nil
+)
   client = Client.new id: id,
                       human_ref: human_ref,
                       address: address,
@@ -19,7 +20,8 @@ def client_create(
   human_ref: 354,
   address: address_new,
   entities: [Entity.new(title: 'Mr', initials: 'M', name: 'Prior')],
-  properties: nil)
+  properties: nil
+)
   client = client_new id: id,
                       human_ref: human_ref,
                       address: address,
