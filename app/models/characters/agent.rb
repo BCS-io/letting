@@ -47,6 +47,6 @@ class Agent < ActiveRecord::Base
 
   def erase_form
     entities.destroy_all
-    address.clear_up_form unless address.nil?
+    address&.clear_up_form
   end
 end

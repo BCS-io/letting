@@ -23,7 +23,7 @@ class PropertyDecorator
   end
 
   def client_ref
-    client && client.human_ref
+    client&.human_ref
   end
 
   def agent_name
