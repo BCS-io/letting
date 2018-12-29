@@ -20,6 +20,11 @@ AllCops:
 # Ignored Styles
 # These styles will not be modelled in our code.
 #
+Layout/ExtraSpacing:
+  Exclude:
+    - spec/models/ledgers/charge_spec.rb
+Layout/MultilineOperationIndentation:
+  Enabled: false
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Style/MethodDefParentheses:
@@ -34,10 +39,8 @@ Rails:
   Enabled: true
 Style/AndOr:
   Enabled: false
-Style/ExtraSpacing:
-  Exclude:
-    - spec/models/ledgers/charge_spec.rb
-Style/TrailingCommaInLiteral:
+
+Style/TrailingCommaInArrayLiteral:
   Enabled: false
 Style/TrailingCommaInArguments:
   Enabled: false
@@ -50,8 +53,6 @@ Style/FrozenStringLiteralComment:
 Style/NestedParenthesizedCalls:
   Enabled: false
 Style/MutableConstant:
-  Enabled: false
-Style/MultilineOperationIndentation:
   Enabled: false
 #
 # Ignored
