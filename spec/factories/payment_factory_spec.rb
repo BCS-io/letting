@@ -12,7 +12,7 @@ describe 'payment' do
     describe 'overrides' do
       it 'alters at_time' do
         expect(payment_new(booked_at: '2012-03-25 13:00:00').booked_at)
-          .to eq Time.zone.local(2012, 03, 25, 13, 0, 0)
+          .to eq Time.zone.local(2012, 3, 25, 13, 0, 0)
       end
       it('alters amount') { expect(payment_new(amount: 1).amount).to eq 1 }
     end

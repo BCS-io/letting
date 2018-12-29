@@ -196,7 +196,7 @@ describe Payment, :payment, :ledgers, type: :model do
     describe '.by_quarter_day' do
       it 'returns payments within payment period' do
         payment = payment_create \
-          booked_at: Time.zone.local(2013, 2, 1, 00, 00),
+          booked_at: Time.zone.local(2013, 2, 1, 0, 0),
           account: account_create(property: property_new(human_ref: 10))
 
         expect(Payment.by_quarter_day(
@@ -232,7 +232,7 @@ describe Payment, :payment, :ledgers, type: :model do
 
       it 'rejects payments after payment period' do
         payment_create \
-          booked_at: Time.zone.local(2013, 8, 1, 00, 00),
+          booked_at: Time.zone.local(2013, 8, 1, 0, 0),
           account: account_create(property: property_new(human_ref: 10))
 
         expect(Payment.by_quarter_day(

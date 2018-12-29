@@ -60,8 +60,8 @@ describe DueOn, :ledgers, :cycle, type: :model do
 
       it 'handles date time argument' do
         expect(due_on_new(month: 3, day: 25)
-          .between Time.zone.local(2007, 8, 17, 11, 56, 00)..
-                   Time.zone.local(2008, 8, 16, 11, 56, 00))
+          .between Time.zone.local(2007, 8, 17, 11, 56, 0)..
+                   Time.zone.local(2008, 8, 16, 11, 56, 0))
           .to eq [MatchedDueOn.new(Date.new(2008, 3, 25), Date.new(2008, 3, 25))]
       end
 
