@@ -32,7 +32,6 @@ class CyclePage
 
   def name= value
     fill_in 'Name', with: value
-    self
   end
 
   def charged_in charged_in
@@ -41,7 +40,6 @@ class CyclePage
 
   def order= value
     fill_in 'Order', with: value
-    self
   end
 
   def due_on order: 0, day:, month:, year: nil, show_month: nil, show_day: nil

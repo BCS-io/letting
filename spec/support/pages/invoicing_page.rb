@@ -43,7 +43,6 @@ class InvoicingPage
 
   def invoice_date= date
     fill_in 'invoice_date', with: date
-    self
   end
 
   def period
@@ -53,7 +52,6 @@ class InvoicingPage
   def period=(range)
     fill_in 'Start date', with: range.first
     fill_in 'End date', with: range.last
-    self
   end
 
   def form
