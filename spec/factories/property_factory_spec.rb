@@ -34,9 +34,9 @@ describe 'Property Factory' do
 
       it 'can add agent' do
         property_create agent: agent_new(entities: [Entity.new(name: 'Prior')],
-                                         address:  address_new(road: 'New',
-                                                               town: 'Brum',
-                                                               county: 'West'))
+                                         address: address_new(road: 'New',
+                                                              town: 'Brum',
+                                                              county: 'West'))
         expect(Property.first.agent.to_billing).to eq "Prior\nNew\nBrum\nWest"
       end
     end

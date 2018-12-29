@@ -5,7 +5,7 @@ describe Chargeable, :ledgers, type: :model do
     Chargeable.from_charge charge_id: 1,
                            account_id: 2,
                            at_time: Date.new(2013, 3, 25),
-                           period:  '2013-3-25'..'2013-6-30',
+                           period: '2013-3-25'..'2013-6-30',
                            amount: 88.08
   end
 
@@ -26,7 +26,7 @@ describe Chargeable, :ledgers, type: :model do
         account_id: 2,
         charge_id: 1,
         at_time: Date.new(2013, 3, 25),
-        period:  '2013-3-25'..'2013-6-30',
+        period: '2013-3-25'..'2013-6-30',
         amount: 88.08
       expect(chargeable.class).to be Chargeable
     end
@@ -37,7 +37,7 @@ describe Chargeable, :ledgers, type: :model do
           .to eq account_id: 2,
                  charge_id: 1,
                  at_time: Date.new(2013, 3, 25),
-                 period:  '2013-3-25'..'2013-6-30',
+                 period: '2013-3-25'..'2013-6-30',
                  amount: 88.08
       end
 

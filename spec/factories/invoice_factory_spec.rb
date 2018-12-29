@@ -43,7 +43,7 @@ describe 'Invoice Factory' do
 
     it 'sets billing address' do
       agent = agent_new(entities: [Entity.new(name: 'Prior')],
-                        address:  address_new(road: 'New'))
+                        address: address_new(road: 'New'))
 
       expect(invoice_new(property: property_new(agent: agent)).billing_address)
         .to eq "Prior\nNew\nBirmingham\nWest Midlands"

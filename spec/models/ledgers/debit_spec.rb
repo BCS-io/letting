@@ -149,7 +149,7 @@ describe Debit, :ledgers, type: :model do
       end
 
       it 'true when paid in full' do
-        charge = charge_new(debits:  [debit_new(amount: 88.08)],
+        charge = charge_new(debits: [debit_new(amount: 88.08)],
                             credits: [credit_new(amount: 88.08)])
         charge.save!
         expect(Debit.first).to be_paid

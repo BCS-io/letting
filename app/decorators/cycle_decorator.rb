@@ -15,10 +15,10 @@ class CycleDecorator
       'Quarterly' => Cycle.where(due_ons_count: 4)
                           .order(order: :asc)
                           .map { |cycle| [select_name(cycle), cycle.id] },
-      'Year'      => Cycle.where(due_ons_count: 1)
+      'Year' => Cycle.where(due_ons_count: 1)
                           .order(order: :asc)
                           .map { |cycle| [select_name(cycle), cycle.id] },
-      'Frequent'  => Cycle.where(due_ons_count: 5..12)
+      'Frequent' => Cycle.where(due_ons_count: 5..12)
                           .order(order: :asc)
                           .map { |cycle| [select_name(cycle), cycle.id] },
     }

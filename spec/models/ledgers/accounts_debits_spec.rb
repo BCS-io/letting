@@ -23,11 +23,11 @@ RSpec.describe AccountsDebits, type: :model do
 
     it 'produces ordered account debits' do
       chg1 = charge_create(charge_type: GROUND_RENT,
-                            cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)]))
+                           cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)]))
       chg2 = charge_create(charge_type: SERVICE_CHARGE,
-                            cycle: cycle_new(due_ons: [DueOn.new(month: 2, day: 5)]))
+                           cycle: cycle_new(due_ons: [DueOn.new(month: 2, day: 5)]))
       chg3 = charge_create(charge_type: INSURANCE,
-                            cycle: cycle_new(due_ons: [DueOn.new(month: 8, day: 5)]))
+                           cycle: cycle_new(due_ons: [DueOn.new(month: 8, day: 5)]))
       account_create property: property_new(human_ref: 2), charges: [chg1, chg2, chg3]
 
       debits = AccountsDebits.new(property_range: '2',
