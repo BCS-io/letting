@@ -37,7 +37,9 @@ Rails:
   Enabled: true
 Style/AndOr:
   Enabled: false
-
+Style/IfUnlessModifier:
+  Exclude:
+    - 'lib/tasks/import_block.rake'
 Style/TrailingCommaInArrayLiteral:
   Enabled: false
 Style/TrailingCommaInArguments:
