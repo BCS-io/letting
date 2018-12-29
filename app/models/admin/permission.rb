@@ -23,6 +23,7 @@
 Permission = Struct.new(:user) do
   def allow?(controller, _action)
     return true if guest_controllers.include?(controller)
+
     if user
       return true if user_controllers.include?(controller)
       return true if user.admin? && admin_controllers.include?(controller)

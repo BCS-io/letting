@@ -118,6 +118,7 @@ class Property < ActiveRecord::Base
 
   def to_address
     return unless address
+
     address.text
   end
 

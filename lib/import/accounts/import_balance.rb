@@ -34,6 +34,7 @@ module DB
 
     def filtered?
       return true if row.amount.zero?
+
       false
     end
   end

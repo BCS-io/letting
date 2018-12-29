@@ -52,6 +52,7 @@ class LiteralResult
 
   def <=> other
     return nil unless other.is_a?(self.class)
+
     [action, controller, records] <=>
       [other.action, other.controller, other.records]
   end

@@ -25,6 +25,7 @@ class Arrears
       (period.first..period.last).cover? RepeatDate.new(date: within)
     end
     return :missing_due_on unless found_period
+
     found_period.first.date..found_period.last.date
   end
 

@@ -42,6 +42,7 @@ module RevealHelper
   #
   def first_record?(index:)
     return false if index.positive?
+
     true
   end
 

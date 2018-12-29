@@ -28,8 +28,10 @@ class CycleMatcher
 
   def id
     return warn 'Cycle table has no records' unless Cycle.any?
+
     found_structure = find
     raise DB::CycleUnknown unless found_structure
+
     found_structure.id
   end
 

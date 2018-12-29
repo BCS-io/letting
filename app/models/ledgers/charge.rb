@@ -34,6 +34,7 @@ class Charge < ActiveRecord::Base
   #                  associated account. Empty array if nothing billed.
   def coming billing_period
     return [] if dormant?
+
     cycle.between(billing_period).map do |matched_cycle|
       make_chargeable(matched_cycle)
     end.compact

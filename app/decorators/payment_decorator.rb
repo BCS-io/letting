@@ -38,6 +38,7 @@ class PaymentDecorator
 
   def human_ref
     return '-' unless payment.account
+
     payment.account.property.human_ref
   end
 
@@ -68,11 +69,13 @@ class PaymentDecorator
 
   def last_amount
     return '-' if payment_last_created_at == :no_last_payment
+
     number_to_currency payment_last_created_at.amount
   end
 
   def last_human_ref
     return '-' if payment_last_created_at == :no_last_payment
+
     payment_last_created_at.account.property.human_ref
   end
 

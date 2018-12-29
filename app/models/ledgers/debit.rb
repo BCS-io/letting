@@ -58,6 +58,7 @@ class Debit < ActiveRecord::Base
 
   def <=> other
     return nil unless other.is_a?(self.class)
+
     [charge_id, at_time, amount] <=>
       [other.charge_id, other.at_time, other.amount]
   end

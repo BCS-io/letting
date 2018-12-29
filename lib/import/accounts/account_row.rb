@@ -41,6 +41,7 @@ module DB
       return 'balance' if balance?
       return 'debit' if debit?
       return 'credit' if credit?
+
       raise AccountRowTypeUnknown, account_type_unknown_msg
     end
 

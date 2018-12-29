@@ -49,6 +49,7 @@ class RepeatDate
 
   def <=> other
     return nil unless other.is_a?(self.class)
+
     [year, month, day] <=> [other.year, other.month, other.day]
   end
 end

@@ -38,6 +38,7 @@ class Payment < ActiveRecord::Base
 
   def prepare
     return unless account_exists?
+
     credits.push(*account.make_credits)
   end
 
@@ -93,6 +94,7 @@ class Payment < ActiveRecord::Base
   #
   def self.last_booked_at
     return Time.zone.today.to_s if Payment.count.zero?
+
     Payment.order('booked_at DESC').first.booked_at.to_date.to_s
   end
 
@@ -102,6 +104,7 @@ class Payment < ActiveRecord::Base
   #
   def self.last_created_at
     return :no_last_payment if Payment.count.zero?
+
     Payment.order('created_at DESC').first
   end
 

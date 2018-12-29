@@ -64,6 +64,7 @@ class BatchMonths
     return { first: JUN, last: DEC, now: JUN  } if month == JUN
     return { first: MAR, last: SEP, now: SEP  } if month == SEP
     return { first: JUN, last: DEC, now: DEC  } if month == DEC
+
     raise MonthUnknown, "Month argument #{month} is unknown"
   end
 

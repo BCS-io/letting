@@ -30,6 +30,7 @@ class AccountDebit
 
   def <=> other
     return nil unless other.is_a?(self.class)
+
     [date_due, charge_type] <=> [other.date_due, other.charge_type]
   end
 

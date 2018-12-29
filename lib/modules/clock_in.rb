@@ -29,6 +29,7 @@ class ClockIn
     end
     return booked_time.end_of_day if at_least_yesterday? booked_time
     return booked_time.beginning_of_day if at_least_tomorrow? booked_time
+
     booked_time
   end
 

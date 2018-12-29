@@ -39,6 +39,7 @@ module DB
     def charge_type
       charge = ChargeCode.to_string charge_code
       raise ChargeCodeUnknown, charge_code_message, caller unless charge
+
       charge
     end
 
@@ -66,9 +67,11 @@ module DB
     def day_months
       return create_monthly_dates day(1) if monthly?
       return mid_term_day_months if charged_in_code == LEGACY_MID_TERM
+
       day_months = []
       1.upto(maximum_dates) do |index|
         break if empty_due_on? month: month(index), day: day(index)
+
         day_months << DueOnImportable.new(month(index), day(index))
       end
       day_months
@@ -121,6 +124,7 @@ module DB
     def maximum_dates
       max_dates = ChargeCode.day_month_pairs charge_code
       raise ChargeCodeUnknown, max_dates_message, caller unless max_dates
+
       max_dates
     end
 

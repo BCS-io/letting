@@ -44,6 +44,7 @@ module DB
       # The Only mid-term charge is in arrears
       return MODERN_ARREARS if charged_in_code == LEGACY_MID_TERM
       return MODERN_ADVANCE if advanced_charge_type
+
       LEGACY_CODE_TO_CHARGED_IN.fetch(charged_in_code)
     end
 

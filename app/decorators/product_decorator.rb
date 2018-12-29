@@ -21,11 +21,13 @@ class ProductDecorator
 
   def date_due
     return '&nbsp;'.html_safe if product.arrears?
+
     format_short_date product.date_due
   end
 
   def period
     return '&nbsp;'.html_safe unless product.period.first && product.period.last
+
     "#{format_short_date product.period.first} - "\
     "#{format_short_date product.period.last}"
   end

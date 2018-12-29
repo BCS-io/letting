@@ -36,6 +36,7 @@ class PaymentIndexDecorator
 
   def booked_on
     return '' unless payment
+
     format_short_date payment.booked_at.to_date
   end
 

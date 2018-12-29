@@ -57,6 +57,7 @@ class Cycle < ActiveRecord::Base
 
   def <=> other
     return nil unless other.is_a?(self.class)
+
     [charged_in, due_ons.sort] <=> [other.charged_in, other.due_ons.sort]
   end
 
