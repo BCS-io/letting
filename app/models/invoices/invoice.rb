@@ -123,7 +123,7 @@ class Invoice < ActiveRecord::Base
     }
   end
 
-  def property=(property_ref:, occupiers:, property_address:, billing_address:, client_address:) # rubocop: disable Metrics/LineLength
+  def property=(property_ref:, occupiers:, property_address:, billing_address:, client_address:)
     self.property_ref = property_ref
     self.occupiers = occupiers
     self.property_address = property_address
