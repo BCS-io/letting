@@ -8,7 +8,7 @@ namespace :db do
   desc 'Raise an error unless development environment'
   task :dev_warning do
     raise 'You should only perform this task in development.' \
-      if Rails.env == 'production'
+      if Rails.env.production?
   end
 
   desc 'Get app to base state: drop, create, migrate, test:prepare, populate'
