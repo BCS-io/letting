@@ -43,7 +43,7 @@ class Invoicing < ActiveRecord::Base
 
   validate :mininum_accounts
   def mininum_accounts
-    return if accounts.size > 0
+    return unless accounts.empty?
 
     errors.add(:invoice_accounts, 'does not match any accounts.')
   end
