@@ -6,10 +6,10 @@
 #
 class ErrorsController < ApplicationController
   def not_found
-    render status: 404, formats: [:html]
+    render status: :not_found, formats: [:html]
   end
 
   def server_error
-    render status: 500, formats: [:html]
+    render status: :internal_server_error, formats: [:html]
   end
 end
