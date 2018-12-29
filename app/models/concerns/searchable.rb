@@ -29,7 +29,7 @@ module Searchable
     # collection is pluralized version of the model_name
     index_name [Rails.env, model_name.collection.tr('/', '-')].join('_')
 
-    after_commit on: [:create, :update] do
+    after_commit on: %i[create update] do
       __elasticsearch__.index_document
     end
 
@@ -45,19 +45,19 @@ module Searchable
               type: 'nGram',
               min_gram: 1,
               max_gram: 15,
-              token_chars: [:letter, :digit, :punctuation, :symbol]
+              token_chars: %i[letter digit punctuation symbol]
             }
           },
           analyzer: {
             nGram_analyzer: {
               type: 'custom',
               tokenizer: 'whitespace',
-              filter: [:lowercase, :asciifolding, :nGram_filter]
+              filter: %i[lowercase asciifolding nGram_filter]
             },
             whitespace_analyzer: {
               type: 'custom',
               tokenizer: 'whitespace',
-              filter: [:lowercase, :asciifolding]
+              filter: %i[lowercase asciifolding]
             }
           }
         },

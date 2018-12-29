@@ -9,7 +9,7 @@ namespace :db do
   #  - file created by backup gem and put into project root
   #
   desc 'Loads a database from dump file'
-  task restore: [:environment, :drop, :create] do
+  task restore: %i[environment drop create] do
     include Logging
 
     Dir.chdir(import_path) do

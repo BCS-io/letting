@@ -14,8 +14,8 @@
 ####
 #
 class Charge < ActiveRecord::Base
-  enum payment_type: [:manual, :automatic]
-  enum activity: [:dormant, :active]
+  enum payment_type: %i[manual automatic]
+  enum activity: %i[dormant active]
   belongs_to :account
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge

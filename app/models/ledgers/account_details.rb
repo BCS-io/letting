@@ -23,7 +23,7 @@ class AccountDetails < ActiveRecord::Base
   end
 
   def self.balance_all greater_than: 0
-    AccountDetails.includes(property: [:client, :address, :entities])
+    AccountDetails.includes(property: %i[client address entities])
                   .select('account_id, property_id, sum(amount) as amount')
                   .group(:account_id, :property_id, :human_ref)
                   .having('Sum(amount) >= ?', greater_than)

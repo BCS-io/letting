@@ -100,11 +100,11 @@ class PaymentsController < ApplicationController
   end
 
   def join_property
-    [property: [:address, :entities]]
+    [property: %i[address entities]]
   end
 
   def join_payment_tables
-    [account: [property: [:address, :entities]]]
+    [account: [property: %i[address entities]]]
   end
 
   # payment_params

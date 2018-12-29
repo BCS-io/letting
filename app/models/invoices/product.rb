@@ -11,7 +11,7 @@
 #
 class Product < ActiveRecord::Base
   include Comparable
-  enum payment_type: [:manual, :automatic]
+  enum payment_type: %i[manual automatic]
   belongs_to :invoice, inverse_of: :products
 
   validates :amount, :charge_type, :date_due, presence: true
