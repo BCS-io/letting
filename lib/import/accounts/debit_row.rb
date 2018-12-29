@@ -95,15 +95,11 @@ module DB
 
     def debit
       debit = row[:debit].to_f
-      if negative_credit?
+      if credit.negative?
         puts "Property #{human_ref}: converting negative credit to debit"
         debit = credit * -1
       end
       debit
-    end
-
-    def negative_credit?
-      credit < 0
     end
 
     def credit

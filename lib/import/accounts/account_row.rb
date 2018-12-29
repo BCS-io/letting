@@ -55,7 +55,7 @@ module DB
     end
 
     def debit?
-      row[:debit].to_f.nonzero? || row[:credit].to_f < 0
+      row[:debit].to_f.nonzero? || row[:credit].to_f.negative?
     end
 
     def account_type_unknown_msg

@@ -32,7 +32,7 @@ module RevealHelper
   def hide_empty_records_after_first(record:, index:)
     return '' unless record.empty?
 
-    index > 0 ? 'js-revealable' : ''
+    index.positive? ? 'js-revealable' : ''
   end
 
   # first_record?(index:)
@@ -41,7 +41,7 @@ module RevealHelper
   # index - the row's index
   #
   def first_record?(index:)
-    return false if index > 0
+    return false if index.positive?
     true
   end
 
