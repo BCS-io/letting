@@ -53,7 +53,7 @@ class Property < ActiveRecord::Base
       occupiers: occupiers,
       property_address: to_address,
       billing_address: bill_to_s,
-      client_address: client.to_s,
+      client_address: client.to_s
     }
   end
 

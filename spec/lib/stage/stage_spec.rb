@@ -44,7 +44,7 @@ describe Stage, :stage do
   end
 
   it 'extracts' do
-    extract = ExtractRef.new extracts: [{ human_ref: 1, }]
+    extract = ExtractRef.new extracts: [{ human_ref: 1 }]
     ref = Stage.new file_name: 'blah.csv',
                     input: [{ human_ref: 1, other: 'world' }],
                     instructions: [extract],

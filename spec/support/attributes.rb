@@ -90,7 +90,7 @@ def invoice_text_attributes **overrides
     heading1: 'Head1',
     heading2: 'Head2',
     advice1: 'Good Speed',
-    advice2: 'Lock you door',
+    advice2: 'Lock you door'
   }.merge overrides
 end
 

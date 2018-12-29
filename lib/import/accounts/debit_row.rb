@@ -84,7 +84,7 @@ module DB
         charge_id: charge_id,
         at_time: at_time,
         period: period,
-        amount: amount,
+        amount: amount
       }
     end
 

@@ -119,7 +119,7 @@ class Invoice < ActiveRecord::Base
       occupiers: occupiers,
       property_address: property_address,
       billing_address: billing_address,
-      client_address: client_address,
+      client_address: client_address
     }
   end
 

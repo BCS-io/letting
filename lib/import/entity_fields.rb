@@ -47,7 +47,7 @@ module DB
       {
         title: title,
         initials: initials,
-        name: name,
+        name: name
       }
     end
 

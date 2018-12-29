@@ -12,7 +12,7 @@ module RangeCycle
   #
   SPECIALIZED_CLASSES = {
     'advance' => Advance,
-    'arrears' => Arrears,
+    'arrears' => Arrears
   }.freeze
 
   # name:  Advance or Arrears

@@ -46,7 +46,7 @@ module DB
         town:       town,
         county:     county,
         postcode:   row[:postcode],
-        nation:     row[:nation],
+        nation:     row[:nation]
       }
     end
 

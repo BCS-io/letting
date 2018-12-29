@@ -84,7 +84,7 @@ module Searchable
     def self.search(query, sort: '')
       @search_definition = {
         query: {},
-        filter: {},
+        filter: {}
       }
 
       if query.blank?

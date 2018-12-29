@@ -87,7 +87,7 @@ module DB
         cycle_id: cycle_id,
         amount: amount,
         payment_type: payment_type,
-        activity: activity,
+        activity: activity
       }
     end
 

@@ -73,7 +73,7 @@ module DB
       {
         account_id: account_id,
         booked_at: at_time,
-        amount: amount,
+        amount: amount
       }
     end
   end

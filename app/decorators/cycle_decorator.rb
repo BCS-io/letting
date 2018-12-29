@@ -20,7 +20,7 @@ class CycleDecorator
                           .map { |cycle| [select_name(cycle), cycle.id] },
       'Frequent' => Cycle.where(due_ons_count: 5..12)
                           .order(order: :asc)
-                          .map { |cycle| [select_name(cycle), cycle.id] },
+                          .map { |cycle| [select_name(cycle), cycle.id] }
     }
   end
 

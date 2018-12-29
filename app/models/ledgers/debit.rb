@@ -74,7 +74,7 @@ class Debit < ActiveRecord::Base
       payment_type: payment_type,
       date_due: at_time,
       period: period,
-      amount: amount,
+      amount: amount
     }
   end
 
