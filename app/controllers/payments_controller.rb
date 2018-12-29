@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
 
   def show
     @payment = PaymentDecorator.new Payment.includes(join_payment_tables)
-               .find params[:id]
+                                           .find params[:id]
   end
 
   # params[:id] is the account_id returned from search_controller
