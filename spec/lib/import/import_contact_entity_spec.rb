@@ -37,7 +37,7 @@ module DB
     it 'ordered by creation' do
       import_client row
       expect(Client.first.entities[0].created_at).to be <
-      Client.first.entities[1].created_at
+                                                     Client.first.entities[1].created_at
     end
 
     context 'multiple imports' do

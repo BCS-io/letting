@@ -30,7 +30,7 @@ class AccountDecorator
   #
   def abbrev_items
     running_balance [forward_balance(start_of_year)] +
-    dec_items.select { |item| item.at_time >= start_of_year }
+                    dec_items.select { |item| item.at_time >= start_of_year }
   end
 
   private

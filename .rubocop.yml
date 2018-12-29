@@ -23,8 +23,6 @@ AllCops:
 Layout/ExtraSpacing:
   Exclude:
     - spec/models/ledgers/charge_spec.rb
-Layout/MultilineOperationIndentation:
-  Enabled: false
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Style/MethodDefParentheses:
