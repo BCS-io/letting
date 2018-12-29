@@ -47,7 +47,7 @@ module DB
                encoding: 'windows-1251:utf-8',
                headers: @headers,
                header_converters: :symbol,
-               converters: -> (field) { field ? field.strip : nil })
+               converters: ->(field) { field ? field.strip : nil })
          .read.drop(@drop_rows)
     end
 

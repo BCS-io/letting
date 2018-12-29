@@ -9,7 +9,7 @@ task import_block: :environment do
   contents = CSV.open 'import_data/properties.csv',
                       headers: true,
                       header_converters: :symbol,
-                      converters: -> (field) { field ? field.strip : nil }
+                      converters: ->(field) { field ? field.strip : nil }
 
   puts 'open file'
   contents.first(33).each do |row|

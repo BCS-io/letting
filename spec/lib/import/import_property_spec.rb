@@ -85,7 +85,7 @@ module DB
       CSV.parse(row_string,
                 headers: FileHeader.property,
                 header_converters: :symbol,
-                converters: -> (field) { field ? field.strip : nil })
+                converters: ->(field) { field ? field.strip : nil })
     end
   end
 end

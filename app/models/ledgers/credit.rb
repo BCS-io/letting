@@ -55,7 +55,7 @@ class Credit < ActiveRecord::Base
   end
 
   scope :total, -> { sum(:amount) }
-  scope :until, -> (until_time) { where('? >= at_time', until_time) }
+  scope :until, ->(until_time) { where('? >= at_time', until_time) }
 
   def self.available charge_id
     where(charge_id: charge_id).order(:at_time).reject(&:spent?)
