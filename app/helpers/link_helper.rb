@@ -74,7 +74,7 @@ module LinkHelper
   def chevron_link(direction:, text: '', path: '#', title:)
     app_link icon: "chevron-#{direction}",
              text: text,
-             direction: direction == 'right' ? true : false,
+             direction: direction == 'right',
              path: path,
              title: title,
              disabled: path ? false : true
