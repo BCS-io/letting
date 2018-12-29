@@ -1,5 +1,5 @@
 def guide_new id: nil,
-              invoice_text_id:'2',
+              invoice_text_id: '2',
               instruction: 'Your instruction',
               fillin: 'This is useful',
               sample: 'Filled top'
@@ -11,7 +11,7 @@ def guide_new id: nil,
 end
 
 def guide_create id: nil,
-                 invoice_text_id:'2',
+                 invoice_text_id: '2',
                  instruction: 'Your instruction',
                  fillin: 'This is useful',
                  sample: 'Filled top'
