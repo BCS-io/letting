@@ -5,12 +5,12 @@ describe DueOns, :ledgers, :cycle, type: :model do
     describe 'due_ons_size' do
       it 'invalid above max' do
         cycle = cycle_new due_ons: []
-        (1..13).each { cycle.due_ons.build day: 25, month: 3 }
+        13.times { cycle.due_ons.build day: 25, month: 3 }
         expect(cycle).to_not be_valid
       end
       it 'valid if marked for destruction' do
         cycle = cycle_new due_ons: []
-        (1..12).each { cycle.due_ons.build day: 25, month: 3 }
+        12.times { cycle.due_ons.build day: 25, month: 3 }
         cycle.due_ons.first.mark_for_destruction
         expect(cycle).to be_valid
       end
