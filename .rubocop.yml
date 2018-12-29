@@ -48,8 +48,12 @@ Style/UnneededPercentQ:
 # newly added - review
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/MethodMissingSuper:
+  Exclude:
+    - 'lib/modules/method_missing.rb'
 Style/NestedParenthesizedCalls:
   Enabled: false
+
 #
 # Ignored
 # We want this to be removed
