@@ -25,6 +25,8 @@ Layout/ExtraSpacing:
     - spec/models/ledgers/charge_spec.rb
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
+Lint/MissingCopEnableDirective:
+  Enabled: false
 Style/MethodDefParentheses:
   Enabled: false
 Metrics/LineLength:
