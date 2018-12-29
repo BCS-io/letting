@@ -45,7 +45,7 @@ class Address < ActiveRecord::Base
   # join - the character between each line
   #
   def abridged_text join: "\n"
-    [first_line, town.present? ? town : county].join join.to_s
+    [first_line, town.presence || county].join join.to_s
   end
 
   # The first line filled in - houses don't require the flat information
@@ -60,7 +60,7 @@ class Address < ActiveRecord::Base
 
   def first_text
     if flat_house_line.present?
-      house_name.present? ? house_name : address_lines.second
+      house_name.presence || address_lines.second
     else
       road
     end
