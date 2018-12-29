@@ -13,8 +13,6 @@
 #
 # Payments are associated with credits which offset the invoiced debits.
 #
-# Don't see what my options for get_ and set_
-# rubocop: disable Style/AccessorMethodName
 ####
 #
 class PaymentsController < ApplicationController

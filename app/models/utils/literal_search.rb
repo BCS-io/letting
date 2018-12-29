@@ -6,7 +6,6 @@
 #
 # Used by search Controller - returns results as LiteralResults
 #
-# rubocop: disable Style/AccessorMethodName
 #
 ####
 #

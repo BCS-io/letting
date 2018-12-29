@@ -4,9 +4,6 @@
 #
 # Invoicing for batches of invoices.
 #
-# rubocop: disable Style/AccessorMethodName
-# rubocop error to avoid get_ and set_ methods
-#
 # TODO: remove the following rubocop errors
 # rubocop: disable Metrics/ClassLength, Metrics/MethodLength
 #

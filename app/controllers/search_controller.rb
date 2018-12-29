@@ -9,7 +9,6 @@
 # Literal controller is responsible for exact matches.
 # FullTextSearch is responsible for the fuzzy searching.
 #
-# rubocop: disable Style/AccessorMethodName
 #
 ####
 #
