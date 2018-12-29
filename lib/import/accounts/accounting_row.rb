@@ -27,10 +27,11 @@ module DB
 
     def charge_code_to_s(charge_code:, human_ref:)
       charge = ChargeCode.to_string charge_code
-      raise DB::ChargeCodeUnknown,
-            "Property #{human_ref}: Charge code #{charge_code} not convertible",
-            caller  \
-           unless charge
+      unless charge
+        raise DB::ChargeCodeUnknown,
+              "Property #{human_ref}: Charge code #{charge_code} not convertible",
+              caller
+      end
       charge
     end
   end

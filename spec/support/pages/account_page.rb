@@ -76,8 +76,10 @@ class AccountPage
       spec.expect(find_field('Road no').value).to spec.have_text address.road_no
       spec.expect(find_field('Road').value).to spec.have_text address.road
       spec.expect(find_field('Town').value).to spec.have_text address.town
-      spec.expect(find_field('District').value)
-          .to spec.have_text address.district if address.district.present?
+      if address.district.present?
+        spec.expect(find_field('District').value)
+            .to spec.have_text address.district
+      end
       spec.expect(find_field('County').value).to spec.have_text address.county
       spec.expect(find_field('Postcode').value)
           .to spec.have_text address.postcode

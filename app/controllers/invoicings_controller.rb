@@ -45,9 +45,10 @@ class InvoicingsController < ApplicationController
     @invoicing = Invoicing.new invoicing_params
     @invoicing.period_first = get_period_first
     @invoicing.period_last = get_period_last
-    @invoicing.generate invoice_date: params[:invoice_date],
-                        comments: params[:comment] \
-      if @invoicing.valid_arguments?
+    if @invoicing.valid_arguments?
+      @invoicing.generate invoice_date: params[:invoice_date],
+                          comments: params[:comment]
+    end
     if @invoicing.save
       redirect_to invoicing_path(@invoicing), flash: { save: created_message }
     else
@@ -65,9 +66,10 @@ class InvoicingsController < ApplicationController
   def update
     set_invoice_date date: params[:invoice_date]
     @invoicing = Invoicing.find params[:id]
-    @invoicing.generate invoice_date: params[:invoice_date],
-                        comments: params[:comment] \
-      if @invoicing.valid_arguments?
+    if @invoicing.valid_arguments?
+      @invoicing.generate invoice_date: params[:invoice_date],
+                          comments: params[:comment]
+    end
     if @invoicing.save
       redirect_to invoicing_path(@invoicing), flash: { save: updated_message }
     else
