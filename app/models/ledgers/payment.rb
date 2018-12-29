@@ -132,7 +132,8 @@ class Payment < ActiveRecord::Base
     as_json(
       include: {
         account: { methods: [:human_ref, :holder, :address] }
-      })
+      }
+    )
   end
 
   private

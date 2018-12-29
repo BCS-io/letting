@@ -40,8 +40,7 @@ describe ClientPayment, :ledgers do
                                                      DueOn.new(month: 9, day: 4)])
                         )]
                       )
-                    )]
-                   )
+                    )])
       batch_month = BatchMonths.make month: BatchMonths::MAR
 
       other_client = client_create(human_ref: 2)
@@ -79,8 +78,7 @@ describe ClientPayment, :ledgers do
                                                        due_ons: [DueOn.new(month: 3, day: 4),
                                                                  DueOn.new(month: 9, day: 4)])
                                     )]
-                                  )
-                                 )]
+                                  ))]
       )
       batch_month = BatchMonths.make month: BatchMonths::MAR
 

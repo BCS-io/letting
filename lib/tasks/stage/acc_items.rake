@@ -19,8 +19,7 @@ namespace :db do
                 input: acc_items_legacy,
                 instructions: [PatchAccItems.new(patch: patch_acc_items),
                                ExtractAccItems.new(extracts: extract_acc_items),
-                               InsertAccItems.new(insert: insert_acc_items)]
-               ).stage
+                               InsertAccItems.new(insert: insert_acc_items)]).stage
     end
 
     # acc_items_legacy

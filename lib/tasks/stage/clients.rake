@@ -18,8 +18,7 @@ namespace :db do
       Stage.new(file_name: 'import_data/staging/staging_clients.csv',
                 input: clients_legacy,
                 instructions: [PatchRef.new(patch: patch_clients),
-                               ExtractClients.new(extracts: extract_clients)]
-               ).stage
+                               ExtractClients.new(extracts: extract_clients)]).stage
     end
 
     # clients_legacy

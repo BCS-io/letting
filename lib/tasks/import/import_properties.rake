@@ -29,7 +29,8 @@ namespace :db do
     def staging_properties
       DB::CSVTransform.new(
         file_name: 'import_data/staging/staging_properties.csv',
-        headers: DB::FileHeader.property).to_a
+        headers: DB::FileHeader.property
+      ).to_a
     end
   end
 end

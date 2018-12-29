@@ -18,8 +18,7 @@ namespace :db do
       Stage.new(file_name: 'import_data/staging/staging_acc_info.csv',
                 input: acc_infos_legacy,
                 instructions: [PatchAccInfo.new(patch: patch_acc_info),
-                               InsertAccInfo.new(insert: restore_acc_info)]
-               ).stage
+                               InsertAccInfo.new(insert: restore_acc_info)]).stage
     end
 
     # acc_infos_legacy

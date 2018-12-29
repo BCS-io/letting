@@ -16,7 +16,8 @@ namespace :db do
     def staging_charges
       DB::CSVTransform.new(
         file_name: 'import_data/staging/staging_acc_info.csv',
-        headers: DB::FileHeader.charge).to_a
+        headers: DB::FileHeader.charge
+      ).to_a
     end
   end
 end
