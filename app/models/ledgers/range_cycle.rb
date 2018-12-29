@@ -13,7 +13,7 @@ module RangeCycle
   SPECIALIZED_CLASSES = {
     'advance' => Advance,
     'arrears' => Arrears,
-  }
+  }.freeze
 
   # name:  Advance or Arrears
   # dates: The date boundaries which are converted into RepeatDates

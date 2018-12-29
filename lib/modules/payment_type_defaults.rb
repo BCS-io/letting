@@ -6,7 +6,7 @@
 #
 ####
 module PaymentTypeDefaults
-  PAYMENT_TYPE = [MANUAL = 'manual',
-                  AUTOMATIC = 'automatic']
-  UNKNOWN_PAYMENT_TYPE = 'unknown_payment_type'
+  PAYMENT_TYPE = [MANUAL = 'manual'.freeze,
+                  AUTOMATIC = 'automatic'.freeze].freeze
+  UNKNOWN_PAYMENT_TYPE = 'unknown_payment_type'.freeze
 end

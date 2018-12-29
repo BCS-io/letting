@@ -29,7 +29,7 @@ module DB
       'balance' => ImportBalance,
       'debit' => ImportDebit,
       'credit' => ImportPayment
-    }
+    }.freeze
 
     def row= row
       @row = AccountRow.new(row)

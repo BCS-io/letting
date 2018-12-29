@@ -12,10 +12,10 @@
 #
 ####
 module ChargedInDefaults
-  LEGACY_ARREARS = '0'
-  LEGACY_ADVANCE = '1'
-  LEGACY_MID_TERM = 'M'
+  LEGACY_ARREARS = '0'.freeze
+  LEGACY_ADVANCE = '1'.freeze
+  LEGACY_MID_TERM = 'M'.freeze
 
-  MODERN_ARREARS = 'arrears'
-  MODERN_ADVANCE = 'advance'
+  MODERN_ARREARS = 'arrears'.freeze
+  MODERN_ADVANCE = 'advance'.freeze
 end
