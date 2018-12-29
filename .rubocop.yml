@@ -37,6 +37,12 @@ Rails:
   Enabled: true
 Style/AndOr:
   Enabled: false
+Style/ExpandPathArguments:
+  Exclude:
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/environment.rb'
+    - 'spec/rails_helper.rb'
 Style/IfUnlessModifier:
   Exclude:
     - 'lib/tasks/import_block.rake'
