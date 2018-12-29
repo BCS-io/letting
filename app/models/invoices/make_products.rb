@@ -20,7 +20,7 @@ class MakeProducts
   def state
     return :forget if debits.empty?
     return :retain if settled
-    return :mail if :red == color
+    return :mail if color == :red
 
     invoice_required? ? :mail : :retain
   end

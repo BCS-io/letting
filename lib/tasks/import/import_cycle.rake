@@ -32,7 +32,7 @@ namespace :db do
     end
 
     def comment row
-      '#' == row['id'].first
+      row['id'].first == '#'
     end
   end
 end
