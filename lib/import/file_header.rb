@@ -18,7 +18,7 @@ module DB
   #
   class FileHeader
     def self.account
-      %w[human_ref, charge_code at_time description debit credit balance]
+      %w[human_ref charge_code at_time description debit credit balance]
     end
 
     def self.client
