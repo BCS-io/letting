@@ -45,6 +45,8 @@ Style/UnneededPercentQ:
   Enabled: false
 
 # newly added - review
+Style/FrozenStringLiteralComment:
+  Enabled: false
 Style/NestedParenthesizedCalls:
   Enabled: false
 Style/MutableConstant:
