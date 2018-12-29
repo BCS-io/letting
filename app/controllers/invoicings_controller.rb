@@ -116,7 +116,7 @@ class InvoicingsController < ApplicationController
 
   def get_period_first
     return session[:invoicings_period_first] \
-      unless session[:invoicings_period_first].blank?
+      if session[:invoicings_period_first].present?
     session[:invoicings_period_first] = Time.zone.today.to_s
   end
 
@@ -126,7 +126,7 @@ class InvoicingsController < ApplicationController
 
   def get_period_last
     return session[:invoicings_period_last] \
-      unless session[:invoicings_period_last].blank?
+      if session[:invoicings_period_last].present?
     session[:invoicings_period_last] =
       (Time.zone.today + Invoicing::WEEKS_AHEAD.weeks).to_s
   end
@@ -141,7 +141,7 @@ class InvoicingsController < ApplicationController
   #
   def get_invoice_date
     return session[:invoicings_invoice_date] \
-      unless session[:invoicings_invoice_date].blank?
+      if session[:invoicings_invoice_date].present?
 
     session[:invoicings_invoice_date] = Time.zone.today
   end
