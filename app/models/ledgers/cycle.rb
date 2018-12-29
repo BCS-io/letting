@@ -17,7 +17,7 @@ class Cycle < ActiveRecord::Base
   has_many :charges, inverse_of: :cycle
 
   validates :name, :order, :due_ons, presence: true
-  validates :cycle_type, inclusion: { in: %w(term monthly) }
+  validates :cycle_type, inclusion: { in: %w[term monthly] }
   validates :charged_in, inclusion: { in: charged_ins.keys }
   include DueOns
   accepts_nested_attributes_for :due_ons, allow_destroy: true

@@ -95,16 +95,16 @@ class PropertiesController < ApplicationController
   end
 
   def agent_params
-    %i(id property_id authorized) + [address_attributes: address_params] +
+    %i[id property_id authorized] + [address_attributes: address_params] +
       [entities_attributes: entities_params]
   end
 
   def account_params
-    %i(id property_id) + [charges_attributes: charges_params]
+    %i[id property_id] + [charges_attributes: charges_params]
   end
 
   def charges_params
-    %i(id charge_type cycle_id charged_in payment_type amount activity _destroy) # rubocop: disable  Metrics/LineLength
+    %i[id charge_type cycle_id charged_in payment_type amount activity _destroy] # rubocop: disable  Metrics/LineLength
   end
 
   def identity

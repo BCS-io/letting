@@ -71,6 +71,6 @@ class Charge < ActiveRecord::Base
   end
 
   def ignored_attrs
-    %w(id account_id activity created_at updated_at)
+    %w[id account_id activity created_at updated_at]
   end
 end

@@ -105,6 +105,6 @@ class DueOn < ActiveRecord::Base
   end
 
   def ignored_attrs
-    %w(id cycle_id created_at updated_at)
+    %w[id cycle_id created_at updated_at]
   end
 end

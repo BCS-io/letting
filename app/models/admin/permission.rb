@@ -31,11 +31,11 @@ Permission = Struct.new(:user) do
   end
 
   def guest_controllers
-    %w(sessions)
+    %w[sessions]
   end
 
   def user_controllers
-    %w(accounts
+    %w[accounts
        arrears
        client_payments
        clients
@@ -52,13 +52,13 @@ Permission = Struct.new(:user) do
        runs
        search
        search_suggestions
-       second_runs_needed)
+       second_runs_needed]
   end
 
   def admin_controllers
-    %w(users
+    %w[users
        cycles
        invoice_texts
-       guides)
+       guides]
   end
 end

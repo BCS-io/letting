@@ -5,7 +5,7 @@ describe ClientPayment, :ledgers do
     Timecop.travel '2014-6-1'
 
     payment = ClientPayment.query
-    expect(payment.years).to eq %w(2014 2013 2012 2011 2010)
+    expect(payment.years).to eq %w[2014 2013 2012 2011 2010]
 
     Timecop.return
   end

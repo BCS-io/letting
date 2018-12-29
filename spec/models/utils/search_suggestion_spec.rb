@@ -18,12 +18,12 @@ describe SearchSuggestion, type: :model do
 
   it 'finds terms' do
     SearchSuggestion.create! term: 'Bat', popularity: 3
-    expect(SearchSuggestion.terms_for 'Ba').to eq %w(Bat)
+    expect(SearchSuggestion.terms_for 'Ba').to eq %w[Bat]
   end
 
   it 'orders terms by popularity' do
     SearchSuggestion.create! term: 'Bat', popularity: 3
     SearchSuggestion.create! term: 'Baxter', popularity: 5
-    expect(SearchSuggestion.terms_for 'Ba').to eq %w(Baxter Bat)
+    expect(SearchSuggestion.terms_for 'Ba').to eq %w[Baxter Bat]
   end
 end

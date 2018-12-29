@@ -73,7 +73,7 @@ describe 'LiteralSearch #go', type: :model do
     end
   end
 
-  %w(arrears cycles users invoice_texts invoicings invoices)
+  %w[arrears cycles users invoice_texts invoicings invoices]
     .each do |controller|
     it 'returns without search for controllers with no obvious need.' do
       referrer = Referrer.new controller: controller, action: ''

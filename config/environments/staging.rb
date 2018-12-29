@@ -37,7 +37,7 @@ Rails.application.configure do
   config.assets.digest = true
 
   # The types (of font) we want to precompile
-  config.assets.precompile += %w( .svg .eot .woff .ttf )
+  config.assets.precompile += %w[ .svg .eot .woff .ttf ]
 
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'

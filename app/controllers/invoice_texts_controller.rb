@@ -36,13 +36,13 @@ class InvoiceTextsController < ApplicationController
 
   def invoice_texts_params
     params.require(:invoice_text).permit \
-      %i(description invoice_name phone vat heading1 heading2 advice1 advice2),
+      %i[description invoice_name phone vat heading1 heading2 advice1 advice2],
       address_attributes: address_params,
       guides_attributes: guides_params
   end
 
   def guides_params
-    %i(id instruction fillin sample)
+    %i[id instruction fillin sample]
   end
 
   def identity

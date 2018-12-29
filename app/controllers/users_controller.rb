@@ -64,7 +64,7 @@ class UsersController < ApplicationController
   end
 
   def user_attributes
-    %i(nickname email password password_confirmation role)
+    %i[nickname email password password_confirmation role]
   end
 
   def identity

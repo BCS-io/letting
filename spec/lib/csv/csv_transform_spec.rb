@@ -28,7 +28,7 @@ module DB
       end
 
       it 'overwrites headers' do
-        output = CSVTransform.new(headers: %w(one line),
+        output = CSVTransform.new(headers: %w[one line],
                                   file_name: file_name).to_a
         output.each.first do |row|
           expect(row[:one]).to eq 'two'

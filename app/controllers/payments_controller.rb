@@ -113,12 +113,12 @@ class PaymentsController < ApplicationController
   #
   def payment_params
     params.require(:payment)
-          .permit %i(id account_id booked_at amount human_ref),
+          .permit %i[id account_id booked_at amount human_ref],
                   credits_attributes: credit_params
   end
 
   def credit_params
-    %i(id account_id charge_id debit_id at_time amount)
+    %i[id account_id charge_id debit_id at_time amount]
   end
 
   def identity

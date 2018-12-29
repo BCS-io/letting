@@ -6,7 +6,7 @@ require File.expand_path('../config/application', __FILE__)
 
 Rails.application.load_tasks
 
-if %w(development test).include? Rails.env
+if %w[development test].include? Rails.env
   # Removed to avoid vulnerability
   # require 'rubocop/rake_task'
   # RuboCop::RakeTask.new

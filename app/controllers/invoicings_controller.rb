@@ -156,7 +156,7 @@ class InvoicingsController < ApplicationController
   def invoicing_params
     params
       .require(:invoicing)
-      .permit %i(property_range period_first period_last)
+      .permit %i[property_range period_first period_last]
   end
 
   # join_tables
