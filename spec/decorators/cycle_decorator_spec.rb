@@ -8,13 +8,13 @@ describe CycleDecorator do
     cycle_create id: 3, name: 'Quart', due_ons: [DueOn.new(month: 1, day: 1),
                                                  DueOn.new(month: 3, day: 1),
                                                  DueOn.new(month: 6, day: 1),
-                                                 DueOn.new(month: 9, day: 1),]
+                                                 DueOn.new(month: 9, day: 1)]
 
     cycle_create id: 4, name: 'Freq', due_ons: [DueOn.new(month: 1, day: 1),
                                                 DueOn.new(month: 3, day: 1),
                                                 DueOn.new(month: 6, day: 1),
                                                 DueOn.new(month: 8, day: 1),
-                                                DueOn.new(month: 9, day: 1),]
+                                                DueOn.new(month: 9, day: 1)]
     expect(CycleDecorator.for_select).to eq 'Frequent' => [['Freq', 4]],
                                             'Half Year' => [['Half', 2]],
                                             'Quarterly' => [['Quart', 3]],

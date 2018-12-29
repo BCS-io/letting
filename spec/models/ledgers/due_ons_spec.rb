@@ -28,7 +28,7 @@ describe DueOns, :ledgers, :cycle, type: :model do
 
       it 'returns the MatchedDueon of all the covered spot dates' do
         cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 4),
-                                    DueOn.new(month: 9, day: 5),]
+                                    DueOn.new(month: 9, day: 5)]
 
         expect(cycle.due_ons.between Date.new(2010, 3, 1)..
                                      Date.new(2011, 2, 28))

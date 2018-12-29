@@ -51,7 +51,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
     it 'returns the dates of all the matching due_ons' do
       cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 4),
-                                  DueOn.new(month: 9, day: 5),]
+                                  DueOn.new(month: 9, day: 5)]
 
       expect(cycle.between Date.new(2010, 3, 1)..Date.new(2011, 2, 28))
         .to eq [MatchedCycle.new(Date.new(2010, 3, 4),
