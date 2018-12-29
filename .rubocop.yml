@@ -35,6 +35,10 @@ Metrics/MethodLength:
   Max: 10
 Rails:
   Enabled: true
+Rails/FilePath:
+  Exclude:
+    - 'config/application.rb'
+    - 'spec/rails_helper.rb'
 Style/AndOr:
   Enabled: false
 Style/ExpandPathArguments:
