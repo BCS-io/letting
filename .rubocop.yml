@@ -45,6 +45,9 @@ Metrics/LineLength:
     - Gemfile
 Metrics/MethodLength:
   Max: 10
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - 'lib/import/import_base.rb'
 Rails:
   Enabled: true
 Rails/FilePath:
