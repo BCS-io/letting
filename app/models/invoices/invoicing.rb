@@ -77,7 +77,7 @@ class Invoicing < ActiveRecord::Base
   # Anything to print?
   #
   def deliverable?
-    return false unless runs.present?
+    return false if runs.blank?
 
     runs.last.deliverable?
   end
