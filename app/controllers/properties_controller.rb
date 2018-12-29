@@ -87,11 +87,11 @@ class PropertiesController < ApplicationController
   def property_params
     params.require(:property)
           .permit :human_ref,
-              :client_id,
-              address_attributes:         address_params,
-              entities_attributes:        entities_params,
-              agent_attributes:           agent_params,
-              account_attributes:         account_params
+                  :client_id,
+                  address_attributes:         address_params,
+                  entities_attributes:        entities_params,
+                  agent_attributes:           agent_params,
+                  account_attributes:         account_params
   end
 
   def agent_params

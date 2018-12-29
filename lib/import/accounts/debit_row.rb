@@ -55,8 +55,8 @@ module DB
                .cycle
                .bill_period(billed_on: at_time.to_date)
       raise PeriodUnknown,
-           period_message,
-           caller unless period != :missing_due_on
+            period_message,
+            caller unless period != :missing_due_on
       period
     end
 
