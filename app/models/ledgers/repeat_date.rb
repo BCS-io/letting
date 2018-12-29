@@ -18,11 +18,7 @@ class RepeatDate
                  month: Time.zone.now.month,
                  year:  A_YEAR_AWAY_FROM_LEAP_DAY,
                  date:  nil
-    @date = if date
-              date
-            else
-              Date.new(year, month, day)
-            end
+    @date = date || Date.new(year, month, day)
   end
 
   delegate :day, to: :date

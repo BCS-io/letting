@@ -36,7 +36,7 @@ class Patch
   #
   def cleanse(originals:)
     originals.map! do |original|
-      stand_in(original) ? stand_in(original) : original
+      stand_in(original) || original
     end
   end
 
