@@ -66,12 +66,12 @@ RSpec.describe MakeProducts, type: :model do
 
       it 'red invoice - retains if the account settled' do
         charge = charge_create payment_type: 'manual'
-        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+        debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 10)
-        account = account_create charges: [charge], debits: [debit_1], credits: [credit]
+        account = account_create charges: [charge], debits: [debit1], credits: [credit]
 
         make = MakeProducts.new account: account,
-                                debits: [debit_1],
+                                debits: [debit1],
                                 color: :red
 
         expect(make.state).to eq :retain
@@ -81,11 +81,11 @@ RSpec.describe MakeProducts, type: :model do
     context 'mail' do
       it 'red invoice - mailed provided there are debits' do
         charge = charge_create payment_type: 'automatic'
-        debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-        account = account_create charges: [charge], debits: [debit_1]
+        debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+        account = account_create charges: [charge], debits: [debit1]
 
         make = MakeProducts.new account: account,
-                                debits: [debit_1],
+                                debits: [debit1],
                                 color: :red
 
         expect(make.state).to eq :mail
@@ -94,11 +94,11 @@ RSpec.describe MakeProducts, type: :model do
       context 'blue invoice' do
         it 'mails if it has debit' do
           charge = charge_create payment_type: 'manual'
-          debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-          account = account_create charges: [charge], debits: [debit_1]
+          debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+          account = account_create charges: [charge], debits: [debit1]
 
           make = MakeProducts.new account: account,
-                                  debits: [debit_1],
+                                  debits: [debit1],
                                   color: :blue
 
           expect(make.state).to eq :mail
@@ -106,11 +106,11 @@ RSpec.describe MakeProducts, type: :model do
 
         it 'retain if the only debits are automated' do
           charge = charge_create payment_type: 'automatic'
-          debit_1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
-          account = account_create charges: [charge], debits: [debit_1]
+          debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
+          account = account_create charges: [charge], debits: [debit1]
 
           make = MakeProducts.new account: account,
-                                  debits: [debit_1],
+                                  debits: [debit1],
                                   color: :blue
 
           expect(make.state).to eq :retain

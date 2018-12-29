@@ -57,11 +57,11 @@ RSpec.describe Product, type: :model do
     end
 
     it 'orders Ground Rent before Garage ground rent' do
-      c_1 = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
-      c_2 = charge_new charge_type: ChargeTypes::GROUND_RENT
+      c1 = charge_new charge_type: ChargeTypes::GARAGE_GROUND_RENT
+      c2 = charge_new charge_type: ChargeTypes::GROUND_RENT
 
-      invoice_create snapshot: snapshot_new(debits: [debit_new(charge: c_1),
-                                                     debit_new(charge: c_2)])
+      invoice_create snapshot: snapshot_new(debits: [debit_new(charge: c1),
+                                                     debit_new(charge: c2)])
 
       expect(Product.page2.charge_type).to eq 'Ground Rent'
     end

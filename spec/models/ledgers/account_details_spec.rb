@@ -92,12 +92,12 @@ describe AccountDetails, :ledgers, type: :model do
 
     it 'smoke test' do
       charge = charge_create
-      credit_1 = credit_new amount: 3, at_time: Date.new(2012, 3, 4), charge: charge
-      credit_2 = credit_new amount: 1, at_time: Date.new(2013, 3, 4), charge: charge
-      debit_1 = debit_new amount: 7, at_time: Date.new(2012, 3, 4), charge: charge
-      debit_2 = debit_new amount: 5, at_time: Date.new(2013, 3, 4), charge: charge
-      account_create credits: [credit_1, credit_2],
-                     debits: [debit_1, debit_2],
+      credit1 = credit_new amount: 3, at_time: Date.new(2012, 3, 4), charge: charge
+      credit2 = credit_new amount: 1, at_time: Date.new(2013, 3, 4), charge: charge
+      debit1 = debit_new amount: 7, at_time: Date.new(2012, 3, 4), charge: charge
+      debit2 = debit_new amount: 5, at_time: Date.new(2013, 3, 4), charge: charge
+      account_create credits: [credit1, credit2],
+                     debits: [debit1, debit2],
                      property: property_new
 
       expect(AccountDetails.balance_all.first.amount).to eq(8.00)

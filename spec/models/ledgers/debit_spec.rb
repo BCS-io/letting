@@ -64,9 +64,9 @@ describe Debit, :ledgers, type: :model do
     describe '.available' do
       it 'a created debit is available' do
         charge = charge_create
-        debit_1 = debit_create charge: charge, at_time: '2012-4-1', amount: 15
+        debit1 = debit_create charge: charge, at_time: '2012-4-1', amount: 15
 
-        expect(Debit.available charge.id).to eq [debit_1]
+        expect(Debit.available charge.id).to eq [debit1]
       end
 
       it 'a debit settled by a credit is not available' do
