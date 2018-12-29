@@ -1,5 +1,3 @@
-# rubocop: disable Metrics/MethodLength
-
 def client_new(
   id: nil,
   human_ref: 354,

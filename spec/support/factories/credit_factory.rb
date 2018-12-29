@@ -1,5 +1,4 @@
 # rubocop: disable Metrics/ParameterLists
-# rubocop: disable Metrics/MethodLength
 
 #
 # Most credit amounts will be negative

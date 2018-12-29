@@ -1,5 +1,4 @@
 # rubocop: disable Metrics/ParameterLists
-# rubocop: disable Metrics/MethodLength
 
 def invoice_text_new id: nil,
                      description: 'Page 1 Invoice',

@@ -1,4 +1,4 @@
-# rubocop: disable  Metrics/MethodLength, Metrics/ParameterLists
+# rubocop: disable  Metrics/ParameterLists
 
 def product_new \
   charge_type: 'Rent',

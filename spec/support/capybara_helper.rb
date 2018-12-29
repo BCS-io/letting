@@ -26,7 +26,6 @@
 #
 # fill_autocomplete('property_client_ref', with: client_id)
 #
-## rubocop: disable Metrics/LineLength
 module CapybaraHelper
   def fill_autocomplete(field, with: '', select: '')
     fill_in field, with: with

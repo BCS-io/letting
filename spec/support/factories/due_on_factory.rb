@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/MethodLength
 # rubocop: disable Metrics/ParameterLists
 
 def due_on_new id: nil,

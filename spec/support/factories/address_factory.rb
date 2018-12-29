@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/MethodLength
 # rubocop: disable Metrics/ParameterLists
 
 def address_new flat_no: '',

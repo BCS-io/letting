@@ -1,5 +1,4 @@
 # rubocop: disable Metrics/ParameterLists
-# rubocop: disable Metrics/MethodLength
 
 def debit_new account_id: 1,
               charge_id: nil,

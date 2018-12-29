@@ -1,4 +1,4 @@
-# rubocop: disable Metrics/MethodLength, Metrics/ParameterLists
+# rubocop: disable Metrics/ParameterLists
 
 def user_create id: nil,
                 nickname: 'user',
