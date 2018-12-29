@@ -45,7 +45,7 @@ class Invoice < ActiveRecord::Base
     def total_arrears
       return 0 if last.nil?
 
-      max.balance   # same as sort.last.balance
+      max.balance # same as sort.last.balance
     end
   end
   InvoiceMissingProducts = Class.new(StandardError)
