@@ -19,10 +19,10 @@ class RepeatDate
                  year:  A_YEAR_AWAY_FROM_LEAP_DAY,
                  date:  nil
     @date = if date
-      date
-    else
-      Date.new(year, month, day)
-    end
+              date
+            else
+              Date.new(year, month, day)
+            end
   end
 
   delegate :day, to: :date
