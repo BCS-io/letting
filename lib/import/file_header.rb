@@ -48,7 +48,7 @@ module DB
     end
 
     def self.entities
-      %w[title1  initials1 name1 title2 initials2 name2]
+      %w[title1 initials1 name1 title2 initials2 name2]
     end
 
     def self.address

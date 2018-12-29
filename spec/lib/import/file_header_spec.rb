@@ -7,7 +7,7 @@ module DB
       fields =
         %w[
           human_ref
-          title1  initials1 name1
+          title1 initials1 name1
           title2 initials2 name2
           flat_no house_name road_no road district town county postcode
         ]
@@ -17,7 +17,7 @@ module DB
     it 'property' do
       fields =
         %w[
-          human_ref  updated
+          human_ref updated
           title1 initials1 name1
           title2 initials2 name2
           flat_no house_name road_no road district town county postcode
