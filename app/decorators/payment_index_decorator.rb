@@ -28,8 +28,7 @@ class PaymentIndexDecorator
     payment.account.property.occupiers
   end
 
-  def charge
-  end
+  def charge; end
 
   def booked_at
     format_date payment.booked_at

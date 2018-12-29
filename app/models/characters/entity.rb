@@ -26,8 +26,7 @@ class Entity < ActiveRecord::Base
   validates :name, length: { maximum: 64 }, presence: true
   validates :title, :initials, length: { maximum: 10 }
 
-  def prepare
-  end
+  def prepare; end
 
   def clear_up_form
     destroy_entity if empty?
