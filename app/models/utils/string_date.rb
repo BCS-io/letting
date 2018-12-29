@@ -14,7 +14,7 @@ class StringDate
 
   def to_date
     Date.parse datestring
-  rescue
+  rescue StandardError
     nil
   end
 end

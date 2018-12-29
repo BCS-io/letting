@@ -17,7 +17,7 @@ namespace :db do
         CSV.foreach(filename, headers: true) do |row|
           begin
             Address.create!(row.to_hash)
-          rescue
+          rescue StandardError
             p 'InvoiceText Address Create failed (see hash below):', row.to_hash
           end
         end

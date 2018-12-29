@@ -47,7 +47,7 @@ module DB
           self.row = file_row
           import_row if allowed?
           show_alive index
-        rescue => e
+        rescue StandardError => e
           puts
           warn "Exception: #{e.message}"
           next

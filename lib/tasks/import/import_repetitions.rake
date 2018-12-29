@@ -16,7 +16,7 @@ namespace :db do
       CSV.foreach(filename, headers: true) do |row|
         begin
           Repetitions.create!(row.to_hash) unless comment(row)
-        rescue
+        rescue StandardError
           p 'Repetitions Create failed (see hash below):', row.to_hash
         end
       end

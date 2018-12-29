@@ -24,7 +24,7 @@ namespace :db do
       CSV.foreach(filename, headers: true) do |row|
         begin
           Cycle.create!(row.to_hash) unless comment(row)
-        rescue
+        rescue StandardError
           p 'Cycle Create failed (see hash below):', row.to_hash
         end
       end

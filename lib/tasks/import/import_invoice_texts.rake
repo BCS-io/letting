@@ -14,7 +14,7 @@ namespace :db do
         CSV.foreach(filename, headers: true) do |row|
           begin
             InvoiceText.create!(row.to_hash)
-          rescue
+          rescue StandardError
             p 'InvoiceText Create failed (see hash below):', row.to_hash
           end
         end
