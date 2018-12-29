@@ -20,6 +20,14 @@ AllCops:
 # Ignored Styles
 # These styles will not be modelled in our code.
 #
+Layout/AlignHash:
+  Exclude:
+    - 'app/controllers/properties_controller.rb'
+    - 'app/models/ledgers/charge.rb'
+    - 'app/models/ledgers/chargeable.rb'
+    - 'lib/import/contact_fields.rb'
+    - 'lib/import/import_user.rb'
+    - 'spec/support/attributes.rb'
 Layout/ExtraSpacing:
   Exclude:
     - spec/models/ledgers/charge_spec.rb
@@ -29,6 +37,8 @@ Lint/MissingCopEnableDirective:
   Enabled: false
 Style/MethodDefParentheses:
   Enabled: false
+Metrics/BlockLength:
+  Max: 205
 Metrics/LineLength:
   Max: 95
   Exclude:
