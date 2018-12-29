@@ -202,7 +202,7 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(Payment.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
-        ))
+               ))
           .to eq [payment]
       end
 
@@ -214,7 +214,7 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(Payment.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
-        ))
+               ))
           .to eq [payment]
       end
 
@@ -226,7 +226,7 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(Payment.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
-        ))
+               ))
           .to eq []
       end
 
@@ -238,7 +238,7 @@ describe Payment, :payment, :ledgers, type: :model do
         expect(Payment.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
-        ))
+               ))
           .to eq []
       end
     end
