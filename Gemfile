@@ -75,7 +75,6 @@
 # A list of Gems that if updated will break the application.
 #
 # Gem                     Using      Last tested   Gem Bug
-# byebug                  3.5.1            4.0.3         Y
 # Capistrano              3.5.0            3.6.0         Y
 # capistrano-db-tasks       0.3              0.4         Y
 # jquery-ui-rails         4.1.2            5.0.3         N
@@ -173,7 +172,7 @@ group :development, :test do
   # Throwing exceptions when it hits breakpoints
   #
   gem 'bundler-audit'
-  gem 'byebug', '3.5.1'
+  gem 'byebug', platform: :mri
   gem 'capybara', '~> 2.13.0'
 
   gem 'capybara-screenshot', '~> 1.0.0'
