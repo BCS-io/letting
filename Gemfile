@@ -187,7 +187,7 @@ group :development, :test do
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'rack-mini-profiler', '~>0.10.0'
   gem 'rb-readline'
-  gem 'rspec-rails', '~> 3.5.0'
+  gem 'rspec-rails', '~> 3.8.0'
   gem 'selenium-webdriver', '~>3.0'
   gem 'spring'
   gem 'spring-commands-rspec'
