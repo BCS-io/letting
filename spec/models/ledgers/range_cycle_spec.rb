@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 describe RangeCycle, :ledgers, :range do
-  before { Timecop.travel Date.new(2014, 1, 31) }
-  after  { Timecop.return }
-
   it 'initializes with dates' do
     repeat = RangeCycle.for name: 'advance', dates: [Date.new(2014, 6, 5)]
 
@@ -12,9 +9,6 @@ describe RangeCycle, :ledgers, :range do
   end
 
   describe '#duration' do
-    before { Timecop.travel Date.new(2014, 1, 31) }
-    after  { Timecop.return }
-
     describe 'finds advanced range' do
       describe 'bounding' do
         it 'matches start date' do

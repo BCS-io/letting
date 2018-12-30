@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 describe AccountDecorator do
-  before { Timecop.travel Date.new(2013, 1, 31) }
-  after { Timecop.return }
-
   describe 'running-balance' do
     it 'keeps a working balance' do
       charge = charge_new
@@ -37,12 +34,14 @@ describe AccountDecorator do
     end
 
     it 'orders abbrev-items by date' do
-      expect(account.abbrev_items.map(&:at_time)).to \
-        contain_exactly \
-          Time.zone.local(2013, 1, 1,  0, 0, 0),
-          Time.zone.local(2013, 3, 25, 0, 0, 0),
-          Time.zone.local(2013, 4, 30, 0, 0, 0),
-          Time.zone.local(2013, 9, 25, 0, 0, 0)
+      Timecop.travel(Date.new(2013, 1, 31)) do
+        expect(account.abbrev_items.map(&:at_time)).to \
+          contain_exactly \
+            Time.zone.local(2013, 1, 1,  0, 0, 0),
+            Time.zone.local(2013, 3, 25, 0, 0, 0),
+            Time.zone.local(2013, 4, 30, 0, 0, 0),
+            Time.zone.local(2013, 9, 25, 0, 0, 0)
+      end
     end
   end
 

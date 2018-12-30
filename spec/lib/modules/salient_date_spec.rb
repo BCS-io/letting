@@ -6,13 +6,12 @@ describe SalientDate do
     @dummy.extend(SalientDate)
   end
   describe '#salient_date_range' do
-    before { Timecop.travel Date.new(2013, 1, 31) }
-    after  { Timecop.return }
-
     it 'outputs date without year when same year' do
-      expect(@dummy.salient_date_range start_date: Date.parse('2013-04-05'),
-                                       end_date: Date.parse('2013-06-07'))
-        .to eq '05/Apr - 07/Jun'
+      Timecop.travel(Date.new(2013, 1, 31)) do
+        expect(@dummy.salient_date_range start_date: Date.parse('2013-04-05'),
+                                         end_date: Date.parse('2013-06-07'))
+          .to eq '05/Apr - 07/Jun'
+      end
     end
 
     it 'outputs date with year when not this year' do

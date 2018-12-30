@@ -29,12 +29,12 @@ describe Payment, :payment, :ledgers, type: :model do
 
   describe 'initialize' do
     # changing for Date to DateTime - so I want test to fail if we use date
-    before { Timecop.freeze Time.zone.local(2013, 9, 30, 2, 0) }
-    after  { Timecop.return }
     describe 'booked_at' do
       it 'sets nil booked_at to today' do
-        expect(payment_new(booked_at: nil).booked_at)
-          .to eq Time.zone.now
+        Timecop.freeze(Time.zone.local(2013, 9, 30, 2, 0)) do
+          expect(payment_new(booked_at: nil).booked_at)
+            .to eq Time.zone.now
+        end
       end
     end
     describe 'amount' do
@@ -50,17 +50,17 @@ describe Payment, :payment, :ledgers, type: :model do
 
   describe '#register_booking' do
     # changing for Date to DateTime - so I want test to fail if we use date
-    before { Timecop.freeze Time.zone.local(2013, 9, 30, 2, 0) }
-    after  { Timecop.return }
 
     it 'booking time is current time if booking today' do
-      payment = payment_new account: account_new,
-                            booked_at: Time.zone.local(2013, 9, 30, 10, 0)
+      Timecop.freeze(Time.zone.local(2013, 9, 30, 2, 0)) do
+        payment = payment_new account: account_new,
+                              booked_at: Time.zone.local(2013, 9, 30, 10, 0)
 
-      payment.register_booking
+        payment.register_booking
 
-      expect(payment.booked_at)
-        .to eq Time.zone.local(2013, 9, 30, 2, 0)
+        expect(payment.booked_at)
+          .to eq Time.zone.local(2013, 9, 30, 2, 0)
+      end
     end
 
     it 'booking time set to end of day if booking in past' do
@@ -74,14 +74,16 @@ describe Payment, :payment, :ledgers, type: :model do
     end
 
     it 'booking time set to start of day if booking in future' do
-      payment = payment_new account: account_new,
-                            booked_at: Time.zone.local(2013, 10, 1, 10, 0)
+      Timecop.freeze(Time.zone.local(2013, 9, 30, 2, 0)) do
+        payment = payment_new account: account_new,
+                              booked_at: Time.zone.local(2013, 10, 1, 10, 0)
 
-      payment.register_booking
+        payment.register_booking
 
-      expect(payment.booked_at)
-        .to be_within(5.seconds)
-        .of(Time.zone.local(2013, 10, 1, 0, 0, 0))
+        expect(payment.booked_at)
+          .to be_within(5.seconds)
+          .of(Time.zone.local(2013, 10, 1, 0, 0, 0))
+      end
     end
   end
 

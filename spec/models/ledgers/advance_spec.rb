@@ -74,10 +74,8 @@ describe Advance, :ledgers, :range do
     end
 
     it 'returns periods based initialized dates' do
-      Timecop.travel Date.new(2031, 12, 31)
       repeat = Advance.new repeat_dates: [RepeatDate.new(year: 2020, month: 3, day: 8)]
       expect(repeat.periods).to eq [[RepeatDate.new(year: 2020, month: 3, day: 8), RepeatDate.new(year: 2021, month: 3, day: 7)]]
-      Timecop.return
     end
   end
 end

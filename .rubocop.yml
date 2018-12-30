@@ -49,6 +49,8 @@ Style/MethodDefParentheses:
   Enabled: false
 Metrics/BlockLength:
   Max: 205
+  Exclude:
+    - 'spec/models/ledgers/payment_spec.rb'
 Metrics/LineLength:
   Max: 95
   Exclude:

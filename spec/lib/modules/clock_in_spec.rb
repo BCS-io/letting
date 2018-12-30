@@ -10,14 +10,12 @@ describe ClockIn do
     describe '#initialize add_time' do
       it 'applies time if required' do
         new_time = Time.zone.local(2008, 9, 1, 12, 1, 6)
-        Timecop.freeze(new_time)
+        Timecop.freeze(new_time) do
+          time = ClockIn.new.recorded_as booked_time: Time.zone.now.to_date,
+                                         add_time: true
 
-        time = ClockIn.new.recorded_as booked_time: Time.zone.now.to_date,
-                                       add_time: true
-
-        expect(time).to eq Time.zone.local(2008, 9, 1, 12, 1, 6)
-
-        Timecop.return
+          expect(time).to eq Time.zone.local(2008, 9, 1, 12, 1, 6)
+        end
       end
 
       it 'leaves off if not required' do
@@ -40,24 +38,20 @@ describe ClockIn do
 
     it 'booked in end of day when we clock in the past' do
       new_time = Time.zone.local(2008, 9, 1, 12, 1, 6)
-      Timecop.freeze(new_time)
-
-      time = ClockIn.new.recorded_as booked_time: Time.zone.now - 1.day
-      expect(time)
-        .to be_within(0.5).of(Time.zone.local(2008, 8, 31, 23, 59, 59, 999_999))
-
-      Timecop.return
+      Timecop.freeze(new_time) do
+        time = ClockIn.new.recorded_as booked_time: Time.zone.now - 1.day
+        expect(time)
+          .to be_within(0.5).of(Time.zone.local(2008, 8, 31, 23, 59, 59, 999_999))
+      end
     end
 
     it 'booked in start of the day when we clock in the future' do
       new_time = Time.zone.local(2008, 8, 31, 12, 1, 6)
-      Timecop.freeze(new_time)
-
-      time = ClockIn.new.recorded_as booked_time: Time.zone.now + 1.day
-      expect(time)
-        .to be_within(0.5).of(Time.zone.local(2008, 9, 1, 0, 0, 0))
-
-      Timecop.return
+      Timecop.freeze(new_time) do
+        time = ClockIn.new.recorded_as booked_time: Time.zone.now + 1.day
+        expect(time)
+          .to be_within(0.5).of(Time.zone.local(2008, 9, 1, 0, 0, 0))
+      end
     end
 
     context 'booking_date set to another day' do

@@ -76,12 +76,11 @@ describe Credit, :ledgers, type: :model do
   end
 
   context 'default initialize' do
-    before { Timecop.travel Date.new(2013, 9, 30) }
-    after { Timecop.return }
-
     it 'has at_time' do
-      expect(credit_new(at_time: nil).at_time.to_s)
-        .to eq Time.zone.local(2013, 9, 30, 0, 0, 0, '+1').to_s
+      Timecop.travel(Date.new(2013, 9, 30)) do
+        expect(credit_new(at_time: nil).at_time.to_s)
+          .to eq Time.zone.local(2013, 9, 30, 0, 0, 0, '+1').to_s
+      end
     end
   end
 

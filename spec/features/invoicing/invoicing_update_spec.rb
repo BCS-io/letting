@@ -8,8 +8,6 @@ describe 'Invoicing#update', type: :feature do
   end
 
   it 'updates to red invoice' do
-    Timecop.travel '2013-6-1'
-
     create_account human_ref: 87,
                    cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
     invoicing = Invoicing.new property_range: '87',
@@ -21,8 +19,6 @@ describe 'Invoicing#update', type: :feature do
 
     expect(invoicing_page).to be_success
     expect(invoicing_page.title).to eq 'Letting - View Invoicing'
-
-    Timecop.return
   end
 
   def create_account(human_ref:, cycle:)

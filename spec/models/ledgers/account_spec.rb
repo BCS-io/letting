@@ -13,9 +13,6 @@ describe Account, :ledgers, type: :model do
   end
 
   describe 'methods' do
-    before { Timecop.travel Date.new(2013, 1, 31) }
-    after { Timecop.return }
-
     describe '#debits_coming' do
       it 'debits if accounting_period crosses a due date' do
         ch = charge_new cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 5)])
