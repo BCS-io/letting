@@ -103,7 +103,7 @@ gem 'jquery-rails', '~> 4.0.0'
 gem 'jquery-ui-rails', '4.1.2'
 
 # Kaminari before elasticsearch
-gem 'kaminari', '~> 0.16.0'
+gem 'kaminari', '~> 1.1.0'
 gem 'lograge'
 gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>0.20.0' # rails 5 required to use pg 1.0+

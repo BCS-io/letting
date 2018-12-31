@@ -199,9 +199,18 @@ GEM
     jquery-ui-rails (4.1.2)
       railties (>= 3.1.0)
     json (1.8.6)
-    kaminari (0.16.3)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    kaminari (1.1.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.1.1)
+      kaminari-activerecord (= 1.1.1)
+      kaminari-core (= 1.1.1)
+    kaminari-actionview (1.1.1)
+      actionview
+      kaminari-core (= 1.1.1)
+    kaminari-activerecord (1.1.1)
+      activerecord
+      kaminari-core (= 1.1.1)
+    kaminari-core (1.1.1)
     kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -453,7 +462,7 @@ DEPENDENCIES
   jbuilder (~> 2.2.0)
   jquery-rails (~> 4.0.0)
   jquery-ui-rails (= 4.1.2)
-  kaminari (~> 0.16.0)
+  kaminari (~> 1.1.0)
   lograge
   meta_request
   nokogiri (>= 1.8.2)
