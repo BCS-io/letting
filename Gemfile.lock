@@ -60,9 +60,9 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10)
-    better_errors (2.1.1)
+    better_errors (2.5.0)
       coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
+      erubi (>= 1.0.0)
       rack (>= 0.9.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
@@ -165,6 +165,7 @@ GEM
       faraday
       multi_json
     equalizer (0.0.11)
+    erubi (1.8.0)
     erubis (2.7.0)
     execjs (2.6.0)
     faraday (0.10.0)
@@ -431,7 +432,7 @@ DEPENDENCIES
   airbrussh (~> 1.1.0)
   autoprefixer-rails (~> 5.1.0)
   bcrypt (~> 3.1.9)
-  better_errors (~> 2.1.0)
+  better_errors (~> 2.5.0)
   binding_of_caller (~> 0.8.0)
   brakeman (~> 4.3.0)
   bullet (~> 4.14.0)
