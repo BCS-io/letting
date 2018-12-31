@@ -88,7 +88,7 @@ ruby '~> 2.5.0'
 # Production
 #
 gem 'autoprefixer-rails', '~> 9.4.0'
-gem 'bcrypt', '~> 3.1.9'
+gem 'bcrypt', '~> 3.1.12'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'elasticsearch', '~> 1.1.0'
 gem 'elasticsearch-model', '~> 0.1.0'
