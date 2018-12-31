@@ -154,7 +154,7 @@ group :development do
   gem 'better_errors', '~> 2.5.0'
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'brakeman', '~>4.3.0', require: false
-  gem 'bullet', '~>4.14.0'
+  gem 'bullet', '~>5.9.0'
   gem 'rails_best_practices', '~>1.15.0'
   # Remove to avoid vulnerability
   # gem 'rubocop', '~> 0.34.0', require: false
