@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Property Factory' do
+RSpec.describe 'Property Factory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(property_new).to be_valid }

@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../../lib/import/charge_code'
 
 module DB
-  describe ChargeCode, :import do
+  RSpec.describe ChargeCode, :import do
     describe '.to_string' do
       it 'maps rents' do
         expect(ChargeCode.to_string 'GGR').to eq 'Garage Ground Rent'

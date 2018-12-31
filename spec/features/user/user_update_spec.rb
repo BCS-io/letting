@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User#update', type: :feature do
+RSpec.describe 'User#update', type: :feature do
   let(:user_page) { UserPage.new }
   before(:each) { log_in admin_attributes }
 

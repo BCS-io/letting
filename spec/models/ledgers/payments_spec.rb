@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Payments do
+RSpec.describe Payments do
   describe 'methods' do
     it 'to_a' do
       payment1 = payment_create(account: account_new, amount: 10)

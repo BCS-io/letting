@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../../lib/modules/clock_in'
 
-describe ClockIn do
+RSpec.describe ClockIn do
   it 'defaults booking_date to today' do
     expect(ClockIn.new.booking_date).to eq Time.zone.today
   end

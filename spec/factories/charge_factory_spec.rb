@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'ChargeFactory' do
+RSpec.describe 'ChargeFactory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(charge_new).to be_valid }

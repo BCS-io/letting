@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Address Factory' do
+RSpec.describe 'Address Factory' do
   describe 'default' do
     it('is valid') { expect(address_new).to be_valid }
     it('has empty flat_no') { expect(address_new.flat_no).to eq '' }

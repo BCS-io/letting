@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DueOns, :ledgers, :cycle, type: :model do
+RSpec.describe DueOns, :ledgers, :cycle, type: :model do
   describe 'validates' do
     describe 'due_ons_size' do
       it 'invalid above max' do

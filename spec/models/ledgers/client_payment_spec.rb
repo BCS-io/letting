@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ClientPayment, :ledgers do
+RSpec.describe ClientPayment, :ledgers do
   it 'creates years' do
     Timecop.travel('2014-6-1') do
       payment = ClientPayment.query

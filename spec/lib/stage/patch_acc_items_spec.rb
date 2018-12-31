@@ -1,7 +1,7 @@
 require_relative '../../../lib/stage/patch_acc_info'
 require_relative '../../../lib/stage/patch_acc_items'
 
-describe PatchAccItems, :stage do
+RSpec.describe PatchAccItems, :stage do
   def row human_ref: 10,
           charge_type: 'Rent',
           at_time: Date.new(2014, 3, 8),

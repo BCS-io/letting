@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../../lib/import/file_header'
 
 module DB
-  describe FileHeader, :import do
+  RSpec.describe FileHeader, :import do
     it 'client' do
       fields =
         %w[

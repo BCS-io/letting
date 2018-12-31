@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'ChargeableFactory' do
+RSpec.describe 'ChargeableFactory' do
   describe 'default' do
     it('has account_id') { expect(chargeable_new.account_id).to eq 2 }
     it('has charge_id') { expect(chargeable_new.charge_id).to eq 1 }

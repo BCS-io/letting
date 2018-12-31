@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe FullTextSearch, type: :model do
+RSpec.describe FullTextSearch, type: :model do
   describe '#go', :search do
     it 'return default when mismatch' do
       property_create address: address_new(road: 'Edge')

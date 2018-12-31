@@ -3,7 +3,7 @@ require 'rails_helper'
 #
 # Property's route path is to account
 #
-describe 'Property#index', type: :feature do
+RSpec.describe 'Property#index', type: :feature do
   before(:each) { log_in }
 
   it 'basic' do

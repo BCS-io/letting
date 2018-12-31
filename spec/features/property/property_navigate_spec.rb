@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Property navigate', type: :feature do
+RSpec.describe 'Property navigate', type: :feature do
   before(:each) { log_in }
 
   describe 'from index page' do

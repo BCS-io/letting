@@ -5,7 +5,7 @@ require 'rails_helper'
 # Printing out a single invoice (bypassing viewing the letter on the screen.)
 #
 #
-describe 'PrintInvoices#show', type: :feature do
+RSpec.describe 'PrintInvoices#show', type: :feature do
   it 'basic' do
     log_in admin_attributes
     invoice_text_create id: 1

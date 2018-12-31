@@ -1,6 +1,6 @@
 require_relative '../../../lib/modules/consecutize'
 
-describe Consecutize do
+RSpec.describe Consecutize do
   it 'initializes one number' do
     consecutive = Consecutize.new(elements: [1])
     expect(consecutive.to_s).to eq '1'

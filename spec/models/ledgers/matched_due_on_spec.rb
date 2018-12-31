@@ -1,7 +1,7 @@
 require 'rails_helper'
 # rubocop: disable Lint/UselessComparison
 
-describe MatchedDueOn, :ledgers, :cycle, type: :model do
+RSpec.describe MatchedDueOn, :ledgers, :cycle, type: :model do
   describe '#<=>' do
     it 'returns 0 when equal' do
       expect(MatchedDueOn.new(2, 2) <=> MatchedDueOn.new(2, 2)).to eq(0)

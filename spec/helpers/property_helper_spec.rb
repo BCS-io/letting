@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PropertyHelper, type: :helper do
+RSpec.describe PropertyHelper, type: :helper do
   it '#lists clients' do
     client_create id: 1,
                   human_ref: '8008',

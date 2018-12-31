@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cycle Factory', :cycle, :ledgers do
+RSpec.describe 'Cycle Factory', :cycle, :ledgers do
   describe 'new' do
     context 'default' do
       it('has name') { expect(cycle_new.name).to eq 'Mar' }

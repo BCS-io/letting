@@ -1,6 +1,6 @@
 require_relative '../../../lib/modules/space_out'
 
-describe SpaceOut do
+RSpec.describe SpaceOut do
   it 'handles nil' do
     spaced_out = SpaceOut.process(nil)
     expect(spaced_out).to eq ''

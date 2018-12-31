@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/accounts/credit_row'
 
 module DB
-  describe CreditRow, :import do
+  RSpec.describe CreditRow, :import do
     def row human_ref: 9,
             charge_code: 'GR',
             date: '2012-03-25 12:00:00',

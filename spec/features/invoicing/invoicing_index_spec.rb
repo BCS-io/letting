@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Invoicing#index', type: :feature do
+RSpec.describe 'Invoicing#index', type: :feature do
   before(:each) do
     log_in admin_attributes
   end

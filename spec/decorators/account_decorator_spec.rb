@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AccountDecorator do
+RSpec.describe AccountDecorator do
   describe 'running-balance' do
     it 'keeps a working balance' do
       charge = charge_new

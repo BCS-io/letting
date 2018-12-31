@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Snapshot Factory' do
+RSpec.describe 'Snapshot Factory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(invoice_new).to be_valid }

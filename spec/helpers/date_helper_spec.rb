@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DateHelper, type: :helper do
+RSpec.describe DateHelper, type: :helper do
   describe '#salient_date_range' do
     it 'includes salient_date interface' do
       expect(salient_date_range start_date: Date.new(Time.zone.now.year, 4, 5),

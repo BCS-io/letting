@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'InvoiceText#update', type: :feature do
+RSpec.describe 'InvoiceText#update', type: :feature do
   before(:each) do
     log_in admin_attributes
   end

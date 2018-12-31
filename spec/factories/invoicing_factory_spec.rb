@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Invoicing Factory' do
+RSpec.describe 'Invoicing Factory' do
   describe 'default' do
     it "is valid if covers an account's human_ref" do
       property_create human_ref: 1, account: account_new

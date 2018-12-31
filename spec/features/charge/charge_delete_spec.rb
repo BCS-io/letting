@@ -3,7 +3,7 @@ require 'rails_helper'
 # Deleting a charge can only happen with current property
 # Tests create and use a property in all instances.
 #
-describe 'Charge#delete', type: :feature do
+RSpec.describe 'Charge#delete', type: :feature do
   let(:account) { AccountPage.new }
   before(:each) do
     log_in

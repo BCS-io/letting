@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User#show', type: :feature do
+RSpec.describe 'User#show', type: :feature do
   before(:each) do
     log_in admin_attributes
   end

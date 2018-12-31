@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Invoice Factory' do
+RSpec.describe 'Invoice Factory' do
   describe 'default' do
     it('is valid') { expect(invoice_new).to be_valid }
 

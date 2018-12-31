@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Product Factory' do
+RSpec.describe 'Product Factory' do
   describe 'default' do
     it('is valid') { expect(product_new).to be_valid }
     it('has charge') { expect(product_new.charge_type).to eq 'Rent' }

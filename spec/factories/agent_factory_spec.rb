@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Agent Factory' do
+RSpec.describe 'Agent Factory' do
   describe 'default' do
     it('is valid') { expect(agent_new).to be_valid }
     it 'has address' do

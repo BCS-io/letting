@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/accounts/import_payment'
 
 module DB
-  describe ImportPayment, :import do
+  RSpec.describe ImportPayment, :import do
     it 'single credit' do
       property_create human_ref: 89,
                       account: account_new(charges: [charge_create])

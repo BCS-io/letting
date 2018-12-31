@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Property, type: :model do
+RSpec.describe Property, type: :model do
   it('is valid') { expect(property_new).to be_valid }
 
   describe 'validations' do

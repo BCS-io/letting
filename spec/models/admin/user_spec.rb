@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User, type: :model do
+RSpec.describe User, type: :model do
   describe 'validations' do
     it('is valid') { expect(user_create).to be_valid }
 

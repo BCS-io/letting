@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'SecondRunsNeeded#index', type: :feature do
+RSpec.describe 'SecondRunsNeeded#index', type: :feature do
   before(:each) do
     log_in admin_attributes
   end

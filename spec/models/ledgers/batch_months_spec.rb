@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe BatchMonths, :ledgers do
+RSpec.describe BatchMonths, :ledgers do
   describe 'make month as id' do
     it 'can return now' do
       batch_months = BatchMonths.make month: BatchMonths::MAR

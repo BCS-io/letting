@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Permission Testing', type: :feature do
+RSpec.describe 'Permission Testing', type: :feature do
   it 'allows a guest to use login route' do
     visit '/login'
     expect(page.title).to eq 'Letting - Login'

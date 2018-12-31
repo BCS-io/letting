@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'payment' do
+RSpec.describe 'payment' do
   describe 'new' do
     describe 'default' do
       it('is not valid') { expect(payment_new).to_not be_valid }

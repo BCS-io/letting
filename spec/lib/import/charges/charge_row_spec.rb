@@ -18,7 +18,7 @@ require_relative '../../../../lib/import/charges/due_on_importable'
 ####
 module DB
   include ChargedInDefaults
-  describe ChargeRow, :import do
+  RSpec.describe ChargeRow, :import do
     def charge_row code: 'GR',
                    charged_in: 0,
                    amount: 50.5,

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PropertyDecorator do
+RSpec.describe PropertyDecorator do
   let(:property) { PropertyDecorator.new property_new }
 
   let(:house) do

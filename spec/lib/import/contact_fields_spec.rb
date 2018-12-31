@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/contact_fields'
 
 module DB
-  describe ContactFields, :import do
+  RSpec.describe ContactFields, :import do
     def contact_fields
       %q(11,  Mr,  D, Example, Mrs, A N, Other&, 1, ExampleHouse,  2, ) +
         %q(Example Street, District ,Example Town,  Example County,) +

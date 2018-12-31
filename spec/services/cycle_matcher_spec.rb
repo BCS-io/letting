@@ -12,7 +12,7 @@ require_relative '../../lib/import/charges/charge_row'
 ####
 #
 module DB
-  describe CycleMatcher, :cycle do
+  RSpec.describe CycleMatcher, :cycle do
     it 'matches on due_ons' do
       cycle_create id: 6,
                    charged_in: 'advance',

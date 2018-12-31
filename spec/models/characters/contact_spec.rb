@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for Contact do
+RSpec.shared_examples_for Contact do
   describe '#prepares_for_form' do
     it 'prepares address' do
       contactable = described_class.new
@@ -18,14 +18,14 @@ shared_examples_for Contact do
   end
 end
 
-describe Property do
+RSpec.describe Property do
   it_behaves_like Contact
 end
 
-describe Agent do
+RSpec.describe Agent do
   it_behaves_like Contact
 end
 
-describe Client do
+RSpec.describe Client do
   it_behaves_like Contact
 end

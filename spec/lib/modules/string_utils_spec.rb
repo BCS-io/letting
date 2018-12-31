@@ -6,7 +6,7 @@ class StringTest
   include StringUtils
 end
 
-describe StringUtils do
+RSpec.describe StringUtils do
   describe 'is_num?' do
     it 'return true if a numeric' do
       expect(StringTest.num?('10')).to eq true

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Session#creates', type: :feature do
+RSpec.describe 'Session#creates', type: :feature do
   it 'completes basic' do
     user_create user_attributes
     navigates_to_create_page

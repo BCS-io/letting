@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client#create', type: :feature do
+RSpec.describe 'Client#create', type: :feature do
   before { log_in }
   let(:client_page) { ClientPage.new }
 

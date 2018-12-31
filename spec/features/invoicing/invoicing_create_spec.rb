@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Invoicing#create', type: :feature do
+RSpec.describe 'Invoicing#create', type: :feature do
   let(:invoicing_page) { InvoicingPage.new }
   before do
     log_in

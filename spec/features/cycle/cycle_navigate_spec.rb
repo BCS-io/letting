@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cycle navigate', type: :feature do
+RSpec.describe 'Cycle navigate', type: :feature do
   before { log_in admin_attributes }
 
   describe 'from index page' do

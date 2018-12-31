@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AccountCreditDecorator do
+RSpec.describe AccountCreditDecorator do
   describe 'accessors for' do
     it '#charge_type' do
       credit_dec = AccountCreditDecorator.new credit_new(at_time: '10/6/2014')

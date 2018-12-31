@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Payment, :payment, :ledgers, type: :model do
+RSpec.describe Payment, :payment, :ledgers, type: :model do
   describe 'validates' do
     it('is valid') { expect(payment_new account: account_new).to be_valid }
     it 'requires account' do

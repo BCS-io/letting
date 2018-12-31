@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User#destroy', type: :feature do
+RSpec.describe 'User#destroy', type: :feature do
   before(:each) { log_in admin_attributes }
 
   it 'destroys' do

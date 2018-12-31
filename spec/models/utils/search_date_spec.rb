@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SearchDate, type: :model do
+RSpec.describe SearchDate, type: :model do
   context 'valid' do
     it 'for date' do
       expect(SearchDate.new('2000-1-1')).to be_valid_date

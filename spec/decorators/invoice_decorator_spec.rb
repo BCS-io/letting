@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe InvoiceDecorator do
+RSpec.describe InvoiceDecorator do
   it '#invoice_date - displays formatted date' do
     invoice_dec = InvoiceDecorator.new invoice_new invoice_date: Date.new(2010, 3, 25)
     expect(invoice_dec.invoice_date).to eq '25/Mar/10'

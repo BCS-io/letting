@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client#show', type: :feature do
+RSpec.describe 'Client#show', type: :feature do
   before { log_in }
 
   it 'has basic details' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RepeatDate, :ledgers, :range do
+RSpec.describe RepeatDate, :ledgers, :range do
   describe 'create' do
     describe 'with date' do
       it 'has expected day' do

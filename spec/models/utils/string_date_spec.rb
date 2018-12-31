@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe StringDate, type: :model do
+RSpec.describe StringDate, type: :model do
   describe 'method' do
     describe 'to_date' do
       it 'for date' do

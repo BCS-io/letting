@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Credit, :ledgers, type: :model do
+RSpec.describe Credit, :ledgers, type: :model do
   let(:credit) { credit_new amount: 88.08 }
 
   describe 'validates' do

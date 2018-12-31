@@ -1,7 +1,7 @@
 require 'rails_helper'
 include AddressDefaults
 
-describe Address, type: :model do
+RSpec.describe Address, type: :model do
   describe 'validations' do
     it('valid') { expect(address_new).to be_valid }
     describe 'flat_no' do

@@ -9,7 +9,7 @@ require 'rails_helper'
 # first.
 #
 #
-describe 'PrintRun#show', type: :feature do
+RSpec.describe 'PrintRun#show', type: :feature do
   it 'basic' do
     log_in admin_attributes
     invoice_text_create id: 1

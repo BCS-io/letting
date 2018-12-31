@@ -32,7 +32,7 @@ class PaymentByDatesPage
   end
 end
 
-describe 'PaymentByDate#index', :ledgers, type: :feature do
+RSpec.describe 'PaymentByDate#index', :ledgers, type: :feature do
   let(:payment_by_dates_page) { PaymentByDatesPage.new }
   before { log_in }
 

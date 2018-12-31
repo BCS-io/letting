@@ -16,7 +16,7 @@ include ChargeTypes
 ####
 #
 module DB
-  describe BalanceRow, :import do
+  RSpec.describe BalanceRow, :import do
     def row human_ref: 9,
             charge_code: 'GR',
             date: '2012-03-24 00:00:00',

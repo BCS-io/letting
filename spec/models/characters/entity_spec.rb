@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Entity, type: :model do
+RSpec.describe Entity, type: :model do
   let(:entity) { Entity.new person_entity_attributes entitieable_id: 1 }
   it('is valid') { expect(entity).to be_valid }
 

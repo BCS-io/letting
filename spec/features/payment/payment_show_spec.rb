@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Payment#show', type: :feature do
+RSpec.describe 'Payment#show', type: :feature do
   before { log_in }
 
   it 'shows record' do

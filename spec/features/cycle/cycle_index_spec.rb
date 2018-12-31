@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cycle#index', :ledgers, type: :feature do
+RSpec.describe 'Cycle#index', :ledgers, type: :feature do
   before { log_in admin_attributes }
 
   it 'completes basic' do

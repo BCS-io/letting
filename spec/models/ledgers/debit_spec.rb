@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Debit, :ledgers, type: :model do
+RSpec.describe Debit, :ledgers, type: :model do
   describe 'validates' do
     let(:debit) { charge_new(debits: [debit_new]).debits.first }
     it('is valid') { expect(debit).to be_valid }

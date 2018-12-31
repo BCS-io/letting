@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User#index', type: :feature do
+RSpec.describe 'User#index', type: :feature do
   before(:each) { log_in admin_attributes }
 
   it 'completes basic' do

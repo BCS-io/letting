@@ -17,7 +17,7 @@ include ChargeTypes
 ####
 module DB
   include ChargedInDefaults
-  describe LegacyChargedInFields, :import do
+  RSpec.describe LegacyChargedInFields, :import do
     describe '#id' do
       context 'valid legacy code' do
         it 'returns charged_in code' do

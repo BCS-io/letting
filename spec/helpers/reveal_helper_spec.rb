@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RevealHelper, type: :helper do
+RSpec.describe RevealHelper, type: :helper do
   describe '#hide_empty_records_after_first' do
     it 'display if empty and first' do
       object = double

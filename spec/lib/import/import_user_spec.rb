@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_user'
 
 module DB
-  describe ImportUser, :import do
+  RSpec.describe ImportUser, :import do
     def row
       %q(Rich, richard.wigley@gmail.com,  password,  admin)
     end

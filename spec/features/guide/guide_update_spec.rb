@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Guide#update', type: :feature do
+RSpec.describe 'Guide#update', type: :feature do
   before(:each) do
     log_in admin_attributes
   end

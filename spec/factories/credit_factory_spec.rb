@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Credit Factory' do
+RSpec.describe 'Credit Factory' do
   describe 'new' do
     describe 'default' do
       it('is not valid') { expect(credit_new).to_not be_valid }

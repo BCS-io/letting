@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SalientDate do
+RSpec.describe SalientDate do
   before :each do
     @dummy = Object.new
     @dummy.extend(SalientDate)

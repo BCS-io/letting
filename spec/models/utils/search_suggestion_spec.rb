@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SearchSuggestion, type: :model do
+RSpec.describe SearchSuggestion, type: :model do
   it 'indexes_properties' do
     property_create address: address_new(house_name: 'Box',
                                          road: 'Box',

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CreditDecorator do
+RSpec.describe CreditDecorator do
   it 'has the #amount - keeps sign' do
     credit_dec = CreditDecorator.new credit_new amount: 20.00
     expect(credit_dec.amount).to eq '20.00'

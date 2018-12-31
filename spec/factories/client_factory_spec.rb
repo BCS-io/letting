@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client Factory' do
+RSpec.describe 'Client Factory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(client_new).to be_valid }

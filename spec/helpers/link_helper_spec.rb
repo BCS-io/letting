@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LinkHelper, type: :helper do
+RSpec.describe LinkHelper, type: :helper do
   describe '#view_link' do
     it 'disables new records' do
       expect(view_link(property_new)).to include 'disabled'

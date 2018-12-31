@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Account Factory' do
+RSpec.describe 'Account Factory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(account_new).to be_valid }

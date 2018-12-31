@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Chargeable, :ledgers, type: :model do
+RSpec.describe Chargeable, :ledgers, type: :model do
   let(:chargeable) do
     Chargeable.from_charge charge_id: 1,
                            account_id: 2,

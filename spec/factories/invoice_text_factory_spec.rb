@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'InvoiceText Factory' do
+RSpec.describe 'InvoiceText Factory' do
   describe 'new' do
     # We create the object and test it has expected value
     describe 'default' do

@@ -1,7 +1,7 @@
 require_relative '../../../lib/csv/csv_transform'
 
 module DB
-  describe CSVTransform, :import, :stage do
+  RSpec.describe CSVTransform, :import, :stage do
     describe 'to_a' do
       it 'errors if file unknown' do
         expect { warn 'Warning: client is missing.' }

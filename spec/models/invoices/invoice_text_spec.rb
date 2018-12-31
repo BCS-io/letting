@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe InvoiceText, type: :model do
+RSpec.describe InvoiceText, type: :model do
   describe 'validations' do
     it('returns valid') { expect(invoice_text_new).to be_valid }
     it('description') { expect(invoice_text_new description: '').to_not be_valid }

@@ -4,7 +4,7 @@ require 'rails_helper'
 #
 # Displays the invoicing run onto the screen. Formatted ready for printing.
 #
-describe 'RunShow#show', type: :feature do
+RSpec.describe 'RunShow#show', type: :feature do
   it 'basic' do
     charge = charge_new charge_type: ChargeTypes::GROUND_RENT
     setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])

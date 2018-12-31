@@ -1,6 +1,6 @@
 require_relative '../../../lib/stage/extract_ref'
 
-describe ExtractRef, :stage do
+RSpec.describe ExtractRef, :stage do
   def row human_ref: 10, value: 4
     { human_ref: human_ref, value: value }
   end

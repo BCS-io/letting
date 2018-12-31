@@ -1,7 +1,7 @@
 
 require_relative '../../../lib/modules/rangify'
 
-describe Rangify do
+RSpec.describe Rangify do
   it 'empty string handled' do
     expect { Rangify.from_str('') }.to_not raise_error
   end

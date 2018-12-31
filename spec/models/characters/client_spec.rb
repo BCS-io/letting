@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../../../lib/modules/string_utils'
 
-describe Client, type: :model do
+RSpec.describe Client, type: :model do
   describe 'validations' do
     it('is valid') { expect(client_new).to be_valid }
 

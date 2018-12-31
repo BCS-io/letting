@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_examples_for Entities do
+RSpec.shared_examples_for Entities do
   describe 'validates' do
     it 'requires entities below the maximum allowed' do
       entityable = described_class.new
@@ -56,14 +56,14 @@ shared_examples_for Entities do
   end
 end
 
-describe Property do
+RSpec.describe Property do
   it_behaves_like Entities
 end
 
-describe Agent do
+RSpec.describe Agent do
   it_behaves_like Entities
 end
 
-describe Client do
+RSpec.describe Client do
   it_behaves_like Entities
 end

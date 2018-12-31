@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PaymentDecorator, :payment do
+RSpec.describe PaymentDecorator, :payment do
   describe 'methods' do
     context 'with account' do
       it '#human_ref is returned' do

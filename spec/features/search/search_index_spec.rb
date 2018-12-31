@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Search index', type: :feature do
+RSpec.describe 'Search index', type: :feature do
   before { log_in }
 
   describe 'index', :search do

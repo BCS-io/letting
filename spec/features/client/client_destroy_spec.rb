@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client#destroy', type: :feature do
+RSpec.describe 'Client#destroy', type: :feature do
   before { log_in }
 
   it '#destroys' do

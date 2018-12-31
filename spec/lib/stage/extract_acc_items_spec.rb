@@ -1,6 +1,6 @@
 require_relative '../../../lib/stage/extract_acc_items'
 
-describe ExtractAccItems, :stage do
+RSpec.describe ExtractAccItems, :stage do
   def row human_ref: 10,
           charge_code: 'GR',
           at_time: Date.new(2014, 3, 8),

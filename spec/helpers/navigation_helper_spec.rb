@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe NavigationHelper, type: :helper do
+RSpec.describe NavigationHelper, type: :helper do
   describe '#main_menu_active?' do
     it 'returns "active" when "selection" is on named controller' do
       allow(controller).to receive(:controller_name).and_return('accounts')

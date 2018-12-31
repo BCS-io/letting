@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Address#updates', type: :feature do
+RSpec.describe 'Address#updates', type: :feature do
   before(:each) { log_in }
 
   let(:client) { ClientPage.new }

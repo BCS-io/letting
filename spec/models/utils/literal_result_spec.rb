@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LiteralResult do
+RSpec.describe LiteralResult do
   describe '#found?' do
     it 'is found if records set' do
       expect(LiteralResult.new(controller: 'arbitary',

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Charge, :ledgers, :range, :cycle, type: :model do
+RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
   describe 'validations' do
     it('is valid') { expect(charge_new).to be_valid }
     describe 'presence' do

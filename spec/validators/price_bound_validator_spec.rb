@@ -13,7 +13,7 @@ module PriceBound
   end
 end
 
-describe PriceBoundValidator do
+RSpec.describe PriceBoundValidator do
   def validatable amount
     PriceBound::Validatable.new amount
   end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client navigate', type: :feature do
+RSpec.describe 'Client navigate', type: :feature do
   before { log_in }
 
   describe 'from index page' do

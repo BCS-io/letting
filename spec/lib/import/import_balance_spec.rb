@@ -12,7 +12,7 @@ require_relative '../../../lib/import/accounts/import_balance'
 ####
 #
 module DB
-  describe ImportBalance, :import do
+  RSpec.describe ImportBalance, :import do
     describe 'unnamed debit only one charge' do
       def row_code charge_code: 'GR', description: 'Balance'
         %(8, #{charge_code}, 2004-03-24 00:00:00, #{description}, 37.5,    0, 37.5)

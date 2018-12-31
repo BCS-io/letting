@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Charges', :ledgers, type: :model do
+RSpec.describe 'Charges', :ledgers, type: :model do
   let(:charges) { account_new.charges }
 
   it '#prepare_for_form' do

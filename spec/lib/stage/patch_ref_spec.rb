@@ -1,6 +1,6 @@
 require_relative '../../../lib/stage/patch_ref'
 
-describe PatchRef, :stage do
+RSpec.describe PatchRef, :stage do
   def row human_ref: 10, value: 4
     { human_ref: human_ref, value: value }
   end

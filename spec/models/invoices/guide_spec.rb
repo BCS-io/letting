@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Guide, type: :model do
+RSpec.describe Guide, type: :model do
   describe 'validations' do
     it('returns valid') { expect(guide_new).to be_valid }
     it('needs instruction') { expect(guide_new instruction: '').to_not be_valid }

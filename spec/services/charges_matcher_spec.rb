@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module DB
-  describe ChargesMatcher do
+  RSpec.describe ChargesMatcher do
     describe '#first_or_initialize' do
       it 'builds a charge if the charge type is unknown' do
         account = account_new charges: [charge_new(charge_type: 'Rent')]

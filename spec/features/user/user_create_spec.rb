@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User#create', type: :feature do
+RSpec.describe 'User#create', type: :feature do
   let(:user_page) { UserPage.new }
   before(:each) { log_in admin_attributes }
 

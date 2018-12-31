@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Client#index', type: :feature do
+RSpec.describe 'Client#index', type: :feature do
   before { log_in }
 
   it 'basic' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe InvoicingIndexDecorator do
+RSpec.describe InvoicingIndexDecorator do
   it '#created_at' do
     Timecop.travel(Time.zone.local(2008, 9, 1, 10, 5, 1)) do
       property_create human_ref: 1, account: account_new

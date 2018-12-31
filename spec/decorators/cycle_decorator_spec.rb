@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CycleDecorator do
+RSpec.describe CycleDecorator do
   it 'returns cycles' do
     cycle_create id: 1, name: 'Year', due_ons: [DueOn.new(month: 3, day: 2)]
     cycle_create id: 2, name: 'Half', due_ons: [DueOn.new(month: 1, day: 1),

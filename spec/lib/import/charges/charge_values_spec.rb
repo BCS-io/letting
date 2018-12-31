@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../../../lib/import/charges/charge_values'
 
 module DB
-  describe ChargeValues, :import do
+  RSpec.describe ChargeValues, :import do
     context 'Converts from code' do
       it 'returns a ChargeValues' do
         charge_value = ChargeValues.from_code 'GGR'

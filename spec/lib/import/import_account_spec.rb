@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/accounts/import_account'
 
 module DB
-  describe ImportAccount, :import do
+  RSpec.describe ImportAccount, :import do
     describe 'import_row' do
       def debit
         %q(8, GR, 2011-12-25 00:00:00, Ground Rent..., 47.5,    0, 47.5)

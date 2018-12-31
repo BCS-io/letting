@@ -3,7 +3,7 @@ require 'rails_helper'
 #
 # Property's route path is to account
 #
-describe 'Property#destroy', type: :feature do
+RSpec.describe 'Property#destroy', type: :feature do
   before(:each) { log_in }
 
   it 'completes basic' do

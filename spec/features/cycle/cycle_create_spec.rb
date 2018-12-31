@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Cycle#create', :ledgers, type: :feature do
+RSpec.describe 'Cycle#create', :ledgers, type: :feature do
   before { log_in admin_attributes }
 
   context 'Term' do

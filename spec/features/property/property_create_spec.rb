@@ -4,7 +4,7 @@ require 'rails_helper'
 # Property's route path is to account
 # charge tests are in charge_create_spec.rb
 #
-describe 'Property#create', type: :feature do
+RSpec.describe 'Property#create', type: :feature do
   let(:account) { AccountPage.new }
   before(:each) { log_in }
 

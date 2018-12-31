@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AccountDetails, :ledgers, type: :model do
+RSpec.describe AccountDetails, :ledgers, type: :model do
   describe '.balanced' do
     it 'returns accounts that were balanced a time ago' do
       charge = charge_create

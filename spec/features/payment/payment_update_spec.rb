@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Payment#update', :ledgers, type: :feature do
+RSpec.describe 'Payment#update', :ledgers, type: :feature do
   before { log_in }
   let(:payment_page) { PaymentPage.new }
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 # rubocop: disable Lint/UselessComparison
 
-describe DueOn, :ledgers, :cycle, type: :model do
+RSpec.describe DueOn, :ledgers, :cycle, type: :model do
   it('is valid') { expect(due_on_new).to be_valid }
 
   describe 'Attribute' do

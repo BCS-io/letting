@@ -12,7 +12,7 @@ require_relative '../../../lib/import/accounts/accounting_row'
 ####
 #
 module DB
-  describe AccountingRow, :import do
+  RSpec.describe AccountingRow, :import do
     let(:accounting) { (Class.new { include AccountingRow }).new }
 
     describe '#account_id' do

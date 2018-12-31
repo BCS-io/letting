@@ -3,7 +3,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_client'
 
 module DB
-  describe 'ImportContactAddress', :import do
+  RSpec.describe 'ImportContactAddress', :import do
     def row
       %q(11,  Mr,  D, Example, Mrs, A N, Other, 14a, ExampleHouse,  2, ) +
         %q(Example Street, Example District ,Example Town,  Example County,) +

@@ -3,7 +3,7 @@ require_relative '../../../lib/stage/patch_ref'
 require_relative '../../../lib/stage/extract_ref'
 require_relative '../../../lib/csv/csv_transform'
 
-describe Stage, :stage do
+RSpec.describe Stage, :stage do
   describe 'initialize' do
     describe 'headers' do
       it 'can be set directly' do

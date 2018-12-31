@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RangeCycle, :ledgers, :range do
+RSpec.describe RangeCycle, :ledgers, :range do
   it 'initializes with dates' do
     repeat = RangeCycle.for name: 'advance', dates: [Date.new(2014, 6, 5)]
 

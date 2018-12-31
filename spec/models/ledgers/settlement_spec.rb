@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Settlement, :ledgers, type: :model do
+RSpec.describe Settlement, :ledgers, type: :model do
   describe 'resolve' do
     describe 'matched settlement' do
       it 'completes when settlement == offset' do

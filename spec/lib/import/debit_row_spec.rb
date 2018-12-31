@@ -14,7 +14,7 @@ include ChargeTypes
 ####
 #
 module DB
-  describe DebitRow, :import do
+  RSpec.describe DebitRow, :import do
     def row human_ref: 9,
             charge_code: 'GR',
             date: '2012-03-25 00:00:00',

@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/entity_fields'
 
 module DB
-  describe EntityFields, :import do
+  RSpec.describe EntityFields, :import do
     it('title') { expect(EntityFields.new('Mr', 'A', 'Man').title).to eq 'Mr' }
     it 'initials' do
       expect(EntityFields.new('', 'A', 'Man').initials).to eq 'A'

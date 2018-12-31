@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'DueOn Factory' do
+RSpec.describe 'DueOn Factory' do
   describe 'new' do
     describe 'default' do
       it('is valid') { expect(due_on_new month: 1, day: 1).to be_valid }

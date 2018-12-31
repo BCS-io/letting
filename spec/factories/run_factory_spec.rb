@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Run Factory' do
+RSpec.describe 'Run Factory' do
   describe 'default' do
     it('is valid') { expect(run_new).to be_valid }
     describe 'presence' do

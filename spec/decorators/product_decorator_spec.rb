@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ProductDecorator, :invoice do
+RSpec.describe ProductDecorator, :invoice do
   describe 'methods' do
     describe '#date_due' do
       it 'returns #date_due formatted' do

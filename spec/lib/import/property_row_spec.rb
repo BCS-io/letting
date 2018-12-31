@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/property_row'
 
 module DB
-  describe PropertyRow, :import do
+  RSpec.describe PropertyRow, :import do
     let(:row) { PropertyRow.new parse_line property_row }
 
     context 'readers' do

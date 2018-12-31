@@ -4,7 +4,7 @@ require_relative '../../../lib/import/file_header'
 require_relative '../../../lib/import/import_property'
 
 module DB
-  describe ImportProperty, :import do
+  RSpec.describe ImportProperty, :import do
     client = nil
     before :each do
       client = client_create human_ref: 11

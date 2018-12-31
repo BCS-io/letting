@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Invoicing#show', type: :feature do
+RSpec.describe 'Invoicing#show', type: :feature do
   it 'Main success scenario' do
     log_in
     property_create human_ref: 2, account: account_new

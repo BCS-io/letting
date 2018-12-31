@@ -5,7 +5,7 @@ require 'rails_helper'
 # Tests for creating charges onto a property have been moved to
 # charge_create_spec.rb
 #
-describe 'Property#Update', type: :feature do
+RSpec.describe 'Property#Update', type: :feature do
   let(:account) { AccountPage.new }
 
   context 'Agentless' do
