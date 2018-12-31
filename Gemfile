@@ -159,7 +159,7 @@ group :development do
   # Remove to avoid vulnerability
   # gem 'rubocop', '~> 0.34.0', require: false
   gem 'rubycritic', require: false
-  gem 'scss_lint', '~> 0.49.0', require: false
+  gem 'scss_lint', '~> 0.57.0', require: false
   gem 'traceroute'
 end
 
