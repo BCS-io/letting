@@ -45,10 +45,10 @@ describe 'Charge#create', type: :feature do
       within 'div#t-charge' do
         expect(page).to have_css('.spec-charge-count', count: 1)
       end
-      6.times { click_on 'Add Charge' }
+      click_on 'Add Charge'
 
       within 'div#t-charge' do
-        expect(page).to have_css('.spec-charge-count', count: 6)
+        expect(page).to have_css('.spec-charge-count', count: 2)
       end
     end
   end
