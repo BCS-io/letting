@@ -52,9 +52,8 @@ GEM
       io-like (~> 0.3.0)
     arel (6.0.4)
     ast (2.4.0)
-    autoprefixer-rails (5.1.8)
+    autoprefixer-rails (9.4.4)
       execjs
-      json
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -167,7 +166,7 @@ GEM
     equalizer (0.0.11)
     erubi (1.8.0)
     erubis (2.7.0)
-    execjs (2.6.0)
+    execjs (2.7.0)
     faraday (0.10.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
@@ -437,7 +436,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrussh (~> 1.1.0)
-  autoprefixer-rails (~> 5.1.0)
+  autoprefixer-rails (~> 9.4.0)
   bcrypt (~> 3.1.9)
   better_errors (~> 2.5.0)
   binding_of_caller (~> 0.8.0)
