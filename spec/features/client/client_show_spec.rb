@@ -13,21 +13,7 @@ describe 'Client#show', type: :feature do
     expect_property_ref ref: 2008
   end
 
-  it '#show payments' do
-    charge =
-      charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
-                                               DueOn.new(month: 9, day: 30)])
-    payment = payment_new booked_at: '2014-3-2', amount: 17.35
-    client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
-      .properties << property_new(human_ref: 63,
-                                  account: account_new(charges: [charge],
-                                                       payment: payment))
-    visit '/clients/1'
-
-    expect(page).to have_text '17.35'
-  end
-
-  it '#show aggregated payments', js: true do
+  it '#show payment', js: true do
     charge =
       charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
                                                DueOn.new(month: 9, day: 30)])
@@ -39,21 +25,6 @@ describe 'Client#show', type: :feature do
     visit '/clients/1'
 
     expect(page).to have_text '17.35'
-    click_on '17.35'
-    expect(page).to have_text 'Print Mar 2014'
-  end
-
-  it '#show detailed payments for an aggregation', js: true do
-    charge =
-      charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
-                                               DueOn.new(month: 9, day: 30)])
-    payment = payment_new booked_at: '2014-5-1', amount: 17.35
-    client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
-      .properties << property_new(human_ref: 63,
-                                  account: account_new(charges: [charge],
-                                                       payment: payment))
-    visit '/clients/1'
-
     click_on '17.35'
     expect(page).to have_text 'Print Mar 2014'
   end
