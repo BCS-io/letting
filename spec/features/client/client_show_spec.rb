@@ -14,10 +14,11 @@ RSpec.describe 'Client#show', type: :feature do
   end
 
   it '#show payment', js: true do
+    year = Date.current.year - 1 # recent year but not ahead of time
     charge =
       charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),
                                                DueOn.new(month: 9, day: 30)])
-    payment = payment_new booked_at: '2014-5-1', amount: 17.35
+    payment = payment_new booked_at: "#{year}-5-1", amount: 17.35
     client_create(id: 1, human_ref: 87, entities: [Entity.new(name: 'Grace')])
       .properties << property_new(human_ref: 63,
                                   account: account_new(charges: [charge],
@@ -26,7 +27,7 @@ RSpec.describe 'Client#show', type: :feature do
 
     expect(page).to have_text '17.35'
     click_on '17.35'
-    expect(page).to have_text 'Print Mar 2014'
+    expect(page).to have_text "Print Mar #{year}"
   end
 
   def expect_client_ref(ref:)
