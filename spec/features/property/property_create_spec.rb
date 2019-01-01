@@ -14,7 +14,7 @@ RSpec.describe 'Property#create', type: :feature do
     expect(page).to have_css('.spec-entity-count', count: 1)
   end
 
-  it '#create', js: true do
+  it '#create', js: true, elasticsearch: true do
     client_create id: 15, human_ref: 8008
 
     account.load
@@ -26,7 +26,7 @@ RSpec.describe 'Property#create', type: :feature do
     expect_agent
   end
 
-  it '#creates an account without agent', js: true do
+  it '#creates an account without agent', js: true, elasticsearch: true do
     client_create id: 16, human_ref: 8008
     account.load
 

@@ -17,7 +17,7 @@ RSpec.describe 'Payment#create', :ledgers, type: :feature do
   end
 
   describe 'autofocus' do
-    it 'the next step', js: true do
+    it 'the next step', elasticsearch: true, js: true do
       account_create property: property_create(human_ref: 2003),
                      charges: [charge_new(debits: [debit_new(amount: 20.05)])]
 
@@ -28,7 +28,6 @@ RSpec.describe 'Payment#create', :ledgers, type: :feature do
       expect(find('#submit')[:autofocus]).to be_present
       payment_page.pay
       expect(find_field(:account_payment_search)[:autofocus]).to be_present
-      Payment.__elasticsearch__.delete_index!
     end
 
     it 'stays on search when no account found', js: true do
@@ -61,7 +60,7 @@ RSpec.describe 'Payment#create', :ledgers, type: :feature do
     end
   end
 
-  it 'payment for debit', js: true do
+  it 'payment for debit', elasticsearch: true, js: true do
     account_create property: property_create(human_ref: 2003),
                    charges: [charge_new(debits: [debit_new(amount: 20.05)])]
 

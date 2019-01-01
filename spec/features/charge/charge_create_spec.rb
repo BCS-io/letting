@@ -30,7 +30,7 @@ RSpec.describe 'Charge#create', type: :feature do
     expect(Charge.first.amount).to eq 12.05
   end
 
-  describe 'empty charge row' do
+  describe 'empty charge row', elasticsearch: true do
     it 'displays an empty charge row if no charges present', js: true do
       account.load
 
@@ -53,7 +53,7 @@ RSpec.describe 'Charge#create', type: :feature do
     end
   end
 
-  it 'can fills in a charge but delete it before updating', js: true do
+  it 'can fills in a charge but delete it before updating', js: true, elasticsearch: true do
     cycle = cycle_create id: 1, charged_in: 'advance'
     account.load id: 1
 
@@ -69,7 +69,7 @@ RSpec.describe 'Charge#create', type: :feature do
     expect(Charge.count).to eq 0
   end
 
-  describe 'can fill two charges at once (2.a.)' do
+  describe 'can fill two charges at once (2.a.)', elasticsearch: true do
     it 'main case succeeds', js: true do
       cycle = cycle_create(id: 1, charged_in: 'advance')
       account.load id: 1

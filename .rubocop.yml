@@ -43,6 +43,9 @@ Layout/LeadingBlankLines:
     - 'spec/support/factories/run_factory.rb'
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
+Lint/HandleExceptions:
+  Exclude:
+    - 'spec/rails_helper.rb' # suppress Elasticsearch NotFound Errors
 Lint/MissingCopEnableDirective:
   Enabled: false
 Style/MethodDefParentheses:
@@ -55,6 +58,7 @@ Metrics/LineLength:
   Max: 95
   Exclude:
     - Gemfile
+    - 'spec/rails_helper.rb'
 Metrics/MethodLength:
   Max: 10
 Naming/AccessorMethodName:
@@ -63,6 +67,9 @@ Naming/AccessorMethodName:
     - 'app/controllers/payments_controller.rb'
     - 'app/controllers/search_controller.rb'
     - 'app/models/utils/literal_search.rb'
+Naming/ConstantName:
+  Exclude:
+    - 'spec/rails_helper.rb'
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'lib/import/import_base.rb'

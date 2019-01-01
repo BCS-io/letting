@@ -41,8 +41,8 @@ RSpec.describe 'Invoicing#create', type: :feature do
     end
   end
 
-  describe 'period' do
-    it 'uses defaults dates', js: true do
+  describe 'period', js: true, elasticsearch: true do
+    it 'uses defaults dates' do
       Timecop.travel('2013-6-1') do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
@@ -57,7 +57,7 @@ RSpec.describe 'Invoicing#create', type: :feature do
       end
     end
 
-    it 'uses chosen dates', js: true do
+    it 'uses chosen dates' do
       Timecop.travel('2013-6-1') do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
@@ -74,7 +74,7 @@ RSpec.describe 'Invoicing#create', type: :feature do
       end
     end
 
-    it 'uses defaults dates if left on default choice', js: true do
+    it 'uses defaults dates if left on default choice' do
       Timecop.travel('2013-6-1') do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
@@ -90,7 +90,7 @@ RSpec.describe 'Invoicing#create', type: :feature do
       end
     end
 
-    it 'enables dates when dates are chosen', js: true do
+    it 'enables dates when dates are chosen' do
       Timecop.travel('2013-6-1') do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])

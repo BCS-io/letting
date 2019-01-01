@@ -93,13 +93,15 @@ RSpec.describe Property, type: :model do
     end
   end
 
-  describe 'full text .search', :search do
+  it 'should be indexed', elasticsearch: true do
+    expect(Property.__elasticsearch__.index_exists?).to be_truthy
+  end
+
+  describe 'full text .search', elasticsearch: true do
     before :each do
       property_create address: address_new(house_name: 'Hill')
       Property.import force: true, refresh: true
     end
-
-    after(:each) { Property.__elasticsearch__.delete_index! }
 
     it 'human id' do
       expect(Property.search('2002', sort: 'human_ref').results.total).to eq 1

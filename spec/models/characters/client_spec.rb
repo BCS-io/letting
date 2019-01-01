@@ -42,7 +42,11 @@ RSpec.describe Client, type: :model do
       .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
   end
 
-  describe 'full text .search', :search do
+  it 'should be indexed', elasticsearch: true do
+    expect(Client.__elasticsearch__.index_exists?).to be_truthy
+  end
+
+  describe 'full text .search', :search, elasticsearch: true, type: :model do
     before(:each) do
       client_create \
         human_ref: '80',
@@ -51,7 +55,6 @@ RSpec.describe Client, type: :model do
 
       Client.import force: true, refresh: true
     end
-    after(:each) { Client.__elasticsearch__.delete_index! }
 
     it 'finds human_id' do
       expect(Client.search('80', sort: 'human_ref').count).to eq 1

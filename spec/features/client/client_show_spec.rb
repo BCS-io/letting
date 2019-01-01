@@ -13,7 +13,7 @@ RSpec.describe 'Client#show', type: :feature do
     expect_property_ref ref: 2008
   end
 
-  it '#show payment', js: true do
+  it '#show payment', js: true, elasticsearch: true do
     year = Date.current.year - 1 # recent year but not ahead of time
     charge =
       charge_create cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25),

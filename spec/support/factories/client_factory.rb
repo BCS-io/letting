@@ -25,6 +25,6 @@ def client_create(
                       address: address,
                       entities: entities,
                       properties: properties
-  client.save!
+  client.save! # adding client will start a elasticsearch create event
   client
 end

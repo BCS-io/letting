@@ -17,7 +17,7 @@ RSpec.describe 'Property#Update', type: :feature do
                       client: client_new(human_ref: 90)
     end
 
-    it 'opens valid page', js: true do
+    it 'opens valid page', js: true, elasticsearch: true do
       account.load id: 1
       expect(account.title).to eq 'Letting - Edit Account'
       account.expect_property self,
@@ -29,7 +29,7 @@ RSpec.describe 'Property#Update', type: :feature do
       account.expect_entity self, type: 'property', **person_attributes
     end
 
-    it 'updates account', js: true do
+    it 'updates account', js: true, elasticsearch: true do
       new_client = client_create(human_ref: 101)
       account.load id: 1
       account.property property_id: '81', client_ref: '101'
@@ -43,7 +43,7 @@ RSpec.describe 'Property#Update', type: :feature do
       account.expect_entity self, type: 'property', **company_attributes
     end
 
-    it 'adds agent', js: true do
+    it 'adds agent', js: true, elasticsearch: true do
       account.load id: 1
       check 'Agent'
       account.address selector: '#agent', address: address_new
@@ -72,7 +72,7 @@ RSpec.describe 'Property#Update', type: :feature do
   context 'Agentless with charge' do
     before { log_in }
 
-    it 'can be set to dormant', js: true do
+    it 'can be set to dormant', js: true, elasticsearch: true do
       property_create \
         id: 1, account: account_new(charges: [charge_new(activity: 'active')])
       account.load id: 1
@@ -97,7 +97,7 @@ RSpec.describe 'Property#Update', type: :feature do
       account.load id: 1
     end
 
-    it 'opens property with agent', js: true  do
+    it 'opens property with agent', js: true, elasticsearch: true do
       expect(find_field('Agent')).to be_checked
       account.expect_address self,
                              type: '#property_agent_address',

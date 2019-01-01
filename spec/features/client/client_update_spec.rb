@@ -10,13 +10,13 @@ RSpec.describe 'Client#update', type: :feature do
       client_page.load id: 1
     end
 
-    it 'opens valid page', js: true do
+    it 'opens valid page', js: true, elasticsearch: true do
       expect(client_page.title).to eq 'Letting - Edit Client'
       expect(page).to have_css '.spec-entity-count', count: 1
     end
 
     # Note ** combines keywords (order + amend_person) - splatted into call
-    it 'amends', js: true do
+    it 'amends', js: true, elasticsearch: true do
       client_page.click 'Add district'
       client_page.fill_in_client_id 278
       client_page.fill_in_entity order: 0, name: 'Smith'
@@ -38,7 +38,7 @@ RSpec.describe 'Client#update', type: :feature do
       expect(page).to have_css '[data-role="error_messages"]'
     end
 
-    it 'adds a second entity', js: true do
+    it 'adds a second entity', js: true, elasticsearch: true do
       client_page.click 'Add Person'
       client_page.fill_in_entity order: 1, name: 'Cook'
 
@@ -59,8 +59,8 @@ RSpec.describe 'Client#update', type: :feature do
     end
   end
 
-  context 'with two entity' do
-    it 'deletes second entity', js: true do
+  context 'with two entity', js: true, elasticsearch: true do
+    it 'deletes second entity' do
       client_create \
         id: 1,
         human_ref: 301,
@@ -76,7 +76,7 @@ RSpec.describe 'Client#update', type: :feature do
       expect(Client.first.entities.size).to eq 1
     end
 
-    it 'does not add a third entity', js: true do
+    it 'does not add a third entity' do
       client_create \
         id: 1,
         human_ref: 301,

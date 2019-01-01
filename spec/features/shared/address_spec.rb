@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'Address#updates', type: :feature do
+RSpec.describe 'Address#updates', type: :feature, js: true, elasticsearch: true do
   before(:each) { log_in }
 
   let(:client) { ClientPage.new }
   let(:address) { AddressPage.new }
 
   describe 'district line' do
-    it 'can show', js: true do
+    it 'can show' do
       client_create id: 1, address: address_new(district: '')
       client.load id: 1
 
@@ -16,14 +16,14 @@ RSpec.describe 'Address#updates', type: :feature do
       expect(address).to be_district_visible
     end
 
-    it 'shows if the address already has district', js: true do
+    it 'shows if the address already has district' do
       client_create id: 1, address: address_new(district: 'Edgbaston')
       client.load id: 1
 
       expect(address).to be_district_visible
     end
 
-    it 'can hide', js: true do
+    it 'can hide' do
       client_create id: 1, address: address_new(district: 'Edgbaston')
       client.load id: 1
 
@@ -33,7 +33,7 @@ RSpec.describe 'Address#updates', type: :feature do
   end
 
   describe 'nation line' do
-    it 'can show', js: true do
+    it 'can show' do
       client_create id: 1, address: address_new(nation: '')
       client.load id: 1
 
@@ -42,14 +42,14 @@ RSpec.describe 'Address#updates', type: :feature do
       expect(address).to be_nation_visible
     end
 
-    it 'shows if the address already has nation', js: true do
+    it 'shows if the address already has nation' do
       client_create id: 1, address: address_new(nation: 'Edgbaston')
       client.load id: 1
 
       expect(address).to be_nation_visible
     end
 
-    it 'can hide', js: true do
+    it 'can hide' do
       client_create id: 1, address: address_new(nation: 'Edgbaston')
       client.load id: 1
 

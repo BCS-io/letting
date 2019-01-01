@@ -4,7 +4,7 @@ RSpec.describe 'Payment#update', :ledgers, type: :feature do
   before { log_in }
   let(:payment_page) { PaymentPage.new }
 
-  it 'editing original payment - no double payments', js: true do
+  it 'editing original payment - no double payments', js: true, elasticsearch: true do
     charge = charge_create debits: [debit_new(amount: 30)]
     payment = payment_new credit: credit_new(amount: 30, charge_id: charge.id)
     account_create payment: payment,

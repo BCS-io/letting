@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Search index', type: :feature do
+RSpec.describe 'Search index', type: :feature, elasticsearch: true do
   before { log_in }
 
   describe 'index', :search do
@@ -40,7 +40,6 @@ RSpec.describe 'Search index', type: :feature do
       expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'
-      Property.__elasticsearch__.delete_index!
     end
 
     it 'handles multiple requests' do
@@ -54,7 +53,6 @@ RSpec.describe 'Search index', type: :feature do
       expect(page).to have_text '111'
       click_on 'search'
       expect(page).to have_text '111'
-      Property.__elasticsearch__.delete_index!
     end
 
     it 'empty search returns a default result set' do
@@ -64,7 +62,6 @@ RSpec.describe 'Search index', type: :feature do
       fill_in 'search_terms', with: ''
       click_on 'search'
       expect(page).to have_text '111'
-      Property.__elasticsearch__.delete_index!
     end
 
     it 'search not found when absent' do
@@ -74,7 +71,6 @@ RSpec.describe 'Search index', type: :feature do
       fill_in 'search_terms', with: '599'
       click_on 'search'
       expect(page).to have_text 'No Matches found. Search again.'
-      Property.__elasticsearch__.delete_index!
     end
 
     describe 'search terms' do
@@ -97,7 +93,6 @@ RSpec.describe 'Search index', type: :feature do
         fill_in 'search_terms', with: 'Wor'
         click_on 'search'
         expect(find_field('search_terms').value).to have_text 'Wor'
-        Property.__elasticsearch__.delete_index!
       end
     end
   end

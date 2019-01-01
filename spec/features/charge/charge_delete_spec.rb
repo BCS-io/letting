@@ -13,7 +13,7 @@ RSpec.describe 'Charge#delete', type: :feature do
                     client: client_new(human_ref: 90)
   end
 
-  it 'deletes charge', js: true do
+  it 'deletes charge', js: true, elasticsearch: true do
     charge = charge_create cycle: cycle_new(id: 1, charged_in: 'advance')
     Account.first.charges << charge
     account.load id: 1
