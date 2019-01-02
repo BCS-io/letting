@@ -120,7 +120,7 @@ gem 'rake', '10.1.0'
 gem 'sass-rails', '~> 5.0.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'seedbank'
-gem 'sprockets', '~>2.12.3'
+gem 'sprockets', '~>3.7.0'
 gem 'turbolinks', '~> 2.5.0'
 gem 'uglifier', '~> 2.7.0'
 gem 'unicorn', '~> 4.8.0'
