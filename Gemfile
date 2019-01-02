@@ -156,6 +156,7 @@ group :development do
   gem 'brakeman', '~>4.3.0', require: false
   gem 'bullet', '~>5.9.0'
   gem 'rails_best_practices', '~>1.15.0'
+  gem 'require_all', '~> 1.0' # 2.0 seems to break rails_best_practice
   # Remove to avoid vulnerability
   # gem 'rubocop', '~> 0.34.0', require: false
   gem 'rubycritic', require: false
