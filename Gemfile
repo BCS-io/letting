@@ -117,7 +117,7 @@ gem 'rails-env-favicon'
 # TODO: fix for being able to read in args
 # Using this version of the gem because it is the same as on production system
 gem 'rake', '10.1.0'
-gem 'sass-rails', '~> 5.0.1'
+gem 'sass-rails', '~> 5.0.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'seedbank'
 gem 'sprockets', '~>2.12.3'
