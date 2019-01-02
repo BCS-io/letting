@@ -1,6 +1,3 @@
-require 'coveralls'
-Coveralls.wear!('rails')
-
 require 'database_cleaner'
 require 'zonebie'
 

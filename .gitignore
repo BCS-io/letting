@@ -26,8 +26,6 @@
 # data importing - not saved on github!
 /import_data
 
-.coveralls.yml
-
 Guardfile
 
 public/assets

@@ -201,7 +201,6 @@ end
 # Testing
 #
 group :test do
-  gem 'coveralls', '~>0.8.0', require: false
   gem 'database_cleaner', '~> 1.5.0'
 
   # Create e.s. test node
