@@ -203,7 +203,7 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
-    kgio (2.9.3)
+    kgio (2.11.2)
     launchy (2.4.3)
       addressable (~> 2.3)
     lograge (0.10.0)
