@@ -95,7 +95,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'equalizer'
 gem 'font-awesome-rails'
-gem 'jbuilder', '~> 2.2.0'
+gem 'jbuilder', '~> 2.7.0'
 gem 'jquery-rails', '~> 4.0.0'
 
 # BREAKING GEM
