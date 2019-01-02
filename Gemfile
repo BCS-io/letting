@@ -96,7 +96,7 @@ gem 'elasticsearch-rails'
 gem 'equalizer'
 gem 'font-awesome-rails'
 gem 'jbuilder', '~> 2.7.0'
-gem 'jquery-rails', '~> 4.0.0'
+gem 'jquery-rails', '~> 4.3.0'
 
 # BREAKING GEM
 # 5.0.3 - causes CapybaraHelper to fail
