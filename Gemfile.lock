@@ -442,8 +442,8 @@ DEPENDENCIES
   database_cleaner (~> 1.5.0)
   elasticsearch (~> 2.0.0)
   elasticsearch-extensions
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch-model (~> 0.1.0)
+  elasticsearch-rails (~> 0.1.0)
   equalizer
   font-awesome-rails
   jbuilder (~> 2.7.0)
