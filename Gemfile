@@ -161,6 +161,8 @@ group :development do
   gem 'rubycritic', require: false
   gem 'scss_lint', '~> 0.57.0', require: false
   gem 'traceroute'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
 end
 
 #
@@ -191,9 +193,6 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'table_print'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
   gem 'zonebie', '~> 0.6.0'
 end
 
