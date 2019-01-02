@@ -383,7 +383,7 @@ GEM
     traceroute (0.8.0)
       rails (>= 3.0.0)
     tty-which (0.3.0)
-    turbolinks (2.5.3)
+    turbolinks (2.5.4)
       coffee-rails
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
