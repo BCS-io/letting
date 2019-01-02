@@ -252,7 +252,7 @@ GEM
       rack (~> 1.4)
     rack-dev-mark (0.7.7)
       rack (>= 1.1, < 2.1)
-    rack-mini-profiler (0.10.2)
+    rack-mini-profiler (1.0.1)
       rack (>= 1.2.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -457,7 +457,7 @@ DEPENDENCIES
   pry-rails (~> 0.3.0)
   pry-stack_explorer (~> 0.4.9.0)
   rack-dev-mark (~> 0.7.0)
-  rack-mini-profiler (~> 0.10.0)
+  rack-mini-profiler (~> 1.0.0)
   rails (= 4.2.11)
   rails-env-favicon
   rails_best_practices (~> 1.15.0)
