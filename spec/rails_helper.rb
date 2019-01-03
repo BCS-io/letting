@@ -76,7 +76,7 @@ RSpec.configure do |config|
       begin
         model.__elasticsearch__.create_index!
         model.__elasticsearch__.refresh_index!
-      rescue StandardError => Elasticsearch::Transport::Transport::Errors::NotFound
+      rescue Elasticsearch::Transport::Transport::Errors::NotFound
         # This kills "Index does not exist" errors being written to console
       rescue StandardError => e
         STDERR.puts "There was an error creating the elasticsearch index for #{model.name}: #{e.inspect}"
@@ -91,7 +91,7 @@ RSpec.configure do |config|
 
       begin
         model.__elasticsearch__.delete_index!
-      rescue StandardError => Elasticsearch::Transport::Transport::Errors::NotFound
+      rescue Elasticsearch::Transport::Transport::Errors::NotFound
         # This kills "Index does not exist" errors being written to console
       rescue StandardError => e
         STDERR.puts "There was an error removing the elasticsearch index for #{model.name}: #{e.inspect}"

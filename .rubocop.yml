@@ -67,9 +67,6 @@ Naming/AccessorMethodName:
     - 'app/controllers/payments_controller.rb'
     - 'app/controllers/search_controller.rb'
     - 'app/models/utils/literal_search.rb'
-Naming/ConstantName:
-  Exclude:
-    - 'spec/rails_helper.rb'
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'lib/import/import_base.rb'
