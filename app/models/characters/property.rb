@@ -75,8 +75,8 @@ class Property < ActiveRecord::Base
     as_json(
       methods: %i[occupiers address_text],
       include: {
-        agent: { methods: %i[full_name to_address],
-                 only: %i[full_name to_address] }
+        agent: { methods: %i[full_names address],
+                 only: %i[full_names address] }
       },
       except: %i[id created_at updated_at]
     )

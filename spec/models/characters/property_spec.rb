@@ -99,7 +99,11 @@ RSpec.describe Property, type: :model do
 
   describe 'full text .search', elasticsearch: true do
     before :each do
-      property_create address: address_new(house_name: 'Hill')
+      agent = agent_new authorized: true,
+                        entities: [Entity.new(name: 'Bel')],
+                        address: address_new(road: 'Old', town: 'York')
+      property_create address: address_new(house_name: 'Hill'),
+                      agent: agent
       Property.import force: true, refresh: true
     end
 
@@ -117,6 +121,12 @@ RSpec.describe Property, type: :model do
     end
     it 'towns' do
       expect(Property.search('Bir', sort: 'human_ref').count).to eq 1
+    end
+    it 'agent name' do
+      expect(Property.search('Bel', sort: 'human_ref').count).to eq 1
+    end
+    it 'agent town' do
+      expect(Property.search('Yor', sort: 'human_ref').count).to eq 1
     end
   end
 end
