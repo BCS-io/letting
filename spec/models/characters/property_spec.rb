@@ -93,6 +93,23 @@ RSpec.describe Property, type: :model do
     end
   end
 
+  describe 'flattening models' do
+    it 'returns abridged version of address' do
+      p = property_create address: address_new(road: 'Edge', town: 'Brum', county: 'West')
+      expect(p.abridged_text).to eq "Edge\nBrum"
+    end
+
+    it 'returns tenants' do
+      p = property_create occupiers: [Entity.new(name: 'Strauss')]
+      expect(p.full_names).to eq 'Strauss'
+    end
+
+    it 'returns address' do
+      p = property_create address: address_new(house_name: 'Hill')
+      expect(p.address_text).to eq "Hill\nEdgbaston Road\nBirmingham\nWest Midlands"
+    end
+  end
+
   it 'should be indexed', elasticsearch: true do
     expect(Property.__elasticsearch__.index_exists?).to be_truthy
   end
