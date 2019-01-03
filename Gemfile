@@ -158,7 +158,7 @@ group :development do
   gem 'rails_best_practices', '~>1.15.0'
   gem 'require_all', '~> 1.0' # 2.0 seems to break rails_best_practice
   # Remove to avoid vulnerability
-  # gem 'rubocop', '~> 0.34.0', require: false
+  gem 'rubocop', '~> 0.62.0', require: false
   gem 'rubycritic', require: false
   gem 'scss_lint', '~> 0.57.0', require: false
   gem 'traceroute'
