@@ -60,6 +60,19 @@ RSpec.describe 'payment' do
         expect(payment.booked_at)
           .to eq Time.zone.local(2013, 9, 30, 10, 5, 6)
       end
+
+      it 'alters account property ref' do
+        payment_create account: account_new(property: property_new(human_ref: 5))
+
+        expect(Payment.first.account.property.human_ref).to eq 5
+      end
+
+      it 'alters account property address' do
+        payment_create account: \
+          account_create(property: property_new(address: address_new(road: 'Hill')))
+
+        expect(Account.first.property.address.road).to eq 'Hill'
+      end
     end
   end
 end
