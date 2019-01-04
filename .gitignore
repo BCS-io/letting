@@ -17,6 +17,9 @@
 !/log/.keep
 /tmp
 
+# Ignore Byebug command history file.
+.byebug_history
+
 # Sandi Meter
 /sandi_meter
 
