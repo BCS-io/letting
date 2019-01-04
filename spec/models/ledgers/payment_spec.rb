@@ -272,5 +272,13 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
 
       expect(Payment.search('Strauss', sort: 'human_ref').results.total).to eq 1
     end
+
+    it 'has property address' do
+      payment_create account: \
+          account_create(property: property_new(address: address_new(town: 'Bristol')))
+      Payment.import force: true, refresh: true
+
+      expect(Payment.search('Bristol', sort: 'human_ref').results.total).to eq 1
+    end
   end
 end

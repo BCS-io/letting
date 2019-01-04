@@ -28,6 +28,10 @@ class Account < ActiveRecord::Base
     property.occupiers
   end
 
+  def location
+    property.address_text
+  end
+
   has_many :payments, dependent: :destroy, inverse_of: :account
   has_many :credits, dependent: :destroy
   has_many :debits, dependent: :destroy, inverse_of: :account do
