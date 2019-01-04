@@ -11,7 +11,7 @@ RSpec.describe 'Client#create', type: :feature do
     expect(page).to have_css '.spec-entity-count', count: 1
   end
 
-  it 'can be added', js: true do
+  it 'can be added', js: true, elasticsearch: true do
     client_page.load
     client_page.click 'Add district'
     client_page.fill_in_client_id 278
