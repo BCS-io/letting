@@ -245,4 +245,32 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       end
     end
   end
+
+  it 'should be indexed', elasticsearch: true do
+    expect(Payment.__elasticsearch__.index_exists?).to be_truthy
+  end
+
+  describe 'full text .search', elasticsearch: true do
+    it 'human id' do
+      payment_create account: account_create(property: property_new(human_ref: 203))
+      Payment.import force: true, refresh: true
+
+      expect(Payment.search('203', sort: 'human_ref').results.total).to eq 1
+    end
+
+    it 'has amount' do
+      payment_create account: account_create(property: property_new), amount: 127
+      Payment.import force: true, refresh: true
+
+      expect(Payment.search('127', sort: 'human_ref').results.total).to eq 1
+    end
+
+    it 'has holder' do
+      payment_create account: account_create(property: \
+        property_new(occupiers: [Entity.new(name: 'Strauss')]))
+      Payment.import force: true, refresh: true
+
+      expect(Payment.search('Strauss', sort: 'human_ref').results.total).to eq 1
+    end
+  end
 end
