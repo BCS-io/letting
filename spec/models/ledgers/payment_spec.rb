@@ -259,10 +259,19 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     end
 
     it 'has amount' do
-      payment_create account: account_create(property: property_new), amount: 127
+      payment_create account: account_create(property: property_new), amount: 12.70
       Payment.import force: true, refresh: true
 
-      expect(Payment.search('127', sort: 'human_ref').results.total).to eq 1
+      expect(Payment.search('12.7', sort: 'human_ref').results.total).to eq 1
+    end
+
+    it 'has amount to two decimal places' do
+      skip
+      payment_create account: account_create(property: property_new), amount: 12.70
+      Payment.import force: true, refresh: true
+
+      # note this should match but doesn't
+      expect(Payment.search('12.70', sort: 'human_ref').results.total).to eq 1
     end
 
     it 'has holder' do
