@@ -8,8 +8,7 @@ RSpec.describe 'Account Factory' do
     end
     describe 'adds' do
       it 'can add property' do
-        property = property_new(human_ref: 5)
-        expect(account_new(property: property).property.human_ref).to eq 5
+        expect(account_new(property: property_new(human_ref: 5)).property.human_ref).to eq 5
       end
       it 'can add charge' do
         expect(account_new(charges: [charge_new]).charges[0].charge_type)
@@ -41,6 +40,14 @@ RSpec.describe 'Account Factory' do
   describe 'create' do
     it 'is creates' do
       expect { account_create }.to change(Account, :count).by 1
+    end
+    it 'can change property reference' do
+      expect(account_create(property: property_new(human_ref: 5)).property.human_ref).to eq 5
+    end
+    it 'can change property address' do
+      account_create(property: property_new(address: address_new(road: 'Hill')))
+
+      expect(Account.first.property.address.road).to eq 'Hill'
     end
   end
 end
