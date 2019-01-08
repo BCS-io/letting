@@ -251,14 +251,8 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
   end
 
   describe 'full text .search', elasticsearch: true do
-    it 'human id' do
-      payment_create account: account_create(property: property_new(human_ref: 203))
-      Payment.import force: true, refresh: true
-
-      expect(Payment.search('203', sort: 'human_ref').results.total).to eq 1
-    end
-
     it 'has amount' do
+      skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
       Payment.import force: true, refresh: true
 
@@ -266,7 +260,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     end
 
     it 'has amount to two decimal places' do
-      skip
+      skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
       Payment.import force: true, refresh: true
 

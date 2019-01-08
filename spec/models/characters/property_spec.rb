@@ -124,8 +124,8 @@ RSpec.describe Property, type: :model do
       Property.import force: true, refresh: true
     end
 
-    it 'human id' do
-      expect(Property.search('2002', sort: 'human_ref').results.total).to eq 1
+    it 'not human id' do
+      expect(Property.search('2002', sort: 'human_ref').results.total).to eq 0
     end
     it 'names' do
       expect(Property.search('Grac', sort: 'human_ref').count).to eq 1

@@ -56,19 +56,19 @@ RSpec.describe Client, type: :model do
       Client.import force: true, refresh: true
     end
 
-    it 'finds human_id' do
-      expect(Client.search('80', sort: 'human_ref').count).to eq 1
+    it 'no human_id' do
+      expect(Client.search('80', sort: 'human_ref').count).to eq 0
     end
-    it 'finds names' do
+    it 'names' do
       expect(Client.search('Bell', sort: 'human_ref').count).to eq 1
     end
-    it 'finds houses' do
+    it 'houses' do
       expect(Client.search('Hil', sort: 'human_ref').count).to eq 1
     end
-    it 'finds roads' do
+    it 'roads' do
       expect(Client.search('Edg', sort: 'human_ref').count).to eq 1
     end
-    it 'finds towns' do
+    it 'towns' do
       expect(Client.search('Bir', sort: 'human_ref').count).to eq 1
     end
   end

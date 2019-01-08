@@ -130,12 +130,29 @@ class Payment < ActiveRecord::Base
   end
 
   include Searchable
+
+  mapping do
+    indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
+    indexes :to_s, type: :string, copy_to: :text_record
+
+    indexes :account do
+      indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
+      indexes :holder, type: :string, copy_to: :text_record
+      indexes :location, type: :string, copy_to: :text_record
+    end
+
+    indexes :created_at, index: :no
+    indexes :updated_at, index: :no
+    indexes :text_record, type: :string, analyzer: :nGram_analyzer
+  end
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})
     as_json(
       include: {
-        account: { methods: %i[human_ref holder location] }
-      }
+        account: { methods: %i[human_ref holder location],
+                   only: %i[human_ref holder location] }
+      },
+      except: %i[id account_id created_at updated_at]
     )
   end
 

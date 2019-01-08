@@ -70,13 +70,28 @@ class Property < ActiveRecord::Base
   end
 
   include Searchable
+
+  mapping do
+    indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
+    indexes :occupiers, type: :string, copy_to: :text_record
+    indexes :address_text, type: :string, copy_to: :text_record
+
+    indexes :agent do
+      indexes :full_names, type: :string, copy_to: :text_record
+      indexes :address_text, type: :string, copy_to: :text_record
+    end
+
+    indexes :created_at, index: :no
+    indexes :updated_at, index: :no
+    indexes :text_record, type: :string, analyzer: :nGram_analyzer
+  end
   # Elasticsearch uses generates JSON document for property index
   def as_indexed_json(_options = {})
     as_json(
       methods: %i[occupiers address_text],
       include: {
-        agent: { methods: %i[full_names address],
-                 only: %i[full_names address] }
+        agent: { methods: %i[full_names address_text],
+                 only: %i[full_names address_text] }
       },
       except: %i[id created_at updated_at]
     )

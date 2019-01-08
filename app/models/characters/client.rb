@@ -45,7 +45,19 @@ class Client < ActiveRecord::Base
   end
 
   include Searchable
+
+  mapping do
+    indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
+    indexes :to_s, type: :string, copy_to: :text_record
+    indexes :created_at, index: :no
+    indexes :updated_at, index: :no
+    indexes :text_record, type: :string, analyzer: :nGram_analyzer
+  end
+
   def as_indexed_json(_options = {})
-    as_json(methods: :to_s)
+    as_json(
+      methods: :to_s,
+      except: %i[id created_at updated_at]
+    )
   end
 end

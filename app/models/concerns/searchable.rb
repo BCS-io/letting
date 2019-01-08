@@ -65,19 +65,6 @@ module Searchable
       }
     )
 
-    mapping _all: { type: 'string', analyzer: 'nGram_analyzer',
-                    search_analyzer: 'whitespace_analyzer' } do
-      indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
-      indexes :occupiers, type: :string
-      indexes :address do
-        indexes :created_at, index: :not_analyzed
-        indexes :updated_at, index: :not_analyzed
-      end
-
-      indexes :created_at, index: :not_analyzed
-      indexes :updated_at, index: :not_analyzed
-    end
-
     # The search code follows code I found in Elasticsearch issue
     # (see above)
     #
@@ -96,7 +83,7 @@ module Searchable
       else
         @search_definition[:query] = {
           match: {
-            _all: {
+            text_record: {
               query: query,
               operator: 'and'
             }
