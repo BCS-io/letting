@@ -37,7 +37,7 @@ RSpec.describe 'Search index', type: :feature, elasticsearch: true do
       visit '/accounts'
       fill_in 'search_terms', with: 'West Midl'
       click_on 'search'
-      expect(page).to have_text '111'
+      expect(page).to_not have_text '111'
       expect(page).to have_text '222'
       expect(page).to have_text '333'
     end

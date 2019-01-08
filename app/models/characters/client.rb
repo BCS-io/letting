@@ -51,7 +51,8 @@ class Client < ActiveRecord::Base
     indexes :to_s, type: :string, copy_to: :text_record
     indexes :created_at, index: :no
     indexes :updated_at, index: :no
-    indexes :text_record, type: :string, analyzer: :nGram_analyzer
+    indexes :text_record, type: :string, analyzer: :nGram_analyzer,
+                          search_analyzer: :whitespace_analyzer
   end
 
   def as_indexed_json(_options = {})

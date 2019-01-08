@@ -144,7 +144,8 @@ class Payment < ActiveRecord::Base
 
     indexes :created_at, index: :no
     indexes :updated_at, index: :no
-    indexes :text_record, type: :string, analyzer: :nGram_analyzer
+    indexes :text_record, type: :string, analyzer: :nGram_analyzer,
+                          search_analyzer: :whitespace_analyzer
   end
   # Elasticsearch uses generates JSON document for payment index
   def as_indexed_json(_options = {})

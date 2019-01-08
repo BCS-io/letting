@@ -47,29 +47,35 @@ RSpec.describe Client, type: :model do
   end
 
   describe 'full text .search', :search, elasticsearch: true, type: :model do
-    before(:each) do
-      client_create \
-        human_ref: '80',
-        entities: [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')],
-        address: address_new(house_name: 'Hill', road: 'Edge', town: 'Birm')
+    it 'has partial match' do
+      client_create entities: [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')]
 
       Client.import force: true, refresh: true
+
+      expect(Client.search('Bel', sort: 'human_ref').results.total).to eq 1
     end
 
-    it 'no human_id' do
+    it 'mismatches human ref' do
+      client_create human_ref: '80'
+      Client.import force: true, refresh: true
+
       expect(Client.search('80', sort: 'human_ref').count).to eq 0
     end
-    it 'names' do
+
+    it 'matches entity' do
+      client_create entities: [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')]
+      Client.import force: true, refresh: true
+
       expect(Client.search('Bell', sort: 'human_ref').count).to eq 1
+      expect(Client.search('Bradman', sort: 'human_ref').count).to eq 0
     end
-    it 'houses' do
-      expect(Client.search('Hil', sort: 'human_ref').count).to eq 1
-    end
-    it 'roads' do
-      expect(Client.search('Edg', sort: 'human_ref').count).to eq 1
-    end
-    it 'towns' do
-      expect(Client.search('Bir', sort: 'human_ref').count).to eq 1
+
+    it 'matches address' do
+      client_create address: address_new(house_name: 'Hill', road: 'Edge', town: 'Birm')
+      Client.import force: true, refresh: true
+
+      expect(Client.search('Edge', sort: 'human_ref').count).to eq 1
+      expect(Client.search('High', sort: 'human_ref').count).to eq 0
     end
   end
 end

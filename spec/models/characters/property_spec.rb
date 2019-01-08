@@ -115,35 +115,45 @@ RSpec.describe Property, type: :model do
   end
 
   describe 'full text .search', elasticsearch: true do
-    before :each do
-      agent = agent_new authorized: true,
-                        entities: [Entity.new(name: 'Bel')],
-                        address: address_new(road: 'Old', town: 'York')
-      property_create address: address_new(house_name: 'Hill'),
-                      agent: agent
+    it 'matches partial match' do
+      property_create address: address_new(house_name: 'Hill')
       Property.import force: true, refresh: true
-    end
 
-    it 'not human id' do
-      expect(Property.search('2002', sort: 'human_ref').results.total).to eq 0
-    end
-    it 'names' do
-      expect(Property.search('Grac', sort: 'human_ref').count).to eq 1
-    end
-    it 'house' do
       expect(Property.search('Hil', sort: 'human_ref').count).to eq 1
     end
-    it 'roads' do
-      expect(Property.search('Edg', sort: 'human_ref').count).to eq 1
+
+    it 'mismatches human ref' do
+      property_create human_ref: 2002
+      Property.import force: true, refresh: true
+
+      expect(Property.search('2002', sort: 'human_ref').results.total).to eq 0
     end
-    it 'towns' do
-      expect(Property.search('Bir', sort: 'human_ref').count).to eq 1
+
+    it 'matches address' do
+      property_create address: address_new(house_name: 'Hill')
+      Property.import force: true, refresh: true
+
+      expect(Property.search('Hil', sort: 'human_ref').count).to eq 1
+      expect(Property.search('Edgeware', sort: 'human_ref').count).to eq 0
     end
-    it 'agent name' do
+
+    it 'matches agent name' do
+      agent = agent_new authorized: true, entities: [Entity.new(name: 'Bel')]
+      property_create agent: agent
+      Property.import force: true, refresh: true
+
       expect(Property.search('Bel', sort: 'human_ref').count).to eq 1
+      expect(Property.search('Bradman', sort: 'human_ref').count).to eq 0
     end
-    it 'agent town' do
+
+    it 'matches agent town' do
+      agent = agent_new authorized: true,
+                        address: address_new(road: 'Old', town: 'York')
+      property_create agent: agent
+      Property.import force: true, refresh: true
+
       expect(Property.search('Yor', sort: 'human_ref').count).to eq 1
+      expect(Property.search('London', sort: 'human_ref').count).to eq 0
     end
   end
 end

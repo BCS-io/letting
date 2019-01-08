@@ -251,7 +251,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
   end
 
   describe 'full text .search', elasticsearch: true do
-    it 'has partial match' do
+    it 'matches partial match' do
       payment_create account: account_create(property: \
         property_new(occupiers: [Entity.new(name: 'Strauss')]))
       Payment.import force: true, refresh: true
@@ -259,7 +259,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       expect(Payment.search('Strau', sort: 'human_ref').results.total).to eq 1
     end
 
-    it 'has amount' do
+    it 'matches amount' do
       skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
       Payment.import force: true, refresh: true
@@ -267,7 +267,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       expect(Payment.search('12.7', sort: 'human_ref').results.total).to eq 1
     end
 
-    it 'has amount to two decimal places' do
+    it 'matches amount to two decimal places' do
       skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
       Payment.import force: true, refresh: true
@@ -276,20 +276,22 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       expect(Payment.search('12.70', sort: 'human_ref').results.total).to eq 1
     end
 
-    it 'has holder' do
+    it 'matches holder' do
       payment_create account: account_create(property: \
         property_new(occupiers: [Entity.new(name: 'Strauss')]))
       Payment.import force: true, refresh: true
 
       expect(Payment.search('Strauss', sort: 'human_ref').results.total).to eq 1
+      expect(Payment.search('Bradman', sort: 'human_ref').results.total).to eq 0
     end
 
-    it 'has property address' do
+    it 'matches property address' do
       payment_create account: \
           account_create(property: property_new(address: address_new(town: 'Bristol')))
       Payment.import force: true, refresh: true
 
       expect(Payment.search('Bristol', sort: 'human_ref').results.total).to eq 1
+      expect(Payment.search('London', sort: 'human_ref').results.total).to eq 0
     end
   end
 end
