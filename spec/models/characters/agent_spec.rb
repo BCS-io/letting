@@ -3,6 +3,13 @@ require 'rails_helper'
 RSpec.describe Agent, type: :model do
   it('is valid') { expect(agent_new).to be_valid }
 
+  describe 'flattening models' do
+    it 'returns name' do
+      agent = agent_new entities: [Entity.new(name: 'Strauss')]
+      expect(agent.full_names).to eq 'Strauss'
+    end
+  end
+
   context 'when authorized' do
     it 'clear_up only removes dummy entity' do
       (agent = agent_new).authorized = true
