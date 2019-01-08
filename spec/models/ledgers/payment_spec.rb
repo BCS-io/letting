@@ -251,6 +251,14 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
   end
 
   describe 'full text .search', elasticsearch: true do
+    it 'has partial match' do
+      payment_create account: account_create(property: \
+        property_new(occupiers: [Entity.new(name: 'Strauss')]))
+      Payment.import force: true, refresh: true
+
+      expect(Payment.search('Strau', sort: 'human_ref').results.total).to eq 1
+    end
+
     it 'has amount' do
       skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
