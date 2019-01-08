@@ -16,7 +16,12 @@ class Agent < ActiveRecord::Base
   before_validation :clear_up_form
 
   delegate :full_names, to: :entities
-  delegate :text, to: :address, prefix: true
+
+  def address_text
+    return '' if address.nil?
+
+    address.text
+  end
 
   def bill_to
     authorized? ? self : property

@@ -8,6 +8,16 @@ RSpec.describe Agent, type: :model do
       agent = agent_new entities: [Entity.new(name: 'Strauss')]
       expect(agent.full_names).to eq 'Strauss'
     end
+
+    it 'returns no address if null' do
+      agent = agent_new address: nil
+      expect(agent.address_text).to eq ''
+    end
+
+    it 'returns address' do
+      agent = agent_new address: address_new(house_name: 'Hill')
+      expect(agent.address_text).to eq "Hill\nEdgbaston Road\nBirmingham\nWest Midlands"
+    end
   end
 
   context 'when authorized' do
