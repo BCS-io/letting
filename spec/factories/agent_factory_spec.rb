@@ -22,5 +22,10 @@ RSpec.describe 'Agent Factory' do
       expect(agent.to_billing)
         .to eq "Mr M. Prior\nWiggiton\nBirmingham\nWest Midlands"
     end
+
+    it 'can have nil address' do
+      agent = agent_new address: nil
+      expect(agent.address).to be_nil
+    end
   end
 end
