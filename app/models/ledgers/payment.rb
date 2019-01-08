@@ -131,7 +131,7 @@ class Payment < ActiveRecord::Base
 
   include Searchable
 
-  mapping do
+  mapping dynamic: 'false' do
     indexes :human_ref, type: :integer, index: :not_analyzed
     indexes :to_s, type: :string, copy_to: :text_record
 
