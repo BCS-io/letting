@@ -134,6 +134,7 @@ class Payment < ActiveRecord::Base
   mapping dynamic: 'false' do
     indexes :human_ref, type: :integer, index: :not_analyzed
     indexes :to_s, type: :string, copy_to: :text_record
+    indexes :booked_at, type: :date, format: 'strict_date_optional_time||epoch_millis'
 
     indexes :account do
       indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed

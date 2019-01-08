@@ -31,5 +31,16 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       expect(results[:records].first.class).to eq Client
       expect(results[:render]).to eq 'clients/index'
     end
+
+    it 'return payment when refeerer payment' do
+      payment_create account: account_create(property: \
+        property_new(occupiers: [Entity.new(name: 'Strauss')]))
+      Payment.import force: true, refresh: true
+      referrer = Referrer.new controller: 'payments', action: ''
+
+      results = FullTextSearch.search(referrer: referrer, query: 'Strauss').go
+      expect(results[:records].first.class).to eq Payment
+      expect(results[:render]).to eq 'payments/index'
+    end
   end
 end
