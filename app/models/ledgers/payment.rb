@@ -141,8 +141,8 @@ class Payment < ActiveRecord::Base
       indexes :location, type: :text, copy_to: :text_record
     end
 
-    indexes :created_at, index: :no
-    indexes :updated_at, index: :no
+    indexes :created_at, index: false
+    indexes :updated_at, index: false
     indexes :text_record, type: :text, analyzer: :nGram_analyzer,
                           search_analyzer: :whitespace_analyzer
   end

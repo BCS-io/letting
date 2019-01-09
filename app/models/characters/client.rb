@@ -53,11 +53,11 @@ class Client < ActiveRecord::Base
   include Searchable
 
   mapping dynamic: 'false' do
-    indexes :human_ref, type: :integer, index: :not_analyzed
+    indexes :human_ref, type: :integer, index: false
     indexes :full_names, type: :text, copy_to: :text_record
     indexes :address_text, type: :text, copy_to: :text_record
-    indexes :created_at, index: :no
-    indexes :updated_at, index: :no
+    indexes :created_at, index: false
+    indexes :updated_at, index: false
     indexes :text_record, type: :text, analyzer: :nGram_analyzer,
                           search_analyzer: :whitespace_analyzer
   end
