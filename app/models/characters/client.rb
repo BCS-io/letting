@@ -54,7 +54,8 @@ class Client < ActiveRecord::Base
 
   mapping dynamic: 'false' do
     indexes :human_ref, type: :integer, index: :not_analyzed
-    indexes :to_s, type: :text, copy_to: :text_record
+    indexes :full_names, type: :text, copy_to: :text_record
+    indexes :address_text, type: :text, copy_to: :text_record
     indexes :created_at, index: :no
     indexes :updated_at, index: :no
     indexes :text_record, type: :text, analyzer: :nGram_analyzer,
@@ -63,7 +64,7 @@ class Client < ActiveRecord::Base
 
   def as_indexed_json(_options = {})
     as_json(
-      methods: :to_s,
+      methods: %i[full_names address_text],
       except: %i[id created_at updated_at]
     )
   end

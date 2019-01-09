@@ -256,7 +256,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         property_new(occupiers: [Entity.new(name: 'Strauss')]))
       Payment.import force: true, refresh: true
 
-      expect(Payment.search('Strau', sort: 'human_ref').results.total).to eq 1
+      expect(Payment.search('Strau', sort: 'booked_at').results.total).to eq 1
     end
 
     it 'matches amount' do
@@ -264,7 +264,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       payment_create account: account_create(property: property_new), amount: 12.70
       Payment.import force: true, refresh: true
 
-      expect(Payment.search('12.7', sort: 'human_ref').results.total).to eq 1
+      expect(Payment.search('12.7', sort: 'booked_at').results.total).to eq 1
     end
 
     it 'matches amount to two decimal places' do
@@ -273,7 +273,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       Payment.import force: true, refresh: true
 
       # note this should match but doesn't
-      expect(Payment.search('12.70', sort: 'human_ref').results.total).to eq 1
+      expect(Payment.search('12.70', sort: 'booked_at').results.total).to eq 1
     end
 
     it 'matches holder' do
@@ -281,8 +281,8 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         property_new(occupiers: [Entity.new(name: 'Strauss')]))
       Payment.import force: true, refresh: true
 
-      expect(Payment.search('Strauss', sort: 'human_ref').results.total).to eq 1
-      expect(Payment.search('Bradman', sort: 'human_ref').results.total).to eq 0
+      expect(Payment.search('Strauss', sort: 'booked_at').results.total).to eq 1
+      expect(Payment.search('Bradman', sort: 'booked_at').results.total).to eq 0
     end
 
     it 'matches property address' do
@@ -290,8 +290,8 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           account_create(property: property_new(address: address_new(town: 'Bristol')))
       Payment.import force: true, refresh: true
 
-      expect(Payment.search('Bristol', sort: 'human_ref').results.total).to eq 1
-      expect(Payment.search('London', sort: 'human_ref').results.total).to eq 0
+      expect(Payment.search('Bristol', sort: 'booked_at').results.total).to eq 1
+      expect(Payment.search('London', sort: 'booked_at').results.total).to eq 0
     end
   end
 end

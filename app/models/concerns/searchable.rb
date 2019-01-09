@@ -68,7 +68,7 @@ module Searchable
     # The search code follows code I found in Elasticsearch issue
     # (see above)
     #
-    def self.search(query, sort: '')
+    def self.search(query, sort:, order: :asc)
       @search_definition = {
         query: {}
       }
@@ -77,7 +77,7 @@ module Searchable
         @search_definition[:query] = { match_all: {} }
         @search_definition[:size]  = 100
         @search_definition[:sort]  = [
-          { sort.to_sym => { order: 'asc' } }
+          { sort.to_sym => { order: order.to_sym } }
         ]
       else
         @search_definition[:query] = {
@@ -90,7 +90,7 @@ module Searchable
         }
         @search_definition[:sort] = [{
           _score: { order: 'desc' },
-          sort.to_sym => { order: 'asc' }
+          sort.to_sym => { order: order.to_sym }
         }]
         @search_definition[:size] = 100
       end

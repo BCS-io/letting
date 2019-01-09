@@ -32,13 +32,13 @@ class FullTextSearch
   def results
     case referrer.controller
     when 'clients'
-      records = Client.search(query, sort: 'human_ref').records
+      records = Client.search(query, sort: 'human_ref', order: :asc).records
       { records: records, render: 'clients/index' }
     when 'payments'
-      records = Payment.search(query, sort: 'booked_at').records
+      records = Payment.search(query, sort: 'booked_at', order: :desc).records
       { records: records, render: 'payments/index' }
     else
-      records = Property.search(query, sort: 'human_ref').records
+      records = Property.search(query, sort: 'human_ref', order: :asc).records
       { records: records, render: 'properties/index' }
     end
   end

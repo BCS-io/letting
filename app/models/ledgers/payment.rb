@@ -132,12 +132,11 @@ class Payment < ActiveRecord::Base
   include Searchable
 
   mapping dynamic: 'false' do
-    indexes :human_ref, type: :integer, index: :not_analyzed
     indexes :to_s, type: :text, copy_to: :text_record
     indexes :booked_at, type: :date, format: 'strict_date_optional_time||epoch_millis'
 
     indexes :account do
-      indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
+      indexes :human_ref, type: :integer, boost: 2.0, copy_to: :text_record
       indexes :holder, type: :text, copy_to: :text_record
       indexes :location, type: :text, copy_to: :text_record
     end
