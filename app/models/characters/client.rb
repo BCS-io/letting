@@ -24,6 +24,12 @@ class Client < ActiveRecord::Base
 
   delegate :full_names, to: :entities
 
+  def address_text
+    return '' if address.nil?
+
+    address.text
+  end
+
   def prepare_for_form
     prepare_contact
   end

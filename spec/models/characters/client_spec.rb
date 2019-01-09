@@ -37,6 +37,23 @@ RSpec.describe Client, type: :model do
     end
   end
 
+  describe 'flattening models' do
+    it 'returns name' do
+      client = client_new entities: [Entity.new(name: 'Strauss')]
+      expect(client.full_names).to eq 'Strauss'
+    end
+
+    it 'returns no address if null' do
+      client = client_new address: nil
+      expect(client.address_text).to eq ''
+    end
+
+    it 'returns address' do
+      client = client_new address: address_new(house_name: 'Hill')
+      expect(client.address_text).to eq "Hill\nEdgbaston Road\nBirmingham\nWest Midlands"
+    end
+  end
+
   it '#to_s returns client as text' do
     expect(client_new.to_s)
       .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
