@@ -48,10 +48,10 @@ class Client < ActiveRecord::Base
 
   mapping dynamic: 'false' do
     indexes :human_ref, type: :integer, index: :not_analyzed
-    indexes :to_s, type: :string, copy_to: :text_record
+    indexes :to_s, type: :text, copy_to: :text_record
     indexes :created_at, index: :no
     indexes :updated_at, index: :no
-    indexes :text_record, type: :string, analyzer: :nGram_analyzer,
+    indexes :text_record, type: :text, analyzer: :nGram_analyzer,
                           search_analyzer: :whitespace_analyzer
   end
 

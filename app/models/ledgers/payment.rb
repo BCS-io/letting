@@ -133,18 +133,18 @@ class Payment < ActiveRecord::Base
 
   mapping dynamic: 'false' do
     indexes :human_ref, type: :integer, index: :not_analyzed
-    indexes :to_s, type: :string, copy_to: :text_record
+    indexes :to_s, type: :text, copy_to: :text_record
     indexes :booked_at, type: :date, format: 'strict_date_optional_time||epoch_millis'
 
     indexes :account do
       indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
-      indexes :holder, type: :string, copy_to: :text_record
-      indexes :location, type: :string, copy_to: :text_record
+      indexes :holder, type: :text, copy_to: :text_record
+      indexes :location, type: :text, copy_to: :text_record
     end
 
     indexes :created_at, index: :no
     indexes :updated_at, index: :no
-    indexes :text_record, type: :string, analyzer: :nGram_analyzer,
+    indexes :text_record, type: :text, analyzer: :nGram_analyzer,
                           search_analyzer: :whitespace_analyzer
   end
   # Elasticsearch uses generates JSON document for payment index

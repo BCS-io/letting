@@ -73,17 +73,17 @@ class Property < ActiveRecord::Base
 
   mapping dynamic: 'false' do
     indexes :human_ref, type: :integer, index: :not_analyzed
-    indexes :occupiers, type: :string, copy_to: :text_record
-    indexes :address_text, type: :string, copy_to: :text_record
+    indexes :occupiers, type: :text, copy_to: :text_record
+    indexes :address_text, type: :text, copy_to: :text_record
 
     indexes :agent do
-      indexes :full_names, type: :string, copy_to: :text_record
-      indexes :address_text, type: :string, copy_to: :text_record
+      indexes :full_names, type: :text, copy_to: :text_record
+      indexes :address_text, type: :text, copy_to: :text_record
     end
 
     indexes :created_at, index: :no
     indexes :updated_at, index: :no
-    indexes :text_record, type: :string, analyzer: :nGram_analyzer,
+    indexes :text_record, type: :text, analyzer: :nGram_analyzer,
                           search_analyzer: :whitespace_analyzer
   end
   # Elasticsearch uses generates JSON document for property index
