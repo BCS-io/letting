@@ -72,7 +72,7 @@ class Property < ActiveRecord::Base
   include Searchable
 
   mapping do
-    indexes :human_ref, type: :integer, boost: 2.0, index: :not_analyzed
+    indexes :human_ref, type: :integer, index: :not_analyzed
     indexes :occupiers, type: :string, copy_to: :text_record
     indexes :address_text, type: :string, copy_to: :text_record
 
