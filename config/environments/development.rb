@@ -3,14 +3,14 @@ Rails.application.configure do
   # config/application.rb.
   config.lograge.enabled = true
 
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-    Bullet.rails_logger = true
-    # Bullet.airbrake = true
-  end
+  # config.after_initialize do
+  #   Bullet.enable = true
+  #   Bullet.alert = true
+  #   Bullet.bullet_logger = true
+  #   Bullet.console = true
+  #   Bullet.rails_logger = true
+  #   # Bullet.airbrake = true
+  # end
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
