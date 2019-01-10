@@ -399,8 +399,9 @@ GEM
     traceroute (0.8.0)
       rails (>= 3.0.0)
     tty-which (0.3.0)
-    turbolinks (2.5.4)
-      coffee-rails
+    turbolinks (5.2.0)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -497,7 +498,7 @@ DEPENDENCIES
   table_print
   timecop (~> 0.8.0)
   traceroute
-  turbolinks (~> 2.5.0)
+  turbolinks (~> 5)
   uglifier (~> 2.7.0)
   unicorn (~> 4.8.0)
   web-console (~> 2.0)
