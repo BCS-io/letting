@@ -30,11 +30,11 @@ module Searchable
     index_name [Rails.env, model_name.collection.tr('/', '-')].join('_')
 
     after_commit on: %i[create update] do
-      __elasticsearch__.index_document
+      __elasticsearch__.index_document unless Rails.env.test?
     end
 
     after_commit on: [:destroy] do
-      __elasticsearch__.delete_document
+      __elasticsearch__.delete_document unless Rails.env.test?
     end
 
     settings(
