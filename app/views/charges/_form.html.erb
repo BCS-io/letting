@@ -12,7 +12,7 @@
     <div class='js-dynamic-group  js-enclosed-toggle <%= hide_empty_records_after_first record: f.object, index: f.index %>'  >
 
       <div class='col-5-24  grid-row  bottom-spacer  spec-charge-count'>
-        <%= f.text_field :charge_type, data: { autocomplete_source: Charge.uniq.pluck(:charge_type).sort }, class: 'js-clear'  %>
+        <%= f.text_field :charge_type, data: { autocomplete_source: Charge.distinct.pluck(:charge_type).sort }, class: 'js-clear'  %>
       </div>
       <div class='col-8-24  bottom-spacer'>
         <%= f.select :cycle_id, grouped_options_for_select(CycleDecorator.for_select, f.object.cycle_id), { prompt: 'Please select'}, class: 'js-clear'  %>

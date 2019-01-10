@@ -14,7 +14,7 @@
     <%= b.label :house_name %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
-    <%= b.text_field :house_name, data: { autocomplete_source: Address.uniq.pluck(:house_name).reject(&:blank?).sort }  %>
+    <%= b.text_field :house_name, data: { autocomplete_source: Address.distinct.pluck(:house_name).reject(&:blank?).sort }  %>
   </div>
   <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :road_no %>
@@ -26,7 +26,7 @@
     <%= b.label :road, class: 'required' %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
-    <%= b.text_field :road, data: { autocomplete_source: Address.uniq.pluck(:road).reject(&:blank?).sort } %>
+    <%= b.text_field :road, data: { autocomplete_source: Address.distinct.pluck(:road).reject(&:blank?).sort } %>
   </div>
   <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :district %>
@@ -49,13 +49,13 @@
     <%= b.label :town %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
-    <%= b.text_field :town, data: { autocomplete_source: Address.uniq.pluck(:town).reject(&:blank?).sort } %>
+    <%= b.text_field :town, data: { autocomplete_source: Address.distinct.pluck(:town).reject(&:blank?).sort } %>
   </div>
   <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :county, class: 'required' %>
   </div>
   <div class='col-3-4  bottom-spacer  no-r-pad'>
-    <%= b.text_field :county, data: { autocomplete_source: Address.uniq.pluck(:county).reject(&:blank?).sort }  %>
+    <%= b.text_field :county, data: { autocomplete_source: Address.distinct.pluck(:county).reject(&:blank?).sort }  %>
   </div>
   <div class='col-1-4  bottom-spacer  grid-label'>
     <%= b.label :postcode %>
