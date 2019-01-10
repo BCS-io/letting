@@ -163,7 +163,7 @@ group :development do
   gem 'scss_lint', '~> 0.57.0', require: false
   gem 'traceroute'
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 #
