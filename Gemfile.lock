@@ -211,6 +211,9 @@ GEM
     kgio (2.11.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    listen (3.0.8)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     lograge (0.10.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -471,6 +474,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3.0)
   jquery-ui-rails (= 4.1.2)
   kaminari (~> 1.1.0)
+  listen (~> 3.0.5)
   lograge
   meta_request
   nokogiri (>= 1.8.2)
