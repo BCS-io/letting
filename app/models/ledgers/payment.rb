@@ -9,7 +9,7 @@
 #
 ####
 #
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
   belongs_to :account, inverse_of: :payments
   has_many :credits, inverse_of: :payment, dependent: :destroy do
     def clear_up

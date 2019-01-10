@@ -9,7 +9,7 @@
 #
 ####
 #
-class Product < ActiveRecord::Base
+class Product < ApplicationRecord
   include Comparable
   enum payment_type: %i[manual automatic]
   belongs_to :invoice, inverse_of: :products

@@ -20,7 +20,7 @@
 #
 ####
 #
-class Debit < ActiveRecord::Base
+class Debit < ApplicationRecord
   include Comparable
   include ActAsFakeDeletable
   belongs_to :account, inverse_of: :debits

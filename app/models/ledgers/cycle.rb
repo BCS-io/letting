@@ -11,7 +11,7 @@
 #
 ####
 #
-class Cycle < ActiveRecord::Base
+class Cycle < ApplicationRecord
   include Comparable
   enum charged_in: %i[arrears advance]
   has_many :charges, inverse_of: :cycle

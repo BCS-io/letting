@@ -10,7 +10,7 @@
 #
 ####
 #
-class Property < ActiveRecord::Base
+class Property < ApplicationRecord
   include StringUtils
   belongs_to :client
   has_one :account, dependent: :destroy, inverse_of: :property

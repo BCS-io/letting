@@ -12,7 +12,7 @@
 #
 ###
 #
-class Snapshot < ActiveRecord::Base
+class Snapshot < ApplicationRecord
   belongs_to :account, inverse_of: :snapshots
   has_many :invoices, dependent: :destroy, inverse_of: :snapshot
   has_many :debits, dependent: :destroy, inverse_of: :snapshot

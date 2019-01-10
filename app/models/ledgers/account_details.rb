@@ -4,7 +4,7 @@
 # SQL View onto Database - the table is a union of credits and debits.
 #
 #
-class AccountDetails < ActiveRecord::Base
+class AccountDetails < ApplicationRecord
   belongs_to :account
   belongs_to :property
 

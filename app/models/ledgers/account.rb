@@ -20,7 +20,7 @@
 #
 ####
 #
-class Account < ActiveRecord::Base
+class Account < ApplicationRecord
   belongs_to :property, inverse_of: :account
   delegate :human_ref, to: :property
 

@@ -12,7 +12,7 @@
 #
 ####
 #
-class Run < ActiveRecord::Base
+class Run < ApplicationRecord
   belongs_to :invoicing, counter_cache: true, inverse_of: :runs
   has_many :invoices, dependent: :destroy, inverse_of: :run
 

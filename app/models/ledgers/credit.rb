@@ -13,7 +13,7 @@
 # Credits decrease an accounts balance -.
 ####
 #
-class Credit < ActiveRecord::Base
+class Credit < ApplicationRecord
   include ActAsFakeDeletable
   belongs_to :payment, inverse_of: :credits
   belongs_to :account

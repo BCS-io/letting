@@ -10,7 +10,7 @@
 #
 ####
 #
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   enum role: %i[user admin]
   scope :by_nickname, -> { order(:nickname) }
 

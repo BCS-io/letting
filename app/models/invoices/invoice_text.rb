@@ -21,7 +21,7 @@
 #
 ####
 #
-class InvoiceText < ActiveRecord::Base
+class InvoiceText < ApplicationRecord
   validates :invoice_name, :description, :heading1, :phone, :vat,
             presence: true
   has_one :address, class_name: 'Address',

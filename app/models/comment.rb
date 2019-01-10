@@ -3,7 +3,7 @@
 # Invoices can have a number (defined as between 0-2) of comments associated.
 # These are the comments ...
 #
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   include CommentDefaults
   belongs_to :invoice
 

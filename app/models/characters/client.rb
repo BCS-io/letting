@@ -12,7 +12,7 @@ require_relative '../../../lib/modules/string_utils'
 #
 ####
 #
-class Client < ActiveRecord::Base
+class Client < ApplicationRecord
   include Contact
   include StringUtils
   has_many :properties, dependent: :destroy

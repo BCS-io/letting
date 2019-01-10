@@ -13,7 +13,7 @@
 #
 ####
 #
-class Charge < ActiveRecord::Base
+class Charge < ApplicationRecord
   enum payment_type: %i[manual automatic]
   enum activity: %i[dormant active]
   belongs_to :account

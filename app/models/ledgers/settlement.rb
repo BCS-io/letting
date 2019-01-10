@@ -26,7 +26,7 @@
 #
 ####
 #
-class Settlement < ActiveRecord::Base
+class Settlement < ApplicationRecord
   belongs_to :credit
   belongs_to :debit
 

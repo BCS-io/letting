@@ -13,7 +13,7 @@
 #
 ####
 #
-class Address < ActiveRecord::Base
+class Address < ApplicationRecord
   include AddressDefaults
   belongs_to :addressable, polymorphic: true
   validates :flat_no, :road_no,

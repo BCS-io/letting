@@ -26,7 +26,7 @@
 # invoice_date - date the invoice is made on.
 # comments - one off information to be read by the bill's addressee.
 #
-class Invoice < ActiveRecord::Base
+class Invoice < ApplicationRecord
   enum color: %i[blue red]
   enum deliver: %i[mail retain forget]
   belongs_to :run, inverse_of: :invoices

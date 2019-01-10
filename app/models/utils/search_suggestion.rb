@@ -12,7 +12,7 @@
 # which needs to be automated.
 # http://railscasts.com/episodes/102-auto-complete-association-revised
 #
-class SearchSuggestion < ActiveRecord::Base
+class SearchSuggestion < ApplicationRecord
   def self.terms_for prefix
     suggestions = where('term ilike ?', "#{prefix}_%")
     suggestions.order(popularity: :desc).limit(10).pluck(:term)

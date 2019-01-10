@@ -21,7 +21,7 @@
 #
 ####
 #
-class Entity < ActiveRecord::Base
+class Entity < ApplicationRecord
   belongs_to :entitieable, polymorphic: true
   validates :name, length: { maximum: 64 }, presence: true
   validates :title, :initials, length: { maximum: 10 }

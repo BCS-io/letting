@@ -6,7 +6,7 @@
 #
 ####
 #
-class Letter < ActiveRecord::Base
+class Letter < ApplicationRecord
   belongs_to :invoice
   belongs_to :invoice_text
   validates :invoice, :invoice_text, presence: true
