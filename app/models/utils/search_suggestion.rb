@@ -27,8 +27,7 @@ class SearchSuggestion < ApplicationRecord
   end
 
   def self.index_term term
-    where(term: term).first_or_initialize.tap do |suggestion|
-      suggestion.increment! :popularity
-    end
+    suggestion = where(term: term).first_or_create(popularity: 0)
+    increment_counter(:popularity, suggestion.id)
   end
 end
