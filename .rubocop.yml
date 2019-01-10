@@ -15,7 +15,7 @@ AllCops:
     - db/**/*
     - bin/**/*
     - tmp/**/*
-    - config/environments/**/*
+    - config/**/*
 
 #
 # Ignored Styles
