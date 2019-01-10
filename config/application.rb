@@ -36,9 +36,6 @@ module Letting
                                  "#{config.root}/lib/**/"]
     config.exceptions_app = routes
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     # basic schema cannot handle SQL views - required for account_details
     config.active_record.schema_format = :sql
   end
