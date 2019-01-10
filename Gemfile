@@ -194,6 +194,7 @@ group :development, :test do
   gem 'selenium-webdriver', '~>3.0'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'table_print'
   gem 'zonebie', '~> 0.6.0'
 end
