@@ -309,7 +309,6 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rb-readline (0.5.5)
-    rdoc (4.3.0)
     redis (3.3.5)
     reek (4.8.2)
       codeclimate-engine-rb (~> 0.4.0)
@@ -371,9 +370,6 @@ GEM
     scss_lint (0.57.1)
       rake (>= 0.9, < 13)
       sass (~> 3.5, >= 3.5.5)
-    sdoc (0.4.2)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
     seedbank (0.5.0)
       rake (>= 10.0)
     selenium-webdriver (3.141.0)
@@ -499,7 +495,6 @@ DEPENDENCIES
   rubycritic
   sass-rails (~> 5.0.0)
   scss_lint (~> 0.57.0)
-  sdoc (~> 0.4.0)
   seedbank
   selenium-webdriver (~> 3.0)
   spring
