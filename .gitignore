@@ -63,3 +63,4 @@ config/secrets.yml
 
 # backup files
 letting.tar
+PostgreSQL.sql
