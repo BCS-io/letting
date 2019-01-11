@@ -204,7 +204,7 @@ end
 # Testing
 #
 group :test do
-  gem 'database_cleaner', '~> 1.5.0'
+  gem 'database_cleaner', '~> 1.7.0'
 
   # Create e.s. test node
   gem 'elasticsearch-extensions'
