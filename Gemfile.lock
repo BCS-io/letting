@@ -475,7 +475,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3.0)
   jquery-ui-rails (= 4.1.2)
   kaminari (~> 1.1.0)
-  listen (~> 3.0.5)
+  listen (>= 3.0.5, < 3.2)
   lograge
   meta_request
   nokogiri (>= 1.8.2)

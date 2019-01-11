@@ -156,7 +156,7 @@ group :development do
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'brakeman', '~>4.3.0', require: false
   gem 'bullet', '~>5.9.0'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rails_best_practices', '~>1.15.0'
   gem 'require_all', '~> 1.0' # 2.0 seems to break rails_best_practice
   # Remove to avoid vulnerability
