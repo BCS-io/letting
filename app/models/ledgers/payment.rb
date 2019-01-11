@@ -83,10 +83,10 @@ class Payment < ApplicationRecord
   end
 
   def self.by_booked_at_date
-    order('DATE(booked_at) desc').group('DATE(booked_at)')
-                                 .pluck('DATE(booked_at) as booked_on,'\
+    order(Arel.sql('DATE(booked_at) desc')).group('DATE(booked_at)')
+                                           .pluck(Arel.sql('DATE(booked_at) as booked_on,'\
              ' count(amount) as payments_count, ' \
-             ' sum(amount) as payment_sum')
+             ' sum(amount) as payment_sum'))
   end
 
   # The date a payment was last booked_at
