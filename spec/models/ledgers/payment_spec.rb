@@ -165,6 +165,32 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       end
     end
 
+    describe '.by_booked_at_date' do
+      it 'returns aggregated booking' do
+        past = Time.zone.now - 1.day
+        account = account_create property: property_new
+        payment_create account: account, amount: 10.0, booked_at: past
+        payment_create account: account, amount: 15.0, booked_at: past
+
+        booked = Payment.by_booked_at_date[0]
+        expect(booked[0]).to be_between(past.to_date.yesterday, past.to_date.tomorrow)
+        expect(booked[1]).to eq 2
+        expect(booked[2]).to eq 25
+      end
+
+      it 'reverse orders by date - most recent first' do
+        past = Time.zone.now - 7.days
+        recent = Time.zone.now - 1.day
+        account = account_create property: property_new
+        payment_create booked_at: past, account: account
+        payment_create booked_at: recent, account: account
+
+        booked = Payment.by_booked_at_date
+        expect(booked[0][0]).to be_between(recent.to_date.yesterday, recent.to_date.tomorrow)
+        expect(booked[1][0]).to be_between(past.to_date.yesterday, past.to_date.tomorrow)
+      end
+    end
+
     describe '.last_booked_at' do
       it 'returns today if no payments at all (unlikely)' do
         expect(Payment.last_booked_at).to eq Time.zone.today.to_s
