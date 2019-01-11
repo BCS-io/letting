@@ -51,8 +51,8 @@ class Invoice < ApplicationRecord
   InvoiceMissingProducts = Class.new(StandardError)
   validates :deliver, inclusion: { in: delivers.keys }
   validates :invoice_date, :property_ref, :property_address, presence: true
-  has_many :invoice_texts, through: :letters
   has_many :letters, dependent: :destroy
+  has_many :invoice_texts, through: :letters
 
   after_destroy :destroy_orphaned_snapshot
 

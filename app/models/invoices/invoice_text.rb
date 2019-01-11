@@ -30,8 +30,8 @@ class InvoiceText < ApplicationRecord
   accepts_nested_attributes_for :address, allow_destroy: true
   has_many :guides, dependent: :destroy
   accepts_nested_attributes_for :guides, allow_destroy: true
-  has_many :invoices, through: :letters
   has_many :letters, dependent: :destroy
+  has_many :invoices, through: :letters
 
   def page1?
     self == InvoiceText.first
