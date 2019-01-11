@@ -107,7 +107,7 @@ gem 'kaminari', '~> 1.1.0'
 gem 'lograge'
 gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>0.20.0' # rails 5 required to use pg 1.0+
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.7'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
 gem 'rails', '= 5.0.7.1'
 gem 'rails-env-favicon'
