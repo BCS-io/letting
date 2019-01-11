@@ -177,7 +177,7 @@ group :development, :test do
   # Throwing exceptions when it hits breakpoints
   #
   gem 'bundler-audit'
-  gem 'byebug', platform: :mri
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara', '~> 2.13.0'
 
   gem 'capybara-screenshot', '~> 1.0.0'
