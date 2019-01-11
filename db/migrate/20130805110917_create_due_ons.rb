@@ -1,4 +1,4 @@
-class CreateDueOns < ActiveRecord::Migration
+class CreateDueOns < ActiveRecord::Migration[4.2]
   def change
     create_table :due_ons do |t|
       t.integer :year,       null: true

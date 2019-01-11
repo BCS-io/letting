@@ -1,4 +1,4 @@
-class CreateGuides < ActiveRecord::Migration
+class CreateGuides < ActiveRecord::Migration[4.2]
   def change
     create_table :guides do |t|
       t.belongs_to :invoice_text, null: false, index: true

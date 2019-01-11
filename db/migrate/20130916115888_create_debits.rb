@@ -1,4 +1,4 @@
-class CreateDebits < ActiveRecord::Migration
+class CreateDebits < ActiveRecord::Migration[4.2]
   def change
     create_table :debits do |t|
       t.belongs_to  :account, null: false, index: true

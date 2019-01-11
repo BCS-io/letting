@@ -1,4 +1,4 @@
-class CreateCredits < ActiveRecord::Migration
+class CreateCredits < ActiveRecord::Migration[4.2]
   def change
     create_table :credits do |t|
       t.belongs_to  :account, null: false, index: true

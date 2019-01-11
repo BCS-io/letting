@@ -1,4 +1,4 @@
-class CreateInvoices < ActiveRecord::Migration
+class CreateInvoices < ActiveRecord::Migration[4.2]
   def change
     create_table :invoices do |t|
       t.belongs_to :run, null: false, index: true

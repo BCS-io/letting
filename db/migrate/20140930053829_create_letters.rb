@@ -1,4 +1,4 @@
-class CreateLetters < ActiveRecord::Migration
+class CreateLetters < ActiveRecord::Migration[4.2]
   def change
     create_table :letters do |t|
       t.belongs_to :invoice, null: false, index: true

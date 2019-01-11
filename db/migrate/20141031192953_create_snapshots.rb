@@ -1,4 +1,4 @@
-class CreateSnapshots < ActiveRecord::Migration
+class CreateSnapshots < ActiveRecord::Migration[4.2]
   def change
     create_table :snapshots do |t|
       t.belongs_to :account, null: false, index: true

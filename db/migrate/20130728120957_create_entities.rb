@@ -1,7 +1,7 @@
 #
 # polymorphic: true => two columns entitieable_id and enitieable_type
 #
-class CreateEntities < ActiveRecord::Migration
+class CreateEntities < ActiveRecord::Migration[4.2]
   def change
     create_table :entities do |t|
       t.belongs_to :entitieable, polymorphic: true, null: false

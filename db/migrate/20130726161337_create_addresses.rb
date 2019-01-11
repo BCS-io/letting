@@ -1,7 +1,7 @@
 #
 # polymorphic: true => two columns addressable_id and addressable_type
 #
-class CreateAddresses < ActiveRecord::Migration
+class CreateAddresses < ActiveRecord::Migration[4.2]
   def change
     create_table :addresses do |t|
       t.belongs_to :addressable, polymorphic: true, null: false

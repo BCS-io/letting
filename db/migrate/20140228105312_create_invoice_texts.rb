@@ -1,4 +1,4 @@
-class CreateInvoiceTexts < ActiveRecord::Migration
+class CreateInvoiceTexts < ActiveRecord::Migration[4.2]
   def change
     create_table :invoice_texts do |t|
       t.string :description,  null: false

@@ -1,4 +1,4 @@
-class AccountDetails < ActiveRecord::Migration
+class AccountDetails < ActiveRecord::Migration[4.2]
   def up
     self.connection.execute %Q( CREATE VIEW account_details AS
       SELECT accounts.id as account_id, property_id, human_ref, at_time, coalesce(credits.amount * -1, 0) as amount
