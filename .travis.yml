@@ -3,7 +3,7 @@ language: ruby
 sudo: false
 
 rvm:
-  - 2.3.4
+  - 2.5.3
   # does not handle fuzzy matching (travis uses an older version of rvm)
   # without the rvm value it would get irb version from .ruby-version
   # however I am using rbenv which does not have fuzzy matching
@@ -12,10 +12,10 @@ env:
   - DB=postgresql
 
 addons:
-  postgresql: 9.3
+  postgresql: "11.1"
 
 before_install:
-  - curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.1.1.deb && sudo dpkg -i --force-confnew elasticsearch-1.1.1.deb && sudo service elasticsearch restart
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.4.deb && sudo dpkg -i --force-confnew elasticsearch-6.5.4.deb && sudo service elasticsearch restart
 
 before_script:
   - sleep 10
