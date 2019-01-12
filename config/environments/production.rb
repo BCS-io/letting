@@ -1,6 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.lograge.enabled = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -14,6 +13,10 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+
+  # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
+  # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
+  # config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -35,6 +38,9 @@ Rails.application.configure do
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+
+  # Store uploaded files on the local file system (see config/storage.yml for options)
+  config.active_storage.service = :local
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
@@ -85,4 +91,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  #
+  # User configurations follow
+  #
+  config.lograge.enabled = true
 end
