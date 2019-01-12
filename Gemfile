@@ -180,11 +180,6 @@ group :development, :test do
   #
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara', '~> 2.13.0'
-
-  gem 'capybara-screenshot', '~> 1.0.0'
-  gem 'capybara-webkit', '~> 1.15.0'
-  gem 'chromedriver-helper', '~> 2.1.0'
   # 0.1.1 seems to introduce errors - Use this gem occasionally to weed out
   # performance errors with tests
   # gem 'capybara-slow_finder_errors', '0.1.0'
@@ -193,8 +188,6 @@ group :development, :test do
   gem 'pry-stack_explorer', '~>0.4.9.0'
   gem 'rack-mini-profiler', '~>1.0.0'
   gem 'rb-readline'
-  gem 'rspec-rails', '~> 3.8.0'
-  gem 'selenium-webdriver', '~>3.0'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -206,9 +199,16 @@ end
 # Testing
 #
 group :test do
+  gem 'capybara', '~> 2.13.0'
+  gem 'capybara-screenshot', '~> 1.0.0'
+  gem 'capybara-webkit', '~> 1.15.0'
+  gem 'chromedriver-helper', '~> 2.1.0'
+
   gem 'database_cleaner', '~> 1.7.0'
 
   # Create e.s. test node
   gem 'elasticsearch-extensions'
+  gem 'rspec-rails', '~> 3.8.0'
+  gem 'selenium-webdriver', '~>3.0'
   gem 'timecop', '~>0.8.0'
 end
