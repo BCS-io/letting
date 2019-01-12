@@ -89,6 +89,7 @@ ruby '~> 2.5.0'
 #
 gem 'autoprefixer-rails', '~> 9.4.0'
 gem 'bcrypt', '~> 3.1.12'
+gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2.0'
 gem 'elasticsearch', '~> 6.0.0'
 gem 'elasticsearch-model', '~> 6.0.0'
