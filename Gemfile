@@ -201,7 +201,6 @@ end
 group :test do
   gem 'capybara', '~> 2.15.0'
   gem 'capybara-screenshot', '~> 1.0.0'
-  gem 'capybara-webkit', '~> 1.15.0'
   gem 'chromedriver-helper', '~> 2.1.0'
 
   gem 'database_cleaner', '~> 1.7.0'
