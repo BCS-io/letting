@@ -19,7 +19,6 @@ def credit_new payment_id: 1,
   credit.at_time = at_time if at_time
   credit.charge_id = charge_id if charge_id
   credit.charge = charge if charge
-  allow(credit).to receive(:debit_outstanding).and_return(-88.08)
   credit
 end
 
