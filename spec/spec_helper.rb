@@ -11,6 +11,9 @@ RSpec.configure do |config|
 
   config.filter_run_excluding broken: true
 
+  # run a single or group of tests only - without :focus all examples get run
+  config.filter_run_when_matching :focus
+
   # Setting this config option `false` removes rspec-core's monkey patching of the
   # top level methods like `describe`, `shared_examples_for` and `shared_context`
   # on `main` and `Module`. The methods are always available through the `RSpec`
