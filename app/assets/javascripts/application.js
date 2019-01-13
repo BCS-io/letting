@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
+//= require activestorage
 //= require_tree .
 //= require rails_env_favicon
