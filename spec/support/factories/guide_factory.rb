@@ -15,9 +15,10 @@ def guide_create id: nil,
                  instruction: 'Your instruction',
                  fillin: 'This is useful',
                  sample: 'Filled top'
-  Guide.create! id: id,
-                invoice_text_id: invoice_text_id,
-                instruction: instruction,
-                fillin: fillin,
-                sample: sample
+  guide = guide_new id: id,
+                    invoice_text_id: invoice_text_id,
+                    instruction: instruction,
+                    fillin: fillin,
+                    sample: sample
+  guide.save!
 end
