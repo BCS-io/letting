@@ -28,8 +28,8 @@ RSpec.describe 'InvoiceText#update', type: :feature do
   describe 'page 2' do
     it 'finds data on 2nd page and succeeds' do
       invoice_text_create id: 1
-      invoice_text_create id: 2
-      guide_create id: 1
+      invoice_text = invoice_text_create id: 2
+      guide_create id: 1, invoice_text: invoice_text
       visit '/invoice_texts/2/edit'
 
       expect(page.title). to eq 'Letting - Edit Invoice Text'

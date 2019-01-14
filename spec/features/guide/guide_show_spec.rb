@@ -4,8 +4,9 @@ RSpec.describe 'Guide#show', type: :feature do
   it 'finds guide data' do
     log_in admin_attributes
     invoice_text_create id: 1
-    invoice_text_create id: 2
+    invoice_text = invoice_text_create id: 2
     guide_create id: 1,
+                 invoice_text: invoice_text,
                  instruction: 'ins1',
                  fillin: 'Useful stuff',
                  sample: 'Filled'

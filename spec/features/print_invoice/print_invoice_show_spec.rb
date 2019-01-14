@@ -9,8 +9,10 @@ RSpec.describe 'PrintInvoices#show', type: :feature do
   it 'basic' do
     log_in admin_attributes
     invoice_text_create id: 1
-    invoice_text_create id: 2, heading1: 'Act 2002'
-    (1..7).each { |guide_id| guide_create id: guide_id, instruction: 'inst' }
+    invoice_text = invoice_text_create id: 2, heading1: 'Act 2002'
+    (1..7).each do |guide_id|
+      guide_create id: guide_id, invoice_text: invoice_text, instruction: 'inst'
+    end
     charge = charge_new charge_type: ChargeTypes::GROUND_RENT
     setup snapshot: snapshot_new(debits: [debit_new(charge: charge)])
     visit '/print_invoices/1'
