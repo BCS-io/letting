@@ -1,6 +1,6 @@
 
 def run_new id: nil,
-            invoicing: nil,
+            invoicing: invoicing_new,
             invoices: [invoice_new]
   run = Run.new id: id
   run.invoicing = invoicing if invoicing
@@ -9,7 +9,7 @@ def run_new id: nil,
 end
 
 def run_create id: nil,
-               invoicing: nil,
+               invoicing: invoicing_new,
                invoices: [invoice_new]
   run = run_new id: id,
                 invoicing: invoicing,
