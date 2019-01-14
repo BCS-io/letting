@@ -10,7 +10,7 @@
 ####
 #
 class Agent < ApplicationRecord
-  belongs_to :property, inverse_of: :agent, optional: true
+  belongs_to :property, inverse_of: :agent
   include Contact
   validates :entities, presence: true, if: :authorized?
   before_validation :clear_up_form
