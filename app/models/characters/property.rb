@@ -12,7 +12,7 @@
 #
 class Property < ApplicationRecord
   include StringUtils
-  belongs_to :client, optional: true
+  belongs_to :client
   has_one :account, dependent: :destroy, inverse_of: :property
   accepts_nested_attributes_for :account, allow_destroy: true
   include Contact
