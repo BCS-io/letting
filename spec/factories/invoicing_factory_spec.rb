@@ -16,4 +16,11 @@ RSpec.describe 'Invoicing Factory' do
       it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
     end
   end
+
+  describe 'create' do
+    it 'is valid' do
+      property_create human_ref: 1, account: account_new
+      expect(invoicing_create).to be_valid
+    end
+  end
 end
