@@ -5,14 +5,7 @@ RSpec.describe Credit, :ledgers, type: :model do
 
   describe 'validates' do
     describe 'presence' do
-      it('is not valid') { expect(credit_new).to_not be_valid }
-      it('is valid with charge') do
-        expect(credit_new charge: charge_new).to be_valid
-      end
-      it 'charge required but missing' do
-        (credit = credit_new).valid?
-        expect(credit.errors.first).to eq [:charge, "can't be blank"]
-      end
+      it('is valid') { expect(credit_new).to be_valid }
       it 'at_time' do
         (credit = credit_new).at_time = nil
         expect(credit).to_not be_valid

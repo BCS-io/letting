@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Credit Factory' do
   describe 'new' do
     describe 'default' do
-      it('is not valid') { expect(credit_new).to_not be_valid }
+      it('is valid') { expect(credit_new).to be_valid }
       it 'is requires charge to be valid' do
         expect(credit_new charge: charge_new).to be_valid
       end
