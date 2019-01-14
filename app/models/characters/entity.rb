@@ -22,7 +22,7 @@
 ####
 #
 class Entity < ApplicationRecord
-  belongs_to :entitieable, polymorphic: true
+  belongs_to :entitieable, polymorphic: true, optional: true
   validates :name, length: { maximum: 64 }, presence: true
   validates :title, :initials, length: { maximum: 10 }
 

@@ -5,7 +5,7 @@
 #
 class Comment < ApplicationRecord
   include CommentDefaults
-  belongs_to :invoice
+  belongs_to :invoice, optional: true
 
   validates :clarify, length: { maximum: MAX_CLARIFY },
                       allow_blank: false

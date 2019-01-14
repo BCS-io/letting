@@ -21,7 +21,7 @@
 ####
 #
 class Account < ApplicationRecord
-  belongs_to :property, inverse_of: :account
+  belongs_to :property, inverse_of: :account, optional: true
   delegate :human_ref, to: :property
 
   def holder

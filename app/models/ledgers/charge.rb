@@ -16,7 +16,7 @@
 class Charge < ApplicationRecord
   enum payment_type: %i[manual automatic]
   enum activity: %i[dormant active]
-  belongs_to :account
+  belongs_to :account, optional: true
   has_many :credits, dependent: :destroy, inverse_of: :charge
   has_many :debits, dependent: :destroy, inverse_of: :charge
   belongs_to :cycle, inverse_of: :charges

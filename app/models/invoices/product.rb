@@ -12,7 +12,7 @@
 class Product < ApplicationRecord
   include Comparable
   enum payment_type: %i[manual automatic]
-  belongs_to :invoice, inverse_of: :products
+  belongs_to :invoice, inverse_of: :products, optional: true
 
   validates :amount, :charge_type, :date_due, presence: true
   validates :payment_type, inclusion: { in: payment_types.keys }

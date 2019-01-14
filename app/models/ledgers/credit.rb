@@ -15,9 +15,9 @@
 #
 class Credit < ApplicationRecord
   include ActAsFakeDeletable
-  belongs_to :payment, inverse_of: :credits
-  belongs_to :account
-  belongs_to :charge, inverse_of: :credits
+  belongs_to :payment, inverse_of: :credits, optional: true
+  belongs_to :account, optional: true
+  belongs_to :charge, inverse_of: :credits, optional: true
   delegate :charge_type, to: :charge
   delegate :automatic_payment?, to: :charge
   has_many :debits, through: :settlements

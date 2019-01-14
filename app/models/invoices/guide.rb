@@ -11,7 +11,7 @@
 class Guide < ApplicationRecord
   MAX_CHAR = 100
   MAX_PROX = 25
-  belongs_to :invoice_text
+  belongs_to :invoice_text, optional: true
   validates :instruction, presence: true,
                           length: { maximum: MAX_CHAR }
   validates :fillin, presence: true,

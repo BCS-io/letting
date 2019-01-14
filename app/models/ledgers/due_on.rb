@@ -20,7 +20,7 @@
 #
 class DueOn < ApplicationRecord
   include Comparable
-  belongs_to :cycle, counter_cache: true, inverse_of: :due_ons
+  belongs_to :cycle, counter_cache: true, inverse_of: :due_ons, optional: true
   validates :month, numericality: { only_integer: true,
                                     greater_than: -2,
                                     less_than: 13 }

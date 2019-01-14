@@ -23,11 +23,11 @@
 class Debit < ApplicationRecord
   include Comparable
   include ActAsFakeDeletable
-  belongs_to :account, inverse_of: :debits
+  belongs_to :account, inverse_of: :debits, optional: true
   has_many :credits, through: :settlements
   has_many :settlements, dependent: :destroy
-  belongs_to :charge, inverse_of: :debits
-  belongs_to :snapshot, inverse_of: :debits
+  belongs_to :charge, inverse_of: :debits, optional: true
+  belongs_to :snapshot, inverse_of: :debits, optional: true
 
   def period
     (period_first..period_last)

@@ -29,7 +29,7 @@
 class Invoice < ApplicationRecord
   enum color: %i[blue red]
   enum deliver: %i[mail retain forget]
-  belongs_to :run, inverse_of: :invoices
+  belongs_to :run, inverse_of: :invoices, optional: true
   belongs_to :snapshot, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
   has_many :products, dependent: :destroy, inverse_of: :invoice do
