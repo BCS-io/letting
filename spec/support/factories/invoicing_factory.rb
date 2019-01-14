@@ -14,9 +14,9 @@ def invoicing_create id: nil,
                      period: '2014/06/30'..'2014/08/30',
                      runs: [run_new(invoicing: nil)]
   invoicing = invoicing_new id: id,
-                             property_range: property_range,
-                             period: period,
-                             runs: runs
+                            property_range: property_range,
+                            period: period,
+                            runs: runs
   invoicing.save!
   invoicing
 end

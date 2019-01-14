@@ -9,7 +9,7 @@ RSpec.describe Snapshot, type: :model do
   end
 
   it 'can be debited' do
-    snapshot = Snapshot.new
+    snapshot = snapshot_new
     snapshot.debited debits: [debit_new(charge: charge_new)]
 
     expect(snapshot).to be_valid
