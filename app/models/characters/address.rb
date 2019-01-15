@@ -15,7 +15,7 @@
 #
 class Address < ApplicationRecord
   include AddressDefaults
-  belongs_to :addressable, polymorphic: true, optional: true
+  belongs_to :addressable, polymorphic: true
   validates :flat_no, :road_no,
             length: { maximum: MAX_NUMBER },
             allow_blank: true

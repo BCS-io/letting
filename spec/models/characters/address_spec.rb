@@ -3,88 +3,90 @@ include AddressDefaults
 
 RSpec.describe Address, type: :model do
   describe 'validations' do
-    it('valid') { expect(address_new).to be_valid }
     describe 'flat_no' do
-      it('allows blanks') { expect(address_new flat_no: '').to be_valid }
+      it('allows blanks') { expect(addressable_new flat_no: '').to be_valid }
       it 'has max' do
-        expect(address_new flat_no: 'a' * (MAX_NUMBER + 1)).to_not be_valid
+        expect(addressable_new flat_no: 'a' * (MAX_NUMBER + 1)).to_not be_valid
       end
     end
 
     describe 'house_name' do
-      it('allows blanks') { expect(address_new house_name: '').to be_valid }
+      it('allows blanks') { expect(addressable_new house_name: '').to be_valid }
       it 'has max' do
-        expect(address_new house_name: 'a' * (MAX_STRING + 1)).to_not be_valid
+        expect(addressable_new house_name: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
       it 'has min' do
-        expect(address_new house_name: 'a' * (MIN_STRING - 1)).to_not be_valid
+        expect(addressable_new house_name: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
     end
 
     describe 'road no' do
-      it('allows blanks') { expect(address_new road_no: '').to be_valid }
+      it('allows blanks') { expect(addressable_new road_no: '').to be_valid }
       it 'has max' do
-        expect(address_new road_no: 'a' * (MAX_NUMBER + 1)).to_not be_valid
+        addressable = addressable_new road_no: 'a' * (MAX_NUMBER + 1)
+        addressable.valid?
+        expect(addressable.errors.full_messages)
+          .to eq ['Road no is too long (maximum is 10 characters)']
       end
     end
 
     describe 'road' do
-      it('is required') { expect(address_new road: '').to_not be_valid }
+      it('is required') { expect(addressable_new road: '').to_not be_valid }
       it 'has max' do
-        expect(address_new road: 'a' * (MAX_STRING + 1)).to_not be_valid
+        expect(addressable_new road: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
       it 'has min' do
-        expect(address_new road: 'a' * (MIN_STRING - 1)).to_not be_valid
+        expect(addressable_new road: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
     end
 
     describe 'district' do
-      it('allows blanks') { expect(address_new district: '').to be_valid }
+      it('allows blanks') { expect(addressable_new district: '').to be_valid }
       it 'has max' do
-        expect(address_new district: 'a' * (MAX_STRING + 1)).to_not be_valid
+        expect(addressable_new district: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
       it 'has min' do
-        expect(address_new district: 'a' * (MIN_STRING - 1)).to_not be_valid
+        expect(addressable_new district: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
     end
 
     describe 'town' do
-      it('allows blanks') { expect(address_new town: '').to be_valid }
+      it('allows blanks') { expect(addressable_new town: '').to be_valid }
       it 'has min' do
-        expect(address_new town: 'a' * (MIN_STRING - 1)).to_not be_valid
+        expect(addressable_new town: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
       it('has max') do
-        expect(address_new town: 'a' * (MAX_STRING + 1)).to_not be_valid
+        expect(addressable_new town: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
     end
 
     describe 'county' do
-      it('is required') { expect(address_new county: '').to_not be_valid }
+      it('is required') { expect(addressable_new county: '').to_not be_valid }
       it 'has min' do
-        expect(address_new county: 'a' * (MIN_STRING - 1)).to_not be_valid
+        expect(addressable_new county: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
       it 'has max' do
-        expect(address_new county: 'a' * (MAX_STRING + 1)).to_not be_valid
+        expect(addressable_new county: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
     end
 
     describe 'postcode' do
-      it('allows blanks') { expect(address_new postcode: '').to be_valid }
+      it('allows blanks') { expect(addressable_new postcode: '').to be_valid }
       it 'has min' do
-        expect(address_new postcode: 'B' * (MIN_POSTCODE - 1)).to_not be_valid
+        expect(addressable_new postcode: 'B' * (MIN_POSTCODE - 1)).to_not be_valid
       end
       it 'has max' do
-        expect(address_new postcode: 'B' * (MAX_POSTCODE + 1)).to_not be_valid
+        expect(addressable_new postcode: 'B' * (MAX_POSTCODE + 1)).to_not be_valid
       end
     end
 
     describe 'nation' do
-      it('allows blanks') { expect(address_new nation: '').to be_valid }
+      it('allows blanks') { expect(addressable_new nation: '').to be_valid }
       it 'has min' do
-        expect(address_new nation: 'a' * (MIN_STRING - 1)).to_not be_valid
+        expect(addressable_new nation: 'a' * (MIN_STRING - 1)).to_not be_valid
       end
       it 'has max' do
-        expect(address_new nation: 'a' * (MAX_STRING + 1)).to_not be_valid
+        expect(addressable_new nation: 'a' * (MAX_STRING + 1)).to_not be_valid
       end
     end
   end
@@ -181,5 +183,28 @@ RSpec.describe Address, type: :model do
         expect(address.first_text).to eq '8 Edge Rd'
       end
     end
+  end
+
+  def addressable_new \
+        flat_no: '',
+        house_name: '',
+        road_no: '',
+        road: 'Edgbaston Road',
+        district: '',
+        town: 'Birmingham',
+        county: 'West Midlands',
+        postcode: '',
+        nation: ''
+    address = address_new flat_no: flat_no,
+                          house_name: house_name,
+                          road_no: road_no,
+                          road: road,
+                          district: district,
+                          town: town,
+                          county: county,
+                          postcode: postcode,
+                          nation: nation
+    address.addressable = client_new
+    address
   end
 end

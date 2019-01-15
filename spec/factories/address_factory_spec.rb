@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'Address Factory' do
   describe 'default' do
-    it('is valid') { expect(address_new).to be_valid }
+    it 'errors about missing parent' do
+      a = address_new
+      a.valid?
+
+      expect(a.errors.size).to eq 1
+      expect(a.errors.full_messages).to eq ['Addressable must exist']
+    end
     it('has empty flat_no') { expect(address_new.flat_no).to eq '' }
     it('has empty house_name') { expect(address_new.house_name).to eq '' }
     it('has empty road_no') { expect(address_new.road_no).to eq '' }
