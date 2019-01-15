@@ -9,18 +9,17 @@ def invoice_new id: nil,
                 run_id: 5,
                 color: :blue,
                 invoice_date: '2014/06/30',
-                account: account_create,
-                property: property_new,
+                property: property_new(account: account_create),
                 comments: [],
                 snapshot: snapshot_new,
                 deliver: 'mail'
-  property.account = snapshot.account = account if account
+  snapshot.account = property.account if property.account
   invoice_text_create(id: 1) unless InvoiceText.find_by id: 1
   invoice = Invoice.new id: id, run_id: run_id
   invoice.snapshot = snapshot
   invoice.prepare invoice_date: invoice_date,
                   color: color,
-                  property: account.property.invoice,
+                  property: property.invoice,
                   snapshot: snapshot,
                   comments: comments
   invoice.deliver = deliver
@@ -31,7 +30,6 @@ def invoice_create \
   id: nil,
   run_id: 6,
   invoice_date: '2014/06/30',
-  account: account_create,
   property: property_create,
   comments: [],
   snapshot: snapshot_new,
@@ -40,7 +38,6 @@ def invoice_create \
   invoice = invoice_new id: id,
                         run_id: run_id,
                         invoice_date: invoice_date,
-                        account: account,
                         property: property,
                         comments: comments,
                         snapshot: snapshot,
