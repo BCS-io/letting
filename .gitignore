@@ -64,3 +64,6 @@ config/secrets.yml
 # backup files
 letting.tar
 PostgreSQL.sql
+
+# rails-erd
+erd.pdf
