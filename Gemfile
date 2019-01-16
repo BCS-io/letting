@@ -204,8 +204,6 @@ group :test do
   gem 'capybara-screenshot', '~> 1.0.0'
   gem 'chromedriver-helper', '~> 2.1.0'
 
-  gem 'database_cleaner', '~> 1.7.0'
-
   # Create e.s. test node
   gem 'elasticsearch-extensions'
   gem 'rspec-rails', '~> 3.8.0'

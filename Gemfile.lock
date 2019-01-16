@@ -143,7 +143,6 @@ GEM
     colored (1.2)
     concurrent-ruby (1.1.4)
     crass (1.0.4)
-    database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -479,7 +478,6 @@ DEPENDENCIES
   capybara-screenshot (~> 1.0.0)
   chromedriver-helper (~> 2.1.0)
   coffee-rails (~> 4.2.0)
-  database_cleaner (~> 1.7.0)
   elasticsearch (~> 6.0.0)
   elasticsearch-extensions
   elasticsearch-model (~> 6.0.0)

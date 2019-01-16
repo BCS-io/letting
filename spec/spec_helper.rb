@@ -1,4 +1,3 @@
-require 'database_cleaner'
 require 'zonebie'
 
 RSpec.configure do |config|
