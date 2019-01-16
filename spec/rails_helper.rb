@@ -11,6 +11,9 @@ require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'yaml'
 
+# capybara now uses Puma by default but I get Puama Errno::EINVAL
+# changing back to webrick is one way (not ideal) to solve it
+Capybara.server = :webrick
 # rails has a take_screenshot but cannot get it working
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
