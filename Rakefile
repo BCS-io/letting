@@ -17,6 +17,6 @@ if %w[development test].include? Rails.env
 
   task audit: 'bundle:audit'
   task(:default).clear
-  task default: ['bundle:audit', :scss_lint, :rubocop, 'spec:fast', 'spec:features']
-  task test: ['spec:fast', 'spec:features']
+  task default: ['bundle:audit', :scss_lint, :rubocop, 'spec:fast', 'spec:system']
+  task test: ['spec:fast', 'spec:system']
 end
