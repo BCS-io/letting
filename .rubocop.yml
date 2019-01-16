@@ -61,6 +61,11 @@ Metrics/LineLength:
     - 'spec/rails_helper.rb'
 Metrics/MethodLength:
   Max: 10
+  Exclude:
+    - 'spec/models/characters/address_spec.rb'
+Metrics/ParameterLists:
+  Exclude:
+    - 'spec/models/characters/address_spec.rb'
 Naming/AccessorMethodName:
   Exclude:
     - 'app/controllers/invoicings_controller.rb'
