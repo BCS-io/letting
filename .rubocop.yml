@@ -45,7 +45,7 @@ Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Lint/HandleExceptions:
   Exclude:
-    - 'spec/rails_helper.rb' # suppress Elasticsearch NotFound Errors
+    - 'spec/support/elasticsearch.rb' # suppress Elasticsearch NotFound Errors
 Lint/MissingCopEnableDirective:
   Enabled: false
 Style/MethodDefParentheses:
@@ -58,7 +58,7 @@ Metrics/LineLength:
   Max: 95
   Exclude:
     - Gemfile
-    - 'spec/rails_helper.rb'
+    - 'spec/support/elasticsearch.rb'
 Metrics/MethodLength:
   Max: 10
   Exclude:
