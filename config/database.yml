@@ -21,6 +21,7 @@ internet:
 
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: letting_production
   username: letting
   password: ENTER_PASSWORD
