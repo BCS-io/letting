@@ -10,8 +10,7 @@ staging:
   <<: *default
 production:
   es_bin: '/usr/local/bin/elasticsearch'
-  host: '<%= ENV["ELASTICSEARCH_URL"] %>'
-  port: '9400'
+  url: <%= ENV['ELASTICSEARCH_URL'] %>
 
 # Full re-import
 # rake elasticsearch:sync
