@@ -1,16 +1,12 @@
 development: &default
   es_bin: '/usr/local/bin/elasticsearch'
-  host: 'http://localhost:9200'
-  port: '9200'
 test:
   es_bin: '/usr/local/bin/elasticsearch'
-  host: 'http://localhost:9250'
   port: '9250'
 staging:
   <<: *default
 production:
   es_bin: '/usr/local/bin/elasticsearch'
-  url: <%= ENV['ELASTICSEARCH_URL'] %>
 
 # Full re-import
 # rake elasticsearch:sync
