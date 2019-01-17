@@ -45,6 +45,7 @@ brakeman.html
 # Ignore files with secrets
 .env
 config/secrets.yml
+config/app_environment_variables.rb
 
 # capistrano-db-tasks - dump files
 /db/*.sql.*
