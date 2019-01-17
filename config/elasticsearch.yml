@@ -10,7 +10,7 @@ staging:
   <<: *default
 production:
   es_bin: '/usr/local/bin/elasticsearch'
-  host: 'http://localhost:9400'
+  host: 'http://localhost:9200'
   port: '9400'
 
 # Full re-import
