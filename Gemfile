@@ -113,7 +113,6 @@ gem 'puma', '~> 3.11'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
 gem 'rails', '~> 5.2.2'
 gem 'rails-env-favicon'
-gem 'rails_12factor'
 
 # BREAKING GEM
 # rake versions after this break args options code in import rake (used for
