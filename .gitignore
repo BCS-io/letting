@@ -65,7 +65,7 @@ config/app_environment_variables.rb
 # backup files
 letting.tar
 PostgreSQL.sql
-letting.dump
+*.dump
 
 # rails-erd
 erd.pdf
