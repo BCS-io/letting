@@ -2,7 +2,7 @@
 
 
 APP_ENV="${APP_ENV:-staging}"
-REMOTE_USER="${REMOTE_USER:-deployer}"
+REMOTE_USER="${REMOTE_USER:-dokku}"
 WORKDIR="${WORKDIR:-deploy}"
 
 export $(grep -v '^#' .env | xargs)
@@ -10,27 +10,17 @@ export $(grep -v '^#' .env | xargs)
 function preseed_staging() {
 cat << EOF
 STAGING SERVER (DIRECT VIRTUAL MACHINE) DIRECTIONS:
-  1. Configure a static IP address directly on the VM
-     su
-     <enter password>
-     nano /etc/network/interfaces
-     [change the last line to look like this, remember to set the correct
-      gateway for your router's IP address if it's not 192.168.1.1]
-iface eth0 inet static
-  address ${SERVER_IP}
-  netmask 255.255.255.0
-  gateway 192.168.1.1
+  1. Root needs to be able to login via ssh - if not:
 
-  3. Install sudo (If missing)
-     apt-get update && apt-get install -y -q sudo
+     bin/deployer -O
 
-  4. Add the remote user to the sudo group on the remote server
-       - where ${REMOTE_USER} is the provisioning user's name
-     $ adduser ${REMOTE_USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
-     $ adduser ${REMOTE_USER} sudo
-     verify: sudo grep -Po '^sudo.+:\K.*$' /etc/group
+  2. Server requires a static IP if not:
 
-  5. Run the commands in: $0 --help
+     bin/deploy -N 10.0.0.10 10
+     or
+     bin/deploy -N 192.168.2.10 192
+
+  3. Run the commands in: $0 --help
      Example:
        ./deploy.sh -a
 EOF
