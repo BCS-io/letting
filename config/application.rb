@@ -16,8 +16,8 @@ module Letting
 
     config.i18n.enforce_available_locales = true
 
-    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}'),
-                                 "#{config.root}/lib/**/"]
+    config.eager_load_paths += Dir[Rails.root.join('app', 'models', '{**/}'),
+                                   Rails.root.join('lib', '{**/}')]
     config.exceptions_app = routes
 
     # basic schema cannot handle SQL views - required for account_details
