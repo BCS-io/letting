@@ -5,6 +5,8 @@ APP_ENV="${APP_ENV:-staging}"
 REMOTE_USER="${REMOTE_USER:-deployer}"
 WORKDIR="${WORKDIR:-deploy}"
 
+export $(grep -v '^#' .env | xargs)
+
 function preseed_staging() {
 cat << EOF
 STAGING SERVER (DIRECT VIRTUAL MACHINE) DIRECTIONS:
