@@ -3,6 +3,8 @@
 
 APP_ENV="${APP_ENV:-staging}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
+SERVER_IP="${SERVER_IP:-68.183.255.135}"
+SERVER_NAME="${SERVER_NAME:-yell}"
 WORKDIR="${WORKDIR:-deploy}"
 
 export $(grep -v '^#' .env | xargs)
