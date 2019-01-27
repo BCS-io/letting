@@ -64,21 +64,21 @@ class LiteralSearch
   def client_search
     results action: 'show',
             controller: 'clients',
-            records: id_or_empty(Client.find_by_human_ref query)
+            records: id_or_empty(Client.match_by_human_ref query)
   end
 
   def payment_search
     results action: 'index',
             controller: 'payments',
             records: Payment.includes(account: [property: [:entities]])
-                            .human_ref(query)
+                            .match_by_human_ref(query)
                             .by_booked_at.to_a
   end
 
   def property_search
     results action: 'show',
             controller: 'properties',
-            records: id_or_empty(Property.find_by_human_ref query)
+            records: id_or_empty(Property.match_by_human_ref query)
   end
 
   # default_ordered_query

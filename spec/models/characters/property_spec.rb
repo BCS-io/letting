@@ -62,6 +62,25 @@ RSpec.describe Property, type: :model do
   end
 
   describe 'class methods' do
+    describe 'match_by_human_ref' do
+      it 'finds property when matches human_ref' do
+        property_create human_ref: 10
+        expect(Property.match_by_human_ref(10).human_ref).to eq 10
+      end
+
+      it 'no property when mismatches human_ref' do
+        property_create human_ref: 10
+
+        expect(Property.match_by_human_ref 8).to be_nil
+      end
+
+      it 'no property when matches human ref but also contains other text' do
+        property_create human_ref: 10
+
+        expect(Property.match_by_human_ref '10 Mr Jones').to be_nil
+      end
+    end
+
     describe 'quarter_day_in' do
       it 'matches properties with quarter day charges' do
         property = property_create(

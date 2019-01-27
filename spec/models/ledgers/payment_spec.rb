@@ -203,21 +203,29 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       end
     end
 
-    describe '.human_ref' do
-      it 'returns if in range' do
+    describe '.match_by_human_ref' do
+      it 'finds payment when matches human_ref' do
         payment_create \
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
-        payments = Payment.human_ref 10
+        payments = Payment.match_by_human_ref 10
         expect(payments.size).to eq 1
       end
 
-      it 'returns nothing out of range' do
+      it 'no payment when mismatches human_ref' do
         payment_create \
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
-        payments = Payment.human_ref 5
-        expect(payments.size).to eq 0
+
+        expect(Payment.match_by_human_ref 5).to be_empty
+      end
+
+      it 'no payment when matches human_ref but also contains other text' do
+        payment_create \
+          booked_at: '30/4/2013 01:00:00 +0100',
+          account: account_create(property: property_new(human_ref: 10))
+
+        expect(Payment.match_by_human_ref '10 Mr Jones').to be_empty
       end
     end
 

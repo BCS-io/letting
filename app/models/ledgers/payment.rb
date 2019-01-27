@@ -1,3 +1,5 @@
+require_relative '../../../lib/modules/string_utils'
+
 ####
 #
 # Payment
@@ -10,6 +12,7 @@
 ####
 #
 class Payment < ApplicationRecord
+  include StringUtils
   belongs_to :account, inverse_of: :payments
   has_many :credits, inverse_of: :payment, dependent: :destroy do
     def clear_up
@@ -110,7 +113,9 @@ class Payment < ApplicationRecord
 
   # human_ref - the id of the account / property to return
   #
-  def self.human_ref human_ref
+  def self.match_by_human_ref human_ref
+    return Payment.none unless num? human_ref
+
     Payment.includes(account: [:property])
            .where(properties: { human_ref: human_ref })
   end

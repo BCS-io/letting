@@ -98,7 +98,7 @@ class Property < ApplicationRecord
     )
   end
 
-  def self.find_by_human_ref human_ref
+  def self.match_by_human_ref human_ref
     return nil unless num? human_ref
 
     find_by human_ref: human_ref

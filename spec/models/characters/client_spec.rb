@@ -20,20 +20,23 @@ RSpec.describe Client, type: :model do
     end
   end
 
-  describe '.find_by_human_ref' do
-    it 'finds client by human_ref' do
-      client_create human_ref: 10
-      expect(Client.find_by_human_ref(10).human_ref).to eq 10
-    end
-
-    it 'does not finds client when missing human_ref' do
-      expect(Client.find_by_human_ref 10).to be_nil
-    end
-
-    it 'does not finds client when missing human_ref' do
+  describe '.match_by_human_ref' do
+    it 'finds client when matches human_ref' do
       client_create human_ref: 10
 
-      expect(Client.find_by_human_ref '10 High Street').to be_nil
+      expect(Client.match_by_human_ref(10).human_ref).to eq 10
+    end
+
+    it 'no client when mismatches human_ref' do
+      client_create human_ref: 10
+
+      expect(Client.match_by_human_ref 8).to be_nil
+    end
+
+    it 'no client when matches human_ref but also contains other text' do
+      client_create human_ref: 10
+
+      expect(Client.match_by_human_ref '10 Mr Jones').to be_nil
     end
   end
 
