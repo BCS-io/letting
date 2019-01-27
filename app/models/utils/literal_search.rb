@@ -50,8 +50,7 @@ class LiteralSearch
   def get_query_by_referrer
     case referrer.controller
     when 'clients' then client_search
-    when 'payments', 'payments_by_dates'
-      results action: 'index', controller: 'payments', records: payments_query
+    when 'payments', 'payments_by_dates' then payment_search
 
     when 'properties' then property_search
     when 'arrears', 'cycles', 'users', 'invoice_texts', 'invoicings', 'invoices'
@@ -63,11 +62,23 @@ class LiteralSearch
   end
 
   def client_search
-    results action: 'show', controller: 'clients', records: client_query
+    results action: 'show',
+            controller: 'clients',
+            records: id_or_empty(Client.find_by_human_ref query)
+  end
+
+  def payment_search
+    results action: 'index',
+            controller: 'payments',
+            records: Payment.includes(account: [property: [:entities]])
+                            .human_ref(query)
+                            .by_booked_at.to_a
   end
 
   def property_search
-    results action: 'show', controller: 'properties', records: property_query
+    results action: 'show',
+            controller: 'properties',
+            records: id_or_empty(Property.find_by_human_ref query)
   end
 
   # default_ordered_query
@@ -82,19 +93,6 @@ class LiteralSearch
     return client_search if client_search.found?
 
     results records: []
-  end
-
-  def client_query
-    id_or_empty(Client.find_by_human_ref query)
-  end
-
-  def payments_query
-    Payment.includes(account: [property: [:entities]]).human_ref(query)
-           .by_booked_at.to_a
-  end
-
-  def property_query
-    id_or_empty(Property.find_by_human_ref query)
   end
 
   def id_or_empty record
