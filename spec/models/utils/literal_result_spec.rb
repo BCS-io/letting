@@ -17,7 +17,7 @@ RSpec.describe LiteralResult do
 
   describe 'to_params' do
     it 'defaults to controller / action' do
-      expect(LiteralResult.new(controller: 'c', action: 'a').to_params)
+      expect(LiteralResult.new(controller: 'c', action: 'a', records: []).to_params)
         .to include(controller: 'c', action: 'a')
     end
 
@@ -37,7 +37,7 @@ RSpec.describe LiteralResult do
   end
 
   it '#to_render is composed of controller and action' do
-    expect(LiteralResult.new(controller: 'c', action: 'a').to_render)
+    expect(LiteralResult.new(controller: 'c', action: 'a', records: []).to_render)
       .to eq 'c/a'
   end
 
@@ -82,7 +82,7 @@ RSpec.describe LiteralResult do
     end
 
     it 'returns nil when not comparable' do
-      expect(LiteralResult.new(controller: 'c', action: 'a') <=> 37).to be_nil
+      expect(LiteralResult.new(controller: 'c', action: 'a', records: []) <=> 37).to be_nil
     end
   end
 end

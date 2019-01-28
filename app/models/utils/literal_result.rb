@@ -14,7 +14,7 @@ class LiteralResult
   #   records - when more than one record is being returned
   #   do_not_search - do not search
   #
-  def initialize(controller:, action:, records: [])
+  def initialize(controller:, action:, records:)
     @controller = controller
     @action = action
     @records = Array(records)
