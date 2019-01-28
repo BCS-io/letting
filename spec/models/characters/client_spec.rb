@@ -21,22 +21,22 @@ RSpec.describe Client, type: :model do
   end
 
   describe '.match_by_human_ref' do
-    it 'finds client when matches human_ref' do
-      client_create human_ref: 10
+    it 'returns arrayed client when matches human_ref' do
+      client = client_create human_ref: 10
 
-      expect(Client.match_by_human_ref(10).human_ref).to eq 10
+      expect(Client.match_by_human_ref 10).to eq [client]
     end
 
-    it 'no client when mismatches human_ref' do
+    it 'returns empty array when mismatches human_ref' do
       client_create human_ref: 10
 
-      expect(Client.match_by_human_ref 8).to be_nil
+      expect(Client.match_by_human_ref 8).to be_empty
     end
 
-    it 'no client when matches human_ref but also contains other text' do
+    it 'returns empty array when matches human_ref but also contains other text' do
       client_create human_ref: 10
 
-      expect(Client.match_by_human_ref '10 Mr Jones').to be_nil
+      expect(Client.match_by_human_ref '10 Mr Jones').to be_empty
     end
   end
 

@@ -9,7 +9,7 @@ RSpec.describe 'LiteralSearch #go', type: :model do
       referrer = Referrer.new controller: 'clients', action: ''
 
       expect(LiteralSearch.search(referrer: referrer, query: '8').go)
-        .to eq LiteralResult.new(controller: 'clients', action: 'show', records: client.id)
+        .to eq LiteralResult.new(controller: 'clients', action: 'show', records: [client])
     end
 
     it 'returns nil when no match' do
@@ -62,7 +62,7 @@ RSpec.describe 'LiteralSearch #go', type: :model do
       referrer = Referrer.new controller: 'properties', action: ''
 
       expect(LiteralSearch.search(referrer: referrer, query: '100').go)
-        .to eq LiteralResult.new(controller: 'properties', action: 'show', records: property.id)
+        .to eq LiteralResult.new(controller: 'properties', action: 'show', records: [property])
     end
 
     it 'return nil when no match' do
@@ -97,7 +97,7 @@ RSpec.describe 'LiteralSearch #go', type: :model do
       referrer = Referrer.new controller: 'clients', action: ''
 
       expect(LiteralSearch.search(referrer: referrer, query: '100').go)
-        .to eq LiteralResult.new(controller: 'clients', action: 'show', records: client.id)
+        .to eq LiteralResult.new(controller: 'clients', action: 'show', records: [client])
     end
 
     it 'returns default if queried type does not have that value.' do
@@ -106,7 +106,7 @@ RSpec.describe 'LiteralSearch #go', type: :model do
       referrer = Referrer.new controller: 'clients', action: ''
 
       expect(LiteralSearch.search(referrer: referrer, query: '101').go)
-        .to eq LiteralResult.new(controller: 'properties', action: 'show', records: not_a_client.id)
+        .to eq LiteralResult.new(controller: 'properties', action: 'show', records: [not_a_client])
     end
   end
 end

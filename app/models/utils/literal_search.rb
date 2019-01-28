@@ -64,7 +64,7 @@ class LiteralSearch
   def client_search
     results action: 'show',
             controller: 'clients',
-            records: id_or_empty(Client.match_by_human_ref query)
+            records: Client.match_by_human_ref(query)
   end
 
   def payment_search
@@ -78,7 +78,7 @@ class LiteralSearch
   def property_search
     results action: 'show',
             controller: 'properties',
-            records: id_or_empty(Property.match_by_human_ref query)
+            records: Property.match_by_human_ref(query)
   end
 
   # default_ordered_query
@@ -93,10 +93,6 @@ class LiteralSearch
     return client_search if client_search.found?
 
     results records: []
-  end
-
-  def id_or_empty record
-    record ? record.id : []
   end
 
   def results(action: '', controller: '', records:)

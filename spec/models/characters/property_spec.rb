@@ -63,21 +63,20 @@ RSpec.describe Property, type: :model do
 
   describe 'class methods' do
     describe 'match_by_human_ref' do
-      it 'finds property when matches human_ref' do
-        property_create human_ref: 10
-        expect(Property.match_by_human_ref(10).human_ref).to eq 10
+      it 'returns arrayed property when matches human_ref' do
+        property = property_create human_ref: 10
+        expect(Property.match_by_human_ref 10).to eq [property]
       end
 
-      it 'no property when mismatches human_ref' do
+      it 'returns empty array when mismatches human_ref' do
         property_create human_ref: 10
-
-        expect(Property.match_by_human_ref 8).to be_nil
+        expect(Property.match_by_human_ref 8).to be_empty
       end
 
-      it 'no property when matches human ref but also contains other text' do
+      it 'returns empty array when matches human ref but also contains other text' do
         property_create human_ref: 10
 
-        expect(Property.match_by_human_ref '10 Mr Jones').to be_nil
+        expect(Property.match_by_human_ref '10 Mr Jones').to be_empty
       end
     end
 

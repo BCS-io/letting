@@ -205,14 +205,14 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
 
     describe '.match_by_human_ref' do
       it 'finds payment when matches human_ref' do
-        payment_create \
+        payment = payment_create \
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
-        payments = Payment.match_by_human_ref 10
-        expect(payments.size).to eq 1
+
+        expect(Payment.match_by_human_ref 10).to eq [payment]
       end
 
-      it 'no payment when mismatches human_ref' do
+      it 'return empty array when mismatches human_ref' do
         payment_create \
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
@@ -220,7 +220,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         expect(Payment.match_by_human_ref 5).to be_empty
       end
 
-      it 'no payment when matches human_ref but also contains other text' do
+      it 'returns empty array when matches human_ref but also contains other text' do
         payment_create \
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))

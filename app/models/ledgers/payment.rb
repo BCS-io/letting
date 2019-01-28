@@ -114,7 +114,7 @@ class Payment < ApplicationRecord
   # human_ref - the id of the account / property to return
   #
   def self.match_by_human_ref human_ref
-    return Payment.none unless num? human_ref
+    return none unless num? human_ref
 
     Payment.includes(account: [:property])
            .where(properties: { human_ref: human_ref })
