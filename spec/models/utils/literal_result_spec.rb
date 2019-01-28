@@ -1,11 +1,37 @@
 require 'rails_helper'
 
 RSpec.describe LiteralResult do
-  describe '#found?' do
-    it 'is found if records set' do
+  describe 'initialize' do
+    it 'returns individual items as an array' do
       expect(LiteralResult.new(controller: 'arbitary',
                                action: 'arbitary',
-                               records: 'assigned').found?).to be true
+                               records: 'assigned').records).to be_an_instance_of(Array)
+    end
+
+    it 'returns an empty array as an array' do
+      expect(LiteralResult.new(controller: 'arbitary',
+                               action: 'arbitary',
+                               records: []).records).to be_an_instance_of(Array)
+    end
+
+    it 'returns an array as an array' do
+      expect(LiteralResult.new(controller: 'arbitary',
+                               action: 'arbitary',
+                               records: ['assigned']).records).to be_an_instance_of(Array)
+    end
+
+    it 'returns null relation object as an array' do
+      expect(LiteralResult.new(controller: 'arbitary',
+                               action: 'arbitary',
+                               records: Property.none).records).to be_an_instance_of(Array)
+    end
+  end
+
+  describe '#found?' do
+    it 'is found if one item in an array is set' do
+      expect(LiteralResult.new(controller: 'arbitary',
+                               action: 'arbitary',
+                               records: ['assigned']).found?).to be true
     end
 
     it 'is not found if records missing' do
@@ -24,7 +50,7 @@ RSpec.describe LiteralResult do
     it 'returns id if single record' do
       expect(LiteralResult.new(controller: 'arbitary',
                                action: 'arbitary',
-                               records: 4).to_params)
+                               records: [4]).to_params)
         .to include(id: 4, controller: 'arbitary', action: 'arbitary')
     end
 
@@ -45,7 +71,7 @@ RSpec.describe LiteralResult do
     it 'returns true if single record' do
       expect(LiteralResult.new(controller: 'arbitary',
                                action: 'arbitary',
-                               records: 4).single_record?)
+                               records: [1]).single_record?)
         .to be true
     end
 
@@ -59,24 +85,24 @@ RSpec.describe LiteralResult do
 
   describe '#<=>' do
     it 'returns 0 when equal' do
-      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
-      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
+      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: [1]
+      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: [1]
 
       expect(lhs <=> rhs).to eq(0)
     end
 
     describe 'returns 1 when lhs > rhs' do
       it 'compares records' do
-        lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 2
-        rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
+        lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: [2]
+        rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: [1]
 
         expect(lhs <=> rhs).to eq(1)
       end
     end
 
     it 'returns -1 when lhs < rhs' do
-      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 1
-      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: 2
+      lhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: [1]
+      rhs = LiteralResult.new controller: 'arbitary', action: 'arbitary', records: [2]
 
       expect(lhs <=> rhs).to eq(-1)
     end
