@@ -16,17 +16,27 @@
 class Invoicing < ApplicationRecord
   WEEKS_AHEAD = 7
   has_many :runs, dependent: :destroy, inverse_of: :invoicing
+
   validates :property_range, :period_first, :period_last, :runs, presence: true
+  validate :validate_mininum_accounts
+  validate :validate_run
+
   scope :default, -> { order(period_first: :desc) }
   scope :blue_invoicies, -> { where('runs_count = 1') }
 
+  # period
+  #  - returns the date range which the invoicing covers
+  #
   def period
     (period_first..period_last)
   end
 
-  def period=(billing)
-    self.period_first = billing.first
-    self.period_last  = billing.last
+  # period=(billing_date)
+  #  - set billing date period covered by the invoicing
+  #
+  def period=(billing_dates)
+    self.period_first = billing_dates.first
+    self.period_last  = billing_dates.last
   end
 
   after_initialize :init
@@ -39,32 +49,6 @@ class Invoicing < ApplicationRecord
   #
   def accounts
     AccountFinder.new(property_range: property_range).matching
-  end
-
-  validate :mininum_accounts
-  def mininum_accounts
-    return unless accounts.empty?
-
-    errors.add(:invoice_accounts, 'does not match any accounts.')
-  end
-
-  validate :valid_run
-  def valid_run
-    return if actionable?
-
-    return if property_range.blank? # blank covered by presence
-
-    errors.add(:property_range,
-               ", #{property_range}, has no account that can" \
-               " be charged for the period #{period.first} to #{period.last}.")
-  end
-
-  # valid_arguments?
-  # Does this invoicing have enough arguments to call generate on?
-  # Nil values for property_range and period are nil cause problems.
-  #
-  def valid_arguments?
-    property_range && period.first && period.last
   end
 
   # actionable?
@@ -91,6 +75,14 @@ class Invoicing < ApplicationRecord
     self
   end
 
+  # valid_arguments?
+  # Does this invoicing have enough arguments to call generate on?
+  # Nil values for property_range and period are nil cause problems.
+  #
+  def valid_arguments?
+    property_range && period.first && period.last
+  end
+
   private
 
   def invoices_maker invoice_date, comments
@@ -105,5 +97,31 @@ class Invoicing < ApplicationRecord
   #
   def color
     runs.size <= 1 ? :blue : :red
+  end
+
+  # custom validation that there are accounts that cover the invoicing date period
+  # returns
+  #   - true if there are accounts which are covered by the invoicing
+  #   - otherwise adds error to the error object
+  #
+  def validate_mininum_accounts
+    return true unless accounts.empty?
+
+    errors.add(:invoice_accounts, 'does not match any accounts.')
+  end
+
+  # custom validation that at least one account can be charged for the period
+  # returns
+  #  - true if valid run
+  #  - otherwise adds error to the error object
+  #
+  def validate_run
+    return true if actionable?
+
+    return true if property_range.blank? # blank covered by presence
+
+    errors.add(:property_range,
+               ", #{property_range}, has no account that can" \
+               " be charged for the period #{period.first} to #{period.last}.")
   end
 end

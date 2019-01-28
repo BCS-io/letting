@@ -15,15 +15,36 @@ RSpec.describe Invoicing, type: :model do
     it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
   end
 
-  #
-  # account_setup
-  # creates database objects required for the tests
-  #
-  def account_setup(property_ref:, charge_month:, charge_day:)
-    invoice_text_create id: 1
-    cycle = cycle_new due_ons: [DueOn.new(month: charge_month, day: charge_day)]
-    account_create property: property_new(human_ref: property_ref),
-                   charges: [charge_new(cycle: cycle)]
+  describe 'validates minimum_accounts' do
+    it 'sets no error if invoicing covers an account' do
+      account_setup(property_ref: 2222, charge_month: 3, charge_day: 5)
+
+      invoicing = Invoicing.new property_range: '2222',
+                                period: '2010-3-1'..'2010-3-31'
+
+      invoicing.valid?
+
+      expect(invoicing.errors).to_not include(:invoice_accounts)
+    end
+
+    it 'sets an error if invoicing does not cover any accounts' do
+      account_setup(property_ref: 1111, charge_month: 3, charge_day: 5)
+
+      invoicing = Invoicing.new property_range: '2222',
+                                period: '2010-3-1'..'2010-3-31'
+
+      invoicing.valid?
+
+      expect(invoicing.errors).to include(:invoice_accounts)
+    end
+  end
+
+  describe 'validate_run' do
+    # it is missing this test!
+  end
+
+  describe 'accounts' do
+    # it is missing this test!
   end
 
   describe '#actionable?' do
@@ -55,18 +76,6 @@ RSpec.describe Invoicing, type: :model do
       (invoicing = Invoicing.new).runs = [Run.new(invoices: [invoice])]
 
       expect(invoicing.deliverable?).to be false
-    end
-  end
-
-  describe '#valid_arguments?' do
-    it 'can be true' do
-      expect(invoicing_new).to be_valid_arguments
-    end
-    it 'can be false if range false' do
-      expect(invoicing_new property_range: nil).to_not be_valid_arguments
-    end
-    it 'can be false if period false' do
-      expect(invoicing_new period: nil..nil).to_not be_valid_arguments
     end
   end
 
@@ -140,5 +149,27 @@ RSpec.describe Invoicing, type: :model do
         expect(invoicing.runs.first.invoices).to eq []
       end
     end
+  end
+
+  describe '#valid_arguments?' do
+    it 'can be true' do
+      expect(invoicing_new).to be_valid_arguments
+    end
+    it 'can be false if range false' do
+      expect(invoicing_new property_range: nil).to_not be_valid_arguments
+    end
+    it 'can be false if period false' do
+      expect(invoicing_new period: nil..nil).to_not be_valid_arguments
+    end
+  end
+
+  # account_setup for tests
+  # creates database objects required for the tests
+  #
+  def account_setup(property_ref:, charge_month:, charge_day:)
+    invoice_text_create id: 1
+    cycle = cycle_new due_ons: [DueOn.new(month: charge_month, day: charge_day)]
+    account_create property: property_new(human_ref: property_ref),
+                   charges: [charge_new(cycle: cycle)]
   end
 end
