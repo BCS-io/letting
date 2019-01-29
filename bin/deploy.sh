@@ -50,8 +50,16 @@ EOF
   echo "done!"
 }
 
+function key_copy_to_remote_root() {
+  echo "Local public SSH key to remote root user"
+  ssh-copy-id -i "${HOME}/.ssh/id_rsa.pub" ${SSH_ROOT}@${SERVER_IP}
+  echo "done!"
+}
+
 function provision_server () {
-  echo "add code here"
+
+  echo "---  -K  ---"
+  key_copy_to_remote_root
 }
 
 function server_reachable () {
@@ -99,6 +107,10 @@ case "${1}" in
   ;;
   -h|--help)
   help_menu
+  shift
+  ;;
+  -K|--key-root)
+  key_copy_to_remote_root
   shift
   ;;
   -o|--has-sudo)
