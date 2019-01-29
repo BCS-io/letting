@@ -28,6 +28,13 @@ STAGING SERVER (DIRECT VIRTUAL MACHINE) DIRECTIONS:
 EOF
 }
 
+function clear_remote_host_identification () {
+  echo "Configuring passwordless sudo..."
+  ssh-keygen -q -R ${SERVER_IP}
+  ssh-keygen -q -R ${SERVER_NAME}
+  echo "done!"
+}
+
 function provision_server () {
   echo "add code here"
 }
@@ -73,6 +80,10 @@ case "${1}" in
   ;;
   -h|--help)
   help_menu
+  shift
+  ;;
+  -R|--remove-keys)
+  clear_remote_host_identification
   shift
   ;;
   -S|--preseed-staging)
