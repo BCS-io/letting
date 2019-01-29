@@ -50,6 +50,12 @@ EOF
   echo "done!"
 }
 
+function key_copy_to_remote_admin() {
+  echo "Adding SSH key to ${ADMIN}..."
+  sshpass -p ${ADMIN_PASSWORD} ssh-copy-id -i "${HOME}/.ssh/id_rsa.pub" ${ADMIN}@${SERVER_IP}
+  echo "done!"
+}
+
 function key_copy_to_remote_root() {
   echo "Local public SSH key to remote root user"
   ssh-copy-id -i "${HOME}/.ssh/id_rsa.pub" ${SSH_ROOT}@${SERVER_IP}
@@ -63,6 +69,9 @@ function provision_server () {
 
   echo "---  -r  ---"
   admin_added
+
+  echo "---  -k  ---"
+  key_copy_to_remote_admin
 }
 
 function admin_added () {
@@ -126,6 +135,10 @@ case "${1}" in
   ;;
   -K|--key-root)
   key_copy_to_remote_root
+  shift
+  ;;
+  -k|--ssh-key)
+  key_copy_to_remote_admin
   shift
   ;;
   -o|--has-sudo)
