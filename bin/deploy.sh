@@ -2,6 +2,7 @@
 
 ADMIN="${ADMIN:-deployer}"
 APP_ENV="${APP_ENV:-staging}"
+DOKKU_VERSION="${DOKKU_VERSION:-0.14.5}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
 SERVER_IP="${SERVER_IP:-68.183.255.135}"
 SERVER_NAME="${SERVER_NAME:-yell}"
@@ -111,6 +112,18 @@ sudo systemctl restart ssh
   echo "done!"
 }
 
+function install_dokku () {
+  echo "installing dokku v${1}"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+wget -O "bootstrap.sh wget https://raw.githubusercontent.com/dokku/dokku/v${1}/bootstrap.sh"
+sudo DOKKU_TAG=v${1} bash bootstrap.sh
+dokku version
+  '"
+# dokku user must have the key copied this way or it doesn't work
+cat ~/.ssh/id_rsa.pub | ssh ${ADMIN}@${SERVER_IP} "sudo sshcommand acl-add dokku dokku-admin"
+  echo "done!"
+}
+
 function provision_server () {
 
   echo "---  -K  ---"
@@ -130,6 +143,9 @@ function provision_server () {
 
   echo "---  -l  ---"
   lockdown_ssh
+
+  echo "---  -d  ---"
+  install_dokku ${1}
 }
 
 function admin_added () {
@@ -184,7 +200,11 @@ while [[ $# > 0 ]]
 do
 case "${1}" in
   -a|--all)
-  provision_server
+  provision_server "${2:-${DOKKU_VERSION}}"
+  shift
+  ;;
+  -d|--dokku)
+  install_dokku "${2:-${DOKKU_VERSION}}"
   shift
   ;;
   -f|--firewall)
