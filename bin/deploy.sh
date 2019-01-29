@@ -32,6 +32,12 @@ STAGING SERVER (DIRECT VIRTUAL MACHINE) DIRECTIONS:
 EOF
 }
 
+function backup_remote_database_now () {
+  echo "database: ${DATABASE} Bucket: ${BUCKET_NAME} AWSID: ${AWS_ACCESS_KEY_ID} AWSKey: ${AWS_SECRET_ACCESS_KEY} CRON: ${CRON_SCHEDULE}"
+  ssh ${REMOTE_USER}@${SERVER_IP} postgres:backup ${DATABASE} ${BUCKET_NAME}
+  echo "done!"
+}
+
 function clear_remote_host_identification () {
   echo "Configuring passwordless sudo..."
   ssh-keygen -q -R ${SERVER_IP}
@@ -343,6 +349,10 @@ case "${1}" in
   ;;
   -a|--all)
   provision_server "${2:-${DOKKU_VERSION}}"
+  shift
+  ;;
+  -B|--backup-remote-now)
+  backup_remote_database_now
   shift
   ;;
   -D|--database)
