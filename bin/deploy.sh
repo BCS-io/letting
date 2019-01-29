@@ -2,6 +2,7 @@
 
 ADMIN="${ADMIN:-deployer}"
 APP_ENV="${APP_ENV:-staging}"
+APPLICATION="${APPLICATION:-letting}"
 DOKKU_VERSION="${DOKKU_VERSION:-0.14.5}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
 SERVER_IP="${SERVER_IP:-68.183.255.135}"
@@ -48,6 +49,12 @@ sudo chmod 440 /tmp/sudoers
 sudo chown root:root /tmp/sudoers
 sudo mv /tmp/sudoers /etc
   '"
+  echo "done!"
+}
+
+function create_application () {
+  echo "Create dokku application"
+  ssh ${REMOTE_USER}@${SERVER_IP} apps:create ${APPLICATION}
   echo "done!"
 }
 
@@ -146,6 +153,9 @@ function provision_server () {
 
   echo "---  -d  ---"
   install_dokku ${1}
+
+  echo "---  -A  ---"
+  create_application
 }
 
 function admin_added () {
@@ -199,6 +209,10 @@ EOF
 while [[ $# > 0 ]]
 do
 case "${1}" in
+  -A|--application)
+  create_application
+  shift
+  ;;
   -a|--all)
   provision_server "${2:-${DOKKU_VERSION}}"
   shift
