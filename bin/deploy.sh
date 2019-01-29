@@ -36,6 +36,20 @@ function clear_remote_host_identification () {
   echo "done!"
 }
 
+# configure suders()
+#   - rules under which you can run sudo command
+#
+function configure_sudoers () {
+  echo "Configuring passwordless sudo..."
+  scp "${WORKDIR}/sudo/sudoers" "${SSH_ROOT}@${SERVER_IP}:/tmp/sudoers"
+  ssh -t "${SSH_ROOT}@${SERVER_IP}" bash -c "'
+sudo chmod 440 /tmp/sudoers
+sudo chown root:root /tmp/sudoers
+sudo mv /tmp/sudoers /etc
+  '"
+  echo "done!"
+}
+
 function has_sudo () {
    ssh -T "${SSH_ROOT}@${SERVER_IP}" bash << EOF
     if sudo -n true
@@ -72,6 +86,9 @@ function provision_server () {
 
   echo "---  -k  ---"
   key_copy_to_remote_admin
+
+  echo "---  -u  ---"
+  configure_sudoers
 }
 
 function admin_added () {
@@ -159,6 +176,10 @@ case "${1}" in
   ;;
   -S|--preseed-staging)
   preseed_staging
+  shift
+  ;;
+  -u|--sudo)
+  configure_sudoers
   shift
   ;;
   *)
