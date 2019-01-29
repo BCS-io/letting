@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+ADMIN="${ADMIN:-deployer}"
 APP_ENV="${APP_ENV:-staging}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
 SERVER_IP="${SERVER_IP:-68.183.255.135}"
@@ -60,6 +60,21 @@ function provision_server () {
 
   echo "---  -K  ---"
   key_copy_to_remote_root
+
+  echo "---  -r  ---"
+  admin_added
+}
+
+function admin_added () {
+  echo "Add admin user: ${ADMIN}"
+  ssh -t "${SSH_ROOT}@${SERVER_IP}" bash -c "'
+id -u ${ADMIN} &>/dev/null || adduser --quiet  --disabled-password  --shell /bin/bash --gecos \"\" ${ADMIN}
+adduser ${ADMIN} sudo
+echo \"${ADMIN}:${ADMIN_PASSWORD}\" | sudo chpasswd
+echo \"Test user present:\"
+cut -d: -f1 /etc/passwd | grep ${ADMIN}
+  '"
+  echo "done!"
 }
 
 function server_reachable () {
@@ -123,6 +138,10 @@ case "${1}" in
   ;;
   -R|--remove-keys)
   clear_remote_host_identification
+  shift
+  ;;
+  -r|--admin-user-added)
+  admin_added
   shift
   ;;
   -S|--preseed-staging)
