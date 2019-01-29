@@ -3,6 +3,7 @@
 ADMIN="${ADMIN:-deployer}"
 APP_ENV="${APP_ENV:-staging}"
 APPLICATION="${APPLICATION:-letting}"
+DATABASE="${DATABASE:-database}"
 DOKKU_VERSION="${DOKKU_VERSION:-0.14.5}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
 SERVER_IP="${SERVER_IP:-68.183.255.135}"
@@ -138,6 +139,27 @@ cat ~/.ssh/id_rsa.pub | ssh ${ADMIN}@${SERVER_IP} "sudo sshcommand acl-add dokku
   echo "done!"
 }
 
+function plugin_database () {
+  echo "plugin dokku database"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+if [ ! -e /var/lib/dokku/plugins/available/postgres ]; then
+  sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git postgres
+  sudo dokku postgres:create ${DATABASE}
+  dokku postgres:link ${DATABASE} ${APPLICATION}
+  dokku postgres:expose ${DATABASE}
+  dokku postgres:backup-auth ${DATABASE} ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} ${AWS_REGION}
+  dokku postgres:backup-schedule ${DATABASE} \"7 3 * * 1-5\" ${BUCKET_NAME}
+  dokku postgres:backup-schedule-cat ${DATABASE}
+else
+ echo "dokku postgres is already installed"
+ dokku postgres:info ${DATABASE}
+ echo "Backup schedule of ${DATABASE}:"
+ dokku postgres:backup-schedule-cat ${DATABASE}
+fi
+  '"
+  echo "done!"
+}
+
 function plugin_logging () {
   ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
     sudo dokku plugin:install https://github.com/michaelshobbs/dokku-logspout.git
@@ -181,6 +203,9 @@ function provision_server () {
 
   echo "---  -L  ---"
   plugin_logging
+
+  echo "---  -D  ---"
+  plugin_database
 }
 
 function admin_added () {
@@ -240,6 +265,10 @@ case "${1}" in
   ;;
   -a|--all)
   provision_server "${2:-${DOKKU_VERSION}}"
+  shift
+  ;;
+  -D|--database)
+  plugin_database
   shift
   ;;
   -d|--dokku)
