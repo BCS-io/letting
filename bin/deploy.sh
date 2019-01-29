@@ -187,6 +187,22 @@ function plugin_logging () {
   echo "done!"
 }
 
+function plugin_elasticsearch () {
+  echo "plugin dokku elasticsearch"
+  ssh -t "${SSH_ROOT}@${SERVER_IP}" bash -c "'
+dokku plugin:install https://github.com/dokku/dokku-elasticsearch.git elasticsearch
+cd /var/lib/dokku/plugins/enabled/elasticsearch
+git checkout -B fix_es6
+git remote add sv https://github.com/slava-vishnyakov/dokku-elasticsearch.git
+git pull sv es6_fix2
+echo 'vm.max_map_count=262144' | tee -a /etc/sysctl.conf; sysctl -p
+export ELASTICSEARCH_IMAGE_VERSION=6.5.4; dokku elasticsearch:create search
+dokku elasticsearch:link search ${APPLICATION}
+dokku run ${APPLICATION} rake elasticsearch:sync
+  '"
+  echo "done!"
+}
+
 function provision_server () {
 
   echo "---  -K  ---"
@@ -227,6 +243,9 @@ function provision_server () {
 
   echo "---  -P  ---"
   deploy_application
+
+  echo "---  -e  ---"
+  plugin_elasticsearch
 }
 
 function admin_added () {
@@ -294,6 +313,10 @@ case "${1}" in
   ;;
   -d|--dokku)
   install_dokku "${2:-${DOKKU_VERSION}}"
+  shift
+  ;;
+  -e|--elasticsearch)
+  plugin_elasticsearch
   shift
   ;;
   -f|--firewall)
