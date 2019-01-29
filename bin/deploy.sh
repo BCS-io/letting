@@ -50,6 +50,30 @@ sudo mv /tmp/sudoers /etc
   echo "done!"
 }
 
+function firewall_configure () {
+  echo "Configuring iptables firewall..."
+  local WEB_ALLOWED_IPS=($PUBLIC_ADDRESS_1 $PUBLIC_ADDRESS_2 $PRIVATE_ADDRESS_1 $PRIVATE_ADDRESS_2)
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+    sudo ufw --force reset
+    sudo ufw allow ssh
+  '"
+
+  for ips in "${WEB_ALLOWED_IPS[@]}"
+  do
+    ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+      sudo ufw allow from ${ips} to any port http
+    '"
+  done
+
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+    sudo ufw deny http
+
+    sudo ufw --force enable
+    sudo ufw status verbose
+  '"
+  echo "done!"
+}
+
 function has_sudo () {
    ssh -T "${SSH_ROOT}@${SERVER_IP}" bash << EOF
     if sudo -n true
@@ -89,6 +113,9 @@ function provision_server () {
 
   echo "---  -u  ---"
   configure_sudoers
+
+  echo "---  -f  ---"
+  firewall_configure
 }
 
 function admin_added () {
@@ -144,6 +171,10 @@ do
 case "${1}" in
   -a|--all)
   provision_server
+  shift
+  ;;
+  -f|--firewall)
+  firewall_configure
   shift
   ;;
   -h|--help)
