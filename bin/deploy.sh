@@ -3,6 +3,7 @@
 ADMIN="${ADMIN:-deployer}"
 APP_ENV="${APP_ENV:-staging}"
 APPLICATION="${APPLICATION:-letting}"
+BACKUP_FILE="${BACKUP_FILE:-${APPLICATION}.dump}"
 DATABASE="${DATABASE:-database}"
 DOKKU_VERSION="${DOKKU_VERSION:-0.14.5}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
@@ -35,6 +36,13 @@ EOF
 function backup_remote_database_now () {
   echo "database: ${DATABASE} Bucket: ${BUCKET_NAME} AWSID: ${AWS_ACCESS_KEY_ID} AWSKey: ${AWS_SECRET_ACCESS_KEY} CRON: ${CRON_SCHEDULE}"
   ssh ${REMOTE_USER}@${SERVER_IP} postgres:backup ${DATABASE} ${BUCKET_NAME}
+  echo "done!"
+}
+
+function backup_local_database () {
+  echo "Backing up local database for ${APPLICATION} to ${BACKUP_FILE}"
+  pg_dump -Fc --no-acl --no-owner letting_development > "${WORKDIR}/backup_database/${BACKUP_FILE}"
+  ls -l backup_database| grep ${BACKUP_FILE}
   echo "done!"
 }
 
@@ -353,6 +361,10 @@ case "${1}" in
   ;;
   -B|--backup-remote-now)
   backup_remote_database_now
+  shift
+  ;;
+  -b|--backup)
+  backup_local_database
   shift
   ;;
   -D|--database)
