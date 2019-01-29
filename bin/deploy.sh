@@ -59,6 +59,12 @@ function create_application () {
   echo "done!"
 }
 
+function deploy_application () {
+  echo "deployer application ${APPLICATION}"
+  git push dokku master
+  echo "done!"
+}
+
 function domain_set () {
   echo "domain set for ${APPLICATION}"
   ssh ${REMOTE_USER}@${SERVER_IP} domains:set ${APPLICATION} book-gardener.co.uk www.book-gardener.co.uk
@@ -218,6 +224,9 @@ function provision_server () {
 
   echo "---  -i  ---"
   remote_database_import
+
+  echo "---  -P  ---"
+  deploy_application
 }
 
 function admin_added () {
@@ -325,6 +334,10 @@ case "${1}" in
   ;;
   -p|--ping)
   server_reachable
+  shift
+  ;;
+  -P|--deploy-application)
+  deploy_application
   shift
   ;;
   -R|--remove-keys)
