@@ -5,6 +5,7 @@ APP_ENV="${APP_ENV:-staging}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
 SERVER_IP="${SERVER_IP:-68.183.255.135}"
 SERVER_NAME="${SERVER_NAME:-yell}"
+SSH_ROOT="${SSH_ROOT:-root}"
 WORKDIR="${WORKDIR:-deploy}"
 
 export $(grep -v '^#' .env | xargs)
@@ -32,6 +33,20 @@ function clear_remote_host_identification () {
   echo "Configuring passwordless sudo..."
   ssh-keygen -q -R ${SERVER_IP}
   ssh-keygen -q -R ${SERVER_NAME}
+  echo "done!"
+}
+
+function has_sudo () {
+   ssh -T "${SSH_ROOT}@${SERVER_IP}" bash << EOF
+    if sudo -n true
+    then
+      echo "sudo installed"
+    else
+      echo "No sudo!"
+    fi
+    echo "Suoders:"
+    grep -Po '^sudo.+:\K.*$' /etc/group
+EOF
   echo "done!"
 }
 
@@ -80,6 +95,10 @@ case "${1}" in
   ;;
   -h|--help)
   help_menu
+  shift
+  ;;
+  -o|--has-sudo)
+  has_sudo
   shift
   ;;
   -R|--remove-keys)
