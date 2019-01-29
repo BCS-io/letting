@@ -100,6 +100,17 @@ function key_copy_to_remote_root() {
   echo "done!"
 }
 
+function lockdown_ssh () {
+  echo "locking down configuration of SSH..."
+  scp "${WORKDIR}/ssh/sshd_config" "${ADMIN}@${SERVER_IP}:/tmp/sshd_config"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+sudo chown root:root /tmp/sshd_config
+sudo mv /tmp/sshd_config /etc/ssh
+sudo systemctl restart ssh
+  '"
+  echo "done!"
+}
+
 function provision_server () {
 
   echo "---  -K  ---"
@@ -116,6 +127,9 @@ function provision_server () {
 
   echo "---  -f  ---"
   firewall_configure
+
+  echo "---  -l  ---"
+  lockdown_ssh
 }
 
 function admin_added () {
@@ -187,6 +201,10 @@ case "${1}" in
   ;;
   -k|--ssh-key)
   key_copy_to_remote_admin
+  shift
+  ;;
+  -l|--lockdown-ssh)
+  lockdown_ssh
   shift
   ;;
   -o|--has-sudo)
