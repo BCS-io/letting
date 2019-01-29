@@ -154,6 +154,18 @@ cat ~/.ssh/id_rsa.pub | ssh ${ADMIN}@${SERVER_IP} "sudo sshcommand acl-add dokku
   echo "done!"
 }
 
+function ssl_set () {
+  echo "ssl set for domain"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+  sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+  dokku config:set --no-restart ${APPLICATION} DOKKU_LETSENCRYPT_EMAIL=${DOKKU_LETSENCRYPT_EMAIL}
+  dokku letsencrypt ${APPLICATION}
+  dokku letsencrypt:cron-job --add
+  dokku letsencrypt:ls
+  '"
+  echo "done!"
+}
+
 function open_in_browser () {
   echo "open app in browser"
   open http://${SERVER_IP}
@@ -382,6 +394,10 @@ case "${1}" in
   ;;
   -S|--preseed-staging)
   preseed_staging
+  shift
+  ;;
+  -s|--ssl_set)
+  ssl_set
   shift
   ;;
   -u|--sudo)
