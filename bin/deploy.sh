@@ -54,6 +54,10 @@ function provision_server () {
   echo "add code here"
 }
 
+function server_reachable () {
+  ping ${SERVER_IP}
+}
+
 function help_menu () {
 cat << EOF
 Usage: ${0} (-a | -h | -S)
@@ -99,6 +103,10 @@ case "${1}" in
   ;;
   -o|--has-sudo)
   has_sudo
+  shift
+  ;;
+  -p|--ping)
+  server_reachable
   shift
   ;;
   -R|--remove-keys)
