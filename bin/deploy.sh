@@ -267,6 +267,23 @@ function provision_server () {
 
   echo "---  -w  ---"
   open_in_browser
+
+  echo "---  -U  ---"
+  unattended_updates
+}
+
+function unattended_updates () {
+  echo "Unattended updated configured"
+  scp "${WORKDIR}/unattended-upgrades/50unattended-upgrades" "${ADMIN}@${SERVER_IP}:/tmp/50unattended-upgrades"
+  scp "${WORKDIR}/unattended-upgrades/20auto-upgrades" "${ADMIN}@${SERVER_IP}:/tmp/20auto-upgrades"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+
+sudo chmod 644 /tmp/50unattended-upgrades /tmp/20auto-upgrades
+sudo chown root:root /tmp/50unattended-upgrades /tmp/20auto-upgrades
+sudo mv /tmp/50unattended-upgrades /tmp/20auto-upgrades  /etc/apt/apt.conf.d/
+systemctl list-timers apt-daily.timer
+  '"
+  echo "done!"
 }
 
 function admin_added () {
@@ -398,6 +415,10 @@ case "${1}" in
   ;;
   -s|--ssl_set)
   ssl_set
+  shift
+  ;;
+  -U|--unattended)
+  unattended_updates
   shift
   ;;
   -u|--sudo)
