@@ -127,6 +127,15 @@ sudo systemctl restart ssh
   echo "done!"
 }
 
+function remote_database_import () {
+  echo "copy backup then remote database import"
+  scp "${WORKDIR}/backup_database/${BACKUP_FILE}" "${ADMIN}@${SERVER_IP}:/tmp/${BACKUP_FILE}"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+    sudo dokku postgres:import ${DATABASE} < /tmp/${BACKUP_FILE}
+  '"
+  echo "done!"
+}
+
 function install_dokku () {
   echo "installing dokku v${1}"
   ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
@@ -206,6 +215,9 @@ function provision_server () {
 
   echo "---  -D  ---"
   plugin_database
+
+  echo "---  -i  ---"
+  remote_database_import
 }
 
 function admin_added () {
@@ -281,6 +293,10 @@ case "${1}" in
   ;;
   -h|--help)
   help_menu
+  shift
+  ;;
+  -i|--import-database)
+  remote_database_import
   shift
   ;;
   -K|--key-root)
