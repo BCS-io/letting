@@ -138,6 +138,18 @@ cat ~/.ssh/id_rsa.pub | ssh ${ADMIN}@${SERVER_IP} "sudo sshcommand acl-add dokku
   echo "done!"
 }
 
+function plugin_logging () {
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+    sudo dokku plugin:install https://github.com/michaelshobbs/dokku-logspout.git
+    sudo dokku plugin:install https://github.com/michaelshobbs/dokku-hostname.git dokku-hostname
+    dokku logspout:server syslog+tls://logs7.papertrailapp.com:37515
+    dokku logspout:stream
+    dokku logspout:start
+    dokku logspout:info
+  '"
+  echo "done!"
+}
+
 function provision_server () {
 
   echo "---  -K  ---"
@@ -166,6 +178,9 @@ function provision_server () {
 
   echo "---  -m  ---"
   domain_set
+
+  echo "---  -L  ---"
+  plugin_logging
 }
 
 function admin_added () {
@@ -245,6 +260,10 @@ case "${1}" in
   ;;
   -k|--ssh-key)
   key_copy_to_remote_admin
+  shift
+  ;;
+  -L|--paper-trail-logging)
+  plugin_logging
   shift
   ;;
   -l|--lockdown-ssh)
