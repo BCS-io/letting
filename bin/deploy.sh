@@ -318,35 +318,133 @@ function server_reachable () {
 
 function help_menu () {
 cat << EOF
-Usage: ${0} (-a | -h | -S)
+Usage: ${0} (-A | -a | -B | -b | -D | -d | -e | -h | -i | -K | -k | -l | -m | -o | -P | -p | -R | -r | -S | -s | -U | -u | -w)
 
 ENVIRONMENT VARIABLES:
    APP_ENV          Environment that is being deployed to, 'staging' or 'production'
                     Defaulting to ${APP_ENV}
+
+   APPLICATION      Name of the application
+
+   BACKUP_FILE      File name of database backup
+
+   DATABASE         Name of the database plugin. Defaulting to ${DATABASE}
+
+   DOKKU_VERSION    Dokku version to install. Defaulting to ${DOKKU_VERSION}
+
+   REMOTE_USER      User being created for remote work
 
    SERVER_IP        IP address to work on, ie. staging or production
                     Defaulting to ${SERVER_IP}
 
    SERVER_NAME      Name of server to work on, Defaulting to yell (but nothing better)
 
+   SSH_ROOT         root User account to bootstrap provision of server
+
+
 OPTIONS:
-   -a|--all                  Provision everything except preseeding
+   -A|--app                  Create application
+   -a|--all                  Provision everything for base server
+   -B|--backup-remote-now    Backup remote database now, once
+   -b|--backup-database      Backup local database to file
+   -D|--database             Install Database plugin for Dokku
+   -d|--dokku                Install Dokku
+   -e|--elasticsearch        Elasticsearch plugin installed for Dokku
+   -f|--firewall             Firewall via UFW
    -h|--help                 Show this message
-   -S|--preseed-staging      Preseed intructions for the staging server
+   -i|--import-database      Restore remote database from local backup copy
+   -K|--key-root             Root Key - local key copied to remote for passwordless ssh for root
+   -k|--ssh-key              Admin Key - local key copied to remote for passwordless ssh for admin
+   -l|--lockdown-ssh         Secure SSH configuration
+   -m|--domain-added         Domain added to the application
+   -o|--has-sudo             Sudo installed on the remote server?
+   -P|--deploy               Deploy application to dokku
+   -p|--ping                 Ping the server
+   -r|--user-added           User added to the system
+   -R|--remove               Removes all keys belonging to hostname from a known_hosts file
+   -U|--unattended-updates   Unattended Security Updates added
+   -u|--sudo                 Configure passwordless sudo
+   -r|--user-added           User added to the remote server
+   -S|--preseed-staging      Preseed intructions for the server
+   -s|--ssl-set              SSL via let's encrypt for the application
+   -U|--unattended           Unattended security updates configured
+   -u|--sudo                 Passwordless sudo in sudoers:
+   -w|--open-web             Open application in browser
 
 EXAMPLES:
-   Configure everything together:
+   Create application:
+        $ deploy -A
+
+   Provision everything for base server:
         $ deploy -a
 
-   Displays help
+   Backup remote database now, once:
+        $ deploy -B
+
+   Backup local database to file:
+        $ deploy -b
+
+   Install Database Dokku plugin
+        $ deploy -D
+
+   Install Dokku v${DOKKU_VERSION}:
+        $ deploy -d 0.14.2
+
+   Elasticsearch plugin installed for Dokku:
+        $ deploy -e
+
+   Firewall via UFW:
+        $ deploy -f
+
+   Displays help:
         $ deploy -h
 
-   Displays help for to pre-seed the server for provisioning
+   Restore remote database from local backup copy:
+        $ deploy -i
+
+   Root Key - local key copied to remote for passwordless ssh for root:
+        $ deploy -K
+
+   Admin Key - local key copied to remote for passwordless ssh for admin:
+        $ deploy -k
+
+   Secure ssh configuration:
+        $ deploy -l
+
+   Domain added to the application:
+        $ deploy -m
+
+   Sudo installed on the remote server?
+        $ deploy -o
+
+   Deploy application to Dokku:
+        $ deploy -P
+
+   Ping the server:
+        $ deploy -p
+
+   Removes all keys belonging to hostname from a known_hosts file:
+        $ deploy -R
+
+   User added to the remote server:
+        $ deploy -r
+
+   Preseed intructions for the server:
         $ deploy -S
 
+   SSL via let's encrypt for the application:
+        $ deploy -s
+
+   Unattended security updates configured:
+        $ deploy -U
+
+   Passwordless sudo in sudoers:
+        $ deploy -u
+
+   Open application in browser:
+        $ deploy -w
 EOF
 }
-
 
 while [[ $# > 0 ]]
 do
