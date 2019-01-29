@@ -154,6 +154,12 @@ cat ~/.ssh/id_rsa.pub | ssh ${ADMIN}@${SERVER_IP} "sudo sshcommand acl-add dokku
   echo "done!"
 }
 
+function open_in_browser () {
+  echo "open app in browser"
+  open http://${SERVER_IP}
+  echo "done!"
+}
+
 function plugin_database () {
   echo "plugin dokku database"
   ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
@@ -246,6 +252,9 @@ function provision_server () {
 
   echo "---  -e  ---"
   plugin_elasticsearch
+
+  echo "---  -w  ---"
+  open_in_browser
 }
 
 function admin_added () {
@@ -377,6 +386,10 @@ case "${1}" in
   ;;
   -u|--sudo)
   configure_sudoers
+  shift
+  ;;
+  -w|--open-web)
+  open_in_browser
   shift
   ;;
   *)
