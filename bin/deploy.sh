@@ -58,6 +58,13 @@ function create_application () {
   echo "done!"
 }
 
+function domain_set () {
+  echo "domain set for ${APPLICATION}"
+  ssh ${REMOTE_USER}@${SERVER_IP} domains:set ${APPLICATION} book-gardener.co.uk www.book-gardener.co.uk
+  ssh ${REMOTE_USER}@${SERVER_IP} domains:report ${APPLICATION}
+  echo "done!"
+}
+
 function firewall_configure () {
   echo "Configuring iptables firewall..."
   local WEB_ALLOWED_IPS=($PUBLIC_ADDRESS_1 $PUBLIC_ADDRESS_2 $PRIVATE_ADDRESS_1 $PRIVATE_ADDRESS_2)
@@ -156,6 +163,9 @@ function provision_server () {
 
   echo "---  -A  ---"
   create_application
+
+  echo "---  -m  ---"
+  domain_set
 }
 
 function admin_added () {
@@ -243,6 +253,10 @@ case "${1}" in
   ;;
   -o|--has-sudo)
   has_sudo
+  shift
+  ;;
+  -m|--domain-added)
+  domain_set
   shift
   ;;
   -p|--ping)
