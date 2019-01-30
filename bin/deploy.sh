@@ -6,6 +6,7 @@ APPLICATION="${APPLICATION:-letting}"
 BACKUP_FILE="${BACKUP_FILE:-${APPLICATION}.dump}"
 DATABASE="${DATABASE:-database}"
 DOKKU_VERSION="${DOKKU_VERSION:-0.14.5}"
+NETWORK_CLASS_A="${NETWORK_CLASS_A:-10}"
 REMOTE_USER="${REMOTE_USER:-dokku}"
 SERVER_IP="${SERVER_IP:-10.0.0.10}"
 SERVER_NAME="${SERVER_NAME:-yell}"
@@ -185,6 +186,18 @@ function ssl_set () {
 function open_in_browser () {
   echo "open app in browser"
   open http://${SERVER_IP}
+  echo "done!"
+}
+
+function network_configuration () {
+  echo "Network configuration Current IP: ${1}  Network class: ${2}"
+  scp "${WORKDIR}/network/${2}-network.yaml" "${ADMIN}@${1}:/tmp/50-cloud-init.yaml"
+  ssh -t "${ADMIN}@${1}" bash -c "'
+    sudo chown root:root /tmp/50-cloud-init.yaml
+    sudo mv /tmp/50-cloud-init.yaml /etc/netplan
+    echo "Apply"
+    sudo netplan apply
+  '"
   echo "done!"
 }
 
@@ -525,6 +538,10 @@ case "${1}" in
   ;;
   -R|--remove-keys)
   clear_remote_host_identification
+  shift
+  ;;
+  -N|--network)
+  network_configuration  "${2}" "${3:-${NETWORK_CLASS_A}}"
   shift
   ;;
   -r|--admin-user-added)
