@@ -75,6 +75,8 @@ function create_application () {
 
 function deploy_application () {
   echo "deployer application ${APPLICATION}"
+  git remote remove dokku
+  git remote add dokku dokku@${SERVER_IP}:${APPLICATION}
   git push dokku master
   echo "done!"
 }
