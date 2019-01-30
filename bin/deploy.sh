@@ -301,6 +301,17 @@ function provision_server () {
   unattended_updates
 }
 
+function root_ssh () {
+  echo "Allow root to ssh into server User: ${SSH_ROOT} Password: ${ROOT_PASSWORD}"
+  ssh -t "${ADMIN}@${SERVER_IP}" bash -c "'
+    echo "Add root password"
+    echo \"${SSH_ROOT}:${ROOT_PASSWORD}\" | sudo chpasswd
+    sudo sed -i \"s/#PermitRootLogin prohibit-password/PermitRootLogin yes/\" /etc/ssh/sshd_config
+    sudo service ssh restart
+  '"
+  echo "done!"
+}
+
 function unattended_updates () {
   echo "Unattended updated configured"
   scp "${WORKDIR}/unattended-upgrades/50unattended-upgrades" "${ADMIN}@${SERVER_IP}:/tmp/50unattended-upgrades"
@@ -526,6 +537,10 @@ case "${1}" in
   ;;
   -m|--domain-added)
   domain_set
+  shift
+  ;;
+  -O|--root-ssh)
+  root_ssh
   shift
   ;;
   -p|--ping)
