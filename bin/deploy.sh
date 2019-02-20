@@ -121,7 +121,7 @@ function has_sudo () {
     else
       echo "No sudo!"
     fi
-    echo "Suoders:"
+    echo "Sudoers:"
     grep -Po '^sudo.+:\K.*$' /etc/group
 EOF
   echo "done!"
