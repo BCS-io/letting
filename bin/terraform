@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+#
+
+# terraform wrapper
+#
+#
+
+# Needs to be reset after getopts call - in this case a sourced
+# script called it
+OPTIND=1
+# command
+set -e
+
+project_path="./terraform/project"
+
+print_usage() {
+  printf "Terraform wrapper\n\n"
+  printf "options are as follows:\n"
+  printf "  -a workspace_name - to apply a workspace\n"
+  printf "  -b workspace_name - to bounce workspace - destroy and re-apply\n"
+  printf "  -d workspace_name - to destroy a workspace\n"
+  printf "  -i workspace_name - to init a workspace\n"
+  printf "  -n workspace_name - to make a new workspace\n\n"
+  printf "  -o variable       - to output a variable value\n\n"
+  printf "  -p workspace_name - to plan a workspace\n\n"
+  printf "Workspaces available:\n"
+  printf "  - development\n"
+  printf "  - production\n"
+  printf "  - staging\n"
+  printf "Example: bin/terraform -a production \n"
+}
+
+while getopts 'a:b:d:hi:n:op:' flag; do
+  case "${flag}" in
+    a)  (cd $project_path && terraform workspace select $OPTARG)
+        (cd $project_path && terraform apply -auto-approve) ;;
+    b)  (cd $project_path && terraform workspace select $OPTARG)
+        (cd $project_path && terraform destroy) 
+        (cd $project_path && terraform apply -auto-approve) ;;
+    d)  (cd $project_path && terraform workspace select $OPTARG)
+        (cd $project_path && terraform destroy) ;;
+    h) print_usage
+       exit 1 ;;
+    i)  (cd $project_path && terraform workspace select $OPTARG)
+        (cd $project_path && terraform init) ;;
+    n)  (cd $project_path && terraform workspace new $OPTARG) ;;
+    o)  (cd $project_path && terraform output $OPTARG) ;;
+    p)  (cd $project_path && terraform workspace select $OPTARG)
+        (cd $project_path && terraform plan) ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
