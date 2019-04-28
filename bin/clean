@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+#
+# clean
+# - cleans up references to server
+#   - currently only ssh-keygen
+#
+
+OPTIND=1
+
+print_usage() {
+  printf "Cleaning host key from known hosts\n\n"
+  printf "Options flags as follows:\n"
+  printf "  -c development client admin machine\n"
+  printf "  -C production client admin machine\n"
+  printf "  d - development\n"
+  printf "  l - local development\n"
+  printf "  L - local production\n"
+  printf "  p - production\n"
+  printf "  s - staging\n"
+  printf "\n"
+  printf "Example: clean -p \n"
+}
+
+if [ $# -eq 0 ]; then
+  print_usage
+  exit
+fi
+
+while getopts 'cCdhlLps' flag; do
+  case "${flag}" in
+    c) ssh-keygen -R lamba.bcs.io
+       ssh-keygen -R lamba
+       ip=$(dscacheutil -q host -a name lamba.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    C) ssh-keygen -R lamba.local.bcs.io    
+       ssh-keygen -R lamba.local
+       ip=$(dscacheutil -q host -a name lamba.local.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    d) ssh-keygen -R cava.bcs.io
+       ssh-keygen -R cava
+       # return ip from hosts file
+       ip=$(dscacheutil -q host -a name cava.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    h) print_usage
+       exit 1 ;;
+    l) ssh-keygen -R jura.local.bcs.io
+       ssh-keygen -R jura
+       # return ip from hosts file
+       ip=$(dscacheutil -q host -a name jura.local.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    L) ssh-keygen -R kerrera.local.bcs.io
+       ssh-keygen -R kerrera 
+       # return ip from hosts file
+       ip=$(dscacheutil -q host -a name kerrera.local.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    p) ssh-keygen -R eigg.bcs.io
+       ssh-keygen -R eigg 
+       # return ip from hosts file
+       ip=$(dscacheutil -q host -a name eigg.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    s) ssh-keygen -R danna.bcs.io
+       ssh-keygen -R danna 
+       # return ip from hosts file
+       ip=$(dscacheutil -q host -a name danna.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ssh-keygen -R $ip ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
