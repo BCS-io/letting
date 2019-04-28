@@ -1,0 +1,9 @@
+# 
+# hcloud_token for creating resources in Hetzner letting project
+#  - if compromised 
+#    - login to Hetzner.
+#    - delete token
+#    - create new token and change it below
+#
+
+hcloud_token = "ABCDEFG1234"
