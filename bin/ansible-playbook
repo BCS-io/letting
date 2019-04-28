@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+#
+# ansible provision server
+#
+
+tags=all
+limit=''
+playbook='site'
+
+print_usage() {
+  printf "Ansible wrapper\n\n"
+  printf "options are as follows:\n"
+  printf "Limiting of playbook hosts - optional:\n"
+  printf "  -a all\n"
+  printf "  -c development client admin machine\n"
+  printf "  -C production client admin machine\n"
+  printf "  -d development\n"
+  printf "  -l local development\n"
+  printf "  -L local production\n"
+  printf "  -p production\n"
+  printf "  -s staging\n\n"
+  printf ""
+  printf "  -t tag applied to the running playbook\n"
+  printf "     Example tags:\n"
+  printf "     dokku, database, import\n"
+  printf "Example: bin/ansible-playbook -t dokku  \n"
+}
+
+
+while getopts 'acCdlLht:ps' flag; do
+  case "${flag}" in
+    a) limit='' ;;
+    c) playbook='client' 
+       limit='--limit lamba.bcs.io' ;;
+    C) playbook='client' 
+       limit='--limit lamba.local.bcs.io' ;;
+    d) limit='--limit cava.bcs.io' ;;
+    h) print_usage
+       exit 1 ;;
+    l) limit='--limit jura.local.bcs.io' ;;
+    L) limit='--limit kerrera.local.bcs.io' ;;
+    p) limit='--limit eigg.bcs.io' ;;
+    s) limit='--limit danna.bcs.io' ;;
+    t) tags=$OPTARG ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
+
+ansible_path="./ansible/web"
+
+(cd $ansible_path && ansible-playbook ${playbook}.yml --inventory hosts.ini  ${limit} --tags "${tags}")
