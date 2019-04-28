@@ -72,3 +72,20 @@ erd.pdf
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# ignore terraform binaries
+.terraform
+
+# ignore state file which include plain text passwords
+*.tfstate
+*.tfstate.*
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# tfvars including env that should not be saved
+*.tfvars
