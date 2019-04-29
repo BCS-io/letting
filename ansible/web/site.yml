@@ -8,6 +8,7 @@
   vars_files:
     - vars/secrets.yml
   roles:
+    - base
 
   handlers:
      - name: restart ssh

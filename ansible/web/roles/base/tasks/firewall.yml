@@ -1,0 +1,50 @@
+---
+- name: ufw reset
+  ufw:
+    state: reset
+  tags:
+    - ufw
+
+- name: ufw ssh limit
+  ufw:
+    rule: limit
+    src: "{{ item[1] }}"
+    to_port: "{{ item[0] }}"
+    proto: tcp
+  with_nested:
+    - [22]
+    - "{{ source_ips_permitted }}"
+  tags:
+    - ufw
+
+- name: ufw web rules
+  ufw:
+    rule: allow
+    src: "{{ item[1] }}"
+    to_port: "{{ item[0] }}"
+    proto: tcp
+  with_nested:
+    - [80, 443]
+    - "{{ source_ips_permitted }}"
+  tags:
+    - ufw
+
+- name: ufw deny incoming and enable
+  ufw:
+    direction: incoming
+    state: enabled
+    policy: deny
+  tags:
+    - ufw
+
+- name: debug ufw
+  command: ufw status verbose
+  register: debug_ufw
+  tags:
+    - info
+
+- name: display debug ufw
+  debug:
+    msg: "{{ debug_ufw.stdout_lines }}"
+  tags:
+    - info

@@ -1,0 +1,26 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+  tags:
+    - never
+    - apt-update-upgrade
+
+- name: update apt-check
+  command: /usr/lib/update-notifier/apt-check --human-readable
+  register: apt_check
+  tags:
+    - never
+    - apt-check
+    - info
+
+- name: debug update apt-check
+  debug:
+    msg: "{{ apt_check.stdout_lines }}"
+  tags:
+    - never
+    - apt-check
+    - info

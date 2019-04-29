@@ -1,0 +1,59 @@
+---
+- import_role:
+    name: jnv.unattended-upgrades
+- name: upgrade packages
+  command: unattended-upgrade
+  tags:
+    - never
+    - unattended-upgrade
+
+- name: apt-daily.timer
+  command: systemctl list-timers apt-daily.timer
+  register: apt_daily_timer
+  tags:
+    - never
+    - unattended
+    - daily-timer
+    - info
+
+- name: debug daily.time 
+  debug:
+    msg: "{{ apt_daily_timer.stdout_lines }}"
+  tags:
+    - never
+    - unattended
+    - daily-timer
+    - info
+
+- name: unattended logging
+  command: tail -n 100 /var/log/unattended-upgrades/unattended-upgrades.log
+  register: unattended_logging
+  ignore_errors: yes
+  tags:
+    - never
+    - unattended
+    - unattended-logging
+
+- name: debug unattended logging
+  debug:
+    msg: "{{ unattended_logging.stdout_lines }}"
+  tags:
+    - never
+    - unattended
+    - unattended-logging
+
+- name: dry-run
+  command: unattended-upgrade -v --dry-run
+  register: unattended_dry_run
+  tags:
+    - never
+    - unattended
+    - dry-run
+
+- name: debug unattended dry-run
+  debug:
+    msg: "{{ unattended_dry_run.stdout_lines }}"
+  tags:
+    - never
+    - unattended
+    - dry-run
