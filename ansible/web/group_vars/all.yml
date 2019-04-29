@@ -1,0 +1,52 @@
+ansible_python_interpreter: /usr/bin/python3
+
+# ssh key on the ansible master or controller machine
+controller_key: '~/.ssh/id_rsa.pub'
+
+# Dokku Specific
+application: letting
+ops_email: ops@bcs.io
+
+# rails
+rails_master_key:  '../../rails/config/master.key'
+
+# banner message
+rack_dev_mark_env: ""
+
+# AWS
+#  - aws data is spread out over three different files
+#  - secret.yml - for the secret infor
+#    - aws_access_key_id
+#    - aws_secret_access_key
+#  - group_vars/all.yml - for the shared
+#    - aws_region - shared regions
+#  - host_vars/host-name - host specific variables
+#    - aws_bucket_name
+
+# AWS
+aws_region: eu-west-2
+
+
+# postgres
+# backing up from local letting database to dumpfile (binary format)
+#
+# Restore from "legacy"
+#  - Get the latest legacy as binary format
+#    - download from old amazon account and copy to letting/rails
+#      - letting.tar file
+#    - cd to letting/rails
+#    - bin/rails db:environment:set RAILS_ENV=development db:restore
+#    - bin/deploy.sh -b
+#      - generates: deploy/backup_database/letting.dump
+#  - cd ..
+#  - Import into current database
+#    - bin/ansible-playbook -p -t import
+#
+# Restore from current binary backup
+#  - Get the latest backup
+#    - download from the current amazon account
+#    - unarchive and copy export file to deploy/backup_database/letting.dump
+#  - Import into current database
+#    - bin/ansible-playbook -t import
+#
+postgres_backup_file: ../../rails/deploy/backup_database/letting.dump

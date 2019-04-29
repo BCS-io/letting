@@ -1,0 +1,14 @@
+# Install a role from GitHub
+# To install:
+#   ansible-galaxy install -r requirements.yml
+#
+
+# main dokku library
+- name: dokku_bot.ansible_dokku
+  src: https://github.com/dokku/ansible-dokku
+  version: master
+
+# unattended upgrades
+- name: jnv.unattended-upgrades
+  src: https://github.com/jnv/ansible-role-unattended-upgrades
+  version: master

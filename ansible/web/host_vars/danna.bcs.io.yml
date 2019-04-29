@@ -1,0 +1,17 @@
+---
+domain: staging.letting.bcs.io
+database: letting_staging
+database_port: 5555
+
+# AWS
+#  - aws data is spread out over three different files
+#  - secret.yml - for the secret infor
+#    - aws_access_key_id
+#    - aws_secret_access_key
+#  - group_vars/all.yml - for the shared
+#    - aws_region - shared regions
+#  - host_vars/host-name - host specific variables
+#    - aws_bucket_name
+
+# AWS
+aws_bucket_name: staging.letting.bcs.io

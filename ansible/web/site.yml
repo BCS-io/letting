@@ -1,0 +1,14 @@
+---
+#
+# ansible-playbook playbook.yml --limit appservers -vvv
+#
+- hosts: all
+  remote_user: deployer
+  become: yes
+  vars_files:
+    - vars/secrets.yml
+  roles:
+
+  handlers:
+     - name: restart ssh
+       service: name=ssh state=restarted
