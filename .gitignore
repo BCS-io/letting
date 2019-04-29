@@ -89,3 +89,9 @@ override.tf.json
 
 # tfvars including env that should not be saved
 *.tfvars
+
+
+# ansible
+secrets.yml
+
+*.retry
