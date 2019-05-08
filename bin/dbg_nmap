@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+
+#
+# nmap
+#  - Is the remote port open?
+#
+
+print_usage() {
+  printf "\n"
+  printf "nmap project wrapper:\n\n"
+  printf "  d development server \n"
+  printf "  l local development server \n"
+  printf "  L local production server \n"
+  printf "  h this help message \n"
+  printf "  p production server\n"
+  printf "\n"
+  printf "Example dbg_nmap -p\n"
+}
+
+while getopts 'dhlp' flag; do
+  case "${flag}" in
+    d) nmap -p 80,443 cava.bcs.io ;;
+    l) nmap -p 80,443 jura.local.bcs.io ;;
+    L) nmap -p 80,443 kerrera.local.bcs.io ;;
+    h) print_usage ;;
+    p) nmap -p 80,443 eigg.bcs.io ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+fi
