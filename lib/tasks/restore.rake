@@ -7,6 +7,9 @@ namespace :db do
   # Restores
   #  - loads a database from a dump file
   #  - file created by backup gem and put into project root
+  #  - download s3 file from legacy letting - letting.tar
+  #  - place in root of this project
+  #  - bin/rails db:environment:set RAILS_ENV=development db:restore
   #
   desc 'Loads a database from dump file'
   task restore: %i[environment drop create] do
