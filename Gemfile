@@ -202,11 +202,11 @@ end
 group :test do
   gem 'capybara', '~> 2.15.0'
   gem 'capybara-screenshot', '~> 1.0.0'
-  gem 'chromedriver-helper', '~> 2.1.0'
 
   # Create e.s. test node
   gem 'elasticsearch-extensions'
   gem 'rspec-rails', '~> 3.8.0'
   gem 'selenium-webdriver', '~>3.0'
   gem 'timecop', '~>0.8.0'
+  gem 'webdrivers', '~> 3.0'
 end
