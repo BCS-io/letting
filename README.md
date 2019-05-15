@@ -52,11 +52,7 @@ This document covers the following sections
 5. [Troubleshooting](#troubleshooting)
   * 1\. [Net::SSH::HostKeyMismatch](#net-ssh-hostkeymismatch)
   * 2\. [How to fix duplicate source.list entry](#how-to-fix-duplicate-source-list-entry)
-  * 3\. [Capistrano](#troubleshooting-capistrano)
-    * 1\. SSH Doctor
-    * 2\. Capistrano failing to deploy - with github.com port-22
-    * 3\. Rubygems not installing 
-    * 4\. Fail with Unicorn not restarting
+  * 3\. Removed
   * 4\. Chef
     * 1\. [Bootstrapping a none-default Chef Client](#bootstrapping-a-none-default-chef-client)
     * 2\. [chef-solo - command not found](#chef-solo-command-not-found)
@@ -605,59 +601,6 @@ deb http://archive.ubuntu.com/ubuntu precise main universe
 
 Further Reading
 http://askubuntu.com/questions/120621/how-to-fix-duplicate-sources-list-entry
-
-
-#### 5.3 Capistrano<a name='troubleshooting-capistrano'></a>
-
-##### 1. SSH Doctor
-
-Diagnostic tool
-
-````
-cap production ssh:doctor
-````
-
-````
-The agent has no identities.
-````
-
-##### 2. Fail with github.com port-22
-
-Occasionally a deployment fails with an unable to connect to github.
-Any network service is not completely reliable. Wait for a while and try again.
-
-````
-DEBUG [44051a0f]  ssh: connect to host github.com port 22: Connection timed out
-DEBUG [44051a0f]  fatal: Could not read from remote repository.
-````
-
-
-##### 3. Rubygems not installing
-
-Rubygems ip address keeps changing. If it does then gem installation fails because of the outbound firewall: 
-
-````
-DEBUG [42445bc5] An error occurred while installing minitest (5.8.0), and Bundler cannot continue.
-DEBUG [42445bc5] Make sure that `gem install minitest -v '5.8.0'` succeeds before bundling.
-````
-
-Fix the firewall or remove the outbound firewall then reset the firewall after bundle completed.
-
-
-##### 4. Fail with Unicorn not restarting
-
-````
-DEBUG [e912b64e]  /etc/init.d/unicorn_letting_staging: line 26: kill: (4370) - No such process
-DEBUG [ee25176c]  Couldn't reload, starting 'export HOME; true /home/deployer ; cd /home/letting_staging/current && ( RBENV_ROOT=/opt/rbenv/ RBENV_VERSION=2.2.2 /opt/rbenv//bin/rbenv exec bundle exec unicorn -D -c /home/letting_staging/shared/config/unicorn.rb -E staging )' instead
-DEBUG [69e7a669]  master failed to start, check stderr log for details
-````
-
-* Investigate: 
-  - `sudo service letting_<environment> status`
-  - `sudo service letting_<environment> reload`
-  - `tail -80 ~/apps/letting_staging/shared/logs/unicorn.stderr.log`
-    * `Address already in use  - connect(2) for /tmp/unicorn.letting_staging.sock (Errno::EADDRINUSE)`
-* Remove: `# rm tmp/unicorn.chic_staging.sock`
 
 #### 5.4 Chef
 
