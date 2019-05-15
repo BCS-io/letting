@@ -128,26 +128,6 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 2.7.0'
 gem 'whenever', require: false
 
-# Capistrano deployment
-#
-group :development do
-  # rake has to be ver 11 - bug in 3.6.0
-  gem 'capistrano', '~> 3.5.0', require: false
-
-  gem 'airbrussh', '~> 1.1.0', require: false
-  gem 'capistrano-bundler', '~> 1.1.3', require: false
-
-  #
-  # Upgrading to 0.4.0 caused
-  # createdb: database creation failed: ERROR:  permission denied to create
-  gem 'capistrano-db-tasks', '0.3', require: false
-  gem 'capistrano-postgresql', '~> 4.2.0', require: false
-  gem 'capistrano-rails', '~> 1.1.3', require: false
-  gem 'capistrano-rails-collection', '~> 0.0.3', require: false
-  gem 'capistrano-rails-console', '~> 1.0.0', require: false
-  gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
-end
-
 #
 # Development only
 #
