@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#
+# push subtree to repo
+#
+
+# path of subtree you wish to push
+code_path=rails
+repo=development
+
+print_usage() {
+  printf "Git push subtree\n\n"
+  printf "Options flags as follows:\n"
+  printf "  d - development\n"
+  printf "  l - local development\n"
+  printf "  L - local production\n"
+  printf "  p - production\n"
+  printf "  s - staging\n"
+  printf "\n"
+  printf "Example: gp -p \n"
+}
+
+print_banner() {
+  printf "\n\n"
+  printf "  ******************************************\n"
+  printf "  *                                        *\n"
+  printf "  *          push ${code_path}              *\n"
+  printf "  *                                        *\n"
+  printf "  ******************************************\n"
+  printf "\n\n"
+}
+
+while getopts 'dhlLps' flag; do
+  case "${flag}" in
+    d) repo=development ;;
+    l) repo=development.local ;;
+    L) repo=production.local ;;
+    h) print_usage
+       exit 1 ;;
+    p) print_banner
+       repo=production ;;
+    s) repo=staging ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
+
+git subtree push --prefix $code_path $repo master

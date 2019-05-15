@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#
+# push force subtree to repo
+#
+
+dev_path=rails
+
+print_usage() {
+  printf "Git push subtree\n\n"
+  printf "Options flags as follows:\n"
+  printf "  d - development\n"
+  printf "  l - local development\n"
+  printf "  p - production\n"
+  printf "  s - staging\n"
+  printf "\n"
+  printf "Example: gpf -p \n"
+}
+
+print_banner() {
+  printf "\n\n"
+  printf "  ******************************************\n"
+  printf "  *                                        *\n"
+  printf "  *           push ${dev_path} --force    *\n"
+  printf "  *                                        *\n"
+  printf "  ******************************************\n"
+  printf "\n\n"
+}
+
+while getopts 'dhlLps' flag; do
+  case "${flag}" in
+    d) printf "push ${dev_path} --force\n"
+       repo=development ;;
+    l) printf "push ${dev_path} --force\n"
+       repo=development.local ;;
+    L) printf "push ${dev_path} --force\n"
+       repo=production.local ;;
+    h) print_usage
+       exit 1 ;;
+    p) print_banner
+       repo=production  ;;
+    s) printf "push ${dev_path} --force\n"
+       repo=staging ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
+
+git push $repo `git subtree split --prefix rails master`:master --force
