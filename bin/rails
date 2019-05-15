@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+#
+# run rails
+#
+rails_path=rails
+argument="$1"
+echo "arg ${1}"
+
+print_usage() {
+  printf "rails\n\n"
+  printf "Options flags as follows:\n"
+  printf "  d - development\n"
+  printf "  p - production\n"
+  printf "\n"
+  printf "Example: gp -p \n"
+}
+
+while getopts 'dhp' flag; do
+  case "${flag}" in
+    h) print_usage
+       exit 1 ;;
+    esac
+done
+
+(cd $rails_path && rails $argument)
