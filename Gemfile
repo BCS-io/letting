@@ -111,7 +111,7 @@ gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>0.20.0' # rails 5 required to use pg 1.0+
 gem 'puma', '~> 3.11'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
-gem 'rails', '~> 5.2.2'
+gem 'rails', '~> 5.2.3'
 gem 'rails-env-favicon'
 
 # BREAKING GEM
