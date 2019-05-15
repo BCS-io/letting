@@ -10,9 +10,6 @@ RSpec.describe 'Invoicing Factory' do
       it 'property_range' do
         expect(invoicing_new property_range: nil).to_not be_valid
       end
-      it 'period' do
-        expect(invoicing_new period: nil..nil).to_not be_valid
-      end
       it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
     end
   end

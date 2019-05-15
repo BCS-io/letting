@@ -9,9 +9,6 @@ RSpec.describe Invoicing, type: :model do
     it 'property_range' do
       expect(invoicing_new property_range: nil).to_not be_valid
     end
-    it 'period' do
-      expect(invoicing_new period: nil..nil).to_not be_valid
-    end
     it('runs') { expect(invoicing_new runs: nil).to_not be_valid }
   end
 
@@ -157,9 +154,6 @@ RSpec.describe Invoicing, type: :model do
     end
     it 'can be false if range false' do
       expect(invoicing_new property_range: nil).to_not be_valid_arguments
-    end
-    it 'can be false if period false' do
-      expect(invoicing_new period: nil..nil).to_not be_valid_arguments
     end
   end
 
