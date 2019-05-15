@@ -1,0 +1,20 @@
+scss_files: 'app/assets/stylesheets/**/*.scss'
+
+exclude:
+  - 'app/assets/stylesheets/generic.normalize.css'
+  - 'tmp/rubycritic/assets/stylesheets/*.css'
+
+linters:
+  # Use // everywhere
+  Comment:
+    enabled: false
+
+  # ButtonIcon => .button-icon
+  SelectorFormat:
+    enabled: false
+
+  # Could not disable this on per file basis
+  # rgba( 65, 255, 255, 1)
+  #      ^
+  SpaceBetweenParens:
+    enabled: false

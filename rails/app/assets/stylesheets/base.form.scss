@@ -1,0 +1,53 @@
+/*---------------------------------------------------*\
+
+  $FORM
+
+\*---------------------------------------------------*/
+
+@import 'settings.colors';
+
+%ellipsis-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+label {
+  @extend %ellipsis-text;
+}
+
+input,
+textarea {
+  border: 1px solid $color-line;
+  border-radius: $border-radius;
+  outline: none;
+  width: 95%;
+}
+
+// scss-lint:disable QualifyingElement
+
+input[type=submit] {
+  padding: 2%;
+}
+
+input[readonly='readonly'] {
+  background-color: $scheme-disabled-background;
+  color: $scheme-disabled-foreground;
+}
+
+input[type='checkbox'] {
+  height: 20px;
+  width: 20px;
+}
+
+// scss-lint:enable QualifyingElement
+
+// placeholder text-align
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
+:-ms-input-placeholder {
+  text-align: center;
+}

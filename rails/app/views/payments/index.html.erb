@@ -1,0 +1,52 @@
+<% @title='Payments' %>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'payments/index_help' %>
+<%= render 'bubbles/search_account' %>
+
+<% payments = Payments.new(@records)
+   payment_dec = PaymentIndexDecorator.new payments.to_a.first %>
+
+<div class='Shell'>
+
+  <div class='col-3-24  grid-row  vertical-spacer  grid-header  r-align'>
+    Property ID
+  </div>
+  <div class='col-5-24  vertical-spacer  grid-header'>
+    Name
+    <%= render 'bubbles/help_2_view',  data_type: 'payments' %>
+  </div>
+  <div class='col-4-24  vertical-spacer  grid-header  r-align'>Booked At</div>
+  <div class='col-4-24  vertical-spacer  grid-header  r-align'>Amount</div>
+  <div class='col-4-24  vertical-spacer  grid-header  r-align'>Balance</div>
+  <div class='col-1-24  vertical-spacer  grid-header'>&nbsp;</div>
+  <div class='col-3-24  vertical-spacer  grid-header  no-print'>Actions</div>
+
+    <% payments.to_a.each do |payment|
+       payment_dec = PaymentIndexDecorator.new payment %>
+
+    <div title='View' class='table-row' data-link='<%= payment_path(payment.id) %>'>
+      <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
+         <%= payment_dec.property_ref %>
+      </div>
+      <div class='col-5-24  bottom-spacer inherit-row'>
+        <%= payment_dec.full_name %>
+      </div>
+      <div class='col-4-24  bottom-spacer  inherit-row  r-align'>
+        <%= payment_dec.booked_at %>
+      </div>
+      <div class='col-4-24  bottom-spacer  inherit-row  r-align'>
+        <%= payment_dec.amount %>
+      </div>
+      <div class='col-4-24  bottom-spacer  inherit-row  r-align'>
+        <%= payment_dec.balance %>
+      </div>
+    </div>  <!-- div closes grid row click simulation -->
+    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+    <div class='col-2-24  bottom-spacer'>
+      <%= edit_link payment, size: 'lg' %>
+    </div>
+    <div class='col-1-24  bottom-spacer'>
+      <%= delete_link path: payment %>
+    </div>
+  <% end %>
+</div>

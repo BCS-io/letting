@@ -1,0 +1,16 @@
+<% disabled ||= false %>
+<span class='no-print'>
+
+  <%= button_tag(class: 'Button ButtonPrimary', data: { disable_with: property_prev}, name: 'previous', value: 'true', disabled: property_prev.blank? ? true : false, title: 'Update Account and move to the previous record' ) do %>
+    <%= fa_icon("chevron-left", text: property_prev) %>
+  <% end %>
+
+  <%= render 'buttons/submit', f: f, disabled: disabled %>
+
+  <%= button_tag(class: 'Button ButtonPrimary', data: { disable_with: property_next }, name: 'next', value: 'true', disabled: property_next.blank? ? true : false , title: 'Update Account and move to the next record') do %>
+    <%= fa_icon("chevron-right", text: property_next, right: true) %>
+  <% end %>
+
+  or <%= cancel_link path: path %>
+
+</span>

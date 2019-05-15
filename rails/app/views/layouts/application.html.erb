@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <%= render 'layouts/head', title: @title %>
+  <body class='site'>
+
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/flashes' %>
+
+    <div class='page-wrapper'>
+      <div class='grid'>
+        <article class='col-21-24'>
+          <%= render 'layouts/title' %>
+          <%= yield %>
+        </article>
+        <aside class='col-3-24  no-r-pad  no-print'>
+          <%= render 'layouts/sidebar' %>
+        </aside>
+      </div>
+    </div>
+    <%= render 'layouts/footer' %>
+
+  </body>
+</html>

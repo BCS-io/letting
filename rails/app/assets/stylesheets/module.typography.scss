@@ -1,0 +1,65 @@
+/*--------------------------------------------------*\
+
+  $TYPOGRAPHY
+
+\*--------------------------------------------------*/
+
+// scss-lint:disable PlaceholderInExtend
+
+@import 'settings.colors';
+
+// Text Alignment
+
+.r-align {
+  text-align: right;
+}
+
+.c-align {
+  text-align: center;
+}
+
+.no-warp {
+  white-space: nowrap;
+}
+
+
+// Text coloring
+
+.text-normal {
+  color: $color-text-primary;
+}
+
+.text-warn {
+  color: $errors-warn;
+}
+
+// Fading text - without using common markup to aid testing
+.deemphasized {
+  color: $color-text-faded;
+}
+
+
+// Clipping text - hides the end of the line
+.text-clip {
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+
+
+// Headers - reduces bottom margin to fit more into page
+.small-bottom {
+  margin-bottom: .2em;
+}
+
+@media print {
+// h2 is the title and is used in almost every page printout.
+// Change to a realistic size for heading and date.
+
+  h2 {
+    font-size: 1.2em;
+    margin-bottom: .2em;
+    margin-top: .2em;
+    text-align: center;
+  }
+}

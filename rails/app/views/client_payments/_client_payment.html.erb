@@ -1,0 +1,61 @@
+<% batch_months = BatchMonths.make(month: client_payment.month) %>
+
+<div class='Panel  Panel-Content  u-padding-1-100'>
+
+  <div class='col-1-1  grid-row  bottom-1-line-spacer  r-align  no-print'>
+    <%= print_link text: "Print #{batch_months.now_to_s} #{client_payment.year}", path: client_payment_path(client_payment.client_id, year: client_payment.year, month: batch_months.now), css: 'Button  ButtonPrimary' %>
+  </div>
+  <div class='col-1-1  grid-row  bottom-spacer'>
+    <% period = batch_months.payment_period(year: client_payment.year) %>
+    <h2><%= "Payments in #{batch_months.now_to_s} #{client_payment.year} Quarter for Client #{client_payment.client.id}" %></h2>
+
+    <h4>Payments collected for <%= "#{client_payment.client.full_names} (id: #{client_payment.client.id}) " %> between <%= "#{format_short_date(period.first.to_date)} - #{format_short_date(period.last.to_date)}" %></h4>
+  </div>
+
+  <div class='col-3-24  grid-row  bottom-spacer  grid-header  r-align'>
+    Property ID
+  </div>
+  <div class='col-2-24  grid-header  bottom-spacer  r-align'>No</div>
+  <div class='col-7-24  grid-header  bottom-spacer'>Address</div>
+  <div class='col-5-24  grid-header  bottom-spacer'>Town</div>
+  <div class='col-3-24  grid-header  bottom-spacer  r-align'>£ Amount</div>
+
+
+  <% (accounts = client_payment.accounts_with_period(batch_months: batch_months)).each do |account| %>
+  <% property = account.property %>
+    <div title='View' class='table-row' data-link='<%= property_path(property) %>'>
+
+      <div class='col-3-24  grid-row  bottom-spacer  inherit-row  r-align'>
+         <%= property.human_ref %>
+      </div>
+      <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
+        <%= format_empty_string_as_dash property.address.first_no %>
+      </div>
+      <div class='col-7-24  bottom-spacerer  inherit-row'>
+        <%= format_empty_string_as_dash property.address.first_text %>
+      </div>
+      <div class='col-5-24  bottom-spacer  inherit-row  nowrap'>
+        <%= property.address.town %>
+      </div>
+      <div class='col-3-24  bottom-spacer  inherit-row  r-align'>
+        <!-- charge_period.first_period  (6 months date_range) -->
+        <%= to_decimal account.payments.by_quarter_day(year: client_payment.year, batch_months: batch_months).pluck(:amount).sum %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if accounts.empty? %>
+    <%= render 'information/grid', information: "The Client has no #{batch_months.to_s} properties." %>
+  <% end %>
+
+  <div class='col-15-24  grid-row  grid-footer-text  vertical-spacer'>
+     &nbsp;
+  </div>
+  <div class='col-2-24  grid-footer-text  vertical-spacer'>
+     Total
+  </div>
+  <div class='col-3-24  grid-footer-number  vertical-spacer  r-align'>
+    <%= to_decimal client_payment.period_totals(year: client_payment.year, batch_months: batch_months) %>
+  </div>
+
+</div>

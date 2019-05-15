@@ -1,0 +1,17 @@
+
+//
+// Padding
+//
+// Classes to add on Left, Right padding
+// 1-25 means 100/25 = 4%, so padding 2% on left, 2% on right.
+//
+
+// scss-lint:disable Shorthand
+
+.u-padding-1-100 { padding: 1% 1%; }
+
+.u-padding-1-25 { padding: 1% 2%; }
+
+.u-padding-1-12 { padding: 1% 8.3333%; }
+
+.u-padding-1-6 { padding: 1% 16.6666%; }

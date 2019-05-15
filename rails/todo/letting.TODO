@@ -1,0 +1,51 @@
+Letting:
+
+Resources
+  ☐ Blocks
+  ☐ Charge Info
+  ☐ Account
+  ☐ Property
+  ☐ Client
+
+Action:
+  ✔ Need Paging on Index? @done (before 06-08-16 22:07)
+
+Testing:
+   ☐ Feature tests need refactoring as shared address
+
+Features:
+  ☐ Searching Lists
+  ☐ Search button on wrong side of search input
+
+Style:
+  ✔ Listing Style @done (13-08-04 21:32)
+
+Shared:
+
+  Address
+    Model:
+      ✔ Address @done (13-07-27)
+      ✔ Address length validations @done (13-08-16 22:07)
+      ✔ Postcode validation @done (13-08-16 22:07)
+    Partial:
+      ✔ Length of lines shorter for postcode, flat no, road no @done (13-08-17 20:50)
+
+  Entity
+    IMPORT:
+    ✔ Initials moved into Name if limited company @done (13-09-04 15:00)
+    Model:
+    ✔ Entity (People) @done (13-07-28 23:38)
+    ✔ Entity (company) @done (13-09-04 12:11)
+    ✔ Multiple Entities in testing @done (13-07-31 16:30)
+    ✔ Title, Initials, Name length validations @done (13-08-17 10:49)
+    Partial:
+    ☐ Length of lines shorter for Title and Intials
+
+  Requirements:
+    ✔ entities before addresses (except on the property) @done (13-08-18 08:54)
+    ✔ district text box invisible till click add district @done (13-08-18 08:53)
+    ✔ Agent disabled if use profile is disabled @done (13-09-04 12:11)
+    ✔ Use profile label => Use Agent Address @done (13-09-04 12:11)
+    ✔ Post code shorter than other text boxes @done (13-08-17 20:50)
+
+

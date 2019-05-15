@@ -1,0 +1,10 @@
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp3s0:
+      addresses:
+        - 10.0.0.10/24
+      gateway4: 10.0.0.1
+      nameservers:
+          addresses: [8.8.8.8, 8.8.8.4]

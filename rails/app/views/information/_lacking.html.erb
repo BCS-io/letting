@@ -1,0 +1,4 @@
+<% message = 'None' if local_assigns[:objects].nil? %>
+<% if objects.empty? %>
+  <%= render 'information/grid', information: message %>
+<% end %>

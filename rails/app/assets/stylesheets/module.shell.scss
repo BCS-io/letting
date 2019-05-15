@@ -1,0 +1,40 @@
+/*-----------------------------------------------*\
+
+   $SHELL
+
+\*-----------------------------------------------*/
+
+@import 'settings.colors';
+@import 'tools.mixins';
+
+
+%inside-shell-screen {
+  @media screen {
+    background-color: $scheme-fieldset-background;
+    border: 1px solid $scheme-fieldset-border;
+    border-radius: $border-radius;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
+  }
+
+  @media print {
+    border: 0;
+    width: 20cm;
+  }
+}
+
+.Shell {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0 0 2%;
+}
+
+.Shell-thin {
+  @extend %inside-shell-screen;
+  @include clearfix;
+  margin: 0;
+}
+
+
+.Shell--error {
+  background-color: $errors-background;
+}

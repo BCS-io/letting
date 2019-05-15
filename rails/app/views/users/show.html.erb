@@ -1,0 +1,24 @@
+<% @title='View User' %>
+<div id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'users/show_help' %>
+<%= render 'bubbles/search_account' %>
+
+<div class='grid  Shell  u-padding-1-6'>
+
+  <div class='col-23-24  grid-row  bottom-spacer'>     <!-- 1st column -->
+
+    <div class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>
+      Nickname
+    </div>
+    <div class='col-4-6  bottom-1-line-spacer'><%= @user.nickname %></div>
+    <div class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>email</div>
+    <div class='col-4-6  bottom-1-line-spacer'><%= @user.email %></div>
+    <div class='col-2-6  grid-row  bottom-1-line-spacer  grid-label'>Role</div>
+    <div class='col-4-6  bottom-1-line-spacer'><%= @user.role %></div>
+  </div>
+
+  <div class='col-1-24  bottom-spacer'>     <!-- 2nd column -->
+    <%= edit_link @user %>
+    <%= render 'bubbles/help_edit',  data_type: 'user' %>
+  </div>
+</div> <!-- grid  Shell  u-padding-1-100 -->

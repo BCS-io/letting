@@ -1,0 +1,114 @@
+
+/*--------------------------------------------------------------------*\
+
+  $BUTTON
+
+  ButtonIcon - action buttons and Invoicing Show buttons
+  Button  ButtonPrimary - submit action buttons on form pages and search form
+
+\*--------------------------------------------------------------------*/
+
+@import 'settings.colors';
+
+@media screen {
+
+  .Button {
+    border-radius: $border-radius;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-button-blur $shadow-spread $color-shadow;
+    display: inline-block;
+    font-size: 1em;
+    margin: 0;
+  }
+
+  .ButtonIcon {
+    background: $button-icon-background;
+    border: 1px solid $button-icon-border;
+    color: $button-icon-color;
+    padding: .3em;
+
+    &:hover,
+    &:active {
+      background: $button-icon-active-background;
+      color: $button-icon-active-color;
+    }
+  }
+
+  .ButtonIcon-action {
+    background: $primary-action-background;
+    border: 1px solid darken($primary-action-background, $border-color-darken);
+    color: $primary-action-color;
+    padding: .3em;
+
+    &:hover,
+    &:active {
+      background: $primary-action-active-background;
+      color: $primary-action-active-color;
+    }
+  }
+
+  .ButtonIcon[disabled] {
+    background: $button-icon-disabled-background;
+    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
+    color: $button-icon-disabled-color;
+    padding: .2em;
+    text-decoration: none;
+
+    &:hover,
+    &:active {
+      background: $button-icon-disabled-background;
+      color: $button-icon-disabled-color;
+    }
+  }
+
+  .ButtonIcon-inactive {
+    background: $button-icon-background;
+    border: 1px solid $button-icon-border;
+    color: $button-icon-color;
+    padding: .3em;
+  }
+
+  @mixin redbutton {
+    background: $primary-action-background;
+    border: 1px solid darken($primary-action-background, $border-color-darken);
+    color: $primary-action-color;
+
+    &:hover,
+    &:active {
+      background: $primary-action-active-background;
+      color: $primary-action-active-color;
+    }
+  }
+
+  .ButtonPrimary {
+    @include redbutton;
+    padding: 1.3em;
+  }
+
+  .ButtonSecondary {
+    @include redbutton;
+    padding: .5em;
+  }
+
+  .ButtonPrimary[disabled] {
+    background: $button-icon-disabled-background;
+    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
+    color: $button-icon-disabled-color;
+    padding: 1.3em;
+
+    &:hover,
+    &:active {
+      background: $button-icon-disabled-background;
+      color: $button-icon-disabled-color;
+    }
+  }
+}
+
+@media print {
+
+  .Button,
+  .ButtonIcon,
+  .ButtonIcon-inactive,
+  .ButtonPrimary {
+    display: none;
+  }
+}

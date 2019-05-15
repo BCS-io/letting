@@ -1,0 +1,52 @@
+<%= render 'shared/error_messages', object: user %>
+<div id='help-me',  data-summit='3', data-setLow = '0',  data-setLow='0'></div>
+<%= render 'bubbles/search_account' %>
+<%= render 'users/form_help' %>
+
+<fieldset id='user' class='grid  Shell  u-padding-1-12'>
+
+  <%= form_for user do |f| %>
+    <div class='col-23-24  vertical-spacer spacer-column'>
+
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
+        <%= f.label :nickname, class: 'required' %>
+      </div>
+      <div class='col-16-24  bottom-spacer'><%= f.text_field :nickname %></div>
+
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
+        <%= f.label :email, class: 'required' %>
+      </div>
+      <div class='col-16-24  bottom-spacer'><%= f.text_field :email %></div>
+
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
+        <%= f.label :password, class: 'required' %>
+      </div>
+      <div class='col-16-24  bottom-spacer'>
+        <%= f.password_field :password %>
+      </div>
+
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
+          <%= f.label :password_confirmation, class: 'required' %>
+      </div>
+      <div class='col-16-24  bottom-spacer'>
+        <%= f.password_field :password_confirmation %>
+      </div>
+
+      <div class='col-8-24  grid-row  bottom-spacer  grid-label'>
+        <%= f.label :role, 'Admin Status',  class: 'required' %>
+      </div>
+      <div class='col-16-24  bottom-spacer'><%= f.select :role, User.roles.keys %></div>
+
+      <div class='col-8-24  grid-row  top-1-line-spacer'>&nbsp;</div>
+      <div class='col-16-24  top-1-line-spacer'>
+        <%= render 'forms/buttons', f: f, path: users_path %>
+      </div>
+
+    </div>
+  <% end %>
+
+  <div class='col-1-24  spacer-column'>
+    <%= view_link user %>
+    <%= render 'bubbles/help_view',  data_type: 'user' %>
+  </div>
+</fieldset>

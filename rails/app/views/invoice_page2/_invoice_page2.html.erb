@@ -1,0 +1,35 @@
+<% invoice_dec = InvoiceDecorator.new(invoice) %>
+<div class='print-set'>
+
+  <% invoice_text_page1 = InvoiceText.first %>
+  <%= render 'invoice_texts/heading_page2_address' %>
+
+  <% invoice_page2 = InvoiceText.second %>
+
+  <div class='grid-row  c-align  bottom-spacer'>
+    <%= invoice_page2.heading1 %>
+  </div>
+
+  <div class='grid-row  c-align  h1-print  bottom-spacer'>
+    <%= invoice_page2.heading2 %> <%= invoice_dec.property_ref %>
+  </div>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 0, info: invoice_dec.occupiers, invoice_page2: invoice_page2 } %>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 1, info: simple_format(invoice_dec.property_address, {}, wrapper_tag: 'div'), invoice_page2: invoice_page2 } %>
+
+  <% product_dec = ProductDecorator.new(invoice.products.page2) %>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 2, info: product_dec.amount_on_time, invoice_page2: invoice_page2 } %>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 3, info: product_dec.period, invoice_page2: invoice_page2 } %>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 4, info: invoice_text_page1.invoice_name, invoice_page2: invoice_page2 } %>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 5, info: invoice_text_page1.address.text, invoice_page2: invoice_page2 } %>
+
+  <%= render partial:'invoice_page2/instructions_page2',locals: { guideno: 6, info: invoice_dec.client_address, invoice_page2: invoice_page2 } %>
+
+  <%= render 'invoice_texts/notices', invoice_text: invoice_page2 %>
+
+</div>

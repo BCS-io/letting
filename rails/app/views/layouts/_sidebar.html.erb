@@ -1,0 +1,66 @@
+<% if allow? 'users', '' %>
+  <div class='accordion' >
+    <h3 class='c-align  accordion-header'>Admin Menu</h3>
+    <ul>
+      <li class=<%= main_menu_active? ['cycles'] %>>
+        <h3 class='menu-header'><span class='fa fa-calendar icon-spacer'></span> Cycles</h3>
+        <ul class='menu'>
+          <li class=<%=current_path?(cycles_path)%>><%= link_to 'Cycles', cycles_path, class: 'menu-item' %></li>
+          <li class=<%=current_path?(new_cycle_path(cycle_type: 'term'))%>><%= link_to 'New Term Cycle', new_cycle_path(cycle_type: 'term'), class: 'menu-item' %></li>
+          <li class=<%=current_path?(new_cycle_path(cycle_type: 'monthly'))%>><%= link_to 'New Monthly Cycle', new_cycle_path(cycle_type: 'monthly'), class: 'menu-item' %></li>
+        </ul>
+      </li>
+      <li class=<%= main_menu_active? ['users'] %>>
+        <h3 class='menu-header'><span class='fa fa-user icon-spacer'></span> Users</h3>
+        <ul class='menu'>
+          <li class=<%=current_path?(users_path)%>><%= link_to 'Users', users_path, class: 'menu-item' %></li>
+
+          <li class=<%=current_path?(new_user_path)%>><%= link_to 'New User',  new_user_path, class: 'menu-item' %></li>
+        </ul>
+      </li>
+      <li class=<%= main_menu_active? ['invoice_texts'] %>>
+        <h3 class='menu-header'><span class='fa fa-file-text-o icon-spacer'></span> Invoice Texts</h3>
+        <ul class='menu'>
+          <li class=<%=current_path?(invoice_texts_path)%>><%= link_to 'Invoice Texts', invoice_texts_path, class: 'menu-item' %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<% end %>
+
+<div class='accordion' >
+  <h3 class='c-align  accordion-header'>Menu</h3>
+  <ul >
+    <li class=<%= main_menu_active? ['properties', 'arrears'] %>>
+      <h3 class='menu-header'><span class='fa fa-book icon-spacer'></span> Accounts</h3>
+      <ul class='menu'>
+        <li class=<%=current_path?(properties_path)%>><%= link_to 'Accounts', properties_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(new_property_path)%>><%= link_to 'New Account', new_property_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(arrears_path)%>><%= link_to 'Arrears List', arrears_path, class: 'menu-item' %></li>
+      </ul>
+    </li>
+    <li class=<%= main_menu_active? ['clients', 'client_payments'] %>>
+      <h3 class='menu-header'><span class='fa fa-folder-open-o icon-spacer'></span> Clients</h3>
+      <ul class='menu'>
+        <li class=<%=current_path?(clients_path)%>><%= link_to 'Clients', clients_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(new_client_path)%>><%= link_to 'New Client', new_client_path, class: 'menu-item' %></li>
+      </ul>
+    </li>
+    <li class=<%= main_menu_active? ['invoicings', 'second_runs_needed', 'invoices'] %>>
+      <h3 class='menu-header'><span class='fa fa-envelope-o icon-spacer'></span> Invoicing</h3>
+      <ul class='menu'>
+        <li class=<%=current_path?(invoicings_path)%>><%= link_to 'Invoicings', invoicings_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(new_invoicing_path)%>><%= link_to '1st Run', new_invoicing_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(second_runs_needed_index_path)%>><%= link_to '2nd Runs Needed', second_runs_needed_index_path, class: 'menu-item' %></li>
+      </ul>
+    </li>
+    <li class=<%= main_menu_active? ['payments', 'payments_by_dates'] %>>
+      <h3 class='menu-header'><span class='fa fa-gbp icon-spacer'></span> Payments</h3>
+      <ul class='menu'>
+        <li class=<%=current_path?(payments_path)%>><%= link_to 'Payments', payments_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(new_payment_path)%>><%= link_to 'New Payment', new_payment_path, class: 'menu-item' %></li>
+        <li class=<%=current_path?(payments_by_dates_path)%>><%= link_to 'Payments by date', payments_by_dates_path, class: 'menu-item' %></li>
+      </ul>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,13 @@
+<!-- Partialized Property Description -->
+
+<div class='col-2-24  grid-row  top-1-line-spacer'>&nbsp;</div>
+<div class='col-9-24  top-1-line-spacer'>  <!-- 1st column -->
+  <h3 class='grid-label'>Property ID</h3>
+  <h1><%= payment_dec.human_ref %></h1>
+</div>
+<div class='col-13-24  top-1-line-spacer'>  <!-- 2nd column -->
+  <h3 class='grid-label'>Occupier</h3>
+  <% if payment_dec.account_exists? %>
+    <%= render 'addresses/abridged', property: payment_dec.property_decorator %>
+    <% end %>
+</div>

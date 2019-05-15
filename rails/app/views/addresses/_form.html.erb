@@ -1,0 +1,83 @@
+<%= f.fields_for :address do |b| %>
+
+<div id='<%= parent %>_address'>
+  <div class='col-1-1  grid-label  no-r-pad'>
+    <h3>Address</h3>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :flat_no %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :flat_no %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :house_name %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :house_name, data: { autocomplete_source: Address.distinct.pluck(:house_name).reject(&:blank?).sort }  %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :road_no %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :road_no %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :road, class: 'required' %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :road, data: { autocomplete_source: Address.distinct.pluck(:road).reject(&:blank?).sort } %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :district %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
+    <div class='col-4-24  js-togglable   js-clear  <%= address.add_district_visiblity %> '>
+      <%= add_link js_css: 'js-toggle', title: 'Add district' %>
+    </div>
+    <div class='js-togglable  js-clear  <%= address.district_visiblity %>'>
+      <div class='col-20-24  bottom-spacer  no-r-pad'>
+        <%= b.text_field :district, class: 't-district' %>
+      </div>
+      <div class='col-4-24'>
+        <%= delete_link title: 'Delete district', js_css: 'js-toggle', method: nil, data: false %>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-1-4  grid-row  bottom-spacer  grid-label'>
+    <%= b.label :town %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :town, data: { autocomplete_source: Address.distinct.pluck(:town).reject(&:blank?).sort } %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :county, class: 'required' %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :county, data: { autocomplete_source: Address.distinct.pluck(:county).reject(&:blank?).sort }  %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :postcode %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad'>
+    <%= b.text_field :postcode %>
+  </div>
+  <div class='col-1-4  bottom-spacer  grid-label'>
+    <%= b.label :nation %>
+  </div>
+  <div class='col-3-4  bottom-spacer  no-r-pad  js-toggle-selection'>
+    <div class='js-togglable  js-clear <%= address.add_nation_visiblity %> col-4-24'>
+      <%= add_link js_css: 'js-toggle', title: 'Add nation' %>
+    </div>
+    <div class='js-togglable  js-clear <%= address.nation_visiblity %>'>
+      <div class='col-20-24  bottom-spacer  no-r-pad'>
+        <%= b.text_field :nation, class: 't-nation' %>
+      </div>
+      <div class='col-4-24'>
+        <%= delete_link title: 'Delete nation', js_css: 'js-toggle', method: nil, data: false %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,33 @@
+<% @title='Invoice Texts' %>
+<div id='help-me',  data-summit='2',  data-setLow='0'></div>
+<%= render 'invoice_texts/index_help' %>
+<%= render 'bubbles/search_account' %>
+
+<div class='grid  Shell  u-padding-1-12'>
+
+  <div class='col-4-24  grid-row  bottom-spacer  grid-header  r-align'>   Page
+  </div>
+  <div class='col-17-24  bottom-spacer  grid-header'>
+   Content
+  </div>
+  <div class='col-1-24  bottom-spacer  grid-header'>
+    Action
+  </div>
+
+  <% if @invoice_texts.present? %>
+    <% @invoice_texts.each do |invoice_text| %>
+      <div title='View' class='table-row' data-link='<%= invoice_text_path(invoice_text) %>'>
+
+        <div class='col-4-24  grid-row  bottom-spacer  inherit-row  r-align'>
+          <%= invoice_text.id %>
+        </div>
+        <div class='col-17-24  bottom-spacer  inherit-row'>
+          <%= invoice_text.description %>
+          <%= testing_link path: invoice_text_path(invoice_text) %>
+        </div>
+      </div> <!-- div closes grid row click simulation -->
+      <div class='col-1-24  bottom-spacer'><%= edit_link invoice_text, size: 'lg' %></div>
+      <div class='col-2-24'>&nbsp;</div>
+    <% end %>
+  <% end %> <!-- @invoice_texts.present? -->
+</div>

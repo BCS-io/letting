@@ -1,0 +1,39 @@
+<div id= 't-charge' class='js-group-toggle'>
+  <div class='col-1-1  grid-label'><h3>Charges</h3></div>
+
+  <div class='col-5-24  grid-row  bottom-spacer  grid-header'>Charge</div>
+  <div class='col-8-24  bottom-spacer  grid-header'>Dates Due</div>
+  <div class='col-4-24  bottom-spacer  grid-header'>Payment</div>
+  <div class='col-3-24  bottom-spacer  grid-header r-align'>Amount</div>
+  <div class='col-2-24  bottom-spacer  grid-header'>Activity</div>
+  <div class='col-2-24  bottom-spacer  grid-header  r-align  no-r-pad  no-print'>Action</div>
+
+  <%= builder.fields_for :charges do |f| %>
+    <div class='js-dynamic-group  js-enclosed-toggle <%= hide_empty_records_after_first record: f.object, index: f.index %>'  >
+
+      <div class='col-5-24  grid-row  bottom-spacer  spec-charge-count'>
+        <%= f.text_field :charge_type, data: { autocomplete_source: Charge.distinct.pluck(:charge_type).sort }, class: 'js-clear'  %>
+      </div>
+      <div class='col-8-24  bottom-spacer'>
+        <%= f.select :cycle_id, grouped_options_for_select(CycleDecorator.for_select, f.object.cycle_id), { prompt: 'Please select'}, class: 'js-clear'  %>
+      </div>
+      <div class='col-4-24  bottom-spacer'>
+        <%= f.select :payment_type, payment_types, { prompt: 'Please select'}, class: 'js-clear'  %>
+      </div>
+      <div class='col-3-24  bottom-spacer  r-align'>
+        <%= f.text_field :amount, class: 'r-align  js-clear' %>
+      </div>
+      <div class='col-2-24  bottom-spacer'>
+        <%= f.select :activity, Charge.activities.keys, class: 'js-clear' %>
+      </div>
+      <div class='col-2-24  bottom-spacer  no-r-pad  r-align'>
+        <%= f.hidden_field :_destroy %>
+        <%= delete_charge js_css: hide_or_destroy(record: f.object), css: 't-charge-count' %>
+      </div>
+    </div> <!-- js-dynamic-group js-enclosed-toggle -->
+  <% end %>
+
+  <div class='col-3-24  grid-row  bottom-spacer'>
+    <%= add_link js_css: 'js-reveal-link', title: 'Add Charge' %>
+  </div> <!-- end-row -->
+</div>   <!-- js-group-toggle -->

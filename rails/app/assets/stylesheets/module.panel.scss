@@ -1,0 +1,42 @@
+/*--------------------------------------------------*\
+
+  $PANEL
+
+\*--------------------------------------------------*/
+
+@import 'settings.colors';
+@import 'tools.mixins';
+
+//
+// Panel
+//
+// Only used on invoicings-show - think concept could be used in application
+// more often
+//
+.Panel {
+  @include clearfix;
+  border-radius: $border-radius;
+}
+
+
+//
+// Darkend 'emphaisised' Color
+//
+.Panel-PickOut {
+  background-color: $scheme-pick-out-background;
+  border: 1px solid $scheme-pick-out-border;
+  color: $scheme-pick-out-foreground;
+}
+
+//
+// Displaying content on the screen
+// Given lighter, or in the case of printing white background, to make
+// data the star.
+//
+.Panel-Content {
+  background-color: $scheme-light-background;
+
+  @media screen {
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur-content $shadow-spread $color-shadow;
+  }
+}

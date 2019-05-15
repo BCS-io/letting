@@ -1,0 +1,149 @@
+#
+# Rubocop Configuration
+#
+# Configuration dictates which files are parsed and which rules are used.
+#
+# The configuration template is generated with: `rubocop --auto-gen-config`
+# RuboCop version 0.24.1.
+#
+
+# Ignored Files
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - db/**/*
+    - bin/**/*
+    - tmp/**/*
+    - config/**/*
+
+#
+# Ignored Styles
+# These styles will not be modelled in our code.
+#
+Layout/AlignHash:
+  Exclude:
+    - 'app/controllers/properties_controller.rb'
+    - 'app/models/ledgers/charge.rb'
+    - 'app/models/ledgers/chargeable.rb'
+    - 'lib/import/contact_fields.rb'
+    - 'lib/import/import_user.rb'
+    - 'spec/support/attributes.rb'
+Layout/ExtraSpacing:
+  Exclude:
+    - spec/models/ledgers/charge_spec.rb
+Layout/LeadingBlankLines:
+  Exclude:
+    - 'app/decorators/account_balance_decorator.rb'
+    - 'app/helpers/link_helper.rb'
+    - 'app/models/characters/client.rb'
+    - 'app/models/invoices/invoicing.rb'
+    - 'lib/import/import_user.rb'
+    - 'spec/lib/modules/rangify_spec.rb'
+    - 'spec/support/factories/run_factory.rb'
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+Lint/HandleExceptions:
+  Exclude:
+    - 'spec/support/elasticsearch.rb' # suppress Elasticsearch NotFound Errors
+Lint/MissingCopEnableDirective:
+  Enabled: false
+Style/MethodDefParentheses:
+  Enabled: false
+Metrics/BlockLength:
+  Max: 205
+  Exclude:
+    - 'spec/models/ledgers/payment_spec.rb'
+Metrics/LineLength:
+  Max: 95
+  Exclude:
+    - Gemfile
+    - 'spec/support/elasticsearch.rb'
+Metrics/MethodLength:
+  Max: 10
+  Exclude:
+    - 'spec/models/characters/address_spec.rb'
+Metrics/ParameterLists:
+  Exclude:
+    - 'spec/models/characters/address_spec.rb'
+Naming/AccessorMethodName:
+  Exclude:
+    - 'app/controllers/invoicings_controller.rb'
+    - 'app/controllers/payments_controller.rb'
+    - 'app/controllers/search_controller.rb'
+    - 'app/models/utils/literal_search.rb'
+Naming/UncommunicativeMethodParamName:
+  Exclude:
+    - 'lib/import/import_base.rb'
+Rails:
+  Enabled: true
+Rails/DynamicFindBy:
+  Exclude:
+    - 'app/controllers/payments_controller.rb'
+    - 'app/models/utils/literal_search.rb'
+    - 'spec/models/characters/client_spec.rb'
+    - 'spec/models/ledgers/account_spec.rb'
+Rails/FilePath:
+  Exclude:
+    - 'config/application.rb'
+    - 'spec/rails_helper.rb'
+Rails/HasManyOrHasOneDependent:
+  Exclude:
+    - 'app/models/ledgers/cycle.rb'
+Rails/InverseOf:
+  Exclude:
+    - 'app/models/characters/contact.rb'
+    - 'app/models/characters/entities.rb'
+    - 'app/models/invoices/invoice_text.rb'
+    - 'app/models/ledgers/account.rb'
+Rails/OutputSafety:
+  Exclude:
+    - 'app/decorators/product_decorator.rb'
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'app/models/concerns/act_as_fake_deletable.rb'
+    - 'app/models/utils/search_suggestion.rb'
+Style/AndOr:
+  Enabled: false
+Style/ExpandPathArguments:
+  Exclude:
+    - 'config/application.rb'
+    - 'config/boot.rb'
+    - 'config/environment.rb'
+    - 'spec/rails_helper.rb'
+Style/IfUnlessModifier:
+  Exclude:
+    - 'lib/tasks/import_block.rake'
+Style/MixinUsage:
+  Exclude:
+    - 'spec/lib/import/balance_row_spec.rb'
+    - 'spec/lib/import/charges/legacy_charged_in_fields_spec.rb'
+    - 'spec/lib/import/debit_row_spec.rb'
+    - 'spec/lib/import/payment_type_spec.rb'
+    - 'spec/models/characters/address_spec.rb'
+    - 'spec/models/invoices/invoice_spec.rb'
+    - 'spec/models/invoices/product_spec.rb'
+    - 'spec/models/ledgers/accounts_debits_spec.rb'
+Style/UnneededPercentQ:
+  Enabled: false
+
+# newly added - review
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/MethodMissingSuper:
+  Exclude:
+    - 'lib/modules/method_missing.rb'
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+#
+# Ignored
+# We want this to be removed
+Metrics/AbcSize:
+  Enabled: false
+
+Performance/Count:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false

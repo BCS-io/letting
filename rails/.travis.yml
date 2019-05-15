@@ -1,0 +1,34 @@
+dist: xenial
+language: ruby
+sudo: true
+
+rvm:
+  - 2.5.3
+  # does not handle fuzzy matching (travis uses an older version of rvm)
+  # without the rvm value it would get irb version from .ruby-version
+  # however I am using rbenv which does not have fuzzy matching
+services:
+  - elasticsearch
+  - postgresql
+
+before_install:
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.4.deb && sudo dpkg -i --force-confnew elasticsearch-6.5.4.deb && sudo service elasticsearch restart
+
+before_script:
+  - sleep 10
+  - bundle exec bundle-audit update && bundle exec bundle-audit check
+  - bundle exec rake db:create RAILS_ENV=test
+
+script:
+  - cp config/secrets.example.yml config/secrets.yml
+  - bundle exec rake db:migrate
+  - bundle exec xvfb-run rspec
+  - bundle exec rake db:seed RAILS_ENV=test
+
+notifications:
+  email: true
+  slack: bcs-io:j4u422myY0CcryFquMCAOi45
+  webhooks:
+    on_success: change
+    on_failure: always
+

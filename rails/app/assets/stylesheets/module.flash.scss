@@ -1,0 +1,80 @@
+/*--------------------------------------------------*\
+
+  $FLASH
+
+  :notice things are GOOD,    colour: green
+  :alert  things are NEUTRAL, colour: yellow.
+  :error  things are BAD,     colour: red.
+
+\*--------------------------------------------------*/
+
+@import 'settings.globals';
+@import 'module.layout';
+
+@media screen {
+
+  .flash {
+    border-radius: $border-radius;
+    box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
+    color: $color-text-black;
+    cursor: pointer;
+    margin: 0 20%;
+    padding: 1.5% 2%;
+    position: absolute;
+    text-align: center;
+    width: 40%;
+    z-index: 10;   /*cannot think why flash shouldn't be on the top*/
+  }
+
+  // notice things are GOOD,    colour: green
+
+  @mixin notice {
+    border: 1px solid $flash-notice-border;
+    background-color: $flash-notice-background;
+  }
+
+  // alert  things are NEUTRAL, colour: yellow.
+  @mixin alert {
+    border: 1px solid $flash-alert-border;
+    background-color: $flash-alert-background;
+  }
+
+  // :error  things are BAD,     colour: red.
+  @mixin error {
+    border: 1px solid $flash-error-border;
+    background-color: $flash-error-background;
+  }
+
+  .save {
+    @include notice;
+  }
+
+  .good {
+    @include notice;
+  }
+
+  .problem {
+    @include alert;
+  }
+
+  .delete {
+    @include error;
+  }
+
+  // trying to get close x into top right it isn't nice code
+
+  .flash-close {
+    cursor: pointer;
+    position: relative;
+    top: -10px;
+  }
+}
+
+
+@media print {
+
+  .flash {
+    display: none;
+  }
+}
+

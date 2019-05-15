@@ -1,0 +1,55 @@
+//
+// module.number-clear
+//
+// Allows a user to click on x in number box, r-aligned text box, and
+// change content to 0.00.
+//
+// Order problem - top: -3em;
+// If included after module.search top is changed - no idea.
+//
+//
+
+@import 'settings.colors';
+
+$icon-size: 1.2em;
+
+.number-clear {
+  text-align: right;
+  width: 98%;
+}
+
+.close-icon {
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-block;
+  outline: 0;
+  position: absolute;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.close-icon::after {
+  background-color: $number-clear-background;
+  border-radius: 50%;
+  bottom: 0;
+  color: $color-white;
+  content: 'X';
+  cursor: pointer;
+  display: block;
+  font-size: .9em;
+  height: $icon-size;
+  line-height: $icon-size;
+  margin: auto;
+  padding: 1px 0 0;
+  position: absolute;
+  right: 124.5%;
+  text-align: center;
+  top: -3em;
+  width: $icon-size;
+  z-index: 1;
+}
+
+.number-clear:invalid ~ .close-icon {
+  display: none;
+}

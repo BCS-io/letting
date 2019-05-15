@@ -1,0 +1,67 @@
+<% invoice_dec = InvoiceDecorator.new(invoice) %>
+<div class='print-set'>
+  <%= render 'invoice_texts/heading_page1', invoice_text_page1: invoice_dec.invoice_texts.first %>
+
+  <div class='col-2-24  grid-row'>&nbsp;</div>
+  <div class='col-7-24  medium-bold-headings'>
+    <%= invoice_dec.invoice_texts.first.heading2 %>
+  </div>
+  <div class='col-8-24  medium-bold-headings'>
+    Property Ref: <%= invoice_dec.property_ref %>
+  </div>
+  <div class='col-5-24  medium-bold-headings'>
+    Date: <%= l invoice.invoice_date %>
+  </div>
+  <div class='col-2-24'>&nbsp;</div>
+
+  <div class='col-3-24  grid-row'>&nbsp;</div>
+  <div class='col-21-24  bottom-spacer'>
+    <%= simple_format(invoice_dec.billing_address) %>
+  </div>
+
+  <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-22-24  medium-bold-headings'>
+    Property Address: <%= invoice_dec.property_address %>
+  </div>
+
+  <%= render partial:'products/products',locals: { invoice: invoice } %>
+
+  <div class='col-2-24  grid-row  top-1-line-spacer'>&nbsp;</div>
+  <div class='col-20-24  small-font  top-1-line-spacer'>
+    We <%= invoice_dec.invoice_texts.first.invoice_name.upcase %> ON BEHALF OF YOUR LANDLORD
+    <div class='vertical-spacer'><%= invoice_dec.client_address %></div>
+    <%= invoice_dec.invoice_texts.first.advice1 %>
+    <%= invoice_dec.invoice_texts.first.address.text %>
+
+    <div class = 'grid-row  small-font-bold  vertical-spacer'>
+      Remittance Advice
+    </div>
+    <%= invoice_dec.invoice_texts.first.advice2 %>
+    <div class = 'vertical-spacer'>
+      <i class="fa fa-scissors"></i><%= ("- " * 74).to_s %>
+    </div>
+  </div>
+  <div class='col-2-24  top-1-line-spacer'>&nbsp;</div>
+
+  <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-20-24  medium-bold-headings'>
+    Property Address: <%= invoice_dec.property_address %>
+  </div>
+  <div class='col-2-24'>&nbsp;</div>
+
+  <div class='col-2-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-10-24  medium-bold-headings'>
+    Ref: <%= invoice_dec.property_ref %>
+  </div>
+  <div class='col-10-24  medium-bold-headings'>
+    Due Date <%= invoice_dec.earliest_date_due %>
+  </div>
+  <div class='col-2-24'>&nbsp;</div>
+
+  <div class='col-2-24  grid-row  bottom-1-line-spacer'>&nbsp;</div>
+  <div class='col-22-24  bottom-1-line-spacer'>
+    From: <%= invoice_dec.billing_address %>
+  </div>
+
+  <%= render partial:'products/products_narrow',locals: { invoice: invoice } %>
+</div>

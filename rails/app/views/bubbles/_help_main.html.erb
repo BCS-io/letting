@@ -1,0 +1,54 @@
+<div id='help_0'  class='hide  bubble-intro  Bubble-main'>
+  <p>
+    <h3 class='help-heading'>&nbsp; &nbsp;
+      <i class='fa fa-info-circle fa-lg'></i>
+      <%= line1 %>
+    </h3>
+  </p>
+  <div class='text-in-box'>
+    <p><%= line2 %></p>
+    <p><%= line3 %></p>
+    <p><%= line4 %></p>
+  </div>
+
+  <div class='icons-in-box'>
+
+    <p><i class='fa fa-print fa-lg  ButtonIcon-inactive'></i>&nbsp; Prints page</p>
+
+    <% if icon2 != '' %>
+      <p>
+        <i class='<%= icon2 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line2 %>
+      </p>
+    <% end %>
+
+    <% if icon3 != '' %>
+      <p>
+        <i class='<%= icon3 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line3 %>
+      </p>
+    <% end %>
+
+    <% if icon4 != '' %>
+      <p>
+        <i class='<%= icon4 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line4 %>
+      </p>
+    <% end %>
+
+    <% if icon5 != '' %>
+      <p>
+        <i class='<%= icon5 %> fa-lg   ButtonIcon-inactive'></i>
+        &nbsp; <%= icon_line5 %>
+      </p>
+    <% end %>
+
+  </div>
+
+  <p class='text-in-box'>
+    Using the next button in this box will point you to the different buttons on this page and their usage.
+  </p>
+  <div class = 'buttons-in-box'>
+    <%= render 'bubbles/box' %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+development: &default
+  es_bin: '/usr/local/bin/elasticsearch'
+test:
+  es_bin: '/usr/local/bin/elasticsearch'
+  port: '9250'
+staging:
+  <<: *default
+production:
+  es_bin: '/usr/local/bin/elasticsearch'
+
+# Full re-import
+# rake elasticsearch:sync

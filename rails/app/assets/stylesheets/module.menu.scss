@@ -1,0 +1,121 @@
+/**************************************************************\
+
+Accordion HTML
+
+<div class='accordion' >
+  <h3 class='accordion-header'>Menu</h3>
+  <ul>
+     <li class=active-menu>
+      <h3 class='menu-header'>Accounts</h3>
+      <ul class="menu">
+        <li class='active-item'><a class="menu-item" href="/accounts">Accounts</a></li>
+        <li><a class="menu-item" href="/accounts/new">New Account</a></li>
+      </ul>
+    </li>
+    <li class=inactive-menu>
+      <h3 class='menu-header'>Clients</h3>
+      <ul class="menu">
+        <li><a class="menu-item" href="/clients">Clients</a></li>
+        <li><a class="menu-item" href="/clients/new">New Client</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+\****************************************************************/
+
+@import 'settings.colors';
+
+/* This is main box, border radus, width, colors here set all the unopened boxes */
+/* top & bottom edging on main menu/shell, set to match main menu */
+
+.accordion {
+  background: $menu-background;
+  border-radius: $border-radius;
+  box-shadow: $shadow-offset-x $shadow-offset-y $shadow-blur $shadow-spread $color-shadow;
+  color: $menu-color;
+  font-size: 1em;
+  line-height: 2em;
+  margin-top: 2.7em;
+  padding: .5em 0;
+}
+
+// The header at the top of a group of menus
+//
+.accordion-header {
+  background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
+  border-width: 0;
+  color: $menu-color;
+  font-size: 1em;
+  line-height: 1.5em;                     /* height of block boxes */
+}
+
+//
+// menu-header - The header above each menu
+//
+.menu-header {
+  background-color: $menu-background;    /* main menu unopened  #E6F1FA; */
+  border-width: 0;
+  color: $menu-color;
+  cursor: pointer;
+  font-size: 1em;
+  line-height: 2em;                     /* height of block boxes */
+  margin: 0;
+  padding: 0 .5em;                       /* sets left & right margins */
+
+  &:hover {
+    background-color: $menu-active-background;
+    color: $menu-active-color;
+  }
+}
+
+// Menu
+// Default: Menus are hidden by default
+//
+.menu {
+  border-bottom: 1px solid $menu-border-bottom;
+  display: none;
+}
+
+// Menu
+// Active: Active menus are displayed
+//
+.active-menu .menu {
+  background-color: $color-shadow;
+  border-bottom: 1px solid $menu-border-bottom;
+  display: block;
+}
+
+// menu-item - lowest level of the accordion
+//           - class for marking the menu rows
+//
+.menu-item {
+  background-color: $menu-item-background;
+  border: 1px solid $menu-item-border;
+  border-top: 0;
+  color: $menu-item-color;
+  display: block;
+  padding: 0 15px;
+  text-decoration: none;
+  /*transition for smooth hover animation*/
+  transition: all .5s;
+
+  &:hover {
+    background: $scheme-active-background;
+    border-left: 5px solid $menu-item-active-border-left;
+    color: $scheme-active-foreground;
+  }
+}
+
+// Menu
+// Active: Active menus are displayed
+//
+.active-item .menu-item {
+  background: $scheme-active-background;
+  border-left: 5px solid $menu-item-focus-border-left;
+  color: $scheme-active-foreground;
+}
+
+.icon-spacer {
+  margin-right: .4em;
+}

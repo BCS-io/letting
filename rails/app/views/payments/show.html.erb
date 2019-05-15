@@ -1,0 +1,43 @@
+<% @title='View Payment' %>
+<div id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'bubbles/search_account' %>
+<%= render 'payments/show_help' %>
+<% payment_dec = @payment %>
+
+<fieldset id='payment'  class='grid  Shell  overlay-parent'>
+
+  <div class='col-12-24  grid-row  vertical-spacer'>
+    <%= render 'payments/property_hero', payment_dec: payment_dec %>
+  </div>
+  <div class='col-4-24'>&nbsp;</div>
+  <div class='col-6-24  top-spacer  vertical-spacer'>&nbsp;</div>
+  <div class='col-2-24  top-spacer  vertical-spacer'>
+    <%= edit_link @payment %>
+    <%= render 'bubbles/help_edit',  data_type: 'payment' %>
+  </div>
+
+  <%= render 'payments/received_header' %>
+
+  <div class='col-1-24  grid-row  cell  pair-focus'>&nbsp;</div>
+  <div class='col-5-24 cell  pair-focus'><%= payment_dec.booked_at_dec %></div>
+  <div class='col-10-24  cell  pick-out'>&nbsp;</div>
+  <div class='col-8-24  cell  pick-out'>
+    <h2><%= fa_icon 'certificate', text: 'Paid' %></h2>
+  </div>
+
+  <div class='js-totalizer'>
+    <%= render 'credits/credits', credits_dec: payment_dec.credits_decorated  %>
+
+    <div class='col-12-24  grid-row'>&nbsp;</div>
+    <div class='col-3-24  cell  r-align'><h3>Total</h3></div>
+    <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+    <div class='col-7-24  cell  r-align  pick-out'>
+      <%= text_field_tag '', payment_dec.amount, disabled: true, class: 'r-align' %>
+    </div>
+    <div class='col-1-24  cell  pick-out'>&nbsp;</div>
+
+    <!-- acts as padding on the bottom of the form -->
+    <div class='col-15-24  grid-row'>&nbsp;</div>
+    <div class='col-9-24  pick-out'>&nbsp;</div>
+  </div>  <!-- js-totalizer -->
+</fieldset>

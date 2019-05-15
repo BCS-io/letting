@@ -1,0 +1,10 @@
+<div class='col-1-8   grid-row  bottom-spacer  no-warp'>
+  <%= account_item.date %>
+</div>
+<div class='col-1-4  bottom-spacer'><%= account_item.charge_type %></div>
+<div class='col-1-4  bottom-spacer'><%= account_item.description %></div>
+<div class='col-1-8  bottom-spacer  r-align'><%= account_item.due %></div>
+<div class='col-1-8  bottom-spacer  r-align'><%= account_item.payment %></div>
+<div class='col-1-8  bottom-spacer  r-align  no-r-pad'>
+  <%= to_decimal account_item.running_balance %>
+</div>

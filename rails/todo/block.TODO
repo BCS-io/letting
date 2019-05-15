@@ -1,0 +1,26 @@
+Letting:
+
+Block
+
+Data should consist of:
+name- shortened version of House name or Road name
+Most of address details not specific to 1 property
+
+NO Agent name since a complete group of properties will not normally be managed by 1 agent
+
+Block is needed to edit a number of properties in 1 go
+Could be used to create properties - setting address and charge details.
+
+Items in the block group:
+could be held as data  OR found by search
+Note check would have to be made to ensure exact match
+
+  Actions:
+    Index: List out current blocks
+
+    Create:
+      ☐ 1 .create from property already set up
+      ☐ 2. Create before property set up
+
+Edit: Update charge details
+

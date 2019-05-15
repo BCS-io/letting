@@ -1,0 +1,16 @@
+<div class='grid-row  c-align  h1-print  bottom-spacer'>
+  <%= invoice_text_page1.invoice_name %>
+</div>
+
+<div class='grid-row  c-align  inv-bold-headings  bottom-spacer'>
+  <%= invoice_text_page1.heading1 %>
+</div>
+
+<div class='col-2-24  grid-row'>&nbsp;</div>
+<div class='col-15-24  inv-bold-headings'>
+  VAT Reg No <%= invoice_text_page1.vat %>
+</div>
+<div class='col-3-12  inv-bold-headings'>
+  <%= simple_format(invoice_text_page1.address.text, {}, wrapper_tag: 'div') %>
+  Tel: <%= invoice_text_page1.phone %>
+</div>

@@ -1,0 +1,40 @@
+<% @title='Cycles' %>
+<div  id='help-me',  data-summit='3',  data-setLow='0'></div>
+<%= render 'cycles/index_help' %>
+<%= render 'bubbles/search_account' %>
+
+<div class='grid  Shell  u-padding-1-6'>
+
+  <div class='col-12-24  grid-row  bottom-spacer  grid-header'>
+    Name
+    <%= render 'bubbles/help_2_view',  data_type: 'cycle' %>
+  </div>
+  <div class='col-2-24  bottom-spacer  grid-header  r-align'>Order</div>
+  <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+  <div class='col-4-24  bottom-spacer  grid-header'>Type</div>
+  <div class='col-5-24  bottom-spacer  grid-header  no-print'>Actions</div>
+
+  <% @cycles.each do |cycle| %>
+    <div title='View' class='table-row' data-link='<%= cycle_path(cycle) %>'>
+
+      <div class='col-12-24  grid-row  bottom-spacer  inherit-row'>
+       <%= cycle.name %>
+      </div>
+      <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
+       <%= cycle.order %>
+      </div>
+      <div class='col-1-24  bottom-spacer  inherit-row'>&nbsp;</div>
+      <div class='col-4-24  bottom-spacer  inherit-row'>
+        <%= cycle.cycle_type %>
+      </div>
+    </div> <!-- div closes grid row click simulation -->
+    <nav class='col-1-24  bottom-spacer'>
+      <%= edit_link cycle, size: 'lg' %>
+    </nav>
+    <div class='col-1-24  bottom-spacer'>&nbsp;</div>
+    <nav class='col-1-24  bottom-spacer'>
+      <%= delete_link path: cycle %>
+    </nav>
+    <div class='col-2-24  bottom-spacer'>&nbsp;</div>
+  <% end %>
+</div>

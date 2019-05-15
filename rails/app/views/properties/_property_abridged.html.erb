@@ -1,0 +1,12 @@
+<div class='col-1-4  grid-row  bottom-spacer  grid-header'>Property Id</div>
+<div class='col-1-4  bottom-spacer  grid-header'>Occupier</div>
+<div class='col-1-4  bottom-spacer  grid-header'>Agent</div>
+<div class='col-1-4  bottom-spacer  grid-header'>Client Id</div>
+
+
+<div class='col-1-4  grid-row  bottom-spacer'><%= property.human_ref %></div>
+<div class='col-1-4  bottom-spacer'><%= property.occupiers %></div>
+<div class='col-1-4  bottom-spacer'><%= property.agent_name %></div>
+<div class='col-1-4  bottom-spacer'>
+  <%= link_to property.client_ref, property.client, title: property.client.full_names %>
+</div>

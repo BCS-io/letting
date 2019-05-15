@@ -1,0 +1,17 @@
+//
+// $Line
+//
+// Module for applying line styling
+//
+//
+
+@import 'settings.colors';
+
+// line-total
+// for adding line above and below numbers
+//
+.line-total {
+  border-bottom: 1px solid $color-text-primary;
+  border-top: 1px solid $color-text-primary;
+  padding: .125em 0;
+}

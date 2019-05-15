@@ -1,0 +1,33 @@
+/*-----------------------------------------------*\
+
+   $FONT_AWESOME_SIZING
+
+\*------------------------------------------------*/
+
+
+// standard icon
+//
+.fa.fa {
+  font-size: 1.2em;
+}
+
+// large icons
+//
+.fa.fa-lg {
+  font-size: 1.5em;
+}
+
+
+// 2x icon
+//
+.fa.fa-2x {
+  font-size: 2em;
+}
+
+
+@media print {
+
+  .fa {
+    display: none;
+  }
+}

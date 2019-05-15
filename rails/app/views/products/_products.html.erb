@@ -1,0 +1,34 @@
+<div class='col-2-24  grid-row  bottom-quarter-line-spacer'>&nbsp;</div>
+<div class='col-3-24  grid-header-print  bottom-quarter-line-spacer'>          Due Date</div>
+<div class='col-5-24  grid-header-print  bottom-quarter-line-spacer'>          Charge</div>
+<div class='col-7-24  grid-header-print  bottom-quarter-line-spacer'>          Period</div>
+<div class='col-2-24  grid-header-print  bottom-quarter-line-spacer  r-align'> Due</div>
+<div class='col-3-24  grid-header-print  bottom-quarter-line-spacer  r-align'> Balance</div>
+<div class='col-2-24'>          &nbsp;</div>
+
+<% invoice.products.order_by_date_then_charge.each do |product| %>
+  <% product_dec = ProductDecorator.new product %>
+
+  <div class='col-2-24  grid-row'>     &nbsp;</div>
+  <div class='col-3-24'>               <%= product_dec.date_due %></div>
+  <div class='col-5-24'>               <%= product.charge_type %></div>
+  <div class='col-7-24'>               <%= product_dec.period %></div>
+  <div class='col-2-24  r-align'>      <%= product_dec.amount %></div>
+  <div class='col-3-24  r-align'>      <%= product_dec.balance %></div>
+  <div class='col-2-24'>               &nbsp;</div>
+<% end %>
+
+<div class='col-5-24   grid-row top-half-line-spacer'>&nbsp;</div>
+<div class='col-11-24  top-half-line-spacer'>          Total now Owing</div>
+<div class='col-2-24   top-half-line-spacer'>           &nbsp;</div>
+<div class='col-4-24   top-half-line-spacer  r-align'>
+  <span class='line-total'><%= to_decimal invoice.total_arrears %></span>
+</div>
+<div class='col-2-24'>&nbsp;</div>
+
+<div class='col-1-1 <%= blankers used_lines: invoice.products.count %>'>&nbsp;</div><% invoice.comments.order(:id).each do |comment| %>
+
+  <div class='col-5-24  grid-row  bottom-spacer'>&nbsp;</div>
+  <div class='col-17-24  bottom-spacer'>    <%= comment.clarify %></div>
+  <div class='col-2-24  bottom-spacer'>     &nbsp;</div>
+<% end %>

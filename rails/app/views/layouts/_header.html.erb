@@ -1,0 +1,48 @@
+<header>
+  <div class='grid  grid-pad'>
+
+    <div class='col-6-24  grid-row'>
+      <h2><%= link_to fa_icon('home', text: 'Letting'), root_path, class: 'link-hover  link-text-white' %></h2>
+    </div>
+
+    <div class='col-10-24'>
+      <div class='search-wrapper'>
+          <%= form_tag search_path, method: 'get' do %>
+          <%= text_field_tag :search_terms, params[:search_terms], placeholder: 'Search here...', title: 'Search', data: {autocomplete_source: search_path}, class: 'search-box' %>
+          <button type='submit' id='search' title='Search' class='search-button'>
+            <%= fa_icon('search lg') %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+
+    <nav class='col-8-24  r-align  no-r-pad'>
+      <div class='drop-down'>
+        <ul>
+          <% if current_user %>
+            <li class='drop-down-menu'>
+              <%= link_to fa_icon('print', text: 'Print'), '#', class: 'drop-down-link  js-print' %>
+              <div class='Bubble-print'><%= render 'bubbles/print' %></div>
+            </li>
+            <li class='drop-down-menu'>
+              <%= link_to fa_icon('user', text: current_user.nickname, title: 'User'), '#', class: 'drop-down-link' %>
+                <div class='Bubble-log'><%= render 'bubbles/log' %></div>
+              <ul class='drop-down-sub-menu'>
+                <li class='drop-down-sub-menu-item'>
+                  <%= link_to fa_icon('info-circle', text: ' Help'), '#', title: 'Help', class: 'drop-down-link  js-start-help' %>
+                </li>
+                <li class='drop-down-sub-menu-item'>
+                  <%= link_to fa_icon('sign-out', text: ' Logout'), logout_path, class: 'drop-down-link' %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li class='drop-down-menu'>
+               <%= link_to fa_icon('sign-in', text: ' Log In'), logout_path, title: 'Log In', class: 'drop-down-link' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,19 @@
+<div id='help_0'  class='hide  bubble-short  Bubble-centre'>
+  <p>
+    <h3 class='help-heading  bottom-1-line-spacer'>&nbsp; &nbsp;
+      <i class='fa fa-info-circle fa-lg'></i>
+      <%= heading %>
+    </h3>
+  </p>
+
+  <div class='text-in-box'>
+    <% lines.each do |lines| %>
+        <p><%= lines %></p>
+    <% end %>
+  </div>
+
+  <div  class='buttons-in-box  c_align'>
+    <button  class='js-cancel-help  cancel-button'>cancel</button>
+  </div>
+
+</div>

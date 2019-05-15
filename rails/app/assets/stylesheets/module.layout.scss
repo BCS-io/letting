@@ -1,0 +1,45 @@
+@import 'settings.colors';
+@import 'tools.mixins';
+
+.clearfix { @include clearfix; }
+
+@media screen {
+
+  .site {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /*------------------------------------------------*\
+
+    $PAGE
+
+  \*------------------------------------------------*/
+
+  .page-wrapper {
+    flex: 1;
+    margin: 0 auto;
+    width: 97.5%;
+  }
+
+  .view-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+  }
+
+  /*--------------------------------------*\
+
+      $STRUCTURAL ELEMENTS
+
+  \*--------------------------------------*/
+
+  .float-left {
+    float: left;
+  }
+
+  .float-right {
+    float: right;
+  }
+}

@@ -1,0 +1,24 @@
+  <div class='col-2-24  grid-row'>&nbsp;</div>
+  <div class='col-14-24'>
+    <%= render 'bubbles/help_2_view',  data_type: 'account' %>
+    &nbsp;
+  </div>
+  <div class='col-1-24  Bubble-move-right'>
+    <%= render 'bubbles/help_3',  pic: 'fa fa-gbp fa-lg',  line1: 'Payment Button',  line2: 'Use to make a new payment'%>
+    &nbsp;
+  </div>
+  <div class='col-1-24  Bubble-move-right'>
+      <%= render 'bubbles/help_4',  pic: 'fa fa-edit fa-lg',  line1: 'Edit Button',  line2: "Edits an account's details" %>
+    &nbsp;
+  </div>
+  <div class='col-1-24  Bubble-move-right'>
+    <%= render 'bubbles/help_5',  pic: 'fa fa-trash-o fa-lg',  line1: 'Delete Button', line2: 'Deletes this property details and its account' %>
+    &nbsp;
+  </div>
+  <div class='col-1-24  Bubble-allprint'>
+    <%= render 'bubbles/help_6',  pic: 'fa fa-print fa-lg',  line1: 'Property Print',  line2: 'Printout of Complete Property Record List' %>
+    &nbsp;
+  </div>
+  <div class='col-4-24 r-align'>
+    <%= print_link text:'Full Account List', path: property_lists_path, title: 'Property List', css: 'Button ButtonSecondary' %>
+  </div>

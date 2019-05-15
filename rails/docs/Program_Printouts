@@ -1,0 +1,107 @@
+Printouts available from Letting program
+
+  Since the program is web-based all printouts are via the browser.
+
+  This means the browser needs to be set to remove headings and footings and be set to duplex (2 sided page printing.)
+
+  The printer also needs to be set to duplex printing. Duplex is needed for printing invoices.
+
+  Since the program is web based, every page can be printed out via control P, the print instruction from the browser or the program print button (top right ot the page.)
+
+  To ensure the printout is useful, media controls in the program prevent printout of the heading, the menus and buttons.
+
+  The page will be printed out only as seen on the screen.
+    On some pages clicking on a button reveals more details. To print these out ensure these details are on screen.  The printout normally adds a heading with the date.
+
+   In the client section search will search for a client. In all other sections search will look for a property/account.
+
+
+Page Printouts
+
+  ALL USERS
+
+  For users without admin status the menu allows access to
+
+  Accounts - Index View Edit Create Arrears
+
+   The index consists of pages of property address, with occupier names and client ID.
+   Property details are available from this page.
+   Clicking on the line of a property details will take you to the view page.
+   This can also be entered via the search. Account Number, address or name will reach the page.
+   Address, agent details, charges and accounts are found on view or edit pages.
+   Edit and view icons will allow you to shift between the two pages.
+   The create page can also be printed out.
+   Drop down sections allow further details to be seen and printed out.
+   The printout will be what is shown on the screen.
+
+   The arrears option is available from the accounts menu.
+   Filling in the amount will list out clients with that amount and above owing on their charges.
+
+  Clients - Index View Edit Create Payments
+
+   The index consists of pages of client names and address.
+   Futher client details are available from this page.
+   Clicking on the line of client details will take you to the view page.
+   This can also be entered via the search. Client Number, address or name will reach the page. Note the search will search for clients only from this section.
+   Name, address, property list and accounts are found on view or edit pages.
+   Edit and view icons will allow you to shift between the two pages.
+   Edit allows update to client name and address.
+   The create page can also be printed out.
+   The property list and accounts are found on the view page. The accounts can be printed out via the print icon next to the account tabs, which allow for the date and due dates of the property collection.
+
+  Invoicing via New Invoicing - Create  Invoicing (Run List) Invoicing Print out of a run   Individual Invoice Print
+
+   The New Indexing page allows a run of invoices to be selected and created.
+   These are then available in the Invoicing page allowing a print of all the runs available. Latest at the top of the list.
+   The main focus of the page, however is to click on the print icon next to the run list to produce the invoices in the run created.
+   To obtain an individual invoice print from a run Click on the run details.
+   This will list out items in the run. Click on the print icon next to the Invoice details.
+   A print out of this page is available from the print icon at the top right of the page.
+
+  Payments via New Payments - Payments New Payments
+
+    Payments page will allow a seach for the payments entered on a specfic date allowing a print of this.
+    New Payments will allow details of a payment to be printed out as required.
+
+
+ADMIN STATUS
+
+ For users with admin status the admin menu allows access to
+
+ Cycles - Index View Edit Create
+
+  The index lists each of the available debiting cycles.
+  The view and the edit both give the details of an individual cycle.
+  They and create can be printed out.
+
+ Invoice Text - Index View Edit
+
+  The invoice text is the data used in producing the invoices. Don't touch! It should only be used for a major change in the invoice pages. If the company moved, the new address could be set here.
+  The index lists the two invoice data pages. The first is used by all invoices. The second by ground and garage ground rents only.
+
+  There is no create, only view and update.
+  View gives a resonable representation of the unchanging part of the invoice.
+  Edit allows update of the invoice data. Print off both view and edit pages before making any changes.
+  This will help to decide what to change and as a back up in case of problems.
+
+ Users - Index View Edit Create
+
+  The index lists each of the users and their roles as admin or user.
+  The view gives the nickname, email and role.
+  The print for edit will show the nickname, email and role but not the password or its confirmation.
+
+Special printouts
+
+  Invoices are available via the Invoicing page (Menu choose Invoicing)
+  Choose the run you wish to printout
+
+Arrears List
+
+  Available via using menu to accounts and then Arrears List
+
+
+Client Payments
+
+From the Menu choose Clients, go to the View for the client. The accounts can be printed out via the print icon next to the account tabs, which allow for the date and due dates of the property collection.
+
+

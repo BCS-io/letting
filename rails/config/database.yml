@@ -1,0 +1,28 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: letting_development
+
+test:
+  <<: *default
+  database: letting_test
+
+internet:
+  <<: *default
+  database: letting_internet
+  username: letting
+  password: ENTER_PASSWORD
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  database: letting_production
+  username: letting
+  password: ENTER_PASSWORD
+

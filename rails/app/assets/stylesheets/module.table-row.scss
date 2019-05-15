@@ -1,0 +1,62 @@
+
+/*-----------------------------------------------*\
+
+  $table rows
+
+  Grid to simulating tables - when you hover over a row it has highlight across
+  the whole row.
+
+  1 - Add enclosing div around the hover highlighted row with these items:
+   1.1 class='table-row'
+   1.2 data-link='<%= property_path(property.id) %>
+     - 1.2.1 the data is used by visit-data-link.js
+  2 - columns enclosed by the div that are to have table-row styles added have:
+      class='inherit-row'
+  3 - visit-data-link.js must be present
+  4 - Hidden link added to column in the table for testing purposes
+   4.1 link_to '.', property_path(property.id), class: 'link-view-testing';
+   4.2 spec with: find('.link-view-testing', visible: false).click
+
+  5 - Committed these changes for clients table under:
+    'grid simulating table - client'
+     git log --oneline | grep 'grid simulating table - client'
+
+\*-----------------------------------------------*/
+
+@import 'settings.colors';
+
+//
+// Row with column items as text which look like links on hover
+//
+.table-row {
+  &:hover,
+  &:active {
+    background-color: $scheme-pick-out-background;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+//
+// Row with column items as links at all times
+//
+.table-link-row {
+  color: $link-text-primary-color;
+  text-decoration: underline;
+
+  &:hover,
+  &:active {
+    background-color: $scheme-pick-out-background;
+    cursor: pointer;
+  }
+}
+
+
+//
+// Casscade the properties into the grid-rows from the enclosing div
+//
+.inherit-row {
+  background-color: inherit;
+  text-decoration: inherit;
+}
+

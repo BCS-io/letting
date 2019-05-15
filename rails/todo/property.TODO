@@ -1,0 +1,47 @@
+Letting:
+
+Property
+
+ ✔ Import @done (13-09-04 12:10)
+ ✔ Seed @done (before 13-08-17 12:51)
+
+ Model:
+   ✔ Model has block_id and probably should be removed @done (13-08-17 12:12)
+   ✔ Agent Address @done (13-08-02 00:10)
+   ☐ tag
+   ☐ Edit a number of records at once 'A Block'
+   ☐ Set default for Agent authorized but doesn't seem to work.
+         http://stackoverflow.com/questions/8146448/get-the-default-values-of-table-columns-in-postgres
+    Validates:
+      PropertyID / human_ref:
+      ✔ validates numericality @done (13-07-27 15:13)
+      ✔ validates uniqueness @done (13-07-27 15:13)
+    Shared Require:
+      ☐ Address
+      ☐ Entity
+
+  Actions:
+    Index:
+      ☐ V
+         ☐ IMPROVE: Navigating from list to show currently by clicking human_ref
+      ✔ C @done (13-07-27 11:06)
+    Show:
+     ☐ V
+     ✔ C @done (13-07-27 15:25)
+    Create:
+      ☐ V
+        ✔ Add Entity Button @done (Before 13-08-17 12:10)
+        ☐ Add District Button
+      ✔ C @done (13-08-03 11:15)
+        ✔ Happy Path @done (13-07-30 18:14)
+        ✔ Fail Save @done (13-08-03 11:08)
+            ✔ Fail duplicate Human Property ID @done (before 13-08-03 11:06)
+    Update:
+      ☐ V
+      ✔ C @done (13-07-28 00:27)
+        ✔ Happy Path @done (13-07-28 00:27)
+        ✔ Fail Save @done (13-08-03 11:04)
+    ✔ Delete @done (13-07-30 22:04)
+
+  Behaviour:
+ ✔ Jquery to add new entity @done (13-08-17 10:35)

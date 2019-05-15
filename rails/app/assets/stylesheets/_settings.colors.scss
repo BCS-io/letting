@@ -1,0 +1,321 @@
+
+/*----------------------------------------------------------------------------*\
+
+  $COLORS
+
+  Defined colors
+
+  $COLORSCHEME
+
+  Color schemes only reside in this colors file.
+  Variables that are used in the application should be
+  expressed in terms of the colour scheme where appropriate.
+
+  Colors from:
+  http://paletton.com/#uid=43w0Z0krWE7hbNgmGHXBHy3BFoJ
+  Chose triad and added darker variant .... maybe should calculate it?
+
+  Color naming hexidecimal from:
+  http://chir.ag/projects/name-that-color/
+
+\*----------------------------------------------------------------------------*/
+
+@import 'settings.globals';
+
+
+
+
+/*----------------------------------------------------------------------------*\
+
+
+  $PALLET COLORS
+
+  The list of colors used in the application.
+
+\*----------------------------------------------------------------------------*/
+
+// scss-lint:disable SpaceAfterComma, SpaceBetweenParens
+
+// Primary color, Blue, and shades
+$color-primary-shade-0:        rgba( 34, 125, 190, 1);    // $color-mariner
+$color-primary-shade-1:        rgba(107, 171, 216, 1);    // $color-danube
+$color-primary-shade-2:        rgba( 67, 145, 201, 1);    // $color-Shakespeare
+$color-primary-shade-3:        rgba(  8, 103, 169, 1);    // $color-bahama-blue
+$color-primary-shade-4:        rgba(  6,  77, 126, 1);    // $color-venice-blue
+
+// Secondary Color 1, Yellow, and shades
+$color-secondary-shade-0:      rgba(255, 236,  32, 1);    // $color-broom
+$color-secondary-shade-1:      rgba(255, 243, 118, 1);    // $color-paris-daisy
+$color-secondary-shade-2:      rgba(255, 240,  74, 1);    // $color-gorse
+$color-secondary-shade-3:      rgba(255, 233,   0, 1);    // $color-turbo
+$color-secondary-shade-4:      rgba(197, 180,   0, 1);    // $color-buddha-gold
+
+
+// Secondary Color 2 (calling tenary otherwise too close a name), Red/Pink
+$color-ternary-shade-0:        rgba(232,  30, 101 ,1);    // $color-amaranth
+$color-ternary-shade-1:        rgba(241, 112, 158 ,1);    // $color-froly
+$color-ternary-shade-2:        rgba(236,  69, 128, 1);    // $color-french-rose
+$color-ternary-shade-3:        rgba(225,   0,  80, 1);    // $color-razzmatazz
+$color-ternary-shade-4:        rgba(173,   0,  61, 1);    // $color-shiraz
+
+
+// Complimentary color, Orange
+$color-complimentary-shade-0:  rgba(255, 158,  32, 1);     // $color-tree-poppy
+$color-complimentary-shade-1:  rgba(255, 195, 118, 1);     // $color-macaroni-and-cheese
+$color-complimentary-shade-2:  rgba(255, 176,  74, 1);     // $color-yellow-orange
+$color-complimentary-shade-3:  rgba(255, 144,   0, 1);     // $color-pizass
+$color-complimentary-shade-4:  rgba(197, 111,   0, 1);     // $color-indochine
+
+
+//
+// Neutral Colors
+//
+
+// Black
+$color-black:                  rgba(0, 0, 0, 1);             // black
+
+// Whites
+$color-white:                  rgba(255, 255, 255, 1);      // white
+$color-alabaster:              rgba(248, 248, 248, 1);      // off-white
+$color-cream:                  rgba(255, 255, 204, 1);      // ffffcc Cream
+
+
+// Greys
+$color-grey-alto:              rgba(220, 220, 220, 1);      // Pale Grey Gainsbro
+$color-silver-chalice:         rgba(170, 170, 170, 1);      // Light Grey
+$color-silver-chalice-opaque:  rgba(170, 170, 170, .85);
+$color-boulder:                rgba(119, 119, 119, 1);      // Medium Dark Grey
+$color-tundora:                rgba(68, 68, 68, 1);         // Very Dark Grey
+
+
+// Flash Colors
+$color-snowy-mint:             rgba(219, 255, 221, 1);      // Pale Green
+
+
+// Process these colors into pallet
+// -  Currently none!
+
+
+
+
+/*----------------------------------------------------------------------------*\
+
+
+  $COLORVARIABLES
+
+  Color variables are referenced throughout the application
+
+
+\*----------------------------------------------------------------------------*/
+
+
+$color-neutral:                       $color-alabaster;           // off white
+
+$color-line:                          $color-grey-alto;           // Very Pale Grey
+$color-line-print:                    $color-black;                      // When printing out we want black
+$color-shadow:                        $color-silver-chalice;      // box-shadows on all the controls
+
+$transparent:                         transparent;
+
+//
+// $TYPOGRAPHY
+//
+$color-text-primary:                  $color-tundora;    // Very Dark Gray
+$color-text-faded:                    $color-boulder;    // Medium Gray
+$color-text-black:                    $color-black;
+
+// Scheme
+//
+// Colors which work together.
+//
+// Contains
+// Contrasting Pairs 'Opposites'
+// - Given the palette color as background what should be the foreground?
+// - Given the palette color as foreground what should be the background?
+// Shadow color used for low-lighting, borders
+//
+
+// light
+$scheme-light-background:        $color-neutral;
+$scheme-light-border:            darken($color-neutral, $border-color-darken);
+$scheme-light-foreground:        $color-tundora;
+
+// dark
+$scheme-dark-background:         $color-primary-shade-0;
+$scheme-dark-foreground:         $color-white;
+
+// active   (color: white, back dark-blue)
+// 1) $link-text-primary-active-*
+// 2) $button-icon-active-*
+// 3) $tab-index-plain-active-*
+// 4) $tab-index-focus-active-*
+//
+$scheme-active-background:       $color-primary-shade-4;
+$scheme-active-border:           darken($scheme-active-background, $border-color-darken);
+$scheme-active-foreground:       $color-white;
+
+//
+// Form Field Color
+//
+$scheme-fieldset-background:    lighten($color-primary-shade-0, 50%);    // Egg Shell
+$scheme-fieldset-border:        darken($scheme-fieldset-background, $border-color-darken);
+$scheme-fieldset-color:         $color-primary-shade-4;
+$scheme-fieldset-active-background: darken($scheme-fieldset-background, $border-color-darken);
+$scheme-fieldset-active-color: darken($scheme-fieldset-color, $border-color-darken);
+
+// Darker background color
+// - emphasise over field color
+//
+$scheme-pick-out-background:     lighten($color-primary-shade-1, 20%);    // Light to Medium Blue
+$scheme-pick-out-border:         darken($scheme-pick-out-background, 10%);
+$scheme-pick-out-foreground:     $color-primary-shade-4;
+
+// disabled
+$scheme-disabled-background:     $color-grey-alto;           // Very Pale Grey
+$scheme-disabled-foreground:     $color-text-primary;
+
+// focus
+$scheme-focus-background:       $color-complimentary-shade-0;
+$scheme-focus-foreground:       $color-tundora;
+$scheme-focus-shadow:           $color-complimentary-shade-4;
+
+// help
+$scheme-help-background:         $scheme-light-background;
+$scheme-help-border:             $color-ternary-shade-0;
+$scheme-help-color:              $color-text-primary;
+$scheme-help-icon:               $color-primary-shade-4;
+
+// Overlay
+$schme-overlay-background:       $color-silver-chalice-opaque;
+$schme-overlay-border:           darken($color-silver-chalice-opaque, $border-color-darken);
+$schme-overlay-color:            $color-text-primary;
+
+//
+// Primary action colors
+// module.buttons, module.search, module.tabs
+//
+
+$primary-action-background:           $color-ternary-shade-0;                   // Pink
+$primary-action-color:                $color-white;
+$primary-action-active-background:    lighten($primary-action-background, 5%);  // Blue
+$primary-action-active-color:         $color-white;
+
+
+
+//
+// $module.buttons
+//
+
+// Icon
+$button-icon-background:              $color-white;
+$button-icon-border:                  darken($button-icon-background, $border-color-icon-darken);
+$button-icon-color:                   $color-primary-shade-4;    // venice-blue
+$button-icon-active-background:       $scheme-active-background;    // venice-blue
+$button-icon-active-color:            $scheme-active-foreground;
+
+
+// Plain Disabled
+// No 'active/hover' changes
+$button-icon-disabled-background:     $scheme-disabled-background;     // Grey
+$button-icon-disabled-color:          $scheme-disabled-foreground;
+
+
+//
+// $module.debug
+//
+
+$color-debug:                         $color-black;
+
+
+//
+// $module.error
+//
+
+$errors-background:                   $color-secondary-shade-2;
+$errors-warn:                         $color-ternary-shade-0;      // Pink
+
+
+//
+// $module.flash
+//
+$flash-opacity:                       .85;
+$flash-notice-background:             rgba($color-snowy-mint, $flash-opacity);         // Pale Green :good
+$flash-notice-border:                 darken($flash-notice-background, $border-color-darken);
+
+$flash-alert-background:              rgba($color-secondary-shade-3, $flash-opacity);  // Yellow     :netural
+$flash-alert-border:                  darken($flash-alert-background, $border-color-darken);
+
+$flash-error-background:              rgba($color-ternary-shade-1, $flash-opacity);    // Pink       :bad
+$flash-error-border:                  darken($flash-error-background, $border-color-darken);
+
+
+//
+// $module.number-clear
+//
+$number-clear-opacity:                 .85;
+$number-clear-background:              rgba($color-ternary-shade-1, $number-clear-opacity);    // Pink
+
+
+//
+// $module.form
+
+
+
+//
+// $module.links
+//
+$link-text-primary-color:             $color-primary-shade-4;       // venice-blue
+$link-text-primary-active-color:      $color-primary-shade-2;
+
+$link-text-white-color:               $color-alabaster;
+$link-text-white-active-color:        $color-white;
+
+
+// $Drop Down Menu
+$drop-down-border:                    $color-primary-shade-0;
+$drop-down-link-background:           $scheme-fieldset-background;
+$drop-down-link-color:                $color-primary-shade-4;
+$drop-down-link-active-background:    $color-primary-shade-4;
+$drop-down-link-active-color:         $scheme-fieldset-background;
+
+
+// $MENU
+$menu-background:                     $scheme-fieldset-background;   // Very Light Blue
+$menu-border-bottom:                  $scheme-fieldset-border;       // Medium Dark Blue
+$menu-color:                          $scheme-fieldset-color;        // venice-blue
+$menu-active-background:              $scheme-fieldset-active-background;
+$menu-active-color:                   $scheme-fieldset-active-color;
+
+// $MENU-ITEM
+$menu-item-background:                lighten($color-primary-shade-1, 10%);    // Light to Medium Blue
+$menu-item-border:                    darken($menu-item-background, 10%);
+$menu-item-color:                     $color-primary-shade-4;         // Medium Dark Blue
+$menu-item-active-border-left:        $color-secondary-shade-0;       // Pink
+$menu-item-focus-border-left:         $color-complimentary-shade-0;
+
+
+// $TABS
+
+// index default
+$tab-index-plain-background:        $scheme-dark-background;
+$tab-index-plain-color:             $scheme-dark-foreground;
+$tab-index-plain-active-background: $scheme-active-background;
+$tab-index-plain-active-color:      $scheme-active-foreground;
+
+
+// index focus
+$tab-index-focus-background:          $color-complimentary-shade-0;
+$tab-index-focus-border-color:        $color-complimentary-shade-3;
+$tab-index-focus-active-background:   $scheme-active-background;
+$tab-index-focus-active-border:       $scheme-active-border;
+$tab-index-focus-active-color:        $scheme-active-foreground;
+
+
+// $SEARCH
+$search-wrapper-background:           $color-primary-shade-0;
+
+
+.pair-focus {
+  background: $scheme-focus-background;
+  color: $scheme-focus-foreground;
+}

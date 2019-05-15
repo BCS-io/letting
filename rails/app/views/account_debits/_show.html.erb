@@ -1,0 +1,38 @@
+<% start_date = Time.zone.today.to_s if local_assigns[:start_date].nil? %>
+<% search_terms = '' if local_assigns[:search_terms].nil? %>
+
+<% account_debits = AccountsDebits.new(property_range: search_terms, debit_period: start_date..(start_date.to_date + 1.year).to_s ).list %>
+
+<% if account_debits.present? %>
+
+  <%= render 'information/grid', information: "No property is chargeable for the range of properties #{search_terms} between #{start_date} and #{end_date}" %>
+
+  <div class='col-1-24  grid-row  top-spacer'>&nbsp;</div>
+  <div class='col-16-24  top-spacer'><h3>Upcoming Charges</h3></div>
+
+  <div class='col-1-24  grid-row'>&nbsp;</div>
+  <div class='col-22-24'>
+
+    <div class='col-3-24  grid-row  bottom-spacer  grid-header'>Date</div>
+    <div class='col-14-24  bottom-spacer  grid-header'>Property Range</div>
+    <div class='col-7-24  bottom-spacer  grid-header'>Charge</div>
+
+    <% account_debits.values.each do |account_debit| %>
+
+      <div class='col-3-24  grid-row  bottom-spacer  grid-header'>
+        <%= format_short_date account_debit.date_due %>
+      </div>
+      <div class='col-14-24  bottom-spacer  grid-header'>
+        <%= account_debit.property_refs_to_s %>
+      </div>
+      <div class='col-7-24  bottom-spacer  grid-header'>
+        <%= account_debit.charge_type %>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+
+  <%= render 'information/lacking', objects: account_debits.values, message: "No properties in the range #{search_terms}" %>
+
+<% end %>

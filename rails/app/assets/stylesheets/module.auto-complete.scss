@@ -1,0 +1,15 @@
+
+/*--------------------------------------------------*\
+
+  $AUTO-COMPLETE
+
+\*--------------------------------------------------*/
+
+@import 'settings.colors';
+
+.ui-menu .ui-menu-item a {
+  background-color: $scheme-light-background;
+  border: 1px solid $scheme-light-border;
+  border-radius: $border-radius;
+  color: $scheme-light-foreground;
+}

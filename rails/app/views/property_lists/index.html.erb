@@ -1,0 +1,39 @@
+<% @title='Accounts - Property List' %>
+<% properties = @records %>
+<h2>
+   <span class = 'print-only'><%= @title %> <%= "#{safe_date(date: Time.zone.today, format: :short)}"%></span>
+</h2>
+<div class='grid  Shell  u-padding-1-100'>
+  <div class='col-2-24  grid-row  bottom-spacer  grid-header r-align'>
+    Property ID
+  </div>
+  <div class='col-6-24  bottom-spacer  grid-header'>Occupier</div>
+  <div class='col-1-24  bottom-spacer  grid-header  r-align'>No</div>
+  <div class='col-5-24  bottom-spacer  grid-header'>Address</div>
+  <div class='col-4-24  bottom-spacer  grid-header'>Town</div>
+  <div class='col-2-24  bottom-spacer  grid-header  r-align'>Client ID</div>
+
+  <% properties.each do |prop|
+      property = PropertyDecorator.new prop %>
+
+    <div class='col-2-24  grid-row  bottom-spacer  inherit-row  r-align'>
+      <%= property.human_ref %>
+    </div>
+    <div class='col-6-24  bottom-spacer  inherit-row'>
+      <%= format_empty_string_as_dash property.occupiers %>
+    </div>
+    <div class='col-1-24  bottom-spacer  inherit-row  r-align'>
+      <%= format_empty_string_as_dash property.address.first_no %>
+    </div>
+    <div class='col-5-24  bottom-spacer  inherit-row'>
+      <%= format_empty_string_as_dash property.address.first_text %>
+      <%= testing_link path: property_path(prop) %>
+    </div>
+    <div class='col-4-24  bottom-spacer  inherit-row  nowrap'>
+      <%= property.address.town %>
+    </div>
+    <div class='col-2-24  bottom-spacer  inherit-row  r-align'>
+      <%= property.client_ref %>
+    </div>
+  <% end %>
+</div>

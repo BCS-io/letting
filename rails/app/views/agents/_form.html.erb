@@ -1,0 +1,29 @@
+<%= f.fields_for :agent do |b| %>
+  <div class='overlay-parent'>
+    <div id='agent' class='js-toggle-selection'>
+      <div class='grid'>
+        <div class='col-1-12'>
+          <%= b.check_box :authorized, class: 'js-check-box-toggle' %>
+        </div>
+        <div class='col-11-12'>
+          <h3><%= b.label :authorized, 'Agent' %></h3>
+        </div>
+      </div>
+
+      <div class='js-togglable  js-check-hidden'>
+        <div class='Shell  u-padding-1-100  low-overlay'>
+          <%= t('teachings.properties.agent') %>
+        </div>
+        <div class='disable'>
+          <!-- no agent -->
+          <%= render 'entities/header' %>
+        </div>
+      </div>
+
+      <div class='js-togglable  js-check-visible  js-revealable'>
+        <%= render 'entities/form', f: b, entitieable: agent %>
+        <%= render 'addresses/form', f: b, parent: 'property_agent', address: AddressDecorator.new(agent.address) %>
+      </div>
+    </div>  <!-- agent -->
+  </div>  <!-- overlay-parent -->
+<% end %>

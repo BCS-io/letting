@@ -1,7 +1,0 @@
-<% @title='Edit Cycle' %>
-
-<% if @cycle.monthly? %>
-  <%= render 'form_monthly', cycle: @cycle %>
-<% else %>
-  <%= render 'form_term', cycle: @cycle %>
-<% end %>
