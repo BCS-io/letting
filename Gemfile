@@ -126,7 +126,6 @@ gem 'seedbank'
 gem 'sprockets', '~>3.7.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 2.7.0'
-gem 'unicorn', '~> 4.8.0'
 gem 'whenever', require: false
 
 # Capistrano deployment
@@ -147,7 +146,6 @@ group :development do
   gem 'capistrano-rails-collection', '~> 0.0.3', require: false
   gem 'capistrano-rails-console', '~> 1.0.0', require: false
   gem 'capistrano-secrets-yml', '~> 1.0.0', require: false
-  gem 'capistrano-unicorn-nginx', git: 'https://github.com/BCS-io/capistrano-unicorn-nginx.git', require: false
 end
 
 #
