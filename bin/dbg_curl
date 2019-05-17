@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+#
+# Test that webservers respond to requests
+#
+
+protocol=http
+server=''
+
+print_usage() {
+  printf "Curl wrapper:\n"
+  printf "  d development server \n"
+  printf "  h printing this help message\n"
+  printf "  l local development server \n"
+  printf "  L local production server \n"
+  printf "  p production server\n"
+  printf "  s staging server\n"
+  printf "  t https request \n"
+  printf "\n"
+  printf "Example dbg_curl -p \n\n"
+  printf "Common errors\n"
+  printf "curl: (52) Empty reply from server - HTTP request on HTTPS server\n"
+}
+
+while getopts 'dhlLpst' flag; do
+  case "${flag}" in
+    d) server=development.letting.bcs.io ;;
+    h) print_usage
+       exit 1 ;;
+    l) server=development.letting.local.bcs.io ;;
+    L) server=letting.local.bcs.io ;;
+    p) server=letting.bcs.io ;;
+    s) server=staging.letting.bcs.io ;;
+    t) protocol=https ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
+
+echo "Debug: ${server}"
+dig ${server} | grep ${server}
+echo ""
+
+curl "${protocol}://${server}"
