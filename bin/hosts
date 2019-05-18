@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+if [ $EUID -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+# Needs to be reset after getopts call - in this case a sourced
+# script called it
+OPTIND=1
+
+server=''
+ipaddress=''
+
+print_usage() {
+  printf "/etc/hosts editing\n"
+  printf "  d development server \n"
+  printf "  h printing this help message\n"
+  printf "  p production server\n"
+  printf "  s staging server\n"
+  printf "\n"
+  printf "Example hosts -p 8.8.8.8 \n\n"
+}
+
+print_output() {
+   printf "Update /etc/hosts \n"
+   printf "${ipaddress}  ${server}\n"
+}
+
+while getopts 'd:hp:s:' flag; do
+  case "${flag}" in
+    d) server="cava cava.bcs.io"
+       ipaddress=$OPTARG ;;
+    h) print_usage 
+       exit 1 ;;
+    p) server="eigg eigg.bcs.io"
+       ipaddress=$OPTARG ;;
+    s) server="danna danna.bcs.io"
+       ipaddress=$OPTARG ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
+
+print_output
+
+gsed -i  "s/^.*${server}/${ipaddress}  ${server}/g" /etc/hosts
