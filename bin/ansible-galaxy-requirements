@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+
+# ansible-galaxy-requirements
+#  - installs libraries used in projects ansible-playbook
+
+ansible-galaxy install -r ansible/requirements.yml
+
+echo
+echo "List installed libraries"
+ansible-galaxy list
