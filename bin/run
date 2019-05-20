@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+if [ $EUID -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+option=''
+workspace=''
+terraform_action='-b'
+
+terraform_project_path="./terraform/project"
+ip_address=''
+
+print_usage() {
+  printf "***************************************************\n"
+  printf "*                  Letting                        *\n"
+  printf "***************************************************\n\n"
+  printf "Ansible wrapper\n\n"
+  printf "options are as follows:\n"
+  printf "Limiting of playbook hosts - optional:\n"
+  printf "  -c client\n"
+  printf "  -d development\n"
+  printf "  -p production\n"
+  printf "  -s staging\n\n"
+  printf ""
+  printf "Terraform action\n"
+  printf "  -a apply\n"
+  printf "    -the default is to destroy and then apply\n"
+  printf "Example: bin/run -d  \n"
+}
+
+
+while getopts 'adht:ps' flag; do
+  case "${flag}" in
+    a) terraform_action="-a" ;;
+    d) option="-${flag}"
+       workspace='development' ;;
+    h) print_usage
+       exit 1 ;;
+    p) option="-${flag}"
+       workspace='production' ;;
+    s) option="-${flag}"
+       workspace='staging' ;;
+    *) print_usage
+       exit 1;;
+  esac
+done
+
+if (( $OPTIND == 1 )); then
+  print_usage
+  exit 1
+fi
+
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# needs to work without sudo
+# source ${__dir}/clean ${option}
+source ${__dir}/terraform "${terraform_action}" "${workspace}"
+ip_address=$(cd $terraform_project_path && terraform output public_ip4)
+
+# needs sudo and changes other things complicated
+source ${__dir}/hosts $option $ip_address
+echo $ip_address | pbcopy
+echo "end"
