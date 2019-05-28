@@ -9,6 +9,7 @@
     - vars/secrets.yml
   roles:
     - base
+    - dokku
 
   handlers:
      - name: restart ssh

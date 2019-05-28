@@ -1,0 +1,52 @@
+---
+- import_role:
+    name: dokku_bot.ansible_dokku
+  vars:
+    dokku_skip_key_file: 'true'
+    dokku_version: 0.17.2
+    dokku_vhost_enable: 'true'
+    dokku_web_config: 'false'
+    herokuish_version: 0.5.0
+    plugn_version: 0.3.2
+    sshcommand_version: 0.7.0
+    dokku_users:
+      - name: richard
+        username: richard
+        ssh_key: "{{ lookup('file', controller_key) }}"
+
+- name: apps:create {{ application }}
+  dokku_app:
+    app: "{{ application }}"
+    state: present
+  tags:
+    - dokku
+
+- name: domains:add {{ application }} {{ domain }}
+  dokku_domains:
+    app: "{{ application }}"
+    domains:
+      - "{{ domain }}"
+    state: present
+  tags:
+    - dokku
+
+- name: config:set {{ application }} RAILS_MASTER_KEY=XXXX
+  dokku_config:
+    app: "{{ application }}"
+    config:
+      RAILS_MASTER_KEY: "{{ lookup('file', rails_master_key )}}"
+  tags:
+    - dokku
+    - doit
+
+- name: config:set {{ application }} banner mark
+  dokku_config:
+    app: "{{ application }}"
+    config:
+      RACK_DEV_MARK_ENV: "{{ rack_dev_mark_env }}"
+  # when: rack_dev_mark_env is defined
+
+- import_tasks: elasticsearch.yml
+- import_tasks: database.yml
+- import_tasks: elasticsearch_sync.yml
+- import_tasks: ssl.yml

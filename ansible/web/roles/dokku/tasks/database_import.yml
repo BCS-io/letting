@@ -1,0 +1,35 @@
+---
+#
+# Dump file from previous letting version
+#  - new backup uses the binary form of backup and restore
+#
+- name: import database
+  block:
+    - name: copy database file from ansible server
+      copy:
+        src: "{{postgres_backup_file }}"
+        dest: /tmp/{{application}}.dump
+      tags:
+        - database
+        - import
+
+    - name: expose database
+      command: dokku postgres:expose {{ database }} {{ database_port }}
+      tags:
+        - database
+        - import
+        - database_expose
+
+    - name: import database from tmp dump
+      shell: dokku postgres:import {{ database }} < /tmp/letting.dump
+      become: yes
+      tags:
+        - database
+        - import
+  always:
+    - name: unexpose database
+      command: dokku postgres:unexpose {{ database }}
+      tags:
+        - database
+        - import
+        - database_unexpose

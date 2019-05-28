@@ -1,0 +1,63 @@
+---
+- import_role:
+    name: dokku_bot.ansible_dokku
+  vars:
+    dokku_plugins:
+      - name: postgres
+        url: https://github.com/dokku/dokku-postgres.git
+- name: test database exists?
+  command: dokku postgres:exists {{ database }}
+  tags:
+    - database
+  register: database_exists
+  ignore_errors: true
+  no_log: true
+
+- name: database creation {{ database }}
+  command: dokku postgres:create {{ database }}
+  tags:
+    - database
+  when: database_exists.rc > 0
+
+- name: test database linkage?
+  command: dokku postgres:linked {{ database }} {{ application }}
+  tags:
+    - database
+    - linked
+  register: linked
+  ignore_errors: true
+  no_log: true
+
+- name: database link {{ database }} {{ application }}
+  command: dokku postgres:link {{ database }} {{ application }}
+  tags:
+    - database
+    - linked
+  when: linked.rc > 0
+
+# include import tasks when database doesn't exist
+- include_tasks: database_import.yml
+  tags:
+    - database
+  when: database_exists.rc > 0
+
+- include_tasks: database_import.yml
+  tags:
+    - never
+    - import
+
+- import_tasks: database_backup.yml
+
+- name: dokku postgres:info {{ database }}
+  command: dokku postgres:info {{ database }}
+  tags:
+    - never
+    - postgres_info
+  register: postgres_info
+
+- name: display dokku postgres:info {{ database }}
+  debug:
+    msg: "{{  postgres_info.stdout_lines }}"
+  tags:
+    - never
+    - postgres_info

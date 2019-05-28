@@ -1,0 +1,50 @@
+---
+#
+# elasticsearch_sync
+#  - requires:
+#    - database has been loaded
+#    - application has been deployed - application tag latest
+#    - elasticsearch has been created
+#
+- name: application tag exists?
+  shell: dokku tags {{ application }} | grep "^dokku/letting"
+  register: app_tag_exists
+  ignore_errors: true
+  tags:
+    - elasticsearch
+    - import
+
+- name: Message if application has not been deployed
+  debug:
+    msg: "Application image has not been deployed.\n git push to dokku required."
+  when: app_tag_exists.stdout == ""
+  tags:
+    - elasticsearch
+
+- name: dokku elasticsearch:info {{ database }}
+  command: dokku elasticsearch:info {{ database }}
+  tags:
+    - never
+    - elasticsearch_info
+  register: elasticsearch_info
+
+- name: display dokku elasticsearch:info {{ database }}
+  debug:
+    msg: "{{  elasticsearch_info.stdout_lines }}"
+  tags:
+    - never
+    - elasticsearch_info
+
+#
+# Needs to be run if:
+# 1) Not been run before and there's there's a docker application now tagged 
+#    - until this is true this errors
+# 2) database has been changed (probably from import)
+#
+- name: run {{ application }} rake elasticsearch:sync
+  command: dokku run {{ application }} rake elasticsearch:sync
+  tags:
+    - elasticsearch
+    - import
+  ignore_errors: true
+  when: app_tag_exists.stdout != ""

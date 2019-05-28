@@ -1,0 +1,62 @@
+---
+- import_role:
+    name: dokku_bot.ansible_dokku
+  vars:
+    dokku_plugins:
+      - name: letsencrypt
+        url: https://github.com/dokku/dokku-letsencrypt.git
+
+- name: config:set  {{ application }} DOKKU_LETSENCRYPT_EMAIL=${DOKKU_LETSENCRYPT_EMAIL}
+  dokku_config:
+    app: "{{ application }}"
+    config:
+      DOKKU_LETSENCRYPT_EMAIL: "{{ ops_email }}"
+  tags:
+    - dokku
+    - ssl
+
+- name: website {{ application }}
+  uri:
+    url: "http://{{ domain }}"
+  ignore_errors: yes
+  register: http_response
+  tags:
+    - dokku
+    - ssl
+
+#
+# ansible has import_role apply tags but could not get it to work
+#
+- name: all access
+  ufw:
+    rule: allow
+    to_port: "{{ item }}"
+    proto: tcp
+  loop:
+    - '80'
+    - '443'
+  tags:
+    - dokku
+    - ssl
+
+- name: letsencrypt {{ application }}
+  command: dokku letsencrypt:auto-renew {{ application }}
+  when:
+    - "'encrypt' in group_names"
+    - http_response.status == 200
+  tags:
+    - dokku
+    - ssl
+
+- name: delete all access
+  ufw:
+    rule: allow
+    to_port: "{{ item }}"
+    proto: tcp
+    delete: yes
+  loop:
+    - '80'
+    - '443'
+  tags:
+    - dokku
+    - ssl

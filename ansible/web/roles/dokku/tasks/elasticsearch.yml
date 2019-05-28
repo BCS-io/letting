@@ -1,0 +1,53 @@
+---
+- import_role:
+    name: dokku_bot.ansible_dokku
+  vars:
+    dokku_plugins:
+      - name: elasticsearch
+        url: https://github.com/dokku/dokku-elasticsearch.git
+- name: test elasticsearch exists?
+  command: dokku elasticsearch:exists {{ database }}
+  tags:
+    - elasticsearch
+  register: elasticsearch_exists
+  ignore_errors: true
+  no_log: true
+
+- name: /etc/systctl.conf vm.max.map_count
+  lineinfile:
+    path: /etc/sysctl.conf
+    regexp: '^vm.max_map_count'
+    line: 'vm.max_map_count=262144'
+  tags:
+    - elasticsearch
+
+- name: systctl -p
+  command: sysctl -p
+  become: yes
+  tags:
+    - elasticsearch
+
+- name: elasticsearch:create {{ database }}
+  command: dokku elasticsearch:create {{ database }}
+  tags:
+    - elasticsearch
+  environment:
+    ELASTICSEARCH_IMAGE: "elasticsearch"
+    ELASTICSEARCH_IMAGE_VERSION: 6.5.4
+  when: elasticsearch_exists.rc > 0
+
+- name: test elasticsearch linkage?
+  command: dokku elasticsearch:linked {{ database }} {{ application }}
+  tags:
+    - elasticsearch
+    - linked
+  register: linked
+  ignore_errors: true
+  no_log: true
+
+- name: elasticsearch link {{ database }} {{ application }}
+  command: dokku elasticsearch:link {{ database }} {{ application }}
+  tags:
+    - elasticsearch
+    - linked
+  when: linked.rc > 0
