@@ -27,7 +27,7 @@ module "hetzner_api" {
 
   # image
   # ubuntu-18.04 / debian-9 / snapshot id
-  image = "ubuntu-16.04"
+  image = "ubuntu-18.04"
 
   # server_name
   # danna / papa etc
