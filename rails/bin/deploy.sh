@@ -43,7 +43,7 @@ function backup_remote_database_now () {
 function backup_local_database () {
   echo "Backing up local database for ${APPLICATION} to ${BACKUP_FILE}"
   pg_dump -Fc --no-acl --no-owner letting_development > "${WORKDIR}/backup_database/${BACKUP_FILE}"
-  ls -l backup_database| grep ${BACKUP_FILE}
+  ls -l deploy/backup_database| grep ${BACKUP_FILE}
   echo "done!"
 }
 
