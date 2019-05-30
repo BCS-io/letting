@@ -1,0 +1,33 @@
+---
+#
+# ansible-playbook bootstrap.yml --limit appservers -vvv
+#
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: bootstrapping server with user
+      block:
+        - name: Add 'admin' user
+          user:
+            name: deployer
+            append: yes
+            shell: /bin/bash
+            createhome: yes
+            state: present
+
+        - name: Allow 'admin' to have passwordless sudo
+          lineinfile:
+            dest: /etc/sudoers
+            state: present
+            regexp: '^%deployer'
+            line: '%deployer ALL=(ALL) NOPASSWD: ALL'
+            validate: 'visudo -cf %s'
+
+        - name: authorize 'user' key
+          authorized_key:
+            user: deployer
+            state: present
+            manage_dir: yes
+            key: "{{ lookup('file', controller_key) }}"
+      when: "'bootstrap' in group_names"
+      remote_user: root

@@ -2,6 +2,8 @@
 #
 # ansible-playbook playbook.yml --limit appservers -vvv
 #
+- import_playbook: bootstrap.yml
+
 - hosts: all
   remote_user: deployer
   become: yes
