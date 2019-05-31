@@ -102,7 +102,7 @@
  *= require module.typography
  *= require module.overlay
  *= require module.utilities
- *= require jquery.ui.all
+ *= require jquery-ui
  *= require font-awesome
  *= require shame
  *= require module.help
