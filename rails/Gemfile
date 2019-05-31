@@ -75,7 +75,6 @@
 # A list of Gems that if updated will break the application.
 #
 # Gem                     Using      Last tested   Gem Bug
-# jquery-ui-rails         4.1.2            5.0.3         N
 # rake                   10.1.0           11.2.2         ?
 #
 #
@@ -99,7 +98,7 @@ gem 'jquery-rails', '~> 4.3.0'
 
 # BREAKING GEM
 # 5.0.3 - causes CapybaraHelper to fail
-gem 'jquery-ui-rails', '4.1.2'
+gem 'jquery-ui-rails', '6.0.1'
 
 # Kaminari before elasticsearch
 gem 'kaminari', '~> 1.1.0'
