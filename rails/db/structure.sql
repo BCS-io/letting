@@ -1,34 +1,12 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
-SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
 
@@ -38,7 +16,7 @@ SET default_with_oids = false;
 -- Name: accounts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE accounts (
+CREATE TABLE public.accounts (
     id integer NOT NULL,
     property_id integer NOT NULL,
     created_at timestamp without time zone,
@@ -50,7 +28,7 @@ CREATE TABLE accounts (
 -- Name: credits; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE credits (
+CREATE TABLE public.credits (
     id integer NOT NULL,
     account_id integer NOT NULL,
     charge_id integer NOT NULL,
@@ -67,7 +45,7 @@ CREATE TABLE credits (
 -- Name: debits; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE debits (
+CREATE TABLE public.debits (
     id integer NOT NULL,
     account_id integer NOT NULL,
     snapshot_id integer,
@@ -86,7 +64,7 @@ CREATE TABLE debits (
 -- Name: properties; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE properties (
+CREATE TABLE public.properties (
     id integer NOT NULL,
     human_ref integer NOT NULL,
     client_id integer,
@@ -99,31 +77,32 @@ CREATE TABLE properties (
 -- Name: account_details; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE VIEW account_details AS
+CREATE VIEW public.account_details AS
  SELECT accounts.id AS account_id,
     accounts.property_id,
     properties.human_ref,
     credits.at_time,
     COALESCE((credits.amount * ('-1'::integer)::numeric), (0)::numeric) AS amount
-   FROM ((accounts
-     LEFT JOIN credits ON ((credits.account_id = accounts.id)))
-     JOIN properties ON ((properties.id = accounts.property_id)))
+   FROM ((public.accounts
+     LEFT JOIN public.credits ON ((credits.account_id = accounts.id)))
+     JOIN public.properties ON ((properties.id = accounts.property_id)))
 UNION ALL
  SELECT accounts.id AS account_id,
     accounts.property_id,
     properties.human_ref,
     debits.at_time,
     COALESCE(debits.amount, (0)::numeric) AS amount
-   FROM ((accounts
-     LEFT JOIN debits ON ((debits.account_id = accounts.id)))
-     JOIN properties ON ((properties.id = accounts.property_id)));
+   FROM ((public.accounts
+     LEFT JOIN public.debits ON ((debits.account_id = accounts.id)))
+     JOIN public.properties ON ((properties.id = accounts.property_id)));
 
 
 --
 -- Name: accounts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE accounts_id_seq
+CREATE SEQUENCE public.accounts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -135,17 +114,17 @@ CREATE SEQUENCE accounts_id_seq
 -- Name: accounts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE accounts_id_seq OWNED BY accounts.id;
+ALTER SEQUENCE public.accounts_id_seq OWNED BY public.accounts.id;
 
 
 --
 -- Name: addresses; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE addresses (
+CREATE TABLE public.addresses (
     id integer NOT NULL,
-    addressable_id integer NOT NULL,
     addressable_type character varying NOT NULL,
+    addressable_id integer NOT NULL,
     flat_no character varying,
     house_name character varying,
     road_no character varying,
@@ -164,7 +143,8 @@ CREATE TABLE addresses (
 -- Name: addresses_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE addresses_id_seq
+CREATE SEQUENCE public.addresses_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -176,14 +156,14 @@ CREATE SEQUENCE addresses_id_seq
 -- Name: addresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE addresses_id_seq OWNED BY addresses.id;
+ALTER SEQUENCE public.addresses_id_seq OWNED BY public.addresses.id;
 
 
 --
 -- Name: agents; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE agents (
+CREATE TABLE public.agents (
     id integer NOT NULL,
     authorized boolean DEFAULT false NOT NULL,
     property_id integer NOT NULL,
@@ -196,7 +176,8 @@ CREATE TABLE agents (
 -- Name: agents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE agents_id_seq
+CREATE SEQUENCE public.agents_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -208,14 +189,26 @@ CREATE SEQUENCE agents_id_seq
 -- Name: agents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE agents_id_seq OWNED BY agents.id;
+ALTER SEQUENCE public.agents_id_seq OWNED BY public.agents.id;
+
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
 
 
 --
 -- Name: charges; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE charges (
+CREATE TABLE public.charges (
     id integer NOT NULL,
     charge_type character varying NOT NULL,
     account_id integer NOT NULL,
@@ -232,7 +225,8 @@ CREATE TABLE charges (
 -- Name: charges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE charges_id_seq
+CREATE SEQUENCE public.charges_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -244,14 +238,14 @@ CREATE SEQUENCE charges_id_seq
 -- Name: charges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE charges_id_seq OWNED BY charges.id;
+ALTER SEQUENCE public.charges_id_seq OWNED BY public.charges.id;
 
 
 --
 -- Name: clients; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE clients (
+CREATE TABLE public.clients (
     id integer NOT NULL,
     human_ref integer NOT NULL,
     created_at timestamp without time zone,
@@ -263,7 +257,8 @@ CREATE TABLE clients (
 -- Name: clients_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE clients_id_seq
+CREATE SEQUENCE public.clients_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -275,14 +270,14 @@ CREATE SEQUENCE clients_id_seq
 -- Name: clients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE clients_id_seq OWNED BY clients.id;
+ALTER SEQUENCE public.clients_id_seq OWNED BY public.clients.id;
 
 
 --
 -- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE comments (
+CREATE TABLE public.comments (
     id integer NOT NULL,
     invoice_id integer NOT NULL,
     clarify character varying NOT NULL,
@@ -295,7 +290,8 @@ CREATE TABLE comments (
 -- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE comments_id_seq
+CREATE SEQUENCE public.comments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -307,14 +303,15 @@ CREATE SEQUENCE comments_id_seq
 -- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
 
 
 --
 -- Name: credits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE credits_id_seq
+CREATE SEQUENCE public.credits_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -326,14 +323,14 @@ CREATE SEQUENCE credits_id_seq
 -- Name: credits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE credits_id_seq OWNED BY credits.id;
+ALTER SEQUENCE public.credits_id_seq OWNED BY public.credits.id;
 
 
 --
 -- Name: cycles; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE cycles (
+CREATE TABLE public.cycles (
     id integer NOT NULL,
     name character varying NOT NULL,
     charged_in integer NOT NULL,
@@ -349,7 +346,8 @@ CREATE TABLE cycles (
 -- Name: cycles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE cycles_id_seq
+CREATE SEQUENCE public.cycles_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -361,14 +359,15 @@ CREATE SEQUENCE cycles_id_seq
 -- Name: cycles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE cycles_id_seq OWNED BY cycles.id;
+ALTER SEQUENCE public.cycles_id_seq OWNED BY public.cycles.id;
 
 
 --
 -- Name: debits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE debits_id_seq
+CREATE SEQUENCE public.debits_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -380,14 +379,14 @@ CREATE SEQUENCE debits_id_seq
 -- Name: debits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE debits_id_seq OWNED BY debits.id;
+ALTER SEQUENCE public.debits_id_seq OWNED BY public.debits.id;
 
 
 --
 -- Name: due_ons; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE due_ons (
+CREATE TABLE public.due_ons (
     id integer NOT NULL,
     year integer,
     month integer NOT NULL,
@@ -404,7 +403,8 @@ CREATE TABLE due_ons (
 -- Name: due_ons_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE due_ons_id_seq
+CREATE SEQUENCE public.due_ons_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -416,17 +416,17 @@ CREATE SEQUENCE due_ons_id_seq
 -- Name: due_ons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE due_ons_id_seq OWNED BY due_ons.id;
+ALTER SEQUENCE public.due_ons_id_seq OWNED BY public.due_ons.id;
 
 
 --
 -- Name: entities; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE entities (
+CREATE TABLE public.entities (
     id integer NOT NULL,
-    entitieable_id integer NOT NULL,
     entitieable_type character varying NOT NULL,
+    entitieable_id integer NOT NULL,
     title character varying,
     initials character varying,
     name character varying NOT NULL,
@@ -439,7 +439,8 @@ CREATE TABLE entities (
 -- Name: entities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE entities_id_seq
+CREATE SEQUENCE public.entities_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -451,14 +452,14 @@ CREATE SEQUENCE entities_id_seq
 -- Name: entities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE entities_id_seq OWNED BY entities.id;
+ALTER SEQUENCE public.entities_id_seq OWNED BY public.entities.id;
 
 
 --
 -- Name: guides; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE guides (
+CREATE TABLE public.guides (
     id integer NOT NULL,
     invoice_text_id integer NOT NULL,
     instruction text NOT NULL,
@@ -473,7 +474,8 @@ CREATE TABLE guides (
 -- Name: guides_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE guides_id_seq
+CREATE SEQUENCE public.guides_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -485,14 +487,14 @@ CREATE SEQUENCE guides_id_seq
 -- Name: guides_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE guides_id_seq OWNED BY guides.id;
+ALTER SEQUENCE public.guides_id_seq OWNED BY public.guides.id;
 
 
 --
 -- Name: invoice_texts; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE invoice_texts (
+CREATE TABLE public.invoice_texts (
     id integer NOT NULL,
     description character varying NOT NULL,
     invoice_name character varying NOT NULL,
@@ -511,7 +513,8 @@ CREATE TABLE invoice_texts (
 -- Name: invoice_texts_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE invoice_texts_id_seq
+CREATE SEQUENCE public.invoice_texts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -523,14 +526,14 @@ CREATE SEQUENCE invoice_texts_id_seq
 -- Name: invoice_texts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE invoice_texts_id_seq OWNED BY invoice_texts.id;
+ALTER SEQUENCE public.invoice_texts_id_seq OWNED BY public.invoice_texts.id;
 
 
 --
 -- Name: invoices; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE invoices (
+CREATE TABLE public.invoices (
     id integer NOT NULL,
     run_id integer NOT NULL,
     snapshot_id integer NOT NULL,
@@ -551,7 +554,8 @@ CREATE TABLE invoices (
 -- Name: invoices_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE invoices_id_seq
+CREATE SEQUENCE public.invoices_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -563,14 +567,14 @@ CREATE SEQUENCE invoices_id_seq
 -- Name: invoices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE invoices_id_seq OWNED BY invoices.id;
+ALTER SEQUENCE public.invoices_id_seq OWNED BY public.invoices.id;
 
 
 --
 -- Name: invoicings; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE invoicings (
+CREATE TABLE public.invoicings (
     id integer NOT NULL,
     property_range character varying NOT NULL,
     period_first date NOT NULL,
@@ -585,7 +589,8 @@ CREATE TABLE invoicings (
 -- Name: invoicings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE invoicings_id_seq
+CREATE SEQUENCE public.invoicings_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -597,14 +602,14 @@ CREATE SEQUENCE invoicings_id_seq
 -- Name: invoicings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE invoicings_id_seq OWNED BY invoicings.id;
+ALTER SEQUENCE public.invoicings_id_seq OWNED BY public.invoicings.id;
 
 
 --
 -- Name: letters; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE letters (
+CREATE TABLE public.letters (
     id integer NOT NULL,
     invoice_id integer NOT NULL,
     invoice_text_id integer NOT NULL,
@@ -617,7 +622,8 @@ CREATE TABLE letters (
 -- Name: letters_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE letters_id_seq
+CREATE SEQUENCE public.letters_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -629,14 +635,14 @@ CREATE SEQUENCE letters_id_seq
 -- Name: letters_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE letters_id_seq OWNED BY letters.id;
+ALTER SEQUENCE public.letters_id_seq OWNED BY public.letters.id;
 
 
 --
 -- Name: payments; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE payments (
+CREATE TABLE public.payments (
     id integer NOT NULL,
     account_id integer NOT NULL,
     booked_at timestamp without time zone NOT NULL,
@@ -650,7 +656,8 @@ CREATE TABLE payments (
 -- Name: payments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE payments_id_seq
+CREATE SEQUENCE public.payments_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -662,14 +669,14 @@ CREATE SEQUENCE payments_id_seq
 -- Name: payments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE payments_id_seq OWNED BY payments.id;
+ALTER SEQUENCE public.payments_id_seq OWNED BY public.payments.id;
 
 
 --
 -- Name: products; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE products (
+CREATE TABLE public.products (
     id integer NOT NULL,
     invoice_id integer NOT NULL,
     charge_type character varying NOT NULL,
@@ -688,7 +695,8 @@ CREATE TABLE products (
 -- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE products_id_seq
+CREATE SEQUENCE public.products_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -700,14 +708,15 @@ CREATE SEQUENCE products_id_seq
 -- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE products_id_seq OWNED BY products.id;
+ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 
 
 --
 -- Name: properties_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE properties_id_seq
+CREATE SEQUENCE public.properties_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -719,14 +728,14 @@ CREATE SEQUENCE properties_id_seq
 -- Name: properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE properties_id_seq OWNED BY properties.id;
+ALTER SEQUENCE public.properties_id_seq OWNED BY public.properties.id;
 
 
 --
 -- Name: runs; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE runs (
+CREATE TABLE public.runs (
     id integer NOT NULL,
     invoicing_id integer,
     invoice_date date NOT NULL,
@@ -739,7 +748,8 @@ CREATE TABLE runs (
 -- Name: runs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE runs_id_seq
+CREATE SEQUENCE public.runs_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -751,14 +761,14 @@ CREATE SEQUENCE runs_id_seq
 -- Name: runs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE runs_id_seq OWNED BY runs.id;
+ALTER SEQUENCE public.runs_id_seq OWNED BY public.runs.id;
 
 
 --
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE schema_migrations (
+CREATE TABLE public.schema_migrations (
     version character varying NOT NULL
 );
 
@@ -767,7 +777,7 @@ CREATE TABLE schema_migrations (
 -- Name: search_suggestions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE search_suggestions (
+CREATE TABLE public.search_suggestions (
     id integer NOT NULL,
     term character varying NOT NULL,
     popularity integer NOT NULL,
@@ -780,7 +790,8 @@ CREATE TABLE search_suggestions (
 -- Name: search_suggestions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE search_suggestions_id_seq
+CREATE SEQUENCE public.search_suggestions_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -792,14 +803,14 @@ CREATE SEQUENCE search_suggestions_id_seq
 -- Name: search_suggestions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE search_suggestions_id_seq OWNED BY search_suggestions.id;
+ALTER SEQUENCE public.search_suggestions_id_seq OWNED BY public.search_suggestions.id;
 
 
 --
 -- Name: settlements; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE settlements (
+CREATE TABLE public.settlements (
     id integer NOT NULL,
     amount numeric(8,2) NOT NULL,
     credit_id integer NOT NULL,
@@ -813,7 +824,8 @@ CREATE TABLE settlements (
 -- Name: settlements_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE settlements_id_seq
+CREATE SEQUENCE public.settlements_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -825,14 +837,14 @@ CREATE SEQUENCE settlements_id_seq
 -- Name: settlements_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE settlements_id_seq OWNED BY settlements.id;
+ALTER SEQUENCE public.settlements_id_seq OWNED BY public.settlements.id;
 
 
 --
 -- Name: snapshots; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE snapshots (
+CREATE TABLE public.snapshots (
     id integer NOT NULL,
     account_id integer NOT NULL,
     period_first date NOT NULL,
@@ -846,7 +858,8 @@ CREATE TABLE snapshots (
 -- Name: snapshots_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE snapshots_id_seq
+CREATE SEQUENCE public.snapshots_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -858,14 +871,14 @@ CREATE SEQUENCE snapshots_id_seq
 -- Name: snapshots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE snapshots_id_seq OWNED BY snapshots.id;
+ALTER SEQUENCE public.snapshots_id_seq OWNED BY public.snapshots.id;
 
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE users (
+CREATE TABLE public.users (
     id integer NOT NULL,
     nickname character varying NOT NULL,
     email character varying NOT NULL,
@@ -880,7 +893,8 @@ CREATE TABLE users (
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE users_id_seq
+CREATE SEQUENCE public.users_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -892,182 +906,182 @@ CREATE SEQUENCE users_id_seq
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
 -- Name: accounts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY accounts ALTER COLUMN id SET DEFAULT nextval('accounts_id_seq'::regclass);
+ALTER TABLE ONLY public.accounts ALTER COLUMN id SET DEFAULT nextval('public.accounts_id_seq'::regclass);
 
 
 --
 -- Name: addresses id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY addresses ALTER COLUMN id SET DEFAULT nextval('addresses_id_seq'::regclass);
+ALTER TABLE ONLY public.addresses ALTER COLUMN id SET DEFAULT nextval('public.addresses_id_seq'::regclass);
 
 
 --
 -- Name: agents id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY agents ALTER COLUMN id SET DEFAULT nextval('agents_id_seq'::regclass);
+ALTER TABLE ONLY public.agents ALTER COLUMN id SET DEFAULT nextval('public.agents_id_seq'::regclass);
 
 
 --
 -- Name: charges id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY charges ALTER COLUMN id SET DEFAULT nextval('charges_id_seq'::regclass);
+ALTER TABLE ONLY public.charges ALTER COLUMN id SET DEFAULT nextval('public.charges_id_seq'::regclass);
 
 
 --
 -- Name: clients id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY clients ALTER COLUMN id SET DEFAULT nextval('clients_id_seq'::regclass);
+ALTER TABLE ONLY public.clients ALTER COLUMN id SET DEFAULT nextval('public.clients_id_seq'::regclass);
 
 
 --
 -- Name: comments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+ALTER TABLE ONLY public.comments ALTER COLUMN id SET DEFAULT nextval('public.comments_id_seq'::regclass);
 
 
 --
 -- Name: credits id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY credits ALTER COLUMN id SET DEFAULT nextval('credits_id_seq'::regclass);
+ALTER TABLE ONLY public.credits ALTER COLUMN id SET DEFAULT nextval('public.credits_id_seq'::regclass);
 
 
 --
 -- Name: cycles id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY cycles ALTER COLUMN id SET DEFAULT nextval('cycles_id_seq'::regclass);
+ALTER TABLE ONLY public.cycles ALTER COLUMN id SET DEFAULT nextval('public.cycles_id_seq'::regclass);
 
 
 --
 -- Name: debits id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY debits ALTER COLUMN id SET DEFAULT nextval('debits_id_seq'::regclass);
+ALTER TABLE ONLY public.debits ALTER COLUMN id SET DEFAULT nextval('public.debits_id_seq'::regclass);
 
 
 --
 -- Name: due_ons id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY due_ons ALTER COLUMN id SET DEFAULT nextval('due_ons_id_seq'::regclass);
+ALTER TABLE ONLY public.due_ons ALTER COLUMN id SET DEFAULT nextval('public.due_ons_id_seq'::regclass);
 
 
 --
 -- Name: entities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY entities ALTER COLUMN id SET DEFAULT nextval('entities_id_seq'::regclass);
+ALTER TABLE ONLY public.entities ALTER COLUMN id SET DEFAULT nextval('public.entities_id_seq'::regclass);
 
 
 --
 -- Name: guides id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY guides ALTER COLUMN id SET DEFAULT nextval('guides_id_seq'::regclass);
+ALTER TABLE ONLY public.guides ALTER COLUMN id SET DEFAULT nextval('public.guides_id_seq'::regclass);
 
 
 --
 -- Name: invoice_texts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY invoice_texts ALTER COLUMN id SET DEFAULT nextval('invoice_texts_id_seq'::regclass);
+ALTER TABLE ONLY public.invoice_texts ALTER COLUMN id SET DEFAULT nextval('public.invoice_texts_id_seq'::regclass);
 
 
 --
 -- Name: invoices id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY invoices ALTER COLUMN id SET DEFAULT nextval('invoices_id_seq'::regclass);
+ALTER TABLE ONLY public.invoices ALTER COLUMN id SET DEFAULT nextval('public.invoices_id_seq'::regclass);
 
 
 --
 -- Name: invoicings id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY invoicings ALTER COLUMN id SET DEFAULT nextval('invoicings_id_seq'::regclass);
+ALTER TABLE ONLY public.invoicings ALTER COLUMN id SET DEFAULT nextval('public.invoicings_id_seq'::regclass);
 
 
 --
 -- Name: letters id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY letters ALTER COLUMN id SET DEFAULT nextval('letters_id_seq'::regclass);
+ALTER TABLE ONLY public.letters ALTER COLUMN id SET DEFAULT nextval('public.letters_id_seq'::regclass);
 
 
 --
 -- Name: payments id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY payments ALTER COLUMN id SET DEFAULT nextval('payments_id_seq'::regclass);
+ALTER TABLE ONLY public.payments ALTER COLUMN id SET DEFAULT nextval('public.payments_id_seq'::regclass);
 
 
 --
 -- Name: products id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY products ALTER COLUMN id SET DEFAULT nextval('products_id_seq'::regclass);
+ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
 
 
 --
 -- Name: properties id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY properties ALTER COLUMN id SET DEFAULT nextval('properties_id_seq'::regclass);
+ALTER TABLE ONLY public.properties ALTER COLUMN id SET DEFAULT nextval('public.properties_id_seq'::regclass);
 
 
 --
 -- Name: runs id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY runs ALTER COLUMN id SET DEFAULT nextval('runs_id_seq'::regclass);
+ALTER TABLE ONLY public.runs ALTER COLUMN id SET DEFAULT nextval('public.runs_id_seq'::regclass);
 
 
 --
 -- Name: search_suggestions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY search_suggestions ALTER COLUMN id SET DEFAULT nextval('search_suggestions_id_seq'::regclass);
+ALTER TABLE ONLY public.search_suggestions ALTER COLUMN id SET DEFAULT nextval('public.search_suggestions_id_seq'::regclass);
 
 
 --
 -- Name: settlements id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY settlements ALTER COLUMN id SET DEFAULT nextval('settlements_id_seq'::regclass);
+ALTER TABLE ONLY public.settlements ALTER COLUMN id SET DEFAULT nextval('public.settlements_id_seq'::regclass);
 
 
 --
 -- Name: snapshots id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY snapshots ALTER COLUMN id SET DEFAULT nextval('snapshots_id_seq'::regclass);
+ALTER TABLE ONLY public.snapshots ALTER COLUMN id SET DEFAULT nextval('public.snapshots_id_seq'::regclass);
 
 
 --
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
 
 
 --
 -- Name: accounts accounts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY accounts
+ALTER TABLE ONLY public.accounts
     ADD CONSTRAINT accounts_pkey PRIMARY KEY (id);
 
 
@@ -1075,7 +1089,7 @@ ALTER TABLE ONLY accounts
 -- Name: addresses addresses_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY addresses
+ALTER TABLE ONLY public.addresses
     ADD CONSTRAINT addresses_pkey PRIMARY KEY (id);
 
 
@@ -1083,15 +1097,23 @@ ALTER TABLE ONLY addresses
 -- Name: agents agents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY agents
+ALTER TABLE ONLY public.agents
     ADD CONSTRAINT agents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
 
 
 --
 -- Name: charges charges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY charges
+ALTER TABLE ONLY public.charges
     ADD CONSTRAINT charges_pkey PRIMARY KEY (id);
 
 
@@ -1099,7 +1121,7 @@ ALTER TABLE ONLY charges
 -- Name: clients clients_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY clients
+ALTER TABLE ONLY public.clients
     ADD CONSTRAINT clients_pkey PRIMARY KEY (id);
 
 
@@ -1107,7 +1129,7 @@ ALTER TABLE ONLY clients
 -- Name: comments comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY comments
+ALTER TABLE ONLY public.comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
 
 
@@ -1115,7 +1137,7 @@ ALTER TABLE ONLY comments
 -- Name: credits credits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY credits
+ALTER TABLE ONLY public.credits
     ADD CONSTRAINT credits_pkey PRIMARY KEY (id);
 
 
@@ -1123,7 +1145,7 @@ ALTER TABLE ONLY credits
 -- Name: cycles cycles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY cycles
+ALTER TABLE ONLY public.cycles
     ADD CONSTRAINT cycles_pkey PRIMARY KEY (id);
 
 
@@ -1131,7 +1153,7 @@ ALTER TABLE ONLY cycles
 -- Name: debits debits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY debits
+ALTER TABLE ONLY public.debits
     ADD CONSTRAINT debits_pkey PRIMARY KEY (id);
 
 
@@ -1139,7 +1161,7 @@ ALTER TABLE ONLY debits
 -- Name: due_ons due_ons_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY due_ons
+ALTER TABLE ONLY public.due_ons
     ADD CONSTRAINT due_ons_pkey PRIMARY KEY (id);
 
 
@@ -1147,7 +1169,7 @@ ALTER TABLE ONLY due_ons
 -- Name: entities entities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY entities
+ALTER TABLE ONLY public.entities
     ADD CONSTRAINT entities_pkey PRIMARY KEY (id);
 
 
@@ -1155,7 +1177,7 @@ ALTER TABLE ONLY entities
 -- Name: guides guides_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY guides
+ALTER TABLE ONLY public.guides
     ADD CONSTRAINT guides_pkey PRIMARY KEY (id);
 
 
@@ -1163,7 +1185,7 @@ ALTER TABLE ONLY guides
 -- Name: invoice_texts invoice_texts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY invoice_texts
+ALTER TABLE ONLY public.invoice_texts
     ADD CONSTRAINT invoice_texts_pkey PRIMARY KEY (id);
 
 
@@ -1171,7 +1193,7 @@ ALTER TABLE ONLY invoice_texts
 -- Name: invoices invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY invoices
+ALTER TABLE ONLY public.invoices
     ADD CONSTRAINT invoices_pkey PRIMARY KEY (id);
 
 
@@ -1179,7 +1201,7 @@ ALTER TABLE ONLY invoices
 -- Name: invoicings invoicings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY invoicings
+ALTER TABLE ONLY public.invoicings
     ADD CONSTRAINT invoicings_pkey PRIMARY KEY (id);
 
 
@@ -1187,7 +1209,7 @@ ALTER TABLE ONLY invoicings
 -- Name: letters letters_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY letters
+ALTER TABLE ONLY public.letters
     ADD CONSTRAINT letters_pkey PRIMARY KEY (id);
 
 
@@ -1195,7 +1217,7 @@ ALTER TABLE ONLY letters
 -- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY payments
+ALTER TABLE ONLY public.payments
     ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
 
 
@@ -1203,7 +1225,7 @@ ALTER TABLE ONLY payments
 -- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY products
+ALTER TABLE ONLY public.products
     ADD CONSTRAINT products_pkey PRIMARY KEY (id);
 
 
@@ -1211,7 +1233,7 @@ ALTER TABLE ONLY products
 -- Name: properties properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY properties
+ALTER TABLE ONLY public.properties
     ADD CONSTRAINT properties_pkey PRIMARY KEY (id);
 
 
@@ -1219,15 +1241,23 @@ ALTER TABLE ONLY properties
 -- Name: runs runs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY runs
+ALTER TABLE ONLY public.runs
     ADD CONSTRAINT runs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
 -- Name: search_suggestions search_suggestions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY search_suggestions
+ALTER TABLE ONLY public.search_suggestions
     ADD CONSTRAINT search_suggestions_pkey PRIMARY KEY (id);
 
 
@@ -1235,7 +1265,7 @@ ALTER TABLE ONLY search_suggestions
 -- Name: settlements settlements_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY settlements
+ALTER TABLE ONLY public.settlements
     ADD CONSTRAINT settlements_pkey PRIMARY KEY (id);
 
 
@@ -1243,7 +1273,7 @@ ALTER TABLE ONLY settlements
 -- Name: snapshots snapshots_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY snapshots
+ALTER TABLE ONLY public.snapshots
     ADD CONSTRAINT snapshots_pkey PRIMARY KEY (id);
 
 
@@ -1251,7 +1281,7 @@ ALTER TABLE ONLY snapshots
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
@@ -1259,203 +1289,196 @@ ALTER TABLE ONLY users
 -- Name: index_accounts_on_property_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_accounts_on_property_id ON accounts USING btree (property_id);
+CREATE INDEX index_accounts_on_property_id ON public.accounts USING btree (property_id);
 
 
 --
 -- Name: index_addresses_on_addressable_id_and_addressable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_addresses_on_addressable_id_and_addressable_type ON addresses USING btree (addressable_id, addressable_type);
+CREATE INDEX index_addresses_on_addressable_id_and_addressable_type ON public.addresses USING btree (addressable_id, addressable_type);
 
 
 --
 -- Name: index_agents_on_property_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_agents_on_property_id ON agents USING btree (property_id);
+CREATE INDEX index_agents_on_property_id ON public.agents USING btree (property_id);
 
 
 --
 -- Name: index_charges_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_charges_on_account_id ON charges USING btree (account_id);
+CREATE INDEX index_charges_on_account_id ON public.charges USING btree (account_id);
 
 
 --
 -- Name: index_charges_on_cycle_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_charges_on_cycle_id ON charges USING btree (cycle_id);
+CREATE INDEX index_charges_on_cycle_id ON public.charges USING btree (cycle_id);
 
 
 --
 -- Name: index_comments_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_comments_on_invoice_id ON comments USING btree (invoice_id);
+CREATE INDEX index_comments_on_invoice_id ON public.comments USING btree (invoice_id);
 
 
 --
 -- Name: index_credits_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_credits_on_account_id ON credits USING btree (account_id);
+CREATE INDEX index_credits_on_account_id ON public.credits USING btree (account_id);
 
 
 --
 -- Name: index_credits_on_charge_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_credits_on_charge_id ON credits USING btree (charge_id);
+CREATE INDEX index_credits_on_charge_id ON public.credits USING btree (charge_id);
 
 
 --
 -- Name: index_credits_on_payment_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_credits_on_payment_id ON credits USING btree (payment_id);
+CREATE INDEX index_credits_on_payment_id ON public.credits USING btree (payment_id);
 
 
 --
 -- Name: index_debits_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_debits_on_account_id ON debits USING btree (account_id);
+CREATE INDEX index_debits_on_account_id ON public.debits USING btree (account_id);
 
 
 --
 -- Name: index_debits_on_charge_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_debits_on_charge_id ON debits USING btree (charge_id);
+CREATE INDEX index_debits_on_charge_id ON public.debits USING btree (charge_id);
 
 
 --
 -- Name: index_debits_on_charge_id_and_at_time; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_debits_on_charge_id_and_at_time ON debits USING btree (charge_id, at_time);
+CREATE UNIQUE INDEX index_debits_on_charge_id_and_at_time ON public.debits USING btree (charge_id, at_time);
 
 
 --
 -- Name: index_debits_on_snapshot_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_debits_on_snapshot_id ON debits USING btree (snapshot_id);
+CREATE INDEX index_debits_on_snapshot_id ON public.debits USING btree (snapshot_id);
 
 
 --
 -- Name: index_due_ons_on_cycle_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_due_ons_on_cycle_id ON due_ons USING btree (cycle_id);
+CREATE INDEX index_due_ons_on_cycle_id ON public.due_ons USING btree (cycle_id);
 
 
 --
 -- Name: index_entities_on_entitieable_id_and_entitieable_type; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_entities_on_entitieable_id_and_entitieable_type ON entities USING btree (entitieable_id, entitieable_type);
+CREATE INDEX index_entities_on_entitieable_id_and_entitieable_type ON public.entities USING btree (entitieable_id, entitieable_type);
 
 
 --
 -- Name: index_guides_on_invoice_text_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_guides_on_invoice_text_id ON guides USING btree (invoice_text_id);
+CREATE INDEX index_guides_on_invoice_text_id ON public.guides USING btree (invoice_text_id);
 
 
 --
 -- Name: index_invoices_on_run_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_invoices_on_run_id ON invoices USING btree (run_id);
+CREATE INDEX index_invoices_on_run_id ON public.invoices USING btree (run_id);
 
 
 --
 -- Name: index_invoices_on_snapshot_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_invoices_on_snapshot_id ON invoices USING btree (snapshot_id);
+CREATE INDEX index_invoices_on_snapshot_id ON public.invoices USING btree (snapshot_id);
 
 
 --
 -- Name: index_letters_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_letters_on_invoice_id ON letters USING btree (invoice_id);
+CREATE INDEX index_letters_on_invoice_id ON public.letters USING btree (invoice_id);
 
 
 --
 -- Name: index_letters_on_invoice_text_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_letters_on_invoice_text_id ON letters USING btree (invoice_text_id);
+CREATE INDEX index_letters_on_invoice_text_id ON public.letters USING btree (invoice_text_id);
 
 
 --
 -- Name: index_payments_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_payments_on_account_id ON payments USING btree (account_id);
+CREATE INDEX index_payments_on_account_id ON public.payments USING btree (account_id);
 
 
 --
 -- Name: index_products_on_invoice_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_products_on_invoice_id ON products USING btree (invoice_id);
+CREATE INDEX index_products_on_invoice_id ON public.products USING btree (invoice_id);
 
 
 --
 -- Name: index_properties_on_client_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_properties_on_client_id ON properties USING btree (client_id);
+CREATE INDEX index_properties_on_client_id ON public.properties USING btree (client_id);
 
 
 --
 -- Name: index_runs_on_invoicing_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_runs_on_invoicing_id ON runs USING btree (invoicing_id);
+CREATE INDEX index_runs_on_invoicing_id ON public.runs USING btree (invoicing_id);
 
 
 --
 -- Name: index_settlements_on_credit_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_settlements_on_credit_id ON settlements USING btree (credit_id);
+CREATE INDEX index_settlements_on_credit_id ON public.settlements USING btree (credit_id);
 
 
 --
 -- Name: index_settlements_on_debit_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_settlements_on_debit_id ON settlements USING btree (debit_id);
+CREATE INDEX index_settlements_on_debit_id ON public.settlements USING btree (debit_id);
 
 
 --
 -- Name: index_snapshots_on_account_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_snapshots_on_account_id ON snapshots USING btree (account_id);
+CREATE INDEX index_snapshots_on_account_id ON public.snapshots USING btree (account_id);
 
 
 --
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
-
-
---
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
 
 
 --
@@ -1464,53 +1487,31 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20130726152930');
+INSERT INTO "schema_migrations" (version) VALUES
+('20130726152930'),
+('20130726161337'),
+('20130728120957'),
+('20130729081107'),
+('20130803143126'),
+('20130805094933'),
+('20130805110917'),
+('20130809214432'),
+('20130819155927'),
+('20130916115516'),
+('20130916115546'),
+('20130916115888'),
+('20131016112247'),
+('20140107121253'),
+('20140228105312'),
+('20140806144305'),
+('20140918173927'),
+('20140919091254'),
+('20140920193251'),
+('20140930053829'),
+('20141031015433'),
+('20141031192953'),
+('20141110181915'),
+('20141129154746'),
+('20150308230143');
 
-INSERT INTO schema_migrations (version) VALUES ('20130726161337');
-
-INSERT INTO schema_migrations (version) VALUES ('20130728120957');
-
-INSERT INTO schema_migrations (version) VALUES ('20130729081107');
-
-INSERT INTO schema_migrations (version) VALUES ('20130803143126');
-
-INSERT INTO schema_migrations (version) VALUES ('20130805094933');
-
-INSERT INTO schema_migrations (version) VALUES ('20130805110917');
-
-INSERT INTO schema_migrations (version) VALUES ('20130809214432');
-
-INSERT INTO schema_migrations (version) VALUES ('20130819155927');
-
-INSERT INTO schema_migrations (version) VALUES ('20130916115516');
-
-INSERT INTO schema_migrations (version) VALUES ('20130916115546');
-
-INSERT INTO schema_migrations (version) VALUES ('20130916115888');
-
-INSERT INTO schema_migrations (version) VALUES ('20131016112247');
-
-INSERT INTO schema_migrations (version) VALUES ('20140107121253');
-
-INSERT INTO schema_migrations (version) VALUES ('20140228105312');
-
-INSERT INTO schema_migrations (version) VALUES ('20140806144305');
-
-INSERT INTO schema_migrations (version) VALUES ('20140918173927');
-
-INSERT INTO schema_migrations (version) VALUES ('20140919091254');
-
-INSERT INTO schema_migrations (version) VALUES ('20140920193251');
-
-INSERT INTO schema_migrations (version) VALUES ('20140930053829');
-
-INSERT INTO schema_migrations (version) VALUES ('20141031015433');
-
-INSERT INTO schema_migrations (version) VALUES ('20141031192953');
-
-INSERT INTO schema_migrations (version) VALUES ('20141110181915');
-
-INSERT INTO schema_migrations (version) VALUES ('20141129154746');
-
-INSERT INTO schema_migrations (version) VALUES ('20150308230143');
 
