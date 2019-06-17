@@ -37,7 +37,8 @@
   notify: restart ssh
 
 - import_tasks: firewall.yml
-- import_tasks: unattended-upgrades.yml
+- import_tasks: unattended-upgrades-commands.yml
+- import_tasks: unattended-upgrades-query.yml
 - import_tasks: upgrade.yml
 
 # precaution before running the rest

@@ -1,12 +1,4 @@
 ---
-- import_role:
-    name: jnv.unattended-upgrades
-- name: upgrade packages
-  command: unattended-upgrade
-  tags:
-    - never
-    - unattended-upgrade
-
 - name: apt-daily.timer
   command: systemctl list-timers apt-daily.timer
   register: apt_daily_timer

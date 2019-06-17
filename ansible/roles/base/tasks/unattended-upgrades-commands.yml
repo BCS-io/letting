@@ -1,0 +1,10 @@
+---
+- name: unattended-upgrade security only
+  import_role:
+    name: jnv.unattended-upgrades
+
+- name: upgrade packages
+  command: unattended-upgrade
+  tags:
+    - never
+    - unattended-upgrade
