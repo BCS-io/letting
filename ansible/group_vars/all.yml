@@ -8,7 +8,7 @@ application: letting
 ops_email: ops@bcs.io
 
 # rails
-rails_master_key:  '../../rails/config/master.key'
+rails_master_key:  '../rails/config/master.key'
 
 # banner message
 rack_dev_mark_env: ""
@@ -49,4 +49,4 @@ aws_region: eu-west-2
 #  - Import into current database
 #    - bin/ansible-playbook -t import
 #
-postgres_backup_file: ../../rails/deploy/backup_database/letting.dump
+postgres_backup_file: ../rails/deploy/backup_database/letting.dump

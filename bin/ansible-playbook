@@ -53,6 +53,6 @@ if (( $OPTIND == 1 )); then
   exit 1
 fi
 
-ansible_path="./ansible/web"
+ansible_path="./ansible"
 
 (cd $ansible_path && ansible-playbook ${playbook}.yml --inventory hosts.ini  ${limit} --tags "${tags}")

@@ -25,7 +25,7 @@
     - never
     - unschedule
 
-- name: dooku postgres:backup-schedule {{ database }}
+- name: dokku postgres:backup-schedule {{ database }} {{ aws_bucket_name }}
   command: dokku postgres:backup-schedule {{ database }} "23 3,11,13,15,17 * * mon-fri" {{ aws_bucket_name }}
   tags:
     - backup

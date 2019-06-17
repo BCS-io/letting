@@ -39,7 +39,7 @@
     - dokku
     - ssl
 
-- name: letsencrypt {{ application }}
+- name: letsencrypt:auto-rewnew {{ application }}
   command: dokku letsencrypt:auto-renew {{ application }}
   when:
     - "'encrypt' in group_names"
