@@ -12,7 +12,3 @@
   roles:
     - base
     - dokku
-
-  handlers:
-     - name: restart ssh
-       service: name=ssh state=restarted
