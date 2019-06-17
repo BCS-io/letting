@@ -1,7 +1,19 @@
 ---
+- name: unattended-upgrade all
+  import_role:
+    name: jnv.unattended-upgrades
+  vars:
+    unattended_origins_patterns:
+    - 'origin=Ubuntu,archive=${distro_codename}-security'
+    - 'o=Ubuntu,a=${distro_codename}'
+    - 'o=Ubuntu,a=${distro_codename}-updates'
+    - 'o=Ubuntu,a=${distro_codename}-proposed-updates'
+  when: unattended_update == "all"
+
 - name: unattended-upgrade security only
   import_role:
     name: jnv.unattended-upgrades
+  when: unattended_update == "security"
 
 - name: upgrade packages
   command: unattended-upgrade

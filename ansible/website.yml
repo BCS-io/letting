@@ -2,6 +2,8 @@
 - hosts: all
   remote_user: deployer
   become: yes
+  vars:
+    unattended_update: security
   vars_files:
     - vars/secrets.yml
   roles:
