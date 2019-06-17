@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: deployer
+  become: yes
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - base
+    - dokku
