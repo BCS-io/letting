@@ -1,0 +1,10 @@
+---
+- hosts: all
+  remote_user: deployer
+  become: yes
+  vars:
+    unattended_update: all
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - base

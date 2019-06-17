@@ -1,0 +1,7 @@
+---
+#
+# ansible-playbook playbook.yml --limit appservers -vvv
+#
+- import_playbook: bootstrap.yml
+
+- import_playbook: basic.yml
