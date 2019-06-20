@@ -4,4 +4,4 @@
 #
 - import_playbook: bootstrap.yml
 
-- import_playbook: basic.yml
+- import_playbook: client-basic.yml

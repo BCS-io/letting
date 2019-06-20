@@ -1,0 +1,30 @@
+---
+- hosts: all
+  remote_user: deployer
+  become: yes
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - base
+    - wtanaka.chrome
+  vars:
+    unattended_update: all
+
+  tasks:
+  - name: add letting servers to /etc/hosts
+    lineinfile:
+      dest: /etc/hosts
+      regexp: '.*{{ item.hostname }}$'
+      line: "{{ item.ip_address }} {{ item.hostname.split('.')[0] }} {{item.hostname }}"
+      state: present
+    with_items: 
+      - { hostname: 'letting.local.bcs.io', ip_address: '192.168.2.3'}
+    tags:
+      - hosts
+
+  - name: delete user login password 
+    user:
+      name: deployer
+      password: ''
+    tags:
+      - delete-user
