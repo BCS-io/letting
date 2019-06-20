@@ -12,3 +12,8 @@
 - name: jnv.unattended-upgrades
   src: https://github.com/jnv/ansible-role-unattended-upgrades
   version: master
+
+# chrom install for client machine
+- name: wtanaka.chrome
+  src: https://github.com/wtanaka/ansible-role-chrome
+  version: master
