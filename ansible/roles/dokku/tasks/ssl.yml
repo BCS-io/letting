@@ -15,15 +15,17 @@
     - dokku
     - ssl
 
+#
+# If this fails have you pushed the code?
+#
+#
 - name: website {{ application }}
   uri:
-    url: "http://{{ domain }}"
-  ignore_errors: yes
-  register: http_response
+    url: http://{{ item }}
+  loop: "{{ domains }}"
   tags:
     - dokku
     - ssl
-
 #
 # ansible has import_role apply tags but could not get it to work
 #
@@ -43,7 +45,6 @@
   command: dokku letsencrypt:auto-renew {{ application }}
   when:
     - "'encrypt' in group_names"
-    - http_response.status == 200
   tags:
     - dokku
     - ssl

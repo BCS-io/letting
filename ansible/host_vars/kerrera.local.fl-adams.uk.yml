@@ -1,5 +1,6 @@
 ---
-domain: local.fl-adams.uk
+domains:
+  - local.fl-adams.uk
 
 database: letting_production
 database_port: 5555

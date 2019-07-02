@@ -1,5 +1,8 @@
 ---
-domain: fl-adams.uk
+domains:
+  - letting.bcs.io
+  - fl-adams.uk
+
 database: letting_production
 database_port: 5555
 
