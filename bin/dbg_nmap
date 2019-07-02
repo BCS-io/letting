@@ -20,11 +20,11 @@ print_usage() {
 
 while getopts 'dhlp' flag; do
   case "${flag}" in
-    d) nmap -p 80,443 cava.bcs.io ;;
+    d) nmap -p 80,443 cava.fl-adams.uk ;;
     l) nmap -p 80,443 jura.local.bcs.io ;;
-    L) nmap -p 80,443 kerrera.local.bcs.io ;;
+    L) nmap -p 80,443 kerrera.local.fl-adams.uk ;;
     h) print_usage ;;
-    p) nmap -p 80,443 eigg.bcs.io ;;
+    p) nmap -p 80,443 eigg.fl-adams.uk ;;
     *) print_usage
        exit 1;;
   esac

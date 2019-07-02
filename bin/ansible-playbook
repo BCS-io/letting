@@ -35,13 +35,13 @@ while getopts 'acCdlLht:ps' flag; do
        limit='--limit lamba.bcs.io' ;;
     C) playbook='client' 
        limit='--limit lamba.local.bcs.io' ;;
-    d) limit='--limit cava.bcs.io' ;;
+    d) limit='--limit cava.fl-adams.uk' ;;
     h) print_usage
        exit 1 ;;
     l) limit='--limit jura.local.bcs.io' ;;
-    L) limit='--limit kerrera.local.bcs.io' ;;
-    p) limit='--limit eigg.bcs.io' ;;
-    s) limit='--limit danna.bcs.io' ;;
+    L) limit='--limit kerrera.local.fl-adams.uk' ;;
+    p) limit='--limit eigg.fl-adams.uk' ;;
+    s) limit='--limit danna.fl-adams.uk' ;;
     t) tags=$OPTARG ;;
     *) print_usage
        exit 1;;

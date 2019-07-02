@@ -1,6 +1,6 @@
 ---
-domain: letting.bcs.io
-database: letting_production
+domain: development.fl-adams.uk
+database: letting_development
 database_port: 5555
 
 # AWS
@@ -14,7 +14,4 @@ database_port: 5555
 #    - aws_bucket_name
 
 # AWS
-aws_bucket_name: letting.bcs.io
-
-# user message
-rack_dev_mark_env: testing-01
+aws_bucket_name: development.fl-adams.uk

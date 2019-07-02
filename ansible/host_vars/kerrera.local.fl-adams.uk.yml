@@ -1,6 +1,7 @@
 ---
-domain: staging.letting.bcs.io
-database: letting_staging
+domain: local.fl-adams.uk
+
+database: letting_production
 database_port: 5555
 
 # AWS
@@ -14,4 +15,7 @@ database_port: 5555
 #    - aws_bucket_name
 
 # AWS
-aws_bucket_name: staging.letting.bcs.io
+aws_bucket_name: local.fl-adams.uk
+
+# user message
+rack_dev_mark_env: LIVE 

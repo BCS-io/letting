@@ -24,13 +24,13 @@ print_usage() {
 
 while getopts 'dhlLpst' flag; do
   case "${flag}" in
-    d) server=development.letting.bcs.io ;;
+    d) server=development.fl-adams.uk ;;
     h) print_usage
        exit 1 ;;
     l) server=development.letting.local.bcs.io ;;
-    L) server=letting.local.bcs.io ;;
-    p) server=letting.bcs.io ;;
-    s) server=staging.letting.bcs.io ;;
+    L) server=local.fl-adams.uk ;;
+    p) server=fl-adams.uk ;;
+    s) server=staging.fl-adams.uk ;;
     t) protocol=https ;;
     *) print_usage
        exit 1;;

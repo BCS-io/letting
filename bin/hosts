@@ -29,13 +29,13 @@ print_output() {
 
 while getopts 'd:hp:s:' flag; do
   case "${flag}" in
-    d) server="cava cava.bcs.io"
+    d) server="cava cava.fl-adams.uk"
        ipaddress=$OPTARG ;;
     h) print_usage 
        exit 1 ;;
-    p) server="eigg eigg.bcs.io"
+    p) server="eigg eigg.fl-adams.uk"
        ipaddress=$OPTARG ;;
-    s) server="danna danna.bcs.io"
+    s) server="danna danna.fl-adams.uk"
        ipaddress=$OPTARG ;;
     *) print_usage
        exit 1;;
