@@ -7,7 +7,16 @@ $( document ).ready(function() {
 });
 
 function print_n_ret() {
-  window.print();
-  history.go(-1);
+  var is_chrome = Boolean(window.chrome);
+  if(is_chrome) 
+  {
+    window.print();
+    setTimeout(function(){window.close(); history.go(-1); }, 200); 
+  }
+  else
+  {
+    window.print();
+    history.go(-1);
+  }
   return false;
 }
