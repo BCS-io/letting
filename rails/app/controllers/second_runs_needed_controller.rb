@@ -4,7 +4,7 @@
 #
 class SecondRunsNeededController < ApplicationController
   def index
-    @invoicings = Invoicing.blue_invoicies.page(params[:page]).default.load
+    @invoicings = Invoicing.blue_invoicies.page(params[:page]).by_period_and_created_at.load
   end
 
   def destroy

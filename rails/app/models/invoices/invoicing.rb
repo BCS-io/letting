@@ -21,7 +21,7 @@ class Invoicing < ApplicationRecord
   validate :validate_mininum_accounts
   validate :validate_run
 
-  scope :default, -> { order(period_first: :desc) }
+  scope :by_period_and_created_at, -> { order(period_first: :desc, created_at: :desc) }
   scope :blue_invoicies, -> { where('runs_count = 1') }
 
   # period
