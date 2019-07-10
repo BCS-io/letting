@@ -1,7 +1,5 @@
 ---
-domains:
-  - development.fl-adams.uk
-
+domain: development.fl-adams.uk
 database: letting_development
 database_port: 5555
 

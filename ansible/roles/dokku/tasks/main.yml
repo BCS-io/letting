@@ -21,11 +21,11 @@
   tags:
     - dokku
 
-- name: domains:add {{ application }} {{ domains }}
+- name: domains:add {{ application }} {{ domain }}
   dokku_domains:
     app: "{{ application }}"
     domains:
-      - "{{ domains }}"
+      - "{{ domain }}"
     state: present
   tags:
     - dokku
@@ -49,5 +49,4 @@
 - import_tasks: elasticsearch.yml
 - import_tasks: database.yml
 - import_tasks: elasticsearch_sync.yml
-# breaks if no git push
 - import_tasks: ssl.yml

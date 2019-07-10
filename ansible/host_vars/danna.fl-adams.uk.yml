@@ -1,7 +1,5 @@
 ---
-domains:
-  - staging.fl-adams.uk
-
+domain: staging.fl-adams.uk
 database: letting_staging
 database_port: 5555
 

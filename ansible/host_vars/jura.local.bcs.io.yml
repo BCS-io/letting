@@ -1,7 +1,5 @@
 ---
-domains:
-  - development.letting.local.bcs.io
-
+domain: development.letting.local.bcs.io
 database: letting_development
 database_port: 5555
 
