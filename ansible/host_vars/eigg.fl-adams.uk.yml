@@ -17,4 +17,4 @@ database_port: 5555
 aws_bucket_name: fl-adams.uk
 
 # user message
-rack_dev_mark_env: testing-01
+# rack_dev_mark_env: testing-01
