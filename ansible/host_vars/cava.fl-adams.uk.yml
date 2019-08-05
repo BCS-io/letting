@@ -15,3 +15,5 @@ database_port: 5555
 
 # AWS
 aws_bucket_name: development.fl-adams.uk
+
+rack_dev_mark_env: development
