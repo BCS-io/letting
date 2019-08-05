@@ -10,3 +10,6 @@
 secrets.yml
 
 *.retry
+
+# AWS file name for backup
+export
