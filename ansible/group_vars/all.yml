@@ -49,4 +49,4 @@ aws_region: eu-west-2
 #  - Import into current database
 #    - bin/ansible-playbook -t import
 #
-postgres_backup_file: ../rails/deploy/backup_database/letting.dump
+postgres_backup_file: roles/dokku/files/export
