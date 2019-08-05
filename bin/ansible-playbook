@@ -28,9 +28,30 @@ print_usage() {
 }
 
 
+print_production_banner() {
+  printf "\n\n"
+  printf "  ******************************************\n"
+  printf "  *                                        *\n"
+  printf "  *                Production              *\n"
+  printf "  *                                        *\n"
+  printf "  ******************************************\n"
+  printf "\n\n"
+}
+
+are_you_sure() {
+  read -p "Continue (y/n)? " choice
+  case "$choice" in
+    y|Y ) printf "\nYes. Continuing...\n";;
+    n|N ) printf "\nNo. Exiting\n"
+          exit 1 ;;
+    * ) printf "\nInvalid. Exiting\n"
+        exit 1 ;;
+  esac
+}
+
 while getopts 'acCdlLht:ps' flag; do
   case "${flag}" in
-    a) limit='' ;;
+    a) limit='--limit all' ;;
     c) playbook='client' 
        limit='--limit lamba.bcs.io' ;;
     C) playbook='client' 
@@ -40,7 +61,9 @@ while getopts 'acCdlLht:ps' flag; do
        exit 1 ;;
     l) limit='--limit jura.local.bcs.io' ;;
     L) limit='--limit kerrera.local.fl-adams.uk' ;;
-    p) limit='--limit eigg.fl-adams.uk' ;;
+    p) print_production_banner
+       are_you_sure
+       limit='--limit eigg.fl-adams.uk' ;;
     s) limit='--limit danna.fl-adams.uk' ;;
     t) tags=$OPTARG ;;
     *) print_usage
@@ -51,6 +74,12 @@ done
 if (( $OPTIND == 1 )); then
   print_usage
   exit 1
+fi
+
+if [[ -z "$limit" ]];
+then
+      echo "Limiting of playbook hosts is required. See help."
+      exit 1
 fi
 
 ansible_path="./ansible"
