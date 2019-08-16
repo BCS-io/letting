@@ -26,8 +26,6 @@ Layout/AlignHash:
     - 'app/controllers/properties_controller.rb'
     - 'app/models/ledgers/charge.rb'
     - 'app/models/ledgers/chargeable.rb'
-    - 'lib/import/contact_fields.rb'
-    - 'lib/import/import_user.rb'
     - 'spec/support/attributes.rb'
 Layout/ExtraSpacing:
   Exclude:
@@ -38,7 +36,6 @@ Layout/LeadingBlankLines:
     - 'app/helpers/link_helper.rb'
     - 'app/models/characters/client.rb'
     - 'app/models/invoices/invoicing.rb'
-    - 'lib/import/import_user.rb'
     - 'spec/lib/modules/rangify_spec.rb'
     - 'spec/support/factories/run_factory.rb'
 Lint/AmbiguousRegexpLiteral:
@@ -72,9 +69,6 @@ Naming/AccessorMethodName:
     - 'app/controllers/payments_controller.rb'
     - 'app/controllers/search_controller.rb'
     - 'app/models/utils/literal_search.rb'
-Naming/UncommunicativeMethodParamName:
-  Exclude:
-    - 'lib/import/import_base.rb'
 Rails:
   Enabled: true
 Rails/DynamicFindBy:
@@ -111,15 +105,8 @@ Style/ExpandPathArguments:
     - 'config/boot.rb'
     - 'config/environment.rb'
     - 'spec/rails_helper.rb'
-Style/IfUnlessModifier:
-  Exclude:
-    - 'lib/tasks/import_block.rake'
 Style/MixinUsage:
   Exclude:
-    - 'spec/lib/import/balance_row_spec.rb'
-    - 'spec/lib/import/charges/legacy_charged_in_fields_spec.rb'
-    - 'spec/lib/import/debit_row_spec.rb'
-    - 'spec/lib/import/payment_type_spec.rb'
     - 'spec/models/characters/address_spec.rb'
     - 'spec/models/invoices/invoice_spec.rb'
     - 'spec/models/invoices/product_spec.rb'
