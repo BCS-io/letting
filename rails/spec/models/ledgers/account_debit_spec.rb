@@ -4,7 +4,7 @@ require 'rails_helper'
 RSpec.describe AccountDebit, type: :model do
   it 'returns #key' do
     first = described_class.new date_due: '2014-01-01', charge_type: 'Rent', property_ref: 4, amount: 6
-    expect(first.key).to eq ['2014-01-01', 'Rent']
+    expect(first.key).to eq %w[2014-01-01 Rent]
   end
 
   it 'returns #property_refs' do
