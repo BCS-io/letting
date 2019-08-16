@@ -1,13 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Agent Factory' do
-  describe 'default' do
-    it('is valid') { expect(agent_new).to be_valid }
-    it 'has address' do
-      expect(agent_new.to_billing)
-        .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
+  describe 'agent_new' do
+    describe 'defaults' do
+      it('is valid') { expect(agent_new).to be_valid }
+      it 'has address' do
+        expect(agent_new.to_billing)
+          .to eq "Mr M. Prior\nEdgbaston Road\nBirmingham\nWest Midlands"
+      end
+      it('has road') { expect(agent_new.address.road).to eq 'Edgbaston Road' }
     end
-    it('has road') { expect(agent_new.address.road).to eq 'Edgbaston Road' }
   end
 
   describe 'overrides' do

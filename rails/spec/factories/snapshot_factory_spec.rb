@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Snapshot Factory' do
-  describe 'new' do
+  describe 'snapshot_new' do
     describe 'default' do
-      it('is valid') { expect(invoice_new).to be_valid }
+      it('is valid') { expect(snapshot_new).to be_valid }
 
       it 'makes account' do
         expect { snapshot_new.save! }.to change(Account, :count).by(1)
@@ -23,7 +23,7 @@ RSpec.describe 'Snapshot Factory' do
     end
   end
 
-  describe 'create' do
+  describe 'snapshot_create' do
     it 'makes snapshots' do
       expect { snapshot_create }.to change(Snapshot, :count).by(1)
     end

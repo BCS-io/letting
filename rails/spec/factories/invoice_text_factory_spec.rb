@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'InvoiceText Factory' do
-  describe 'new' do
+  describe 'invoice_text_new' do
     # We create the object and test it has expected value
     describe 'default' do
       it 'has description' do
         expect(invoice_text_new.description).to eq 'Page 1 Invoice'
       end
-      describe 'makes' do
-        it 'has address' do
-          expect(invoice_text_new.address).not_to be_nil
-        end
+      it 'has address' do
+        expect(invoice_text_new.address).not_to be_nil
       end
     end
 
@@ -39,10 +37,9 @@ RSpec.describe 'InvoiceText Factory' do
       it 'is valid' do
         expect { invoice_text_create }.to change(InvoiceText, :count).by(1)
       end
-      describe 'makes' do
-        it 'builds address' do
-          expect(invoice_text_create.address).not_to be_nil
-        end
+
+      it 'builds address' do
+        expect(invoice_text_create.address).not_to be_nil
       end
     end
   end

@@ -1,23 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe 'Address Factory' do
-  describe 'default' do
-    it 'errors about missing parent' do
-      a = address_new
-      a.valid?
+  describe 'address_new' do
+    describe 'defaults' do
+      it 'errors about missing parent' do
+        a = address_new
+        a.valid?
 
-      expect(a.errors.size).to eq 1
-      expect(a.errors.full_messages).to eq ['Addressable must exist']
+        expect(a.errors.size).to eq 1
+        expect(a.errors.full_messages).to eq ['Addressable must exist']
+      end
+      it('has empty flat_no') { expect(address_new.flat_no).to eq '' }
+      it('has empty house_name') { expect(address_new.house_name).to eq '' }
+      it('has empty road_no') { expect(address_new.road_no).to eq '' }
+      it('has road') { expect(address_new.road).to eq 'Edgbaston Road' }
+      it('has empty district') { expect(address_new.district).to eq '' }
+      it('has town') { expect(address_new.town).to eq 'Birmingham' }
+      it('has county') { expect(address_new.county).to eq 'West Midlands' }
+      it('has empty postcode') { expect(address_new.postcode).to eq '' }
+      it('has empty nation') { expect(address_new.nation).to eq '' }
     end
-    it('has empty flat_no') { expect(address_new.flat_no).to eq '' }
-    it('has empty house_name') { expect(address_new.house_name).to eq '' }
-    it('has empty road_no') { expect(address_new.road_no).to eq '' }
-    it('has road') { expect(address_new.road).to eq 'Edgbaston Road' }
-    it('has empty district') { expect(address_new.district).to eq '' }
-    it('has town') { expect(address_new.town).to eq 'Birmingham' }
-    it('has county') { expect(address_new.county).to eq 'West Midlands' }
-    it('has empty postcode') { expect(address_new.postcode).to eq '' }
-    it('has empty nation') { expect(address_new.nation).to eq '' }
   end
 
   describe 'overrides' do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'UserFactory' do
-  describe 'create' do
+  describe 'user_create' do
     it('is created') { expect(user_create).to be_valid }
     it('has nickname') { expect(user_create.nickname).to eq 'user' }
 

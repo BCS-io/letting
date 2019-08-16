@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Property Factory' do
-  describe 'new' do
+  describe 'property_new' do
     describe 'default' do
       it('is valid') { expect(property_new).to be_valid }
       it('has human_ref') { expect(property_new.human_ref).to eq 2002 }
 
-      describe 'makes' do
-        it 'address' do
-          expect(property_new.address).not_to be_nil
-        end
+      it 'address' do
+        expect(property_new.address).not_to be_nil
       end
     end
 
@@ -43,7 +41,7 @@ RSpec.describe 'Property Factory' do
     end
   end
 
-  describe 'create' do
+  describe 'property_create' do
     it('alters id') { expect(property_create(id: 2).id).to eq 2 }
 
     describe 'default' do

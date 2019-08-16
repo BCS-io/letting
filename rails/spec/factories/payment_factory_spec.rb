@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'payment' do
-  describe 'new' do
+  describe 'payment_new' do
     describe 'default' do
       it('is not valid') { expect(payment_new).not_to be_valid }
       it 'is valid with account' do
@@ -25,7 +25,7 @@ RSpec.describe 'payment' do
     end
   end
 
-  describe 'create' do
+  describe 'payment_create' do
     describe 'default' do
       it 'is created' do
         expect { payment_create account: account_new }

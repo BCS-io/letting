@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Client Factory' do
-  describe 'new' do
-    describe 'default' do
+  describe 'client_new' do
+    describe 'defaults' do
       it('is valid') { expect(client_new).to be_valid }
       it('no id') { expect(client_new.id).to eq nil }
       it('has human_ref') { expect(client_new.human_ref).to eq 354 }
@@ -34,11 +34,9 @@ RSpec.describe 'Client Factory' do
     end
   end
 
-  describe 'create' do
-    describe 'default' do
-      it 'is created' do
-        expect { client_create }.to change(Client, :count).by(1)
-      end
+  describe 'client_create' do
+    it 'is created' do
+      expect { client_create }.to change(Client, :count).by(1)
     end
 
     describe 'adds' do

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Cycle Factory', :cycle, :ledgers do
-  describe 'new' do
-    context 'when default' do
+  describe 'cycle_new' do
+    describe 'default' do
       it('has name') { expect(cycle_new.name).to eq 'Mar' }
       it('has term cycle_type') { expect(cycle_new.cycle_type).to eq 'term' }
       it 'has due_on' do
@@ -26,7 +26,7 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
   end
 
   describe 'create' do
-    context 'when default' do
+    describe 'default' do
       it('is valid') { expect(cycle_create).to be_valid }
 
       it 'is created' do
@@ -35,20 +35,20 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
       it 'makes due_on' do
         expect { cycle_create }.to change(DueOn, :count).by(1)
       end
+    end
 
-      describe 'adds' do
-        it 'due date due_ons' do
-          cycle_create due_ons: [DueOn.new(month: 6, day: 24)]
+    describe 'adds' do
+      it 'due date due_ons' do
+        cycle_create due_ons: [DueOn.new(month: 6, day: 24)]
 
-          expect(Cycle.first.due_ons.first).to eq DueOn.new(month: 6, day: 24)
-        end
+        expect(Cycle.first.due_ons.first).to eq DueOn.new(month: 6, day: 24)
+      end
 
-        it 'per month due_ons' do
-          cycle_create cycle_type: 'monthly',
-                       due_ons: [DueOn.new(day: 2)],
-                       prepare: true
-          expect(Cycle.first.due_ons.size).to eq(12)
-        end
+      it 'per month due_ons' do
+        cycle_create cycle_type: 'monthly',
+                     due_ons: [DueOn.new(day: 2)],
+                     prepare: true
+        expect(Cycle.first.due_ons.size).to eq(12)
       end
     end
 

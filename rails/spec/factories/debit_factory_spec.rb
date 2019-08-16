@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Debit Factory' do
-  describe 'new' do
+  describe 'debit_new' do
     describe 'default' do
       it('is not valid') { expect(debit_new).not_to be_valid }
       it 'is requires charge to be valid' do
