@@ -11,7 +11,7 @@
 ####
 #
 class User < ApplicationRecord
-  enum role: %i[user admin]
+  enum role: { user: 0, admin: 1 }
   scope :by_nickname, -> { order(:nickname) }
 
   has_secure_password

@@ -13,7 +13,7 @@
 #
 class Cycle < ApplicationRecord
   include Comparable
-  enum charged_in: %i[arrears advance]
+  enum charged_in: { arrears: 0, advance: 1 }
   has_many :charges, inverse_of: :cycle
 
   validates :name, :order, :due_ons, presence: true

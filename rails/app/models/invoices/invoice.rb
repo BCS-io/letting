@@ -27,8 +27,8 @@
 # comments - one off information to be read by the bill's addressee.
 #
 class Invoice < ApplicationRecord
-  enum color: %i[blue red]
-  enum deliver: %i[mail retain forget]
+  enum color: { blue: 0, red: 1 }
+  enum deliver: { mail: 0, retain: 1, forget: 2 }
   belongs_to :run, inverse_of: :invoices, optional: true
   belongs_to :snapshot, autosave: true, inverse_of: :invoices
   has_many :comments, dependent: :destroy
