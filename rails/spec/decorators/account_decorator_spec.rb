@@ -45,7 +45,7 @@ RSpec.describe AccountDecorator do
     end
   end
 
-  context 'zero balance' do
+  context 'with zero balance' do
     let(:account) do
       account = account_new
       account.save!
@@ -57,7 +57,7 @@ RSpec.describe AccountDecorator do
     end
   end
 
-  context 'calculated balance' do
+  context 'with calculated balance' do
     it 'abbrev_items' do
       account = account_new
       charge = charge_new

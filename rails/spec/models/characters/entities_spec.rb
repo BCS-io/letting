@@ -25,7 +25,7 @@ RSpec.shared_examples_for Entities do
     end
   end
 
-  context '#prepares_for_form' do
+  context 'with #prepares_for_form' do
     it 'prepares entities' do
       entityable = described_class.new
       expect(entityable.entities.size).to eq(0)

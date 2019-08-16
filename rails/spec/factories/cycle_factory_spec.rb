@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Cycle Factory', :cycle, :ledgers do
   describe 'new' do
-    context 'default' do
+    context 'when default' do
       it('has name') { expect(cycle_new.name).to eq 'Mar' }
       it('has term cycle_type') { expect(cycle_new.cycle_type).to eq 'term' }
       it 'has due_on' do
@@ -26,7 +26,7 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
   end
 
   describe 'create' do
-    context 'default' do
+    context 'when default' do
       it('is valid') { expect(cycle_create).to be_valid }
 
       it 'is created' do

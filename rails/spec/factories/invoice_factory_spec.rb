@@ -4,10 +4,8 @@ RSpec.describe 'Invoice Factory' do
   describe 'default' do
     it('is valid') { expect(invoice_new).to be_valid }
 
-    context 'makes' do
-      it 'makes a invoice_text' do
-        expect { invoice_new }.to change(InvoiceText, :count).by(1)
-      end
+    it 'makes a invoice_text' do
+      expect { invoice_new }.to change(InvoiceText, :count).by(1)
     end
   end
 
@@ -51,15 +49,13 @@ RSpec.describe 'Invoice Factory' do
   end
 
   describe 'create' do
-    context 'default' do
+    context 'when default' do
       it 'is created' do
         expect { invoice_create }.to change(Invoice, :count).by(1)
       end
 
-      context 'makes' do
-        it 'makes a invoice_text' do
-          expect { invoice_create }.to change(InvoiceText, :count).by(1)
-        end
+      it 'makes a invoice_text' do
+        expect { invoice_create }.to change(InvoiceText, :count).by(1)
       end
     end
 

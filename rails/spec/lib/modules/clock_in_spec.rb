@@ -54,7 +54,7 @@ RSpec.describe ClockIn do
       end
     end
 
-    context 'booking_date set to another day' do
+    context 'when booking_date set to another day' do
       it 'books as interday-time if time on booking_date' do
         time = described_class.new(booking_date: Time.zone.yesterday)
                               .recorded_as booked_time: Time.zone.yesterday + 1.hour

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Cycle#update', :ledgers, type: :system do
   before { log_in admin_attributes }
 
-  context 'Term' do
+  context 'when Term' do
     it 'edits term' do
       cycle_create id: 1,
                    name: 'Mar',
@@ -25,7 +25,7 @@ RSpec.describe 'Cycle#update', :ledgers, type: :system do
     end
   end
 
-  context 'Monthly' do
+  context 'when Monthly' do
     it 'edits monthly' do
       cycle_create id: 1,
                    name: 'Regular',

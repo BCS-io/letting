@@ -90,7 +90,7 @@ RSpec.describe Invoicing, type: :model do
       expect(invoicing.runs.first.invoices.first.snapshot).not_to be_nil
     end
 
-    context 'first runs' do
+    context 'with first runs' do
       it 'creates blue invoices' do
         account_setup property_ref: 20, charge_month: 3, charge_day: 25
 
@@ -102,7 +102,7 @@ RSpec.describe Invoicing, type: :model do
       end
     end
 
-    context 'second runs' do
+    context 'with second runs' do
       it 'creates more than one run' do
         account_setup property_ref: 20, charge_month: 3, charge_day: 25
 

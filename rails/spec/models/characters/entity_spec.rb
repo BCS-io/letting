@@ -35,21 +35,19 @@ RSpec.describe Entity, type: :model do
   end
 
   describe 'methods' do
-    context 'new entity' do
+    describe '#empty?' do
       let(:entity) { described_class.new }
 
-      context '#empty?' do
-        it('is empty') { expect(entity).to be_empty }
+      it('is empty when new') { expect(entity).to be_empty }
 
-        it 'with noted attribute not empty' do
-          entity.name = 'Bob'
-          expect(entity).to be_present
-        end
+      it 'fills on assigining noted attributes' do
+        entity.name = 'Bob'
+        expect(entity).to be_present
+      end
 
-        it 'with ignored attribute empty' do
-          entity.id = 8
-          expect(entity).to be_empty
-        end
+      it 'remains empty on assinging ignored attributes' do
+        entity.id = 8
+        expect(entity).to be_empty
       end
     end
 

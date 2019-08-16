@@ -8,7 +8,7 @@ require 'rails_helper'
 RSpec.describe 'Property#Update', type: :system do
   let(:account) { AccountPage.new }
 
-  context 'Agentless' do
+  context 'when Agentless' do
     before do
       log_in
       property_create id: 1,
@@ -69,7 +69,7 @@ RSpec.describe 'Property#Update', type: :system do
     end
   end
 
-  context 'Agentless with charge' do
+  context 'when Agentless with charge' do
     before { log_in }
 
     it 'can be set to dormant', js: true, elasticsearch: true do

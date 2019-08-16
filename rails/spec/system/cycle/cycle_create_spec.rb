@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Cycle#create', :ledgers, type: :system do
   before { log_in admin_attributes }
 
-  context 'Term' do
+  context 'when Term' do
     it 'creates a cycle' do
       cycle_page = CyclePage.new type: :term
       cycle_page.load
@@ -24,7 +24,7 @@ RSpec.describe 'Cycle#create', :ledgers, type: :system do
     end
   end
 
-  context 'Monthly' do
+  context 'when Monthly' do
     it 'creates a cycle' do
       cycle_page = CyclePage.new type: :monthly
       cycle_page.load

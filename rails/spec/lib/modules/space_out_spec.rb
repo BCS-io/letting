@@ -5,7 +5,7 @@ RSpec.describe SpaceOut do
     spaced_out = described_class.process(nil)
     expect(spaced_out).to eq ''
   end
-  context 'hyphen' do
+  context 'with hyphen' do
     it 'spaces out hyphen' do
       spaced_out = described_class.process('100-200')
       expect(spaced_out).to eq '100 - 200'
@@ -17,7 +17,7 @@ RSpec.describe SpaceOut do
     end
   end
 
-  context 'comma' do
+  context 'with comma' do
     it 'spaces out comma' do
       spaced_out = described_class.process('100,200')
       expect(spaced_out).to eq '100, 200'

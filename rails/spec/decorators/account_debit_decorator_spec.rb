@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe AccountDebitDecorator do
   let(:debit_dec) { described_class.new debit_new }
 
-  context 'attributes has' do
+  describe 'attributes' do
     it 'charge_type' do
       debit_dec.charge = charge_new charge_type: 'Rent'
       expect(debit_dec.charge_type).to eq 'Rent'

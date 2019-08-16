@@ -15,10 +15,8 @@ RSpec.describe 'ChargeFactory' do
         expect(charge_new.cycle.due_ons[0])
           .to eq DueOn.new(month: 3, day: 25)
       end
-      describe 'makes' do
-        it 'creates cycle' do
-          expect(charge_new.cycle.name).to eq 'Mar'
-        end
+      it 'makes creates cycle' do
+        expect(charge_new.cycle.name).to eq 'Mar'
       end
 
       describe 'adds' do
@@ -52,7 +50,7 @@ RSpec.describe 'ChargeFactory' do
   end
 
   describe 'create' do
-    context 'default' do
+    context 'when default' do
       it 'is created' do
         expect { charge_create }.to change(Charge, :count).by(1)
       end
@@ -67,10 +65,8 @@ RSpec.describe 'ChargeFactory' do
         expect(Charge.first).not_to be_dormant
       end
 
-      describe 'makes' do
-        it 'creates cycle' do
-          expect { charge_create }.to change(Cycle, :count).by(1)
-        end
+      it 'makes creates cycle' do
+        expect { charge_create }.to change(Cycle, :count).by(1)
       end
     end
 

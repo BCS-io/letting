@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Cycle#create', :ledgers, type: :system do
   before { log_in admin_attributes }
 
-  context 'Term' do
+  context 'when Term' do
     it 'adds due date', js: true do
       cycle_page = CyclePage.new type: :term
       cycle_create id: 1, due_ons: [DueOn.new(month: 3, day: 25)]

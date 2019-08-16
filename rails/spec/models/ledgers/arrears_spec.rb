@@ -9,7 +9,7 @@ RSpec.describe Arrears, :ledgers, :range do
   end
 
   describe '#duration returns period bounding date' do
-    context 'one period' do
+    context 'when one period' do
       describe 'bounding' do
         it 'matches start period' do
           repeat = described_class.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25)]
@@ -34,7 +34,7 @@ RSpec.describe Arrears, :ledgers, :range do
       end
     end
 
-    context 'two periods' do
+    context 'when two periods' do
       it 'returns expected period' do
         repeat = described_class.new repeat_dates: [RepeatDate.new(year: 2025, month: 3, day: 25),
                                                     RepeatDate.new(year: 2025, month: 9, day: 30)]

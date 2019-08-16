@@ -114,7 +114,7 @@ RSpec.describe DueOn, :ledgers, :cycle, type: :model do
     end
 
     describe '#clear_up_form' do
-      context 'new' do
+      context 'when new' do
         it 'saveable when valid' do
           due_on = due_on_new day: 1, month: nil
           due_on.clear_up_form

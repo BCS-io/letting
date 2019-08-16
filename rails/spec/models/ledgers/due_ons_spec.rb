@@ -57,7 +57,7 @@ RSpec.describe DueOns, :ledgers, :cycle, type: :model do
     end
 
     describe 'creating, saving and loading' do
-      context 'term' do
+      context 'when term' do
         it 'new on date' do
           (cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24),
                                        DueOn.new(month: 12, day: 25)])
@@ -93,7 +93,7 @@ RSpec.describe DueOns, :ledgers, :cycle, type: :model do
         end
       end
 
-      context 'monthly' do
+      context 'when monthly' do
         it 'new monthly' do
           (cycle = cycle_new cycle_type: 'monthly', due_ons: nil)
             .prepare

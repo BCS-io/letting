@@ -50,7 +50,7 @@ RSpec.describe MakeProducts, type: :model do
       expect(make.state).to eq :forget
     end
 
-    context 'retain' do
+    context 'when retaining' do
       it 'blue invoice - retains if the account settled' do
         charge = charge_create payment_type: 'manual'
         debit = debit_create charge: charge, at_time: '2000-1-1', amount: 10
@@ -78,7 +78,7 @@ RSpec.describe MakeProducts, type: :model do
       end
     end
 
-    context 'mail' do
+    context 'when mailing' do
       it 'red invoice - mailed provided there are debits' do
         charge = charge_create payment_type: 'automatic'
         debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
@@ -91,7 +91,7 @@ RSpec.describe MakeProducts, type: :model do
         expect(make.state).to eq :mail
       end
 
-      context 'blue invoice' do
+      context 'with blue invoice' do
         it 'mails if it has debit' do
           charge = charge_create payment_type: 'manual'
           debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10

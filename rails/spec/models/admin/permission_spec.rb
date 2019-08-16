@@ -8,7 +8,7 @@ RSpec::Matchers.define :allow? do |*args|
 end
 
 RSpec.describe Permission, type: :model do
-  context 'as guest' do
+  context 'with a guest' do
     subject { described_class.new(nil) }
 
     it('session#new') { is_expected.to allow?('sessions', 'new') }
@@ -40,7 +40,7 @@ RSpec.describe Permission, type: :model do
     it('users#destroy') { is_expected.not_to allow?('users', 'destroy') }
   end
 
-  context 'as user' do
+  context 'with a user' do
     subject { described_class.new(user_create role: 'user') }
 
     it('session#new')      { is_expected.to allow?('sessions', 'new') }
@@ -66,7 +66,7 @@ RSpec.describe Permission, type: :model do
     it('cycles#destroy') { is_expected.not_to allow?('cycles', 'destroy') }
   end
 
-  context 'admin' do
+  context 'with an admin' do
     subject { described_class.new(user_create role: 'user') }
 
     it('users#index') { is_expected.not_to allow?('users', 'index') }
@@ -76,7 +76,7 @@ RSpec.describe Permission, type: :model do
     it('users#destroy') { is_expected.not_to allow?('users', 'destroy') }
   end
 
-  context 'admin' do
+  context 'with an admin' do
     subject { described_class.new(user_create role: 'admin') }
 
     it('session#destroy') { is_expected.to allow?('sessions', 'destroy') }

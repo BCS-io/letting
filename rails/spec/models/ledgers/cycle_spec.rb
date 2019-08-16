@@ -185,7 +185,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
   end
 
   describe 'form preparation' do
-    context 'term' do
+    context 'when term' do
       it '#prepare creates children' do
         cycle = cycle_new cycle_type: 'term', due_ons: nil
         expect(cycle.due_ons.size).to eq(0)
@@ -202,7 +202,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
       end
     end
 
-    context 'monthly' do
+    context 'when monthly' do
       it '#prepare creates children' do
         cycle = cycle_new cycle_type: 'monthly', due_ons: nil
         expect(cycle.due_ons.size).to eq(0)

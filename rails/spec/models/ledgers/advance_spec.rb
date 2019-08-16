@@ -9,7 +9,7 @@ RSpec.describe Advance, :ledgers, :range do
   end
 
   describe '#duration returns period bounding date' do
-    context 'one period' do
+    context 'with one period' do
       describe 'bounding' do
         it 'matches start period' do
           repeat = described_class.new repeat_dates: [RepeatDate.new(year: 2024, month: 9, day: 3)]
@@ -37,7 +37,7 @@ RSpec.describe Advance, :ledgers, :range do
       end
     end
 
-    context 'two periods' do
+    context 'with two periods' do
       it 'returns expected period' do
         repeat = described_class.new repeat_dates: [RepeatDate.new(year: 2030, month: 3, day: 5),
                                                     RepeatDate.new(year: 2030, month: 9, day: 3)]
