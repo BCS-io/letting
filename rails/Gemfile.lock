@@ -309,6 +309,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.4.0)
+    rubocop-rspec (1.35.0)
+      rubocop (>= 0.60.0)
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
@@ -448,6 +450,7 @@ DEPENDENCIES
   require_all (~> 1.0)
   rspec-rails (~> 3.8.0)
   rubocop (~> 0.62.0)
+  rubocop-rspec
   rubycritic
   sass-rails (~> 5.0.0)
   scss_lint (~> 0.57.0)

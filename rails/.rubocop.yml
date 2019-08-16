@@ -7,6 +7,8 @@
 # RuboCop version 0.24.1.
 #
 
+require: rubocop-rspec
+
 # Ignored Files
 
 AllCops:
