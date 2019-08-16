@@ -5,6 +5,7 @@
 #
 
 dev_path=rails
+repo=''
 
 print_usage() {
   printf "Git push subtree\n\n"
@@ -21,10 +22,21 @@ print_banner() {
   printf "\n\n"
   printf "  ******************************************\n"
   printf "  *                                        *\n"
-  printf "  *           push ${dev_path} --force    *\n"
+  printf "  *           push ${repo} --force      *\n"
   printf "  *                                        *\n"
   printf "  ******************************************\n"
   printf "\n\n"
+}
+
+are_you_sure() {
+  read -p "Continue (y/n)? " choice
+  case "$choice" in
+    y|Y ) printf "\nYes. Continuing...\n";;
+    n|N ) printf "\nNo. Exiting\n"
+          exit 1 ;;
+    * ) printf "\nInvalid. Exiting\n"
+        exit 1 ;;
+  esac
 }
 
 while getopts 'dhlLps' flag; do
@@ -37,8 +49,9 @@ while getopts 'dhlLps' flag; do
        repo=production.local ;;
     h) print_usage
        exit 1 ;;
-    p) print_banner
-       repo=production  ;;
+    p) repo=production
+       print_banner
+       are_you_sure ;;
     s) printf "push ${dev_path} --force\n"
        repo=staging ;;
     *) print_usage
