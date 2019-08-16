@@ -56,7 +56,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                       amount: 10.00,
                                       charge: charge
       account.save!
-      expect(described_class.balance_all.first.amount).to eq(1.00)
+      expect(described_class.balance_all.to_a[0].amount).to eq(1.00)
     end
 
     it 'calculates balance when only credits' do
@@ -66,7 +66,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                       amount: 11.00,
                                       charge: charge
       account.save!
-      expect(described_class.balance_all(greater_than: -12).first.amount).to eq(-11.00)
+      expect(described_class.balance_all(greater_than: -12).to_a[0].amount).to eq(-11.00)
     end
 
     it 'calculates balance when only debits' do
@@ -76,7 +76,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                     amount: 10.00,
                                     charge: charge
       account.save!
-      expect(described_class.balance_all.first.amount).to eq(10.00)
+      expect(described_class.balance_all.to_a[0].amount).to eq(10.00)
     end
 
     it 'calculates simple balance' do
@@ -99,7 +99,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                      debits: [debit1, debit2],
                      property: property_new
 
-      expect(described_class.balance_all.first.amount).to eq(8.00)
+      expect(described_class.balance_all.to_a[0].amount).to eq(8.00)
     end
 
     describe 'greater_than' do
@@ -118,7 +118,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
         credit = credit_new amount: 5, at_time: Date.new(2012, 3, 4), charge: charge
         account_create credits: [credit], debits: [debit], property: property_new
 
-        account = described_class.balance_all(greater_than: 10).first.account
+        account = described_class.balance_all(greater_than: 10).to_a[0].account
 
         expect(account).to eq Account.first
       end
