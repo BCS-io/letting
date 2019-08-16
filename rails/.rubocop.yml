@@ -136,3 +136,29 @@ Performance/Count:
 
 Style/Documentation:
   Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/factories/**/*'
+    - 'spec/models/invoices/products_spec.rb'
+    - 'spec/models/ledgers/charges_spec.rb'
+    - 'spec/models/utils/literal_search_spec.rb'
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/factories/invoice_text_factory_spec.rb'
+    - 'spec/models/invoices/invoicing_spec.rb'
+
+RSpec/MultipleDescribes:
+  Exclude:
+    - 'spec/models/characters/contact_spec.rb'
+    - 'spec/models/characters/entities_spec.rb'
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5
