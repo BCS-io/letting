@@ -21,24 +21,13 @@ RSpec.describe InvoiceDecorator do
     expect(invoice_dec.billing_first_address_line).to eq "Edgbaston Road\n"
   end
 
-  describe 'billing address' do
-    it 'pads address' do
-      property = property_new(address: address_new)
-      invoice_dec = described_class.new invoice_new(property: property)
+  it '#billing_address pads address' do
+    property = property_new(address: address_new(road: 'Edgebaston',
+                                                 town: 'Birimingdham',
+                                                 county: 'West Mids'))
+    invoice_dec = described_class.new invoice_new(property: property)
 
-      expect(invoice_dec.billing_address.lines.count).to eq 8
-    end
-
-    it 'pads address' do
-      property = property_new(address:
-                   address_new(house_name: 'a',
-                               district: 'b',
-                               postcode: 'NW1 1AA',
-                               nation: 'Spain'))
-      invoice_dec = described_class.new invoice_new(property: property)
-
-      expect(invoice_dec.billing_address.lines.count).to eq 8
-    end
+    expect(invoice_dec.billing_address.lines.count).to eq 8
   end
 
   describe '#products_display' do

@@ -232,7 +232,19 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     end
 
     describe '.by_quarter_day' do
-      it 'returns payments within payment period' do
+      it 'rejects payments before payment period' do
+        payment_create \
+          booked_at: Time.zone.local(2013, 1, 31, 23, 59),
+          account: account_create(property: property_new(human_ref: 10))
+
+        expect(described_class.by_quarter_day(
+                 year: 2013,
+                 batch_months: BatchMonths.make(month: BatchMonths::MAR)
+               ))
+          .to eq []
+      end
+
+      it 'allows payments after the start of the payment period' do
         payment = payment_create \
           booked_at: Time.zone.local(2013, 2, 1, 0, 0),
           account: account_create(property: property_new(human_ref: 10))
@@ -244,7 +256,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           .to eq [payment]
       end
 
-      it 'returns payments within payment period' do
+      it 'allows payments before the end of the payment period' do
         payment = payment_create \
           booked_at: Time.zone.local(2013, 7, 31, 23, 59),
           account: account_create(property: property_new(human_ref: 10))
@@ -254,18 +266,6 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
                ))
           .to eq [payment]
-      end
-
-      it 'rejects payments before payment period' do
-        payment_create \
-          booked_at: Time.zone.local(2013, 1, 31, 23, 59),
-          account: account_create(property: property_new(human_ref: 10))
-
-        expect(described_class.by_quarter_day(
-                 year: 2013,
-                 batch_months: BatchMonths.make(month: BatchMonths::MAR)
-               ))
-          .to eq []
       end
 
       it 'rejects payments after payment period' do

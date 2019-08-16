@@ -97,12 +97,12 @@ RSpec.describe DueOn, :ledgers, :cycle, type: :model do
           .to be_show
       end
 
-      it 'displays true when either show dates true' do
+      it 'displays true when show_month set' do
         expect(due_on_new(month: 3, day: 25, show_month: 2, show_day: nil))
           .to be_show
       end
 
-      it 'displays true when either show dates true' do
+      it 'displays true when show_day set' do
         expect(due_on_new(month: 3, day: 25, show_month: nil, show_day: 2))
           .to be_show
       end
