@@ -19,19 +19,11 @@ RSpec.describe Debit, :ledgers, type: :model do
 
     describe 'amount' do
       it('is a number') { expect(debit_new(amount: 'nan')).not_to be_valid }
-      it 'has a max' do
+      it('is valid within range') do
+        expect(debit_new(charge: charge_new, amount: 99_999.99)).to be_valid
         expect(debit_new(charge: charge_new, amount: 100_000)).not_to be_valid
-      end
-      it('is valid under max') do
-        debit.amount = 99_999.99
-        expect(debit).to be_valid
-      end
-      it 'has a min' do
+        expect(debit_new(charge: charge_new, amount: -99_999.99)).to be_valid
         expect(debit_new(charge: charge_new, amount: -100_000)).not_to be_valid
-      end
-      it('is valid under max') do
-        debit.amount = -99_999.99
-        expect(debit).to be_valid
       end
       it('fails zero amount') { expect(debit_new amount: 0).not_to be_valid }
     end
