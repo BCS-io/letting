@@ -12,6 +12,7 @@ RSpec.describe 'Credit Factory' do
         expect(credit_new.at_time).to eq Time.zone.local(2013, 4, 30, 0, 0, 0)
       end
     end
+
     describe 'overrides' do
       it 'alters amount' do
         expect(credit_new(amount: 35.50).amount).to eq(35.50)
@@ -25,6 +26,7 @@ RSpec.describe 'Credit Factory' do
 
   describe 'create' do
     let(:charge) { charge_create }
+
     describe 'default' do
       it 'is created' do
         expect { credit_create charge: charge }.to change(Credit, :count).by(1)
@@ -37,6 +39,7 @@ RSpec.describe 'Credit Factory' do
           .to eq Time.zone.local(2013, 4, 30, 0, 0, 0)
       end
     end
+
     describe 'override' do
       it 'alters amount' do
         expect(credit_create(charge: charge, amount: 35.50).amount).to eq(35.50)

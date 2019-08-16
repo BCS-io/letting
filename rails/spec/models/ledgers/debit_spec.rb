@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Debit, :ledgers, type: :model do
   describe 'validates' do
     let(:debit) { charge_new(debits: [debit_new]).debits.first }
+
     it('is valid') { expect(debit).to be_valid }
     describe 'presence' do
       it 'charge required but missing' do
@@ -11,27 +12,28 @@ RSpec.describe Debit, :ledgers, type: :model do
       end
       it 'at_time' do
         debit.at_time = nil
-        expect(debit).to_not be_valid
+        expect(debit).not_to be_valid
       end
       it('amount') { debit_new amount: nil }
     end
+
     describe 'amount' do
-      it('is a number') { expect(debit_new(amount: 'nan')).to_not be_valid }
+      it('is a number') { expect(debit_new(amount: 'nan')).not_to be_valid }
       it 'has a max' do
-        expect(debit_new(charge: charge_new, amount: 100_000)).to_not be_valid
+        expect(debit_new(charge: charge_new, amount: 100_000)).not_to be_valid
       end
       it('is valid under max') do
         debit.amount = 99_999.99
         expect(debit).to be_valid
       end
       it 'has a min' do
-        expect(debit_new(charge: charge_new, amount: -100_000)).to_not be_valid
+        expect(debit_new(charge: charge_new, amount: -100_000)).not_to be_valid
       end
       it('is valid under max') do
         debit.amount = -99_999.99
         expect(debit).to be_valid
       end
-      it('fails zero amount') { expect(debit_new amount: 0).to_not be_valid }
+      it('fails zero amount') { expect(debit_new amount: 0).not_to be_valid }
     end
   end
 
@@ -41,21 +43,21 @@ RSpec.describe Debit, :ledgers, type: :model do
         charge = charge_create
         debit = debit_create charge: charge, at_time: '2012-3-31', amount: 15
 
-        expect(Debit.until(Time.zone.parse('2012-4-1'))).to eq [debit]
+        expect(described_class.until(Time.zone.parse('2012-4-1'))).to eq [debit]
       end
 
-      it 'should reject on same date but, argh does not' do
+      it 'rejects on same date but, argh does not' do
         charge = charge_create
         debit = debit_create charge: charge, at_time: Time.zone.parse('2012-4-1'), amount: 15
 
-        expect(Debit.until(Time.zone.parse('2012-4-1'))).to eq [debit]
+        expect(described_class.until(Time.zone.parse('2012-4-1'))).to eq [debit]
       end
 
       it 'ignores after' do
         charge = charge_create
         debit_create charge: charge, at_time: '2012-4-2', amount: 15
 
-        expect(Debit.until(Time.zone.parse('2012-4-1'))).to eq []
+        expect(described_class.until(Time.zone.parse('2012-4-1'))).to eq []
       end
     end
   end
@@ -66,7 +68,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         charge = charge_create
         debit1 = debit_create charge: charge, at_time: '2012-4-1', amount: 15
 
-        expect(Debit.available charge.id).to eq [debit1]
+        expect(described_class.available charge.id).to eq [debit1]
       end
 
       it 'a debit settled by a credit is not available' do
@@ -75,7 +77,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         credit_create charge: charge, at_time: '2012-5-1', amount: 15
         expect(debit).to be_paid
 
-        expect(Debit.available charge.id).to eq []
+        expect(described_class.available charge.id).to eq []
       end
 
       it 'orders debits by date' do
@@ -83,7 +85,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         first = debit_new at_time: Date.new(2012, 4, 1)
         charge = charge_create debits: [last, first]
 
-        expect(Debit.available charge.id).to eq [first, last]
+        expect(described_class.available charge.id).to eq [first, last]
       end
     end
 
@@ -92,7 +94,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         charge = charge_create
         debit_create charge: charge, at_time: '2012-4-1', amount: 15
 
-        expect(Debit.debt_on_charge charge.id).to eq 15
+        expect(described_class.debt_on_charge charge.id).to eq 15
       end
 
       it 'a debit values are additive' do
@@ -100,7 +102,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         debit_create charge: charge, at_time: '2012-4-1', amount: 15
         debit_create charge: charge, at_time: '2013-4-1', amount: 7
 
-        expect(Debit.debt_on_charge charge.id).to eq 22
+        expect(described_class.debt_on_charge charge.id).to eq 22
       end
 
       it 'a credit values are removed' do
@@ -108,7 +110,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         debit_create charge: charge, at_time: '2012-4-1', amount: 15
         credit_create charge: charge, at_time: '2012-5-1', amount: 5
 
-        expect(Debit.debt_on_charge charge.id).to eq 10
+        expect(described_class.debt_on_charge charge.id).to eq 10
       end
     end
   end
@@ -137,7 +139,7 @@ RSpec.describe Debit, :ledgers, type: :model do
         credit_create amount: 4.00, charge: charge
         debit_create amount: 6.00, charge: charge
 
-        expect(Debit.first.outstanding).to eq 2
+        expect(described_class.first.outstanding).to eq 2
       end
     end
 
@@ -145,14 +147,14 @@ RSpec.describe Debit, :ledgers, type: :model do
       it 'false without credit' do
         charge = charge_new debits: [debit_new(amount: 88.08)]
         charge.save!
-        expect(Debit.first).to_not be_paid
+        expect(described_class.first).not_to be_paid
       end
 
       it 'true when paid in full' do
         charge = charge_new(debits: [debit_new(amount: 88.08)],
                             credits: [credit_new(amount: 88.08)])
         charge.save!
-        expect(Debit.first).to be_paid
+        expect(described_class.first).to be_paid
       end
     end
 

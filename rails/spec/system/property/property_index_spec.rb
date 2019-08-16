@@ -4,7 +4,7 @@ require 'rails_helper'
 # Property's route path is to account
 #
 RSpec.describe 'Property#index', type: :system do
-  before(:each) { log_in }
+  before { log_in }
 
   it 'basic' do
     client = client_create

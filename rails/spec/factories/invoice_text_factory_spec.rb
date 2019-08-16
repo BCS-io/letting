@@ -9,13 +9,15 @@ RSpec.describe 'InvoiceText Factory' do
       end
       describe 'makes' do
         it 'has address' do
-          expect(invoice_text_new.address).to_not be_nil
+          expect(invoice_text_new.address).not_to be_nil
         end
       end
     end
+
     describe 'adds' do
       # adds guides..
     end
+
     describe 'overrides' do
       it 'changes description' do
         expect(invoice_text_new(description: 'new').description).to eq 'new'
@@ -39,7 +41,7 @@ RSpec.describe 'InvoiceText Factory' do
       end
       describe 'makes' do
         it 'builds address' do
-          expect(invoice_text_create.address).to_not be_nil
+          expect(invoice_text_create.address).not_to be_nil
         end
       end
     end

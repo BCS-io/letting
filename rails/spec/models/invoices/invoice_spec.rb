@@ -7,12 +7,12 @@ RSpec.describe Invoice, type: :model do
   it('is valid') { expect(invoice_new).to be_valid }
   describe 'validates presence' do
     it('property_ref') do
-      expect(invoice_new property: property_new(human_ref: nil)).to_not be_valid
+      expect(invoice_new property: property_new(human_ref: nil)).not_to be_valid
     end
-    it('invoice_date') { expect(invoice_new invoice_date: nil).to_not be_valid }
+    it('invoice_date') { expect(invoice_new invoice_date: nil).not_to be_valid }
     it 'property_address' do
-      (invoice = Invoice.new).property_address = nil
-      expect(invoice).to_not be_valid
+      (invoice = described_class.new).property_address = nil
+      expect(invoice).not_to be_valid
     end
   end
 
@@ -44,17 +44,17 @@ RSpec.describe Invoice, type: :model do
         snapshot = Snapshot.new(account: property.account)
         snapshot.period_first = '2000-01-01'
 
-        (invoice = Invoice.new).prepare property: property.invoice,
-                                        snapshot: snapshot,
-                                        color: :blue,
-                                        invoice_date: '2014-06-30'
+        (invoice = described_class.new).prepare property: property.invoice,
+                                                snapshot: snapshot,
+                                                color: :blue,
+                                                invoice_date: '2014-06-30'
 
         expect(invoice.invoice_date.to_s).to eq '2014-06-30'
       end
 
       it 'sets property_ref' do
         invoice_text_create id: 1
-        invoice = Invoice.new
+        invoice = described_class.new
         property = property_create human_ref: 55, account: account_new
         snapshot = Snapshot.new(account: property.account)
         snapshot.period_first = '2000-01-01'
@@ -68,7 +68,7 @@ RSpec.describe Invoice, type: :model do
 
       it 'sets billing_address' do
         invoice_text_create id: 1
-        invoice = Invoice.new
+        invoice = described_class.new
         agent = agent_new(entities: [Entity.new(name: 'Lock')])
         property = property_create agent: agent, account: account_new
         snapshot = Snapshot.new(account: property.account)
@@ -88,10 +88,10 @@ RSpec.describe Invoice, type: :model do
                           amount: 30.05,
                           charge: charge_new(charge_type: GROUND_RENT))
 
-        (invoice = Invoice.new).prepare property: property.invoice,
-                                        snapshot: snapshot_new(account: property.account,
-                                                               debits: [debit]),
-                                        color: :blue
+        (invoice = described_class.new).prepare property: property.invoice,
+                                                snapshot: snapshot_new(account: property.account,
+                                                                       debits: [debit]),
+                                                color: :blue
 
         expect(invoice.products.first.to_s)
           .to eq 'charge_type: Ground Rent date_due: 2013-03-25 amount: 30.05 '\
@@ -104,11 +104,11 @@ RSpec.describe Invoice, type: :model do
           property = property_create account: account_new
           debit = debit_create at_time: '2000-01-01', charge: charge_new
 
-          (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: snapshot_new(account: property.account,
-                                                                 debits: [debit]),
-                                          color: :blue,
-                                          invoice_date: '2014-06-30'
+          (invoice = described_class.new).prepare property: property.invoice,
+                                                  snapshot: snapshot_new(account: property.account,
+                                                                         debits: [debit]),
+                                                  color: :blue,
+                                                  invoice_date: '2014-06-30'
           expect(invoice.earliest_date_due).to eq Date.new(2000, 1, 1)
         end
 
@@ -119,7 +119,7 @@ RSpec.describe Invoice, type: :model do
 
           property = property_create account: account_new(debits: [arrears, debit])
 
-          invoice = Invoice.new
+          invoice = described_class.new
           invoice.prepare property: property.invoice,
                           snapshot: snapshot_new(account: property.account,
                                                  period: '2000/01/01'..'2000/03/01',
@@ -135,7 +135,7 @@ RSpec.describe Invoice, type: :model do
 
           property = property_create account: account_new(debits: [arrears])
 
-          invoice = Invoice.new
+          invoice = described_class.new
           invoice.prepare property: property.invoice,
                           snapshot: snapshot_new(account: property.account,
                                                  period: '2000/01/01'..'2000/03/01',
@@ -147,7 +147,7 @@ RSpec.describe Invoice, type: :model do
       end
 
       it 'prepares invoice total_arrears' do
-        invoice = Invoice.new
+        invoice = described_class.new
         invoice.products = [product_new(balance: 10)]
 
         expect(invoice.total_arrears).to eq 10
@@ -160,9 +160,9 @@ RSpec.describe Invoice, type: :model do
           snapshot = Snapshot.new(account: property.account)
           snapshot.period_first = '2000-01-01'
 
-          (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: snapshot,
-                                          color: :blue
+          (invoice = described_class.new).prepare property: property.invoice,
+                                                  snapshot: snapshot,
+                                                  color: :blue
 
           expect(invoice.comments.size).to eq 0
         end
@@ -173,10 +173,10 @@ RSpec.describe Invoice, type: :model do
           snapshot = Snapshot.new(account: property.account)
           snapshot.period_first = '2000-01-01'
 
-          (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: snapshot,
-                                          color: :blue,
-                                          comments: ['comment']
+          (invoice = described_class.new).prepare property: property.invoice,
+                                                  snapshot: snapshot,
+                                                  color: :blue,
+                                                  comments: ['comment']
 
           expect(invoice.comments.size).to eq 1
           expect(invoice.comments.first.clarify).to eq 'comment'
@@ -188,10 +188,10 @@ RSpec.describe Invoice, type: :model do
           snapshot = Snapshot.new(account: property.account)
           snapshot.period_first = '2000-01-01'
 
-          (invoice = Invoice.new).prepare property: property.invoice,
-                                          snapshot: snapshot,
-                                          color: :blue,
-                                          comments: ['comment', '']
+          (invoice = described_class.new).prepare property: property.invoice,
+                                                  snapshot: snapshot,
+                                                  color: :blue,
+                                                  comments: ['comment', '']
 
           expect(invoice.comments.size).to eq 1
         end
@@ -230,15 +230,15 @@ RSpec.describe Invoice, type: :model do
 
     describe '#actionable?' do
       it 'returns true if in debt' do
-        invoice = Invoice.new deliver: 'mail'
+        invoice = described_class.new deliver: 'mail'
 
         expect(invoice).to be_actionable
       end
 
       it 'returns false if not in debt' do
-        invoice = Invoice.new deliver: 'forget'
+        invoice = described_class.new deliver: 'forget'
 
-        expect(invoice).to_not be_actionable
+        expect(invoice).not_to be_actionable
       end
     end
 

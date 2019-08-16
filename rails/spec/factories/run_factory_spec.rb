@@ -4,7 +4,7 @@ RSpec.describe 'Run Factory' do
   describe 'default' do
     it('is valid') { expect(run_new).to be_valid }
     describe 'presence' do
-      it('invoices') { expect(run_new invoices: nil).to_not be_valid }
+      it('invoices') { expect(run_new invoices: nil).not_to be_valid }
     end
   end
 

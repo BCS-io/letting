@@ -8,19 +8,19 @@ RSpec.describe Product, type: :model do
 
     describe 'presence' do
       it 'requires amount' do
-        expect(product_new(amount: nil)).to_not be_valid
+        expect(product_new(amount: nil)).not_to be_valid
       end
 
       it 'requires amount' do
-        expect(product_new(charge_type: nil)).to_not be_valid
+        expect(product_new(charge_type: nil)).not_to be_valid
       end
 
       it 'requires amount' do
-        expect(product_new(date_due: nil)).to_not be_valid
+        expect(product_new(date_due: nil)).not_to be_valid
       end
 
       it 'requires automatic_payment' do
-        expect(product_new(payment_type: nil)).to_not be_valid
+        expect(product_new(payment_type: nil)).not_to be_valid
       end
     end
   end
@@ -29,8 +29,8 @@ RSpec.describe Product, type: :model do
     it 'creates arrears given arguments' do
       debit = debit_new at_time: '1999/01/01', amount: 8, charge: charge_new
 
-      arrears = Product.arrears account: account_create(debits: [debit]),
-                                date_due: '2001/01/30'
+      arrears = described_class.arrears account: account_create(debits: [debit]),
+                                        date_due: '2001/01/30'
       expect(arrears.to_s).to eq 'charge_type: Arrears ' \
                                  'date_due: 2001-01-30 ' \
                                  'amount: 8.0 ' \
@@ -38,8 +38,8 @@ RSpec.describe Product, type: :model do
     end
 
     it 'returns zero if no debt' do
-      arrears = Product.arrears account: account_create,
-                                date_due: '2001/01/30'
+      arrears = described_class.arrears account: account_create,
+                                        date_due: '2001/01/30'
       expect(arrears.to_s).to eq 'charge_type: Arrears ' \
                                  'date_due: 2001-01-30 ' \
                                  'amount: 0.0 ' \
@@ -53,7 +53,7 @@ RSpec.describe Product, type: :model do
 
       invoice_create snapshot: snapshot_new(debits: [debit_new(charge: charge)])
 
-      expect(Product.page2.charge_type).to eq 'Ground Rent'
+      expect(described_class.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'orders Ground Rent before Garage ground rent' do
@@ -63,7 +63,7 @@ RSpec.describe Product, type: :model do
       invoice_create snapshot: snapshot_new(debits: [debit_new(charge: c1),
                                                      debit_new(charge: c2)])
 
-      expect(Product.page2.charge_type).to eq 'Ground Rent'
+      expect(described_class.page2.charge_type).to eq 'Ground Rent'
     end
 
     it 'does not return 1st page only products' do
@@ -71,98 +71,98 @@ RSpec.describe Product, type: :model do
 
       invoice_create snapshot: snapshot_new(debits: [debit_new(charge: charge)])
 
-      expect(Product.page2).to be_nil
+      expect(described_class.page2).to be_nil
     end
   end
 
   describe '#page2?' do
     it 'returns false if products have no ground rent' do
-      product = Product.new charge_type: INSURANCE
+      product = described_class.new charge_type: INSURANCE
       expect(product.page2?).to eq false
     end
 
     it 'returns true if products includes ground rent' do
-      product = Product.new charge_type: GROUND_RENT
+      product = described_class.new charge_type: GROUND_RENT
       expect(product.page2?).to eq true
     end
 
     it 'returns true if products includes garage ground rent' do
-      product = Product.new charge_type: GARAGE_GROUND_RENT
+      product = described_class.new charge_type: GARAGE_GROUND_RENT
       expect(product.page2?).to eq true
     end
   end
 
   describe '#<=>' do
     it 'returns 0 when equal' do
-      lhs = Product.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6,
-                        period: '2014-1-1'..'2014-3-1'
+      lhs = described_class.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6,
+                                period: '2014-1-1'..'2014-3-1'
 
-      rhs = Product.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6,
-                        period: '2014-1-1'..'2014-3-1'
+      rhs = described_class.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6,
+                                period: '2014-1-1'..'2014-3-1'
 
       expect(lhs <=> rhs).to eq(0)
     end
 
     describe 'returns 1 when lhs > rhs' do
       it 'compares charge_type' do
-        lhs = Product.new charge_type: 'ZZZ', date_due: '2014-01-01', amount: 6,
-                          period: '2014-1-1'..'2014-3-1'
+        lhs = described_class.new charge_type: 'ZZZ', date_due: '2014-01-01', amount: 6,
+                                  period: '2014-1-1'..'2014-3-1'
 
-        rhs = Product.new charge_type: 'Ins', date_due: '2014-01-01', amount: 6,
-                          period: '2014-1-1'..'2014-3-1'
+        rhs = described_class.new charge_type: 'Ins', date_due: '2014-01-01', amount: 6,
+                                  period: '2014-1-1'..'2014-3-1'
 
         expect(lhs <=> rhs).to eq(1)
       end
 
       it 'compares date_due' do
-        lhs = Product.new charge_type: 'Ins', date_due: '2014-02-01', amount: 6,
-                          period: '2014-1-1'..'2014-3-1'
+        lhs = described_class.new charge_type: 'Ins', date_due: '2014-02-01', amount: 6,
+                                  period: '2014-1-1'..'2014-3-1'
 
-        rhs = Product.new charge_type: 'Ins', date_due: '2014-01-01', amount: 6,
-                          period: '2014-1-1'..'2014-3-1'
+        rhs = described_class.new charge_type: 'Ins', date_due: '2014-01-01', amount: 6,
+                                  period: '2014-1-1'..'2014-3-1'
 
         expect(lhs <=> rhs).to eq(1)
       end
 
       it 'compares amount' do
-        lhs = Product.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
-                          period: '2014-1-1'..'2014-3-1'
+        lhs = described_class.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
+                                  period: '2014-1-1'..'2014-3-1'
 
-        rhs = Product.new charge_type: 'AAA', date_due: '2014-01-01', amount: 6,
-                          period: '2014-1-1'..'2014-3-1'
+        rhs = described_class.new charge_type: 'AAA', date_due: '2014-01-01', amount: 6,
+                                  period: '2014-1-1'..'2014-3-1'
 
         expect(lhs <=> rhs).to eq(1)
       end
 
       it 'compares period' do
-        lhs = Product.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
-                          period: '2010-1-1'..'2010-3-1'
+        lhs = described_class.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
+                                  period: '2010-1-1'..'2010-3-1'
 
-        rhs = Product.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
-                          period: '1999-1-1'..'1999-3-1'
+        rhs = described_class.new charge_type: 'Ins', date_due: '2014-01-01', amount: 7,
+                                  period: '1999-1-1'..'1999-3-1'
 
         expect(lhs <=> rhs).to eq(1)
       end
 
       it 'compares charge_type before period' do
-        lhs = Product.new charge_type: 'ZZZ', date_due: '2014-01-01', amount: 7,
-                          period: '1999-1-1'..'1999-3-1'
+        lhs = described_class.new charge_type: 'ZZZ', date_due: '2014-01-01', amount: 7,
+                                  period: '1999-1-1'..'1999-3-1'
 
-        rhs = Product.new charge_type: 'AAA', date_due: '2014-01-01', amount: 7,
-                          period: '2010-1-1'..'2010-3-1'
+        rhs = described_class.new charge_type: 'AAA', date_due: '2014-01-01', amount: 7,
+                                  period: '2010-1-1'..'2010-3-1'
 
         expect(lhs <=> rhs).to eq(1)
       end
     end
 
     it 'returns -1 when lhs < rhs' do
-      lhs = Product.new charge_type: 'Rent', date_due: '2014-01-01', amount: 5
-      rhs = Product.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6
+      lhs = described_class.new charge_type: 'Rent', date_due: '2014-01-01', amount: 5
+      rhs = described_class.new charge_type: 'Rent', date_due: '2014-01-01', amount: 6
       expect(lhs <=> rhs).to eq(-1)
     end
 
     it 'returns nil when not comparable' do
-      expect(Product.new <=> 37).to be_nil
+      expect(described_class.new <=> 37).to be_nil
     end
   end
 

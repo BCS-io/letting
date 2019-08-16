@@ -4,12 +4,12 @@ require 'rails_helper'
 RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
   describe 'validates' do
     it('returns valid') { expect(cycle_new).to be_valid }
-    it('requires a name') { expect(cycle_new name: '').to_not be_valid }
-    it('charged_in') { expect(cycle_new charged_in: nil).to_not be_valid }
-    it('requires an order') { expect(cycle_new order: '').to_not be_valid }
+    it('requires a name') { expect(cycle_new name: '').not_to be_valid }
+    it('charged_in') { expect(cycle_new charged_in: nil).not_to be_valid }
+    it('requires an order') { expect(cycle_new order: '').not_to be_valid }
     it 'requires a cycle_type' do
       (cycle = cycle_new).cycle_type = ''
-      expect(cycle).to_not be_valid
+      expect(cycle).not_to be_valid
     end
     it 'includes cycle_type of term' do
       (cycle = cycle_new).cycle_type = 'term'
@@ -21,7 +21,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
     end
     it 'no other cycle_type accepted' do
       (cycle = cycle_new).cycle_type = 'anything'
-      expect(cycle).to_not be_valid
+      expect(cycle).not_to be_valid
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
     end
 
     it 'is not monthly when initialized term' do
-      expect(cycle_new(cycle_type: 'term', prepare: true)).to_not be_monthly
+      expect(cycle_new(cycle_type: 'term', prepare: true)).not_to be_monthly
     end
   end
 
@@ -129,17 +129,17 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
 
   describe '#<=>' do
     it 'returns 0 when equal' do
-      cycle = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 3, day: 25)]
-      other = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 3, day: 25)]
+      cycle = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 3, day: 25)]
+      other = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 3, day: 25)]
       expect(cycle <=> other).to eq 0
     end
 
     it 'equality is order independent' do
-      cycle = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1),
-                                                         DueOn.new(month: 6, day: 6)]
+      cycle = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1),
+                                                                   DueOn.new(month: 6, day: 6)]
 
-      other = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6),
-                                                         DueOn.new(month: 1, day: 1)]
+      other = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6),
+                                                                   DueOn.new(month: 1, day: 1)]
       expect(cycle <=> other).to eq 0
     end
 
@@ -150,37 +150,37 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
     end
 
     it 'uses charged_id in matching' do
-      cycle = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1)]
-      other = Cycle.new charged_in: 'arrears', due_ons: [DueOn.new(month: 1, day: 1)]
+      cycle = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1)]
+      other = described_class.new charged_in: 'arrears', due_ons: [DueOn.new(month: 1, day: 1)]
       expect(cycle <=> other).to eq(-1)
     end
 
     it 'returns 1 when lhs > rhs for due_ons' do
-      lhs = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
-      rhs = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1)]
+      lhs = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
+      rhs = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1)]
       expect(lhs <=> rhs).to eq(1)
     end
 
     it 'returns 1 when lhs > rhs for charged_in' do
-      lhs = Cycle.new charged_in: 'arrears', due_ons: [DueOn.new(month: 6, day: 6)]
-      rhs = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
+      lhs = described_class.new charged_in: 'arrears', due_ons: [DueOn.new(month: 6, day: 6)]
+      rhs = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
       expect(lhs <=> rhs).to eq(1)
     end
 
     it 'returns -1 when lhs < rhs' do
-      lhs = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1)]
-      rhs = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
+      lhs = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 1, day: 1)]
+      rhs = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
       expect(lhs <=> rhs).to eq(-1)
     end
 
     it 'returns -1 when lhs < rhs for charged_in' do
-      lhs = Cycle.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
-      rhs = Cycle.new charged_in: 'arrears', due_ons: [DueOn.new(month: 6, day: 6)]
+      lhs = described_class.new charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]
+      rhs = described_class.new charged_in: 'arrears', due_ons: [DueOn.new(month: 6, day: 6)]
       expect(lhs <=> rhs).to eq(-1)
     end
 
     it 'returns nil when not comparable' do
-      expect(Cycle.new(charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]) <=> 37).to be_nil
+      expect(described_class.new(charged_in: 'advance', due_ons: [DueOn.new(month: 6, day: 6)]) <=> 37).to be_nil
     end
   end
 
@@ -218,6 +218,7 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
       end
     end
   end
+
   describe '#to_s' do
     it 'displays' do
       expect(cycle_new.to_s)

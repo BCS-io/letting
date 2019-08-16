@@ -6,6 +6,7 @@ RSpec.describe 'Account Factory' do
       it('is valid') { expect(account_new).to be_valid }
       it('has no charge') { expect(Charge.count).to eq 0 }
     end
+
     describe 'adds' do
       it 'can add property' do
         expect(account_new(property: property_new(human_ref: 5)).property.human_ref).to eq 5
@@ -37,6 +38,7 @@ RSpec.describe 'Account Factory' do
       end
     end
   end
+
   describe 'create' do
     it 'is creates' do
       expect { account_create }.to change(Account, :count).by 1

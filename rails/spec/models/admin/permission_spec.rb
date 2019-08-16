@@ -9,7 +9,7 @@ end
 
 RSpec.describe Permission, type: :model do
   context 'as guest' do
-    subject { Permission.new(nil) }
+    subject { described_class.new(nil) }
 
     it('session#new') { is_expected.to allow?('sessions', 'new') }
     it('session#create') { is_expected.to allow?('sessions', 'create') }
@@ -41,7 +41,7 @@ RSpec.describe Permission, type: :model do
   end
 
   context 'as user' do
-    subject { Permission.new(user_create role: 'user') }
+    subject { described_class.new(user_create role: 'user') }
 
     it('session#new')      { is_expected.to allow?('sessions', 'new') }
     it('session#create')   { is_expected.to allow?('sessions', 'create') }
@@ -67,7 +67,7 @@ RSpec.describe Permission, type: :model do
   end
 
   context 'admin' do
-    subject { Permission.new(user_create role: 'user') }
+    subject { described_class.new(user_create role: 'user') }
 
     it('users#index') { is_expected.not_to allow?('users', 'index') }
     it('users#create') { is_expected.not_to allow?('users', 'create') }
@@ -77,7 +77,7 @@ RSpec.describe Permission, type: :model do
   end
 
   context 'admin' do
-    subject { Permission.new(user_create role: 'admin') }
+    subject { described_class.new(user_create role: 'admin') }
 
     it('session#destroy') { is_expected.to allow?('sessions', 'destroy') }
     it('clients#destroy') { is_expected.to allow?('clients', 'destroy') }

@@ -13,6 +13,7 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
         expect(cycle_new.due_ons[0].month).to eq 3
       end
     end
+
     describe 'overrides' do
       it 'changes cycle_type' do
         cycle_new cycle_type: ''

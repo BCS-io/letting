@@ -34,6 +34,7 @@ end
 
 RSpec.describe 'Payment#index', :ledgers, type: :system do
   let(:payments_page) { PaymentsPage.new }
+
   before { log_in }
 
   it 'all' do

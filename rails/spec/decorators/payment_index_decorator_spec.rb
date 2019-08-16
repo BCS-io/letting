@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PaymentIndexDecorator do
   let(:source) { payment_new }
-  let(:decorator) { PaymentIndexDecorator.new source }
+  let(:decorator) { described_class.new source }
 
   context 'methods' do
     it '#amount' do

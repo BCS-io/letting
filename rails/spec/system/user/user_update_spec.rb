@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'User#update', type: :system do
   let(:user_page) { UserPage.new }
-  before(:each) { log_in admin_attributes }
+
+  before { log_in admin_attributes }
 
   it 'completes basic' do
     user = user_create

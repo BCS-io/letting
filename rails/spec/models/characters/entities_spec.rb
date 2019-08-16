@@ -6,7 +6,7 @@ RSpec.shared_examples_for Entities do
       entityable = described_class.new
       3.times { entityable.entities.build title: 'Mr', name: 'Stuart' }
 
-      expect(entityable).to_not be_valid
+      expect(entityable).not_to be_valid
     end
   end
 

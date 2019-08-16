@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'User#destroy', type: :system do
-  before(:each) { log_in admin_attributes }
+  before { log_in admin_attributes }
 
   it 'destroys' do
     user_create nickname: 'adam'

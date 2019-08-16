@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Invoicing#update', type: :system do
   let(:invoicing_page) { InvoicingPage.new }
+
   before do
     log_in
     invoice_text_create id: 1

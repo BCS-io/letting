@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'InvoiceText#show', type: :system do
-  before(:each) do
+  before do
     log_in admin_attributes
     invoice_text_create id: 1,
                         address: address_new(road: 'High')

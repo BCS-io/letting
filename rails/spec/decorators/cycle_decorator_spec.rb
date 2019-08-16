@@ -15,10 +15,10 @@ RSpec.describe CycleDecorator do
                                                 DueOn.new(month: 6, day: 1),
                                                 DueOn.new(month: 8, day: 1),
                                                 DueOn.new(month: 9, day: 1)]
-    expect(CycleDecorator.for_select).to eq 'Frequent' => [['Freq', 4]],
-                                            'Half Year' => [['Half', 2]],
-                                            'Quarterly' => [['Quart', 3]],
-                                            'Year' => [['Year', 1]]
+    expect(described_class.for_select).to eq 'Frequent' => [['Freq', 4]],
+                                             'Half Year' => [['Half', 2]],
+                                             'Quarterly' => [['Quart', 3]],
+                                             'Year' => [['Year', 1]]
   end
 
   it 'orders' do
@@ -30,9 +30,9 @@ RSpec.describe CycleDecorator do
                  name: 'Sep',
                  order: 1,
                  due_ons: [DueOn.new(month: 9, day: 2)]
-    expect(CycleDecorator.for_select).to eq 'Frequent' => [],
-                                            'Half Year' => [],
-                                            'Quarterly' => [],
-                                            'Year' => [['Sep', 2], ['Mar', 1]]
+    expect(described_class.for_select).to eq 'Frequent' => [],
+                                             'Half Year' => [],
+                                             'Quarterly' => [],
+                                             'Year' => [['Sep', 2], ['Mar', 1]]
   end
 end

@@ -6,7 +6,8 @@ require 'rails_helper'
 #
 RSpec.describe 'Property#create', type: :system do
   let(:account) { AccountPage.new }
-  before(:each) { log_in }
+
+  before { log_in }
 
   it 'opens valid page', js: true do
     account.load

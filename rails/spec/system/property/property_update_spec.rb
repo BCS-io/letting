@@ -9,7 +9,7 @@ RSpec.describe 'Property#Update', type: :system do
   let(:account) { AccountPage.new }
 
   context 'Agentless' do
-    before(:each) do
+    before do
       log_in
       property_create id: 1,
                       human_ref: 80,
@@ -88,7 +88,7 @@ RSpec.describe 'Property#Update', type: :system do
   end
 
   context 'with Agent' do
-    before(:each) do
+    before do
       log_in
       agent = agent_new entities: [Entity.new(name: 'Willis')],
                         address: address_new(road: 'Wiggiton')
@@ -123,7 +123,7 @@ RSpec.describe 'Property#Update', type: :system do
     it 'removes agent' do
       uncheck 'Agent'
       account.button('Update').successful?(self).load id: 1
-      expect(find_field('Agent')).to_not be_checked
+      expect(find_field('Agent')).not_to be_checked
     end
   end
 end

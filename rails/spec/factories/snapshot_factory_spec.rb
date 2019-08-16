@@ -24,6 +24,7 @@ RSpec.describe 'Snapshot Factory' do
       end
     end
   end
+
   describe 'create' do
     it 'makes snapshots' do
       expect { snapshot_create }.to change(Snapshot, :count).by(1)

@@ -8,8 +8,8 @@ RSpec.describe MakeProducts, type: :model do
         debit = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit]
 
-        make = MakeProducts.new account: account,
-                                debits: [debit]
+        make = described_class.new account: account,
+                                   debits: [debit]
 
         expect(make.products.first.balance).to eq 10
       end
@@ -20,8 +20,8 @@ RSpec.describe MakeProducts, type: :model do
         recent_debit = debit_create charge: charge, at_time: '2003-1-1', amount: 20
         account = account_create charges: [charge], debits: [past_debit, recent_debit]
 
-        make = MakeProducts.new account: account,
-                                debits: [recent_debit]
+        make = described_class.new account: account,
+                                   debits: [recent_debit]
 
         expect(make.products.first.balance).to eq 10
         expect(make.products.second.balance).to eq 30
@@ -33,8 +33,8 @@ RSpec.describe MakeProducts, type: :model do
         next_debit = debit_new charge: charge, at_time: '2003-1-1', amount: 20
         account = account_create charges: [charge], debits: [recent_debit, next_debit]
 
-        make = MakeProducts.new account: account,
-                                debits: [recent_debit, next_debit]
+        make = described_class.new account: account,
+                                   debits: [recent_debit, next_debit]
 
         expect(make.products.first.balance).to eq 10
         expect(make.products.second.balance).to eq 30
@@ -44,8 +44,8 @@ RSpec.describe MakeProducts, type: :model do
 
   describe '#state' do
     it 'forgets if no debits' do
-      make = MakeProducts.new account: account_create,
-                              debits: []
+      make = described_class.new account: account_create,
+                                 debits: []
 
       expect(make.state).to eq :forget
     end
@@ -57,9 +57,9 @@ RSpec.describe MakeProducts, type: :model do
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 11)
         account = account_create charges: [charge], debits: [debit], credits: [credit]
 
-        make = MakeProducts.new account: account,
-                                debits: [debit],
-                                color: :blue
+        make = described_class.new account: account,
+                                   debits: [debit],
+                                   color: :blue
 
         expect(make.state).to eq :retain
       end
@@ -70,9 +70,9 @@ RSpec.describe MakeProducts, type: :model do
         credit = credit_new(at_time: '1998-1-1', charge: charge, amount: 10)
         account = account_create charges: [charge], debits: [debit1], credits: [credit]
 
-        make = MakeProducts.new account: account,
-                                debits: [debit1],
-                                color: :red
+        make = described_class.new account: account,
+                                   debits: [debit1],
+                                   color: :red
 
         expect(make.state).to eq :retain
       end
@@ -84,9 +84,9 @@ RSpec.describe MakeProducts, type: :model do
         debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
         account = account_create charges: [charge], debits: [debit1]
 
-        make = MakeProducts.new account: account,
-                                debits: [debit1],
-                                color: :red
+        make = described_class.new account: account,
+                                   debits: [debit1],
+                                   color: :red
 
         expect(make.state).to eq :mail
       end
@@ -97,9 +97,9 @@ RSpec.describe MakeProducts, type: :model do
           debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
           account = account_create charges: [charge], debits: [debit1]
 
-          make = MakeProducts.new account: account,
-                                  debits: [debit1],
-                                  color: :blue
+          make = described_class.new account: account,
+                                     debits: [debit1],
+                                     color: :blue
 
           expect(make.state).to eq :mail
         end
@@ -109,9 +109,9 @@ RSpec.describe MakeProducts, type: :model do
           debit1 = debit_new charge: charge, at_time: '2000-1-1', amount: 10
           account = account_create charges: [charge], debits: [debit1]
 
-          make = MakeProducts.new account: account,
-                                  debits: [debit1],
-                                  color: :blue
+          make = described_class.new account: account,
+                                     debits: [debit1],
+                                     color: :blue
 
           expect(make.state).to eq :retain
         end

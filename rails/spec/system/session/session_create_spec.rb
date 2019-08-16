@@ -36,7 +36,7 @@ RSpec.describe 'Session#creates', type: :system do
   end
 
   def expect_to
-    expect(current_path).to eq '/accounts'
+    expect(page).to have_current_path '/accounts'
     expect(page).to have_text /Logged in!/i
     expect(page).to have_text /user/i
   end

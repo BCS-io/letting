@@ -12,7 +12,7 @@ RSpec.describe 'Products', type: :model do
                                product_new(charge_type: ChargeTypes::INSURANCE)]
       products = invoice.products.drop_arrears
 
-      expect(products.first.charge_type).to_not eq 'Arrears'
+      expect(products.first.charge_type).not_to eq 'Arrears'
       expect(products.first.charge_type).to eq 'Insurance'
     end
 

@@ -52,7 +52,7 @@ RSpec.describe 'Client#show', type: :system do
       visit '/clients/1'
 
       expect(page).to have_text '6008'
-      expect(page).to_not have_content /The client has no properties./i
+      expect(page).not_to have_content /The client has no properties./i
     end
 
     # Ajax request - maybe why I am having no luck getting this going

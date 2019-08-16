@@ -8,7 +8,7 @@ RSpec.describe AccountDecorator do
       d2 = debit_new at_time: '25/9/2013', amount: 10.00, charge: charge
       c1 = credit_new at_time: '25/9/2014', amount: 12.00, charge: charge
       ac = account_create charges: [charge_new], debits: [d1, d2], credits: [c1]
-      account_dec = AccountDecorator.new ac
+      account_dec = described_class.new ac
 
       expect(account_dec.all_items.map(&:running_balance))
         .to contain_exactly 5.00, 15.00, 3.00
@@ -23,7 +23,7 @@ RSpec.describe AccountDecorator do
       account.debits.push debit_new charge: charge, at_time: '25/9/2013'
       account.credits.push credit_new charge: charge, at_time: '30/4/2013'
       account.save!
-      AccountDecorator.new account
+      described_class.new account
     end
 
     it 'orders items by date' do
@@ -49,7 +49,7 @@ RSpec.describe AccountDecorator do
     let(:account) do
       account = account_new
       account.save!
-      AccountDecorator.new account
+      described_class.new account
     end
 
     it 'abbrev_items' do
@@ -71,7 +71,7 @@ RSpec.describe AccountDecorator do
                                       at_time: '25/4/2012',
                                       amount: 5.50
       account.save!
-      dec = AccountDecorator.new account
+      dec = described_class.new account
 
       expect(dec.abbrev_items.first.running_balance).to eq 14.50
     end

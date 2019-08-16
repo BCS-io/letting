@@ -6,7 +6,7 @@ RSpec.describe DueOns, :ledgers, :cycle, type: :model do
       it 'invalid above max' do
         cycle = cycle_new due_ons: []
         13.times { cycle.due_ons.build day: 25, month: 3 }
-        expect(cycle).to_not be_valid
+        expect(cycle).not_to be_valid
       end
       it 'valid if marked for destruction' do
         cycle = cycle_new due_ons: []
@@ -51,7 +51,7 @@ RSpec.describe DueOns, :ledgers, :cycle, type: :model do
 
         it 'not empty when something in it' do
           expect(cycle_new(due_ons: [DueOn.new(day: 1)]).due_ons)
-            .to_not be_empty
+            .not_to be_empty
         end
       end
     end
@@ -111,6 +111,7 @@ RSpec.describe DueOns, :ledgers, :cycle, type: :model do
         end
       end
     end
+
     describe '#to_s' do
       it 'outputs the due_ons array' do
         cycle = cycle_new due_ons: [DueOn.new(month: 3, day: 25),

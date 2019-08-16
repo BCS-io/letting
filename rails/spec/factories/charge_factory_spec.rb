@@ -64,7 +64,7 @@ RSpec.describe 'ChargeFactory' do
 
       it 'is an active charge' do
         charge_create
-        expect(Charge.first).to_not be_dormant
+        expect(Charge.first).not_to be_dormant
       end
 
       describe 'makes' do

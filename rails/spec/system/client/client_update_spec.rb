@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Client#update', type: :system do
   before { log_in }
+
   let(:client_page) { ClientPage.new }
 
   context 'with one entity' do
-    before(:each) do
+    before do
       client_create id: 1, human_ref: 301
       client_page.load id: 1
     end
@@ -55,7 +56,7 @@ RSpec.describe 'Client#update', type: :system do
       client_page.click 'Cancel'
 
       expect(client_page.title).to eq 'Letting - Clients'
-      expect(page).to_not have_text 'Smith'
+      expect(page).not_to have_text 'Smith'
     end
   end
 

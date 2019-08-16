@@ -13,7 +13,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                       charge: charge
       account.save!
 
-      expect(AccountDetails.balanced.count(:account_id).size).to eq 1
+      expect(described_class.balanced.count(:account_id).size).to eq 1
     end
 
     it 'does not return accounts that were imbalanced a time ago' do
@@ -25,7 +25,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
 
       account.save!
 
-      expect(AccountDetails.balanced.count(:account_id).size).to eq 0
+      expect(described_class.balanced.count(:account_id).size).to eq 0
     end
 
     it 'ignores recent transactions' do
@@ -40,10 +40,11 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                         charge: charge
         account.save!
 
-        expect(AccountDetails.balanced.count(:account_id).size).to eq 0
+        expect(described_class.balanced.count(:account_id).size).to eq 0
       end
     end
   end
+
   describe '.balance_all' do
     it 'calculates simple balance' do
       charge = charge_create
@@ -55,7 +56,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                       amount: 10.00,
                                       charge: charge
       account.save!
-      expect(AccountDetails.balance_all.first.amount).to eq(1.00)
+      expect(described_class.balance_all.first.amount).to eq(1.00)
     end
 
     it 'calculates balance when only credits' do
@@ -65,7 +66,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                       amount: 11.00,
                                       charge: charge
       account.save!
-      expect(AccountDetails.balance_all(greater_than: -12).first.amount).to eq(-11.00)
+      expect(described_class.balance_all(greater_than: -12).first.amount).to eq(-11.00)
     end
 
     it 'calculates balance when only debits' do
@@ -75,7 +76,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                     amount: 10.00,
                                     charge: charge
       account.save!
-      expect(AccountDetails.balance_all.first.amount).to eq(10.00)
+      expect(described_class.balance_all.first.amount).to eq(10.00)
     end
 
     it 'calculates simple balance' do
@@ -85,7 +86,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                                     amount: 10.00,
                                     charge: charge
       account.save!
-      expect(AccountDetails.balance_all(greater_than: 11).first).to be_nil
+      expect(described_class.balance_all(greater_than: 11).first).to be_nil
     end
 
     it 'smoke test' do
@@ -98,7 +99,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
                      debits: [debit1, debit2],
                      property: property_new
 
-      expect(AccountDetails.balance_all.first.amount).to eq(8.00)
+      expect(described_class.balance_all.first.amount).to eq(8.00)
     end
 
     describe 'greater_than' do
@@ -108,7 +109,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
         credit = credit_new amount: 9, at_time: Date.new(2012, 3, 4), charge: charge
         account_create credits: [credit], debits: [debit]
 
-        expect(AccountDetails.balance_all(greater_than: 10)).to be_empty
+        expect(described_class.balance_all(greater_than: 10)).to be_empty
       end
 
       it 'includes accounts greater than' do
@@ -117,7 +118,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
         credit = credit_new amount: 5, at_time: Date.new(2012, 3, 4), charge: charge
         account_create credits: [credit], debits: [debit], property: property_new
 
-        account = AccountDetails.balance_all(greater_than: 10).first.account
+        account = described_class.balance_all(greater_than: 10).first.account
 
         expect(account).to eq Account.first
       end

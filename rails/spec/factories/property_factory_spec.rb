@@ -8,7 +8,7 @@ RSpec.describe 'Property Factory' do
 
       describe 'makes' do
         it 'address' do
-          expect(property_new.address).to_not be_nil
+          expect(property_new.address).not_to be_nil
         end
       end
     end
@@ -27,9 +27,10 @@ RSpec.describe 'Property Factory' do
         expect(property.address.road).to eq 'Hill'
       end
     end
+
     describe 'adds' do
       it 'can add account' do
-        expect(property_new(account: account_new).account).to_not be_nil
+        expect(property_new(account: account_new).account).not_to be_nil
       end
 
       it 'can add agent' do

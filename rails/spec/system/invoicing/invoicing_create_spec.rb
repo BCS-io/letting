@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Invoicing#create', type: :system do
   let(:invoicing_page) { InvoicingPage.new }
+
   before do
     log_in
     invoice_text_create id: 1
@@ -96,8 +97,8 @@ RSpec.describe 'Invoicing#create', type: :system do
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load.choose_dates
 
-        expect(find_field('Start date')).to_not be_disabled
-        expect(find_field('End date')).to_not be_disabled
+        expect(find_field('Start date')).not_to be_disabled
+        expect(find_field('End date')).not_to be_disabled
       end
     end
   end
@@ -192,7 +193,7 @@ RSpec.describe 'Invoicing#create', type: :system do
           invoicing_page.search_term('9').button 'Create'
 
           expect(invoicing_page).to be_actionable
-          expect(invoicing_page).to_not be_none_retained
+          expect(invoicing_page).not_to be_none_retained
         end
       end
 
@@ -227,7 +228,7 @@ RSpec.describe 'Invoicing#create', type: :system do
           invoicing_page.search_term('8-9').button 'Create'
 
           expect(invoicing_page).to be_actionable
-          expect(invoicing_page).to_not be_none_ignored
+          expect(invoicing_page).not_to be_none_ignored
         end
       end
     end

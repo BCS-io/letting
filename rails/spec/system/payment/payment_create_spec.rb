@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Payment#create', :ledgers, type: :system do
   before { log_in }
+
   let(:payment_page) { PaymentPage.new }
 
   it 'opens payment page as expected' do

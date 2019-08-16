@@ -4,26 +4,27 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
   describe 'validates' do
     it('is valid') { expect(payment_new account: account_new).to be_valid }
     it 'requires account' do
-      expect(payment_new(account_id: nil)).to_not be_valid
+      expect(payment_new(account_id: nil)).not_to be_valid
     end
     describe 'amount' do
-      it('requires amount') { expect(payment_new amount: nil).to_not be_valid }
-      it('is a number') { expect(payment_new amount: 'nan').to_not be_valid }
-      it('has a max') { expect(payment_new amount: 100_000).to_not be_valid }
+      it('requires amount') { expect(payment_new amount: nil).not_to be_valid }
+      it('is a number') { expect(payment_new amount: 'nan').not_to be_valid }
+      it('has a max') { expect(payment_new amount: 100_000).not_to be_valid }
       it 'is valid under max' do
         expect(payment_new account: account_new, amount: 99_999.99).to be_valid
       end
-      it('has a min') { expect(payment_new amount: -100_000).to_not be_valid }
+      it('has a min') { expect(payment_new amount: -100_000).not_to be_valid }
       it 'is valid under min' do
         expect(payment_new account: account_new, amount: -99_999.99).to be_valid
       end
-      it('fails zero amount') { expect(payment_new amount: 0).to_not be_valid }
+      it('fails zero amount') { expect(payment_new amount: 0).not_to be_valid }
     end
+
     it 'requires date' do
       payment = payment_new
       # note: default_initialization for booked_at
       payment.booked_at = nil
-      expect(payment).to_not be_valid
+      expect(payment).not_to be_valid
     end
   end
 
@@ -37,13 +38,14 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         end
       end
     end
+
     describe 'amount' do
       it 'sets nil amount to 0' do
         expect(payment_new(amount: nil).amount).to eq 0
       end
       it 'leaves defined amounts intact' do
         payment = payment_create account: account_new, amount: 10.50
-        expect(Payment.find(payment.id).amount).to eq(10.50)
+        expect(described_class.find(payment.id).amount).to eq(10.50)
       end
     end
   end
@@ -96,7 +98,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
 
       it 'false if no account' do
         (payment = payment_new).account = nil
-        expect(payment).to_not be_account_exists
+        expect(payment).not_to be_account_exists
       end
     end
 
@@ -122,7 +124,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
 
       it 'saves credits with none-zero amount' do
         (payment = payment_new credit: credit_new(amount: 1)).valid?
-        expect(payment.credits.first).to_not be_marked_for_destruction
+        expect(payment.credits.first).not_to be_marked_for_destruction
       end
     end
 
@@ -131,19 +133,19 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         account = account_create property: property_new
         payment = payment_create account_id: account.id,
                                  booked_at: '2014-9-1 16:29:30'
-        expect(Payment.booked_on(date: '2014-09-01').to_a).to eq [payment]
+        expect(described_class.booked_on(date: '2014-09-01').to_a).to eq [payment]
       end
 
       it 'returns nothing on days without a transaction.' do
         account = account_create property: property_new
         payment_create account_id: account.id
-        expect(Payment.booked_on(date: '2000-1-1').to_a).to eq []
+        expect(described_class.booked_on(date: '2000-1-1').to_a).to eq []
       end
 
       it 'returns nothing if invalid date' do
         account = account_create property: property_new
         payment_create account_id: account.id
-        expect(Payment.booked_on date: '2012-x').to eq []
+        expect(described_class.booked_on date: '2012-x').to eq []
       end
     end
 
@@ -153,7 +155,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         payment = payment_create account_id: account.id,
                                  booked_at: Time.zone.now - 2.years + 1.day
 
-        expect(Payment.recent.to_a).to eq [payment]
+        expect(described_class.recent.to_a).to eq [payment]
       end
 
       it 'ignores payments outside range' do
@@ -161,7 +163,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         payment_create account_id: account.id,
                        booked_at: Time.zone.now - 2.years - 1.day
 
-        expect(Payment.recent.to_a).to eq []
+        expect(described_class.recent.to_a).to eq []
       end
     end
 
@@ -172,7 +174,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         payment_create account: account, amount: 10.0, booked_at: past
         payment_create account: account, amount: 15.0, booked_at: past
 
-        booked = Payment.by_booked_at_date[0]
+        booked = described_class.by_booked_at_date[0]
         expect(booked[0]).to be_between(past.to_date.yesterday, past.to_date.tomorrow)
         expect(booked[1]).to eq 2
         expect(booked[2]).to eq 25
@@ -185,7 +187,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         payment_create booked_at: past, account: account
         payment_create booked_at: recent, account: account
 
-        booked = Payment.by_booked_at_date
+        booked = described_class.by_booked_at_date
         expect(booked[0][0]).to be_between(recent.to_date.yesterday, recent.to_date.tomorrow)
         expect(booked[1][0]).to be_between(past.to_date.yesterday, past.to_date.tomorrow)
       end
@@ -193,13 +195,13 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
 
     describe '.last_booked_at' do
       it 'returns today if no payments at all (unlikely)' do
-        expect(Payment.last_booked_at).to eq Time.zone.today.to_s
+        expect(described_class.last_booked_at).to eq Time.zone.today.to_s
       end
 
       it 'returns the last day a payment was made' do
         payment_create(account: account_new, booked_at: '2014-03-25')
         payment_create(account: account_new, booked_at: '2014-06-25')
-        expect(Payment.last_booked_at).to eq '2014-06-25'
+        expect(described_class.last_booked_at).to eq '2014-06-25'
       end
     end
 
@@ -209,7 +211,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.match_by_human_ref 10).to eq [payment]
+        expect(described_class.match_by_human_ref 10).to eq [payment]
       end
 
       it 'return empty array when mismatches human_ref' do
@@ -217,7 +219,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.match_by_human_ref 5).to be_empty
+        expect(described_class.match_by_human_ref 5).to be_empty
       end
 
       it 'returns empty array when matches human_ref but also contains other text' do
@@ -225,7 +227,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: '30/4/2013 01:00:00 +0100',
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.match_by_human_ref '10 Mr Jones').to be_empty
+        expect(described_class.match_by_human_ref '10 Mr Jones').to be_empty
       end
     end
 
@@ -235,7 +237,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: Time.zone.local(2013, 2, 1, 0, 0),
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.by_quarter_day(
+        expect(described_class.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
                ))
@@ -247,7 +249,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: Time.zone.local(2013, 7, 31, 23, 59),
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.by_quarter_day(
+        expect(described_class.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
                ))
@@ -259,7 +261,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: Time.zone.local(2013, 1, 31, 23, 59),
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.by_quarter_day(
+        expect(described_class.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
                ))
@@ -271,7 +273,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
           booked_at: Time.zone.local(2013, 8, 1, 0, 0),
           account: account_create(property: property_new(human_ref: 10))
 
-        expect(Payment.by_quarter_day(
+        expect(described_class.by_quarter_day(
                  year: 2013,
                  batch_months: BatchMonths.make(month: BatchMonths::MAR)
                ))
@@ -280,52 +282,52 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     end
   end
 
-  it 'should be indexed', elasticsearch: true do
-    expect(Payment.__elasticsearch__.index_exists?).to be_truthy
+  it 'is indexed', elasticsearch: true do
+    expect(described_class.__elasticsearch__).to be_index_exists
   end
 
   describe 'full text .search', elasticsearch: true do
     it 'matches partial match' do
       payment_create account: account_create(property: \
         property_new(occupiers: [Entity.new(name: 'Strauss')]))
-      Payment.import force: true, refresh: true
+      described_class.import force: true, refresh: true
 
-      expect(Payment.search('Strau', sort: 'booked_at').results.total).to eq 1
+      expect(described_class.search('Strau', sort: 'booked_at').results.total).to eq 1
     end
 
     it 'matches amount' do
       skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
-      Payment.import force: true, refresh: true
+      described_class.import force: true, refresh: true
 
-      expect(Payment.search('12.7', sort: 'booked_at').results.total).to eq 1
+      expect(described_class.search('12.7', sort: 'booked_at').results.total).to eq 1
     end
 
     it 'matches amount to two decimal places' do
       skip 'wait for elasticsearch 5 scaled_float'
       payment_create account: account_create(property: property_new), amount: 12.70
-      Payment.import force: true, refresh: true
+      described_class.import force: true, refresh: true
 
       # note this should match but doesn't
-      expect(Payment.search('12.70', sort: 'booked_at').results.total).to eq 1
+      expect(described_class.search('12.70', sort: 'booked_at').results.total).to eq 1
     end
 
     it 'matches holder' do
       payment_create account: account_create(property: \
         property_new(occupiers: [Entity.new(name: 'Strauss')]))
-      Payment.import force: true, refresh: true
+      described_class.import force: true, refresh: true
 
-      expect(Payment.search('Strauss', sort: 'booked_at').results.total).to eq 1
-      expect(Payment.search('Bradman', sort: 'booked_at').results.total).to eq 0
+      expect(described_class.search('Strauss', sort: 'booked_at').results.total).to eq 1
+      expect(described_class.search('Bradman', sort: 'booked_at').results.total).to eq 0
     end
 
     it 'matches property address' do
       payment_create account: \
           account_create(property: property_new(address: address_new(town: 'Bristol')))
-      Payment.import force: true, refresh: true
+      described_class.import force: true, refresh: true
 
-      expect(Payment.search('Bristol', sort: 'booked_at').results.total).to eq 1
-      expect(Payment.search('London', sort: 'booked_at').results.total).to eq 0
+      expect(described_class.search('Bristol', sort: 'booked_at').results.total).to eq 1
+      expect(described_class.search('London', sort: 'booked_at').results.total).to eq 0
     end
   end
 end

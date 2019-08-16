@@ -4,7 +4,7 @@ require 'rails_helper'
 # Property's route path is to account
 #
 RSpec.describe 'Property#show', type: :system do
-  before(:each) { log_in }
+  before { log_in }
 
   it 'has basic details' do
     property_create id: 1,
@@ -61,7 +61,7 @@ RSpec.describe 'Property#show', type: :system do
       property_create id: 1, account: account_new(charges: [charge_new])
       visit '/accounts/1'
 
-      expect(page.text).to_not match /No charges levied against this property./i
+      expect(page.text).not_to match /No charges levied against this property./i
     end
   end
 end

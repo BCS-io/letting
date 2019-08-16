@@ -37,7 +37,7 @@ RSpec.describe 'Invoicing#show', type: :system do
       visit '/invoicings/1'
 
       within '.t-run-delete-1' do
-        expect(find '.t-delete-run').to_not be_disabled
+        expect(find '.t-delete-run').not_to be_disabled
       end
     end
   end
@@ -69,7 +69,7 @@ RSpec.describe 'Invoicing#show', type: :system do
                        runs: [run_new(invoices: [invoice])]
       visit '/invoicings/1'
 
-      expect(find '#print-link').to_not be_disabled
+      expect(find '#print-link').not_to be_disabled
       expect(page.has_no_content? /No invoices will be delivered./i).to be true
     end
   end

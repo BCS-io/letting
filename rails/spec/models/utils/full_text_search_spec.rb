@@ -7,7 +7,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Property.import force: true, refresh: true
       referrer = Referrer.new controller: 'properties', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'Edgewar').go
+      results = described_class.search(referrer: referrer, query: 'Edgewar').go
       expect(results[:records].count).to eq 1
       expect(results[:render]).to eq 'properties/index'
     end
@@ -17,7 +17,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Property.import force: true, refresh: true
       referrer = Referrer.new controller: 'properties', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'Edg').go
+      results = described_class.search(referrer: referrer, query: 'Edg').go
       expect(results[:records].first.class).to eq Property
       expect(results[:render]).to eq 'properties/index'
     end
@@ -27,7 +27,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Client.import force: true, refresh: true
       referrer = Referrer.new controller: 'clients', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'High St').go
+      results = described_class.search(referrer: referrer, query: 'High St').go
       expect(results[:records].first.class).to eq Client
       expect(results[:render]).to eq 'clients/index'
     end
@@ -38,7 +38,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Payment.import force: true, refresh: true
       referrer = Referrer.new controller: 'payments', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'Strauss').go
+      results = described_class.search(referrer: referrer, query: 'Strauss').go
       expect(results[:records].first.class).to eq Payment
       expect(results[:render]).to eq 'payments/index'
     end
@@ -53,7 +53,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Property.import force: true, refresh: true
       referrer = Referrer.new controller: 'properties', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'York').go
+      results = described_class.search(referrer: referrer, query: 'York').go
       expect(results[:records][0].address_text).to include("York\n")
       expect(results[:records][1].address_text).to include("Yorkshire\n")
     end
@@ -68,7 +68,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Property.import force: true, refresh: true
       referrer = Referrer.new controller: 'properties', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'York').go
+      results = described_class.search(referrer: referrer, query: 'York').go
       expect(results[:records][0].human_ref).to eq 202
       expect(results[:records][1].human_ref).to eq 303
       expect(results[:records][2].human_ref).to eq 404
@@ -83,7 +83,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Client.import force: true, refresh: true
       referrer = Referrer.new controller: 'clients', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'Blackburne').go
+      results = described_class.search(referrer: referrer, query: 'Blackburne').go
       expect(results[:records][0].full_names).to include('Blackburne')
       expect(results[:records][1].full_names).to include('Mr Blackburne & Mr Black')
     end
@@ -96,7 +96,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Client.import force: true, refresh: true
       referrer = Referrer.new controller: 'clients', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: 'Blackburne').go
+      results = described_class.search(referrer: referrer, query: 'Blackburne').go
       expect(results[:records][0].human_ref).to eq 101
       expect(results[:records][1].human_ref).to eq 202
     end
@@ -110,7 +110,7 @@ RSpec.describe FullTextSearch, elasticsearch: true, type: :model do
       Payment.import force: true, refresh: true
       referrer = Referrer.new controller: 'payments', action: ''
 
-      results = FullTextSearch.search(referrer: referrer, query: '101').go
+      results = described_class.search(referrer: referrer, query: '101').go
       expect(results[:records][0].booked_at).to eq Time.zone.local(2013, 6, 6, 0, 0)
       expect(results[:records][1].booked_at).to eq Time.zone.local(2013, 1, 1, 0, 0)
     end

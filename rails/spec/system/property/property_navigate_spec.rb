@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Property navigate', type: :system do
-  before(:each) { log_in }
+  before { log_in }
 
   describe 'from index page' do
     it 'goes to view' do

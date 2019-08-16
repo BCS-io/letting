@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Chargeable, :ledgers, type: :model do
   let(:chargeable) do
-    Chargeable.from_charge charge_id: 1,
-                           account_id: 2,
-                           at_time: Date.new(2013, 3, 25),
-                           period: '2013-3-25'..'2013-6-30',
-                           amount: 88.08
+    described_class.from_charge charge_id: 1,
+                                account_id: 2,
+                                at_time: Date.new(2013, 3, 25),
+                                period: '2013-3-25'..'2013-6-30',
+                                amount: 88.08
   end
 
   describe 'attributes' do
@@ -22,13 +22,13 @@ RSpec.describe Chargeable, :ledgers, type: :model do
 
   describe 'methods' do
     it 'self.from_charge generates chargeable' do
-      chargeable = Chargeable.from_charge \
+      chargeable = described_class.from_charge \
         account_id: 2,
         charge_id: 1,
         at_time: Date.new(2013, 3, 25),
         period: '2013-3-25'..'2013-6-30',
         amount: 88.08
-      expect(chargeable.class).to be Chargeable
+      expect(chargeable.class).to be described_class
     end
 
     describe '#to_hash' do

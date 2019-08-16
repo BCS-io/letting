@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'SecondRunsNeeded#index', type: :system do
-  before(:each) do
+  before do
     log_in admin_attributes
   end
 

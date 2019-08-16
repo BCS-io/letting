@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Payment#update', :ledgers, type: :system do
   before { log_in }
+
   let(:payment_page) { PaymentPage.new }
 
   it 'editing original payment - no double payments', js: true, elasticsearch: true do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Address#updates', type: :system, js: true, elasticsearch: true do
-  before(:each) { log_in }
+  before { log_in }
 
   let(:client) { ClientPage.new }
   let(:address) { AddressPage.new }

@@ -19,14 +19,14 @@ RSpec.describe PriceBoundValidator do
   end
 
   describe 'amount' do
-    it('is a number') { expect(validatable('nan')).to_not be_valid }
-    it('has a max') { expect(validatable(100_000)).to_not be_valid }
+    it('is a number') { expect(validatable('nan')).not_to be_valid }
+    it('has a max') { expect(validatable(100_000)).not_to be_valid }
     it('is valid under max') do
       expect(validatable(99_999.99)).to be_valid
     end
-    it('has a min') { expect(validatable(-100_000)).to_not be_valid }
+    it('has a min') { expect(validatable(-100_000)).not_to be_valid }
     it('is valid under max') { expect(validatable(-99_999.99)).to be_valid }
-    it('fails zero amount') { expect(validatable amount: 0).to_not be_valid }
+    it('fails zero amount') { expect(validatable amount: 0).not_to be_valid }
   end
 
   it 'sets error' do

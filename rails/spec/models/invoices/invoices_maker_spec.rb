@@ -7,7 +7,7 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      maker = InvoicesMaker.new invoicing: invoicing, color: :blue
+      maker = described_class.new invoicing: invoicing, color: :blue
       expect(maker.invoices.size).to eq 1
     end
 
@@ -16,7 +16,7 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      maker = InvoicesMaker.new invoicing: invoicing, color: :blue
+      maker = described_class.new invoicing: invoicing, color: :blue
       expect(maker.invoices.size).to eq 0
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      first = InvoicesMaker.new invoicing: invoicing, color: :blue
+      first = described_class.new invoicing: invoicing, color: :blue
       expect(first.invoices.first.invoice_date).to eq Time.zone.today
     end
 
@@ -36,9 +36,9 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      first = InvoicesMaker.new invoicing: invoicing,
-                                color: :blue,
-                                invoice_date: '2000/01/01'
+      first = described_class.new invoicing: invoicing,
+                                  color: :blue,
+                                  invoice_date: '2000/01/01'
       expect(first.invoices.first.invoice_date).to eq Date.new(2000, 1, 1)
     end
   end
@@ -49,9 +49,9 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      first = InvoicesMaker.new invoicing: invoicing,
-                                color: :blue,
-                                comments: ['a comment']
+      first = described_class.new invoicing: invoicing,
+                                  color: :blue,
+                                  comments: ['a comment']
       expect(first.invoices.first.comments.size).to eq 1
       expect(first.invoices.first.comments.first.clarify).to eq 'a comment'
     end
@@ -61,7 +61,7 @@ RSpec.describe InvoicesMaker, type: :model do
       invoicing = invoicing_new property_range: '1-10', runs: []
       invoice_text_create id: 1
 
-      first = InvoicesMaker.new invoicing: invoicing, color: :blue
+      first = described_class.new invoicing: invoicing, color: :blue
       expect(first.invoices.first.comments.size).to eq 0
     end
   end

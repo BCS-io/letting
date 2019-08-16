@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Snapshot, type: :model do
   it 'can have a period' do
-    snapshot = Snapshot.new
+    snapshot = described_class.new
     snapshot.period = '2000-01-01'..'2010-01-01'
 
     expect(snapshot.period).to eq Date.parse('2000-01-01')..Date.parse('2010-01-01')
@@ -18,7 +18,7 @@ RSpec.describe Snapshot, type: :model do
   describe '#first_invoice?' do
     it 'is not invoiced if one invoice' do
       invoice = invoice_new
-      snapshot = Snapshot.new
+      snapshot = described_class.new
       snapshot.invoices = [invoice]
 
       expect(snapshot).to be_first_invoice invoice
@@ -26,10 +26,10 @@ RSpec.describe Snapshot, type: :model do
 
     it 'has been invoiced if more than one invoice' do
       second_invoice = invoice_new
-      snapshot = Snapshot.new
+      snapshot = described_class.new
       snapshot.invoices = [invoice_new, second_invoice]
 
-      expect(snapshot).to_not be_first_invoice second_invoice
+      expect(snapshot).not_to be_first_invoice second_invoice
     end
   end
 
@@ -38,15 +38,15 @@ RSpec.describe Snapshot, type: :model do
       account = account_create
       snapshot_create account: account, period: '2001/01/01'..'2001/03/01'
 
-      snap = Snapshot.find account: account, period: '2001/01/01'..'2001/03/01'
+      snap = described_class.find account: account, period: '2001/01/01'..'2001/03/01'
 
-      expect(snap).to_not be_nil
+      expect(snap).not_to be_nil
     end
 
     it 'returns nothing when missing' do
       account = account_create
 
-      snap = Snapshot.find account: account, period: '2001/01/01'..'2001/03/01'
+      snap = described_class.find account: account, period: '2001/01/01'..'2001/03/01'
 
       expect(snap).to be_nil
     end

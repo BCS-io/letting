@@ -1,41 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe Entity, type: :model do
-  let(:entity) { Entity.new person_entity_attributes entitieable_id: 1 }
+  let(:entity) { described_class.new person_entity_attributes entitieable_id: 1 }
+
   it('is valid') { expect(entity).to be_valid }
 
   describe 'validations' do
     describe 'name' do
       it 'presence' do
         entity.name = nil
-        expect(entity).to_not be_valid
+        expect(entity).not_to be_valid
       end
 
       it 'is required' do
         entity.name = ''
-        expect(entity).to_not be_valid
+        expect(entity).not_to be_valid
       end
 
       it 'has a maximum' do
         entity.name = 'a' * 65
-        expect(entity).to_not be_valid
+        expect(entity).not_to be_valid
       end
     end
 
     it 'title has a max' do
       entity.title = 'a' * 11
-      expect(entity).to_not be_valid
+      expect(entity).not_to be_valid
     end
 
     it 'initials has a max' do
       entity.initials = 'a' * 11
-      expect(entity).to_not be_valid
+      expect(entity).not_to be_valid
     end
   end
 
   describe 'methods' do
     context 'new entity' do
-      let(:entity) { Entity.new }
+      let(:entity) { described_class.new }
 
       context '#empty?' do
         it('is empty') { expect(entity).to be_empty }

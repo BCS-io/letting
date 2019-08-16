@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PropertyDecorator do
-  let(:property) { PropertyDecorator.new property_new }
+  let(:property) { described_class.new property_new }
 
   let(:house) do
     property.address.flat_no = ''
@@ -29,13 +29,13 @@ RSpec.describe PropertyDecorator do
     context 'with agent' do
       it 'name returned' do
         agent = agent_new entities: [Entity.new(name: 'Willis')]
-        decorator = PropertyDecorator.new property_create agent: agent
+        decorator = described_class.new property_create agent: agent
         expect(decorator.agent_name).to eq 'Willis'
       end
 
       it 'address returned' do
         agent = agent_new address: address_new(road: 'Wiggiton')
-        decorator = PropertyDecorator.new property_create agent: agent
+        decorator = described_class.new property_create agent: agent
         expect(decorator.agent.address.text)
           .to eq "Wiggiton\nBirmingham\nWest Midlands"
       end

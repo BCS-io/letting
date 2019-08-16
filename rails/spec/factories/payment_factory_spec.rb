@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'payment' do
   describe 'new' do
     describe 'default' do
-      it('is not valid') { expect(payment_new).to_not be_valid }
+      it('is not valid') { expect(payment_new).not_to be_valid }
       it 'is valid with account' do
         expect(payment_new account: account_new).to be_valid
       end
@@ -39,6 +39,7 @@ RSpec.describe 'payment' do
           .to eq Date.new 2013, 4, 30
       end
     end
+
     describe 'overrides' do
       it 'alters amount' do
         expect(payment_create(account: account_new, amount: 35.50).amount)

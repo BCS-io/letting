@@ -32,7 +32,7 @@ RSpec.describe 'RunShow#show', type: :system do
 
       # TODO: write page wrapper
       # Tests showing the page has been loaded
-      expect(page).to_not have_text 'Act 2002'
+      expect(page).not_to have_text 'Act 2002'
     end
   end
 

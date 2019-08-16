@@ -10,7 +10,7 @@ RSpec.describe DateHelper, type: :helper do
   end
 
   describe '#safe_date' do
-    it 'it includes safe_date interface' do
+    it 'includes safe_date interface' do
       expect(safe_date date: nil, format: :short).to eq ''
     end
   end

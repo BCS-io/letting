@@ -5,22 +5,22 @@ RSpec.describe Run, type: :model do
   describe 'validates presence' do
     it '#invoice_date' do
       (run = run_new).invoice_date = nil
-      expect(run).to_not be_valid
+      expect(run).not_to be_valid
     end
     it '#invoices' do
-      expect(run_new invoices: nil).to_not be_valid
+      expect(run_new invoices: nil).not_to be_valid
     end
   end
 
   describe '#deliverable?' do
     it 'can be deliverable' do
-      run = Run.new invoices: [Invoice.new(deliver: 'mail')]
+      run = described_class.new invoices: [Invoice.new(deliver: 'mail')]
 
       expect(run.deliverable?).to be true
     end
 
     it 'can not be deliverable' do
-      run = Run.new invoices: [Invoice.new(deliver: 'retain')]
+      run = described_class.new invoices: [Invoice.new(deliver: 'retain')]
 
       expect(run.deliverable?).to be false
     end
@@ -64,18 +64,18 @@ RSpec.describe Run, type: :model do
 
   describe '#last?' do
     it 'can be last' do
-      last = Run.new(invoices: [invoice_new])
+      last = described_class.new(invoices: [invoice_new])
       Invoicing.new.runs = [last]
 
       expect(last).to be_last
     end
 
     it 'can not be last' do
-      first = Run.new(invoices: [invoice_new])
-      last = Run.new(invoices: [invoice_new])
+      first = described_class.new(invoices: [invoice_new])
+      last = described_class.new(invoices: [invoice_new])
       Invoicing.new.runs = [first, last]
 
-      expect(first).to_not be_last
+      expect(first).not_to be_last
     end
   end
 end

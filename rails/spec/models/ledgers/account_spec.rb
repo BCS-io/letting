@@ -8,7 +8,7 @@ RSpec.describe Account, :ledgers, type: :model do
       account = account_new
       7.times { account.charges << charge_new }
 
-      expect(account).to_not be_valid
+      expect(account).not_to be_valid
     end
   end
 
@@ -136,17 +136,17 @@ RSpec.describe Account, :ledgers, type: :model do
     before { property_create human_ref: 5, account: account_new }
 
     describe '.find_by_human_ref' do
-      it('handles nil') { expect(Account.find_by_human_ref(nil)).to be_nil }
+      it('handles nil') { expect(described_class.find_by_human_ref(nil)).to be_nil }
       it('matching ref') do
-        expect(Account.find_by_human_ref('5')).to eq Account.first
+        expect(described_class.find_by_human_ref('5')).to eq described_class.first
       end
     end
 
     describe '.between' do
-      it('handles nil') { expect(Account.between?(nil).size).to eq 0 }
-      it('matching ref') { expect(Account.between?('5').size).to eq 1 }
-      it('matching range') { expect(Account.between?('5-5').size).to eq 1 }
-      it('unlike ref range') { expect(Account.between?('4000').size).to eq 0 }
+      it('handles nil') { expect(described_class.between?(nil).size).to eq 0 }
+      it('matching ref') { expect(described_class.between?('5').size).to eq 1 }
+      it('matching range') { expect(described_class.between?('5-5').size).to eq 1 }
+      it('unlike ref range') { expect(described_class.between?('4000').size).to eq 0 }
     end
   end
 end

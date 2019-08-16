@@ -9,11 +9,13 @@ RSpec.describe 'Client Factory' do
       it('has entity') { expect(client_new.full_names).to eq 'Mr M. Prior' }
       it('has address') { expect(client_new.address.town).to eq 'Birmingham' }
     end
+
     describe 'overrides' do
       it 'alters human_ref' do
         expect(client_new(human_ref: 620).human_ref).to eq 620
       end
     end
+
     describe 'adds' do
       it 'entities' do
         entities = [Entity.new(title: 'Mr', initials: 'I', name: 'Bell')]

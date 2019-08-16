@@ -5,7 +5,8 @@ require 'rails_helper'
 #
 RSpec.describe 'Charge#delete', type: :system do
   let(:account) { AccountPage.new }
-  before(:each) do
+
+  before do
     log_in
     property_create id: 1,
                     human_ref: 80,

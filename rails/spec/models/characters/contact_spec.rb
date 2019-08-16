@@ -6,14 +6,14 @@ RSpec.shared_examples_for Contact do
       contactable = described_class.new
       expect(contactable.address).to be_nil
       contactable.prepare_for_form
-      expect(contactable.address).to_not be_nil
+      expect(contactable.address).not_to be_nil
     end
 
     it '#clear_up_form destroys address' do
       contactable = described_class.new
       contactable.prepare_for_form
       contactable.clear_up_form
-      expect(contactable.address).to_not be_nil
+      expect(contactable.address).not_to be_nil
     end
   end
 end

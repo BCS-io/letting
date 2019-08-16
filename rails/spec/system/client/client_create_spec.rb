@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Client#create', type: :system do
   before { log_in }
+
   let(:client_page) { ClientPage.new }
 
   it 'opens valid page', js: true do
@@ -40,7 +41,7 @@ RSpec.describe 'Client#create', type: :system do
     client_page.click 'Cancel'
 
     expect(client_page.title).to eq 'Letting - Clients'
-    expect(page).to_not have_text 'Bell'
+    expect(page).not_to have_text 'Bell'
   end
 
   it 'has add and remove actions', js: true do

@@ -4,18 +4,20 @@ RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
   describe 'validations' do
     it('is valid') { expect(charge_new).to be_valid }
     describe 'presence' do
-      it('charge type') { expect(charge_new charge_type: nil).to_not be_valid }
-      it('amount') { expect(charge_new amount: nil).to_not be_valid }
+      it('charge type') { expect(charge_new charge_type: nil).not_to be_valid }
+      it('amount') { expect(charge_new amount: nil).not_to be_valid }
       describe 'amount when zero' do
         it 'rejects active' do
-          expect(charge_new amount: 0, activity: 'active').to_not be_valid
+          expect(charge_new amount: 0, activity: 'active').not_to be_valid
         end
         it 'allows dormant' do
           expect(charge_new amount: 0, activity: 'dormant').to be_valid
         end
       end
-      it('cycle') { expect(charge_new cycle: nil).to_not be_valid }
+
+      it('cycle') { expect(charge_new cycle: nil).not_to be_valid }
     end
+
     describe 'payment type' do
       it 'accepts string' do
         expect(charge_new payment_type: 'manual').to be_valid
@@ -23,31 +25,32 @@ RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
       it 'accepts const' do
         expect(charge_new payment_type: 'manual').to be_valid
       end
-      it('rejects nil') { expect(charge_new payment_type: nil).to_not be_valid }
+      it('rejects nil') { expect(charge_new payment_type: nil).not_to be_valid }
     end
+
     describe 'amount' do
-      it('is a number') { expect(charge_new amount: 'nn').to_not be_valid }
-      it('has a max') { expect(charge_new amount: 100_000).to_not be_valid }
+      it('is a number') { expect(charge_new amount: 'nn').not_to be_valid }
+      it('has a max') { expect(charge_new amount: 100_000).not_to be_valid }
     end
   end
 
   describe 'methods' do
-    it('responds to monthly') { expect(charge_new).to_not be_monthly }
+    it('responds to monthly') { expect(charge_new).not_to be_monthly }
 
     describe '#clear_up_form' do
       it 'keeps charges by default' do
-        expect(Charge.new).to_not be_marked_for_destruction
+        expect(described_class.new).not_to be_marked_for_destruction
       end
 
       it 'clears new charges if asked' do
-        (charge = Charge.new).clear_up_form
+        (charge = described_class.new).clear_up_form
         expect(charge).to be_marked_for_destruction
       end
 
       it 'keeps new charges if edited' do
-        (charge = Charge.new).charge_type = 'Rent'
+        (charge = described_class.new).charge_type = 'Rent'
         charge.clear_up_form
-        expect(charge).to_not be_marked_for_destruction
+        expect(charge).not_to be_marked_for_destruction
       end
     end
 
@@ -100,7 +103,7 @@ RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
 
       it 'returns automatic payment when standing order' do
         charge = charge_new payment_type: 'manual'
-        expect(charge).to_not be_automatic
+        expect(charge).not_to be_automatic
       end
     end
 

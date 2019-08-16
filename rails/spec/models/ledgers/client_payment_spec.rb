@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ClientPayment, :ledgers do
   it 'creates years' do
     Timecop.travel('2014-6-1') do
-      payment = ClientPayment.query
+      payment = described_class.query
       expect(payment.years).to eq %w[2014 2013 2012 2011 2010]
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe ClientPayment, :ledgers do
       )
       batch_month = BatchMonths.make month: BatchMonths::MAR
 
-      expect(ClientPayment.query(client_id: client.id)
+      expect(described_class.query(client_id: client.id)
         .accounts_with_period(batch_months: batch_month))
         .to match_array [client.properties.first.account]
     end
@@ -43,7 +43,7 @@ RSpec.describe ClientPayment, :ledgers do
 
       other_client = client_create(human_ref: 2)
 
-      expect(ClientPayment.query(client_id: other_client.id)
+      expect(described_class.query(client_id: other_client.id)
         .accounts_with_period(batch_months: batch_month))
         .to match_array []
     end
@@ -62,7 +62,7 @@ RSpec.describe ClientPayment, :ledgers do
       )
       batch_month = BatchMonths.make month: BatchMonths::MAR
 
-      expect(ClientPayment.query(client_id: client.id)
+      expect(described_class.query(client_id: client.id)
         .accounts_with_period(batch_months: batch_month))
         .to match_array []
     end
@@ -80,7 +80,7 @@ RSpec.describe ClientPayment, :ledgers do
       )
       batch_month = BatchMonths.make month: BatchMonths::MAR
 
-      expect(ClientPayment.query(client_id: client.id)
+      expect(described_class.query(client_id: client.id)
         .accounts_with_period(batch_months: batch_month))
         .to match_array []
     end

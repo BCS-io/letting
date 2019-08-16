@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AccountDebitDecorator do
-  let(:debit_dec) { AccountDebitDecorator.new debit_new }
+  let(:debit_dec) { described_class.new debit_new }
 
   context 'attributes has' do
     it 'charge_type' do
@@ -23,7 +23,7 @@ RSpec.describe AccountDebitDecorator do
       end
 
       it 'returns arrears description when start date is a minimum date' do
-        dec = AccountDebitDecorator.new \
+        dec = described_class.new \
           debit_new period: Time.zone.local(2000, 1, 1)..Date.new(2013, 6, 30)
         expect(dec.description).to eq 'Arrears'
       end
