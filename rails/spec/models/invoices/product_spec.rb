@@ -11,11 +11,11 @@ RSpec.describe Product, type: :model do
         expect(product_new(amount: nil)).not_to be_valid
       end
 
-      it 'requires amount' do
+      it 'requires charge_type' do
         expect(product_new(charge_type: nil)).not_to be_valid
       end
 
-      it 'requires amount' do
+      it 'requires date_due' do
         expect(product_new(date_due: nil)).not_to be_valid
       end
 

@@ -22,8 +22,8 @@ RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
       it 'accepts string' do
         expect(charge_new payment_type: 'manual').to be_valid
       end
-      it 'accepts const' do
-        expect(charge_new payment_type: 'manual').to be_valid
+      it 'accepts symbol' do
+        expect(charge_new payment_type: :manual).to be_valid
       end
       it('rejects nil') { expect(charge_new payment_type: nil).not_to be_valid }
     end
@@ -96,12 +96,12 @@ RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
     end
 
     describe '#automatic?' do
-      it 'returns automatic payment when standing order' do
+      it 'returns automatic payment' do
         charge = charge_new payment_type: 'automatic'
         expect(charge).to be_automatic
       end
 
-      it 'returns automatic payment when standing order' do
+      it 'returns not automatic payment otherwise' do
         charge = charge_new payment_type: 'manual'
         expect(charge).not_to be_automatic
       end

@@ -72,10 +72,5 @@ RSpec.describe Advance, :ledgers, :range do
       expect(repeat.periods).to eq [[RepeatDate.new(year: 2024, month: 3, day: 26), RepeatDate.new(year: 2024, month: 9, day: 29)],
                                     [RepeatDate.new(year: 2024, month: 9, day: 30), RepeatDate.new(year: 2025, month: 3, day: 25)]]
     end
-
-    it 'returns periods based initialized dates' do
-      repeat = described_class.new repeat_dates: [RepeatDate.new(year: 2020, month: 3, day: 8)]
-      expect(repeat.periods).to eq [[RepeatDate.new(year: 2020, month: 3, day: 8), RepeatDate.new(year: 2021, month: 3, day: 7)]]
-    end
   end
 end

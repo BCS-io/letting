@@ -15,9 +15,6 @@ RSpec.describe 'ChargeFactory' do
         expect(charge_new.cycle.due_ons[0])
           .to eq DueOn.new(month: 3, day: 25)
       end
-      it 'makes creates cycle' do
-        expect(charge_new.cycle.name).to eq 'Mar'
-      end
 
       describe 'adds' do
         it 'can add cycle' do
