@@ -22,6 +22,15 @@ class AccountDetails < ApplicationRecord
                   .order(:human_ref)
   end
 
+  # self.balance_all
+  #  - returns accounts with balances greater than arg
+  #
+  #  argument
+  #  - greater_than: 0  - balance needed to be greater than
+  #
+  # returns
+  #  - information about accounts owing over greater_than
+  #
   def self.balance_all greater_than: 0
     AccountDetails.includes(property: %i[client address entities])
                   .select('account_id, property_id, sum(amount) as amount')
