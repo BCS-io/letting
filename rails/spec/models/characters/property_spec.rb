@@ -26,40 +26,38 @@ RSpec.describe Property, type: :model do
   end
 
   describe 'Methods' do
-    describe '#invoice' do
-      describe '[:billing_address]' do
-        context 'without agent' do
-          property = nil
-          before do
-            agent = agent_new authorized: false,
-                              entities: [Entity.new(name: 'Bel')],
-                              address: address_new(road: 'Old', town: 'York')
-            property = property_new occupiers: [Entity.new(name: 'Grace')],
-                                    address: address_new(road: 'N', town: 'Bm'),
-                                    agent: agent
-          end
-
-          it 'displays property text' do
-            expect(property.invoice[:billing_address])
-              .to eq "Grace\nN\nBm\nWest Midlands"
-          end
+    describe '#invoice - [:billing_address]' do
+      context 'without agent' do
+        property = nil
+        before do
+          agent = agent_new authorized: false,
+                            entities: [Entity.new(name: 'Bel')],
+                            address: address_new(road: 'Old', town: 'York')
+          property = property_new occupiers: [Entity.new(name: 'Grace')],
+                                  address: address_new(road: 'N', town: 'Bm'),
+                                  agent: agent
         end
 
-        context 'with agent' do
-          property = nil
-          before do
-            agent = agent_new authorized: true,
-                              entities: [Entity.new(name: 'Bel')],
-                              address: address_new(road: 'Old', town: 'York')
-            property = property_new occupiers: [Entity.new(name: 'Grace')],
-                                    address: address_new(road: 'N', town: 'Bm'),
-                                    agent: agent
-          end
+        it 'displays property text' do
+          expect(property.invoice[:billing_address])
+            .to eq "Grace\nN\nBm\nWest Midlands"
+        end
+      end
 
-          it 'displays property text' do
-            expect(property.invoice[:billing_address])
-              .to eq "Bel\nOld\nYork\nWest Midlands"
-          end
+      context 'with agent' do
+        property = nil
+        before do
+          agent = agent_new authorized: true,
+                            entities: [Entity.new(name: 'Bel')],
+                            address: address_new(road: 'Old', town: 'York')
+          property = property_new occupiers: [Entity.new(name: 'Grace')],
+                                  address: address_new(road: 'N', town: 'Bm'),
+                                  agent: agent
+        end
+
+        it 'displays property text' do
+          expect(property.invoice[:billing_address])
+            .to eq "Bel\nOld\nYork\nWest Midlands"
         end
       end
     end
