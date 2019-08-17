@@ -184,6 +184,8 @@ group :test do
   gem 'elasticsearch-extensions'
   gem 'rspec-rails', '~> 3.8.0'
   gem 'selenium-webdriver', '~>3.0'
+  gem 'stackprof', '>= 0.2.9', require: false
+  gem 'test-prof'
   gem 'timecop', '~>0.8.0'
   gem 'webdrivers', '~> 3.0'
 end
