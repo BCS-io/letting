@@ -16,27 +16,30 @@ class << self
     create_cycle
 
     Charge.create! [
-      { id: 1, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'manual', amount: '88.08',  account_id: 1 },
+      { id: 1, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'manual', amount: '88.08', account_id: 1 },
       { id: 2, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'automatic', amount: '125.08', account_id: 1 },
-      { id: 3, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'manual', amount: '70.00',  account_id: 2 },
-      { id: 4, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'automatic', amount: '70.00',  account_id: 3 },
+      { id: 3, charge_type: 'Ground Rent',    cycle_id: 1, payment_type: 'manual', amount: '70.00', account_id: 2 },
+      { id: 4, charge_type: 'Service Charge', cycle_id: 1, payment_type: 'automatic', amount: '70.00', account_id: 3 }
     ]
   end
 
   def create_cycle
-    DueOn.create! [
-      { id: 1, month: 3,  day: 25, cycle_id: 1 },
-      { id: 2, month: 9,  day: 29, cycle_id: 1 },
-      { id: 3, month: 6,  day: 25, cycle_id: 2 },
-      { id: 4, month: 12, day: 29, cycle_id: 2 },
-      { id: 5, month: 4,  day: 1,  cycle_id: 3 },
-    ]
-    Cycle.create! [
-      { id: 1,  name: 'Mar/Sep', charged_in: 'arrears', order: 1, cycle_type: 'term' },
-      { id: 2,  name: 'Jun/Dec', charged_in: 'arrears', order: 2, cycle_type: 'term' },
-      { id: 3,  name: 'Apr',     charged_in: 'arrears', order: 3, cycle_type: 'term' },
-    ]
-    Cycle.all.each { |cycle| Cycle.reset_counters(cycle.id, :due_ons) }
+    one = Cycle.new(id: 1, name: 'Mar/Sep', charged_in: 'arrears', order: 1, cycle_type: 'term')
+    one.due_ons.build(id: 1, month: 3,  day: 25)
+    one.due_ons.build(id: 2, month: 9,  day: 29)
+
+    two = Cycle.new(id: 2, name: 'Jun/Dec', charged_in: 'arrears', order: 2, cycle_type: 'term')
+    two.due_ons.build(id: 3, month: 6,  day: 25)
+    two.due_ons.build(id: 4, month: 12, day: 29)
+
+    three = Cycle.new(id: 3, name: 'Apr', charged_in: 'arrears', order: 3, cycle_type: 'term')
+    three.due_ons.build(id: 5, month: 4, day: 1, cycle_id: 3)
+
+    Cycle.transaction do
+      one.save!
+      two.save!
+      three.save!
+    end
   end
 end
 

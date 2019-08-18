@@ -1,4 +1,3 @@
-
 require_relative '../../../lib/modules/string_utils'
 
 ####

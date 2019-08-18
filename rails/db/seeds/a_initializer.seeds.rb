@@ -1,4 +1,3 @@
-
 # Runs first before any other seeding
 #
 # Seedbank runs everything in seeds directory in alphabetic order
@@ -8,5 +7,21 @@
 
 Rake::Task['db:truncate_all'].invoke
 
-# Users
-Rake::Task['db:import:users'].invoke('test')
+admin = User.new(id: 1,
+                 nickname: 'admin',
+                 email: 'admin@example.com',
+                 password: 'password',
+                 password_confirmation: 'password',
+                 role: 'admin')
+
+user = User.new(id: 2,
+                nickname: 'user',
+                email: 'user@example.com',
+                password: 'password',
+                password_confirmation: 'password',
+                role: 'user')
+
+User.transaction do
+  admin.save!
+  user.save!
+end
