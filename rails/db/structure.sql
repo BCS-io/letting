@@ -5,6 +5,7 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
@@ -102,7 +103,6 @@ UNION ALL
 --
 
 CREATE SEQUENCE public.accounts_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -123,8 +123,8 @@ ALTER SEQUENCE public.accounts_id_seq OWNED BY public.accounts.id;
 
 CREATE TABLE public.addresses (
     id integer NOT NULL,
-    addressable_type character varying NOT NULL,
     addressable_id integer NOT NULL,
+    addressable_type character varying NOT NULL,
     flat_no character varying,
     house_name character varying,
     road_no character varying,
@@ -144,7 +144,6 @@ CREATE TABLE public.addresses (
 --
 
 CREATE SEQUENCE public.addresses_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -177,7 +176,6 @@ CREATE TABLE public.agents (
 --
 
 CREATE SEQUENCE public.agents_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -190,18 +188,6 @@ CREATE SEQUENCE public.agents_id_seq
 --
 
 ALTER SEQUENCE public.agents_id_seq OWNED BY public.agents.id;
-
-
---
--- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.ar_internal_metadata (
-    key character varying NOT NULL,
-    value character varying,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
-);
 
 
 --
@@ -226,7 +212,6 @@ CREATE TABLE public.charges (
 --
 
 CREATE SEQUENCE public.charges_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -258,7 +243,6 @@ CREATE TABLE public.clients (
 --
 
 CREATE SEQUENCE public.clients_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -291,7 +275,6 @@ CREATE TABLE public.comments (
 --
 
 CREATE SEQUENCE public.comments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -311,7 +294,6 @@ ALTER SEQUENCE public.comments_id_seq OWNED BY public.comments.id;
 --
 
 CREATE SEQUENCE public.credits_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -347,7 +329,6 @@ CREATE TABLE public.cycles (
 --
 
 CREATE SEQUENCE public.cycles_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -367,7 +348,6 @@ ALTER SEQUENCE public.cycles_id_seq OWNED BY public.cycles.id;
 --
 
 CREATE SEQUENCE public.debits_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -404,7 +384,6 @@ CREATE TABLE public.due_ons (
 --
 
 CREATE SEQUENCE public.due_ons_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -425,8 +404,8 @@ ALTER SEQUENCE public.due_ons_id_seq OWNED BY public.due_ons.id;
 
 CREATE TABLE public.entities (
     id integer NOT NULL,
-    entitieable_type character varying NOT NULL,
     entitieable_id integer NOT NULL,
+    entitieable_type character varying NOT NULL,
     title character varying,
     initials character varying,
     name character varying NOT NULL,
@@ -440,7 +419,6 @@ CREATE TABLE public.entities (
 --
 
 CREATE SEQUENCE public.entities_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -475,7 +453,6 @@ CREATE TABLE public.guides (
 --
 
 CREATE SEQUENCE public.guides_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -514,7 +491,6 @@ CREATE TABLE public.invoice_texts (
 --
 
 CREATE SEQUENCE public.invoice_texts_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -555,7 +531,6 @@ CREATE TABLE public.invoices (
 --
 
 CREATE SEQUENCE public.invoices_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -590,7 +565,6 @@ CREATE TABLE public.invoicings (
 --
 
 CREATE SEQUENCE public.invoicings_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -623,7 +597,6 @@ CREATE TABLE public.letters (
 --
 
 CREATE SEQUENCE public.letters_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -657,7 +630,6 @@ CREATE TABLE public.payments (
 --
 
 CREATE SEQUENCE public.payments_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -696,7 +668,6 @@ CREATE TABLE public.products (
 --
 
 CREATE SEQUENCE public.products_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -716,7 +687,6 @@ ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 --
 
 CREATE SEQUENCE public.properties_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -749,7 +719,6 @@ CREATE TABLE public.runs (
 --
 
 CREATE SEQUENCE public.runs_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -791,7 +760,6 @@ CREATE TABLE public.search_suggestions (
 --
 
 CREATE SEQUENCE public.search_suggestions_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -825,7 +793,6 @@ CREATE TABLE public.settlements (
 --
 
 CREATE SEQUENCE public.settlements_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -859,7 +826,6 @@ CREATE TABLE public.snapshots (
 --
 
 CREATE SEQUENCE public.snapshots_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -894,7 +860,6 @@ CREATE TABLE public.users (
 --
 
 CREATE SEQUENCE public.users_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1102,14 +1067,6 @@ ALTER TABLE ONLY public.agents
 
 
 --
--- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.ar_internal_metadata
-    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
-
-
---
 -- Name: charges charges_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1243,14 +1200,6 @@ ALTER TABLE ONLY public.properties
 
 ALTER TABLE ONLY public.runs
     ADD CONSTRAINT runs_pkey PRIMARY KEY (id);
-
-
---
--- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.schema_migrations
-    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
 
 
 --
@@ -1479,6 +1428,13 @@ CREATE INDEX index_snapshots_on_account_id ON public.snapshots USING btree (acco
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON public.users USING btree (email);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON public.schema_migrations USING btree (version);
 
 
 --
