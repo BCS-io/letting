@@ -218,14 +218,6 @@ To add an option -- is needed after db:import to bypass the rake argument parsin
 - Example for a user: `crontab -u deployer -l`
   `cat /var/log/syslog | grep CRON` - cron outputs into syslog when it runs
 
-###### Whenever
-
-- whenever is a gem that allows you to write ruby and have it convert into CRON
-
-1. whenever code into cron:
-
-- 'cd apps/<my-app>/current; bundle exec whenever .'
-
 ###### Files
 
 1. `cat /etc/crontab`

@@ -122,7 +122,6 @@ gem 'seedbank'
 gem 'sprockets', '~>3.7.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 2.7.0'
-gem 'whenever', require: false
 
 #
 # Development only
