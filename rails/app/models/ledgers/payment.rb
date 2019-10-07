@@ -81,7 +81,7 @@ class Payment < ApplicationRecord
            .where(created_at: SearchDate.new(date).day_range)
   end
 
-  def self.recent after_date: (Time.zone.now - 2.years).to_date
+  def self.recent after_date: Time.zone.today - 2.years
     where('booked_at > ?', after_date)
   end
 
