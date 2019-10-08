@@ -46,6 +46,19 @@
       RACK_DEV_MARK_ENV: "{{ rack_dev_mark_env }}"
   # when: rack_dev_mark_env is defined
 
+- name: Creates nightly hiding of monotonous accounts
+  cron:
+    name: "Rails Account.hide_monotonous_account_details (nightly)"
+    cron_file: "account_hide_monotonous_account_details"
+    minute: "23"
+    hour: "4"
+    user: "root"
+    #                                                                                                              redirect stdout and std error to null
+    job: /usr/bin/dokku --rm run letting "bundle exec rake RAILS_ENV=production 'hide_monotonous_account_details'" >/dev/null 2>&1
+  tags:
+    - dokku
+    - cronjobs
+
 - import_tasks: elasticsearch.yml
 - import_tasks: database.yml
 - import_tasks: elasticsearch_sync.yml
