@@ -75,22 +75,18 @@ This document covers the following sections
 - this can take a while and verbose gives feedback.
 
 4. `rake db:create`
-5. `git clone git@bitbucket.org:bcsltd/letting_import_data.git ~/code/letting/import_data`
 
-   - Clone the _private_ data repository into the import_data directory
-   - Can be imported into the database
-
-6. Create secret file - for _private_ application data - not kept in the repository
+5. Create secret file - for _private_ application data - not kept in the repository
 
 - 1\. `cp ~/code/letting/config/secrets.example.yml secrets.yml`
 - 2\. `rake secret` and copy the generated keys into secrets.yml
 
-7. `rake db:reboot`
+6. `rake db:reboot`
 
 - drops the database (if any), creates and runs migrations.
 - Repeat each time you want to delete and restore the database.
 
-8. Elasticsearch
+7. Elasticsearch
 
 - 1a\. Foreground
   - brew switch elasticsearch 1.1.1 # if not available
@@ -110,14 +106,11 @@ This document covers the following sections
   - Change: ES_HEAP_SIZE=1503m => ES_HEAP_SIZE=1g, -Xms1g, -Xmx1g
   - Change: ES_JAVA_OPS => -Xms1500m - Xmx1500m => -Xms1g -Xmx1g
 
-9. Add Data - using _one_ of:
+8. Add test Data:
 
 - 1\. Seed data: `rake db:seed`
-- 2\. import data: `rake db:import -- -t`
-  - -t includes test user and passwords.
-- 3\. Pull data from server: `cap <environment> db:pull`
 
-10. `rake elasticsearch:sync`
+9. `rake elasticsearch:sync`
 
 - Re-index Elasticsearch
   <br><br>
@@ -128,50 +121,44 @@ This document covers the following sections
 
 - Provisioning is a one time setup of the server which will then be ready for deployment. If another application is already deployed this will have been done.
 
-1. Install Ubuntu-14.04 LTS x86_64-minimal
+1. Install Ubuntu-18.04 LTS x86_64-minimal
 2. `ssh-keygen -R <server-name | server ip>`
 
 - removes any previous keys that will prevent keyless ssh-ing.
 
-3. `ssh-copy-id root@<server-name | server ip>`
+3. For cloud services use Terraform
+  - 1\. `cd to project`
+  - 2\. `sudo bin/run`
+    - follow instructions
+    - Any ip address change should be used to update the DNS
 
-- Adds the key to the server
-- confirm passwordless entry `ssh root@<server-name | server ip>`
+4. Download latest version of the database
+  - 1\. Download
+  - 2\. Untar (apple allows you to double click)
+  - 3\. Move the untarred file `export` to `letting/ansible/roles/dokku/files`
 
-4. Provision the software stack with Chef
+5. Run ansible over the server
+  - 1\. Update ansible-galaxy - if needed / missing `bin/ansible-galaxy-requirements`
+  - 2\. `bin/ansible-playbook`
+     - errors will be present because deploy hasn't happened
+       - test elasticsearch exists
+       - test elasticsearch linkage?
+       - application tag exists?
+       - dokuu_bot.ansible_dokku : start dokku-daemon
+     - follow instructions
 
-- change to a machine configured for Chef Solo
-- 1\. `cd ~/code/chef/repo`
-- 2\. `knife solo bootstrap root@example.com'
-  - 1\. Once complete reboot box before webserver working
-  - 2\. Once System set up use `knife solo cook deployer@example.com' for further updates.
-    - root has been disabled and logging on is through the user deployer
-- 3\. `ssh deployer@example.com`
-  - Verify you can passwordlessly log on.
-- 4\. `sudo reboot`
-  - A number of changes have been made - NGINX is not serving pages until reboot.
+6. Deploy application
+  - 1\. `bin/gp`
 
-5. (Hack) gem install bundler
+6. Rerun ansible to provision server
+  - 1\. `bin/ansible-playbook`
+    - should pass without error
 
-- this will be installed to `~.gem/ruby/x.x.x/gems` - required for the `cap <environment> deploy`
-
-##### 1.2.2. Deployment
-
-###### 1.2.2.1. Code Setup<a name='deployment-code-setup'></a>
-
-Deploy the application with Capistrano
-
-- 1\. `cap <environment> setup`
-- 2\. `cap <environment> deploy`
-
-###### 1.2.2.2. Data
+##### 1.2.2. Data
 
 1. Database
-   On your _local_ system Add Data (see 1.1.9 above). Then copy to the server.
-   `cap <environment> db:push`
-   or use fake data `cap <environment> rails:rake:db:seed`
-
-- login: admin@example.com / password, user@example.com / password
+  The database will be imported as part of the Ansible script. However, if you only want to import the database:
+    -  `bin/ansible-playbook -t database`
 
 2. Elasticsearch
    `cap <environment> elasticsearch:sync`
