@@ -3,7 +3,7 @@ language: ruby
 sudo: true
 
 rvm:
-  - 2.5.3
+  - 2.5.7
   # does not handle fuzzy matching (travis uses an older version of rvm)
   # without the rvm value it would get irb version from .ruby-version
   # however I am using rbenv which does not have fuzzy matching
