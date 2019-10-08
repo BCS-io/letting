@@ -19,28 +19,24 @@ This document covers the following sections
     - 1\. [Code Setup](#deployment-code-setup)
     - 2\. Data
 
-2. [Commands](#commands)
-
-- 1\. rake db:import
-
 4. [Cheatsheet](#cheatsheet)
 
-- 2\. [Cron](#cron)
-- 3\. [Elasticsearch](#elasticsearch)
-- 4\. [Firewall](#firewall)
+- 1\. [Cron](#cron)
+- 2\. [Elasticsearch](#elasticsearch)
+- 3j\. [Firewall](#firewall)
   - 1\. [Listing Rules](#firewall-listing-rules)
   - 2\. [What is being blocked?](#firewall-what-is being blocked)
   - 3\. [Adding Ranges](#firewall-adding-ranges)
   - 4\. [Disabling](#firewall-disabling)
   - 5\. [Enabling](#firewall-enabling)
-- 5\. [Postgresql](#postgresql)
+- 4\. [Postgresql](#postgresql)
   - 1\.[Login](#postgresql-login)
   - 2\.[psql prompt](#postgresql-psql-prompt)
   - 3\.[Execute SQL](#postgresql-execute-sql)
   - 4\.[Verify](#postgresql-verify)
-- 7\. [Ruby](#ruby)
-- 8\. [SCP](#scp)
-- 9\. [SSH](#ssh)
+- 5\. [Ruby](#ruby)
+- 6\. [SCP](#scp)
+- 7\. [SSH](#ssh)
 
 5. [Troubleshooting](#troubleshooting)
 
@@ -48,21 +44,15 @@ This document covers the following sections
 - 2\. [How to fix duplicate source.list entry](#how-to-fix-duplicate-source-list-entry)
 - 5\. [Cron](#cron)
 - 6\. [Elasticsearch Faraday::ConnectionFailed](#elasticsearch-connection-failed)
-- 7\. [Missing secret_key_base](#missing-secret_key_base)
-- 9\. [Production Server](#production-server)
-  - 1\. [Clean application](#clean-application)
-  - 2\. [Database reset](#database-reset)
-  - 3\. [Rails console](#rails-console)
-  - 4\. [Rake Tasks](#rake-tasks)
-- 10\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
-- 11\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
+- 7\. [Truncating a file without changing ownership](#truncating-a-file-without-changing-ownership)
+- 8\. [Recursive diff of two directories](#recursive-diff-of-two-directories)
 
 6. Production Client
    <br><br><br>
 
 ## 1. PROJECT SETUP<a name='project-setup'></a>
 
-#### 1.1. Development Setup
+### 1.1. Development Setup
 
 1. `git clone git@github.com:BCS-io/letting.git`
 
@@ -89,7 +79,7 @@ This document covers the following sections
 7. Elasticsearch
 
 - 1a\. Foreground
-  - brew switch elasticsearch 1.1.1 # if not available
+  - brew install elasticsearch 6.5.4
   - Open tab and enter `elasticsearch`
 - 1b\. Background
 
@@ -115,9 +105,9 @@ This document covers the following sections
 - Re-index Elasticsearch
   <br><br>
 
-#### 1.2. Server Setup
+### 1.2. Server Setup
 
-##### 1.2.1. Provision
+#### 1.2.1. Provision
 
 - Provisioning is a one time setup of the server which will then be ready for deployment. If another application is already deployed this will have been done.
 
@@ -154,58 +144,36 @@ This document covers the following sections
   - 1\. `bin/ansible-playbook`
     - should pass without error
 
-##### 1.2.2. Data
+#### 1.2.2. Data
 
 1. Database
   The database will be imported as part of the Ansible script. However, if you only want to import the database:
     -  `bin/ansible-playbook -t database`
 
 2. Elasticsearch
-   `cap <environment> elasticsearch:sync`
+  Elasticsearch synchronises with the postgres database. To force this you can use the ansible instruction: 
+    `bin/ansible-playbook -t elasticsearch`
 
-- Import Data Into Elasticsearch Indexes
-- step not always needed - to delete all indexes - ssh to the server and run this.
-  `curl -XDELETE 'http://localhost:9200/_all'`
-
-My Reference: Webserver alias: `ssh arran`
-<br><br><br>
-
-## 2. COMMANDS<a name='commands'></a>
-
-#### 2.1. rake db:import
-
-`rake db:import` is a command for importing production data from the old system to the new system.
-
-The basic command: `rake db:import`
-
-##### options
-
-To add an option -- is needed after db:import to bypass the rake argument parsing.
-
-1. -r Range of properties to import: `rake db:import -- -r 1-200`
-   - Default is import all properties
-2. -t Adding test passwords for easy login: `rake db:import -- -t`
-   - 1\. Default is _no_ test passwords
-   - 2\. Import creates an admin from the application.yml's user and password (see above).
-3. -h Help displays help and exits `rake db:import -- -h`
+<br>
 
 ## 4 Cheatsheet<a name='cheatsheet'></a>
 
-##### 4.2 Cron<a name='cron'></a>
+### 4.1 Cron<a name='cron'></a>
 
-###### Information
+#### Information
 
 `man cron and man crontab` - introduction to the files used by cron and how to run cron
 
-###### Basic Commands
+#### Basic Commands
 
 `pgrep cron` - cron daemon running
 `crontab -l` - lists the crontab for the current user, `-u` to set the user
+`cat account_hide_monotonous_account_details` - show the raw cron command
 
 - Example for a user: `crontab -u deployer -l`
   `cat /var/log/syslog | grep CRON` - cron outputs into syslog when it runs
 
-###### Files
+#### Files
 
 1. `cat /etc/crontab`
 
@@ -229,7 +197,7 @@ To add an option -- is needed after db:import to bypass the rake argument parsin
 - run does not execute jobs which have a dot in their name
   - One of the VPS's have a file name name `apt.disabled`
 
-##### 4.3 Elasticsearch<a name='elasticsearch'></a>
+### 4.2 Elasticsearch<a name='elasticsearch'></a>
 
 - Java application that improves usability of Lucene. [1]
 - Recommend giving half of heap to Elasticsearch - Lucene will use the rest. [2]
@@ -280,21 +248,21 @@ Once changes made: `sudo service elasticsearch restart`
     }
 ```
 
-###### Further Reading
+#### Further Reading
 
 [1] http://exploringelasticsearch.com/overview.html  
 [2] http://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html  
 [3] http://zapone.org/benito/2015/01/21/elasticsearch-reports-default-heap-memory-size-after-setting-environment-variable/
 
-#### 4.4 Firewall<a name='firewall'></a>
+### 4.3 Firewall<a name='firewall'></a>
 
-###### 4.4.1 Listing Rules<a name='firewall-listing-rules'></a>
+#### 4.3.1 Listing Rules<a name='firewall-listing-rules'></a>
 
 `sudo iptables --list`
 
-###### 4.4.2 What is being blocked?<a name='firewall-what-is being blocked'></a>
+#### 4.3.2 What is being blocked?<a name='firewall-what-is being blocked'></a>
 
-Firewall blocks
+#### Firewall blocks
 
 1. ssh to the server which is having packets blocked.
 2. What address is being blocked? `cat /var/log/kern.log`
@@ -307,7 +275,7 @@ FQDN to ip address (Fully Qualified Domain Name)
 
 - Answer section - check the A records for ip addresses
 
-###### 4.4.3 Adding Ranges<a name='firewall-adding-ranges'></a>
+#### 4.3.3 Adding Ranges<a name='firewall-adding-ranges'></a>
 
 1. From ip address
 
@@ -317,7 +285,7 @@ FQDN to ip address (Fully Qualified Domain Name)
 2. whois 23.23.181.189
 3. Add the CIDR range to the firewall, in this case Amazon's 23.20.0.0/14
 
-###### 4.4.4 Disabling<a name='firewall-disabling'></a>
+#### 4.3.4 Disabling<a name='firewall-disabling'></a>
 
 If an operation is not completing and you suspect a firewall issue
 these commands completely remove it.
@@ -330,47 +298,46 @@ these commands completely remove it.
     iptables -F
 ```
 
-###### 4.4.5 Enabling<a name='firewall-enabling'></a>
+#### 4.4.5 Enabling<a name='firewall-enabling'></a>
 
 `sudo iptables-restore /etc/iptables-rules`
 
 - Rebooting the box, if applicable, will also restore the firewall
 
-##### 4.5 Postgresql<a name='postgresql'></a>
+### 4.4 Postgresql<a name='postgresql'></a>
 
-###### 4.5.1 Login<a name='postgresql-login'></a>
+#### 4.4.1 Login<a name='postgresql-login'></a>
 
 Server: `psql -U postgres`  
  Database: `psql -d letting_<envionment> -U letting_<environment>`
 
-###### 4.5.2 psql prompt<a name='postgresql-psql-prompt'></a>
+#### 4.4.2 psql prompt<a name='postgresql-psql-prompt'></a>
 
 - Listing Users (roles) and attributes: `\du`
 - Listing all databases: `\list`
 - Connect to a database: `\c db_name`
 
-###### 4.5.3 Execute SQL <a name='postgresql-prompt'></a>
+#### 4.4.3 Execute SQL <a name='postgresql-prompt'></a>
 
 - Execute SQL file: `psql -f thefile.sql letting_<environment>`
 
-###### 4.5.4 Verify<a name='postgresql-verify'></a>
+#### 4.4.4 Verify<a name='postgresql-verify'></a>
 
 - brew info postgres - general information
   - pg_ctl -D /usr/local/var/postgres status
 
-===
--##### 4.7 Ruby<a name='ruby'></a>
+### 4.5 Ruby<a name='ruby'></a>
 
 Ruby version is read from the Gemfile and during the push to DOKKU.  
 Heroku, which Dokku was based, has a page on [specifying a Ruby Version](https://devcenter.heroku.com/articles/ruby-versions)
 
-#### 4.8 scp<a name='scp'></a>
+### 4.6 scp<a name='scp'></a>
 
 - for copying files between servers
 
 scp -r user@your.server.example.com:/path/to/file /home/user/Desktop/file
 
-#### 4.9 SSH<a name='ssh'></a>
+#### 4.7 SSH<a name='ssh'></a>
 
 1. brew install ssh-copy-id
 2. ssh-copy-id deployer@example.com
@@ -378,7 +345,7 @@ scp -r user@your.server.example.com:/path/to/file /home/user/Desktop/file
 
 ## 5 Trouble Shooting<a name='troubleshooting'></a>
 
-#### 5.1 Net::SSH::HostKeyMismatch<a name='net-ssh-hostkeymismatch'></a>
+### 5.1 Net::SSH::HostKeyMismatch<a name='net-ssh-hostkeymismatch'></a>
 
 Error seen as something like:
 
@@ -391,38 +358,38 @@ Solution
 
 `ssh-keygen -R <ip address> | <name>`
 
-#### 5.2 How to fix duplicate source.list entry<a name='how-to-fix-duplicate-source-list-entry'></a>
+### 5.2 How to fix duplicate source.list entry<a name='how-to-fix-duplicate-source-list-entry'></a>
 
 Format of Repository Source List found in `/etc/apt/sources.list` and `/etc/apt/sources.list.d/`
 `<type of repository> <location> <dist-name> <components>`
 
 Example
-`deb http://archive.ubuntu.com/ubuntu precise main`
+`deb http://archive.ubuntu.com/ubuntu bionic main`
 
 Example of a duplicate
 
 - In the example 'universe' has been duplicated
 
 ```
-deb http://archive.ubuntu.com/ubuntu precise universe
-deb http://archive.ubuntu.com/ubuntu precise main universe
+deb http://archive.ubuntu.com/ubuntu bionic universe
+deb http://archive.ubuntu.com/ubuntu bionic main universe
 ```
 
 - Fix - this is equivalent
 
 ```
-deb http://archive.ubuntu.com/ubuntu precise main universe
+deb http://archive.ubuntu.com/ubuntu bionic main universe
 ```
 
 Further Reading
 http://askubuntu.com/questions/120621/how-to-fix-duplicate-sources-list-entry
 
-#### 5.5 Cron<a name='cron'></a>
+### 5.5 Cron<a name='cron'></a>
 
 1. Is Cron running? `ps uww -C cron`
 2. Has Cron run? check syslog: `tail -200 /var/log/syslog`
 
-#### 5.6 Elasticsearch Faraday::ConnectionFailed<a name='elasticsearch-connection-failed'></a>
+### 5.6 Elasticsearch Faraday::ConnectionFailed<a name='elasticsearch-connection-failed'></a>
 
 ```
    Failure/Error: Client.import force: true, refresh: true
@@ -450,74 +417,13 @@ Somtimes it won't delete the Elasticsearch pid file.
 
 ```
 
-#### 5.7 Missing secret_key_base<a name='missing-secret_key_base'></a>
-
-Without the secret_key being set - nothing works 2 diagnostics:
-
-1. `cat unicorn.stderr.log` - app error: Missing `secret_key_base` ... set this value in `config/secrets.yml
-2. current/.env is missing
-3. Do not add the file into version control, git.
-
-Solution
-
-1. run `rake secret` and copy the output
-2. Create a .env file in the root of the project
-3. Add SECRET_KEY_BASE: and copy the output from 1.
-4. `cap production env:upload`
-5. Restart the server - another deployment did this otherwise `sudo service unicorn_<name of process> reload` worth trying.
-
-#### 5.9 Production Server<a name='production-server'></a>
-
-1. Clean application<a name='clean-application'></a>
-
-1\. `sudo rm -rf ~/apps/`  
- 2\. `sudo rm /tmp/unicorn.letting_*.sock`  
- 3\. `sudo -u postgres psql`  
- 4\. `postgres=# drop database letting_<environment>;`  
- \* if you have outstanding backend connections:  
- `SELECT pid FROM pg_stat_activity where pid <> pg_backend_pid();`  
- Then for each connection:  
- `SELECT pg_terminate_backend($1);`
-
-5\. Start Server Setup
-
-2. Database reset<a name='database-reset'></a>
-
-1\. `cap production rails:rake:db:drop`  
- 2\. If database will not be dropped - Remove any backend connections  
- _ 1\. local dev: `rake db:terminate RAILS_ENV=test`  
- _ 2\. Production: _need a cap version_
-
-3\. `cap <environment> deploy`  
- \* Should see the migrations being run.
-
-4\. `cap <environment> db:push`  
- \* The data has been deleted by the drop this puts it back.
-
-3. Rails console<a name='rails-console'></a>
-   `bundle exec rails c production`
-
-4) Rake Tasks<a name='rake-tasks'></a>
-
-```
-ssh <server>
-cd ~/apps/letting_<environment>/current
-RAILS_ENV=<environment> bundle exec rake <method name>
-```
-
-5. Reload Service
-
-1\. `cat /var/log/syslog` => 'letting_unicorn' process is not running  
- 2\. `sudo service unicorn_letting_production reload`  
- \* Couldn't reload, starting ' error message continued and included the problem
-
-#### 5.10 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
+### 5.7 Truncating a file without changing ownership<a name='truncating-a-file-without-changing-ownership'></a>
 
 ```
 cat /dev/null > /file/you/want/to/wipe-out
 ```
 
-#### 5.11 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
+### 5.8 Recursive diff of two directories<a name='recursive-diff-of-two-directories'></a>
 
 ```
 diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
@@ -525,7 +431,7 @@ diff -r letting/ letting_diffable/ | sed '/Binary\ files\ /d' >outputfile
 
 ===
 
-### 6 Production Client
+## 6 Production Client
 
 On release of the version go through the [production checklist](https://github.com/BCS-io/letting/blob/master/docs/production_checklist.md)
 
