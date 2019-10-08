@@ -4,9 +4,9 @@
 # push subtree to repo
 #
 
-# path of subtree you wish to push
 code_path=rails
-repo=development
+remote_repo=development
+force=false
 
 print_usage() {
   printf "Git push subtree\n\n"
@@ -16,30 +16,48 @@ print_usage() {
   printf "  L - local production\n"
   printf "  p - production\n"
   printf "  s - staging\n"
+  printf "Push option :\n"
+  printf "  f - force push\n"
   printf "\n"
-  printf "Example: gp -p \n"
+  printf "Example: gp -p \n\n"
+  printf "Deployment requires remote repository tracked to dokku server\n"
+  printf "Example: \n"
+  printf " -  git remote add dokku dokku@my-server.example.com:app-name \n"
 }
 
 print_banner() {
   printf "\n\n"
   printf "  ******************************************\n"
   printf "  *                                        *\n"
-  printf "  *          push ${code_path}              *\n"
+  printf "  *      push production                   *\n"
   printf "  *                                        *\n"
   printf "  ******************************************\n"
   printf "\n\n"
 }
 
-while getopts 'dhlLps' flag; do
+are_you_sure() {
+  read -p "Continue (y/n)? " choice
+  case "$choice" in
+    y|Y ) printf "\nYes. Continuing...\n";;
+    n|N ) printf "\nNo. Exiting\n"
+          exit 1 ;;
+    * ) printf "\nInvalid. Exiting\n"
+        exit 1 ;;
+  esac
+}
+
+while getopts 'dhlLfps' flag; do
   case "${flag}" in
-    d) repo=development ;;
-    l) repo=development.local ;;
-    L) repo=production.local ;;
+    d) remote_repo=development;;
+    l) remote_repo=development.local ;;
+    L) remote_repo=production.local ;;
+    f) force=true ;;
     h) print_usage
        exit 1 ;;
     p) print_banner
-       repo=production ;;
-    s) repo=staging ;;
+       are_you_sure
+       remote_repo=production ;;
+    s) remote_repo=staging ;;
     *) print_usage
        exit 1;;
   esac
@@ -51,4 +69,10 @@ if (( $OPTIND == 1 )); then
   exit 1
 fi
 
-git subtree push --prefix $code_path $repo master
+if [ "$force" = true ]; then
+  echo "force push"
+  # git push $remote_repo `git subtree split --prefix $code_path master`:master --force
+  git push $remote_repo `git subtree split --prefix $code_path master`:master --force
+else
+  git subtree push --prefix $code_path $remote_repo master
+fi
