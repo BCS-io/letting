@@ -3,12 +3,12 @@
     name: dokku_bot.ansible_dokku
   vars:
     dokku_skip_key_file: 'true'
-    dokku_version: 0.17.2
+    dokku_version: 0.17.7
     dokku_vhost_enable: 'true'
     dokku_web_config: 'false'
-    herokuish_version: 0.5.0
+    herokuish_version: 0.5.2
     plugn_version: 0.3.2
-    sshcommand_version: 0.7.0
+    sshcommand_version: 0.8.0
     dokku_users:
       - name: richard
         username: richard
