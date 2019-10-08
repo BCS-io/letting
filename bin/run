@@ -30,6 +30,26 @@ print_usage() {
   printf "Example: bin/run -d  \n"
 }
 
+print_banner() {
+  printf "\n\n"
+  printf "  ******************************************\n"
+  printf "  *                                        *\n"
+  printf "  *           Destroy Production?          *\n"
+  printf "  *                                        *\n"
+  printf "  ******************************************\n"
+  printf "\n\n"
+}
+
+are_you_sure() {
+  read -p "Continue (y/n)? " choice
+  case "$choice" in
+    y|Y ) printf "\nYes. Continuing...\n";;
+    n|N ) printf "\nNo. Exiting\n"
+          exit 1 ;;
+    * ) printf "\nInvalid. Exiting\n"
+        exit 1 ;;
+  esac
+}
 
 while getopts 'adht:ps' flag; do
   case "${flag}" in
@@ -38,7 +58,9 @@ while getopts 'adht:ps' flag; do
        workspace='development' ;;
     h) print_usage
        exit 1 ;;
-    p) option="-${flag}"
+    p) print_banner
+       are_you_sure
+       option="-${flag}"
        workspace='production' ;;
     s) option="-${flag}"
        workspace='staging' ;;
