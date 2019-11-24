@@ -105,6 +105,7 @@
  *= require module.utilities
  *= require jquery-ui
  *= require font-awesome
+ *= require page.login
  *= require shame
  *= require module.help
  */

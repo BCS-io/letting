@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/head', title: @title %>
+
+<body class='site-login'>
+
+    <div class="login__header">
+        <%= render 'layouts/header-minimal' %>
+        <%= render 'layouts/flashes' %>
+    </div>
+    <article class="login__main">
+      <%= render 'layouts/title' %>
+      <%= yield %>
+    </article>
+    <div class='login__hero'>
+        <%= inline_svg_tag "cover.svg", class: 'svg' %>
+    </div>
+    <div class="login__footer">
+      <%= render 'layouts/footer' %>
+    </div>
+</body>
+
+</html>

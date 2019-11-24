@@ -1,0 +1,36 @@
+@import 'settings.colors';
+
+@media screen {
+
+  .site-login {
+    display: grid;
+    grid-template-areas: "header"
+                         "main"
+                         "hero"
+                         "footer";
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 300px auto 5%;
+    height: 100vh;
+  }
+
+  .login__header {
+    grid-area: header;
+  }
+
+  .login__main {
+    align-self: center;
+    grid-area: main;
+    justify-self: center;
+    width: 500px;
+  }
+
+  .login__hero {
+    align-self: flex-end;
+    grid-area: hero;
+  }
+
+  .login__footer {
+    background-color: $color-primary-shade-1;
+    grid-area: footer;
+  }
+}
