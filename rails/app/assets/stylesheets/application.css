@@ -72,6 +72,7 @@
  *= require generic.box-sizing
  *= require generic.normalize
  *= require base.form
+ *= require base.image
  *= require base.link
  *= require base.list
  *= require base.navigation

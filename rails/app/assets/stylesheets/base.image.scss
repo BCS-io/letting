@@ -1,0 +1,9 @@
+@media screen {
+  svg {
+    // SVG elements are inline by default. Which means they have
+    // lines under them. Block removes this line however I still
+    // was 1px out on right and bottom until I edited the SVG
+    // directly. Possibly could also have set width and height.
+    display: block;
+  }
+}
