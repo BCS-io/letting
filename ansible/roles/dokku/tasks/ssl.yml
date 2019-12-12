@@ -15,14 +15,24 @@
     - dokku
     - ssl
 
-- name: website {{ application }}
+- name: website live {{ application }}
   uri:
-    url: "http://{{ domain }}"
+    url: "https://{{ domain }}"
+    validate_certs: false
   ignore_errors: yes
   register: http_response
   tags:
     - dokku
     - ssl
+    - info
+
+- name: display http_response
+  debug:
+    msg: "{{ http_response }}"
+  tags:
+    - never
+    - ssl
+    - info
 
 #
 # ansible has import_role apply tags but could not get it to work
