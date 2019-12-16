@@ -16,17 +16,16 @@ print_usage() {
   printf "***************************************************\n"
   printf "*                  Letting                        *\n"
   printf "***************************************************\n\n"
-  printf "Ansible wrapper\n\n"
-  printf "options are as follows:\n"
-  printf "Limiting of playbook hosts - optional:\n"
-  printf "  -c client\n"
+  printf "Terraform bash script wrapper\n\n"
+  printf " - runs terraform script and updates hosts file with new address"
+  printf "Workspace options are as follows - choose one:\n"
   printf "  -d development\n"
   printf "  -p production\n"
-  printf "  -s staging\n\n"
-  printf ""
-  printf "Terraform action\n"
+  printf "\n"
+  printf "Terraform action (optional)\n"
   printf "  -a apply\n"
-  printf "    -the default is to destroy and then apply\n"
+  printf "  -b destroy and then apply (default)\n"
+  printf "\n"
   printf "Example: bin/run -d  \n"
 }
 
@@ -68,6 +67,11 @@ while getopts 'adht:ps' flag; do
        exit 1;;
   esac
 done
+
+if [ -z "$workspace"]; then
+  printf "Workspace was not set. Choose a workspace option\n"
+  printf " -------------------------------------------------\n\n"
+fi
 
 if (( $OPTIND == 1 )); then
   print_usage
