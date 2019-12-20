@@ -5,24 +5,33 @@
 #
 
 code_path=rails
-remote_repo=development
+platform=dokku
+environment=staging
 force=false
 
 print_usage() {
+  printf "\n"
   printf "Git push subtree\n\n"
-  printf "Options flags as follows:\n"
-  printf "  d - development\n"
-  printf "  l - local development\n"
-  printf "  L - local production\n"
+  printf "Platform flag options:\n"
+  printf "  D - Dokku (default)\n"
+  printf "  H - Heroku (unavailable)\n"
+  printf "\n"
+  printf "Environment flag options:\n"
+  printf "  s - staging (default)\n"
   printf "  p - production\n"
-  printf "  s - staging\n"
+  printf "\n"
   printf "Push option :\n"
   printf "  f - force push\n"
   printf "\n"
-  printf "Example: gp -p \n\n"
-  printf "Deployment requires remote repository tracked to dokku server\n"
+  printf "Example: gp -D -p \n"
+  printf "\n\n"
+  printf "Note:\n"
+  printf "\n"
+  printf "Deployment requires remote repository tracked to plaform and environment\n"
+  printf "Platforms supported Dokku only\n"
+  printf "\n"
   printf "Example: \n"
-  printf " -  git remote add dokku dokku@my-server.example.com:app-name \n"
+  printf " -  git remote add dokku-staging dokku@my-server.example.com:app-name \n"
 }
 
 print_banner() {
@@ -46,18 +55,16 @@ are_you_sure() {
   esac
 }
 
-while getopts 'dhlLfps' flag; do
+while getopts 'Dhfps' flag; do
   case "${flag}" in
-    d) remote_repo=development;;
-    l) remote_repo=development.local ;;
-    L) remote_repo=production.local ;;
+    D) platform=dokku;;
     f) force=true ;;
     h) print_usage
        exit 1 ;;
     p) print_banner
        are_you_sure
-       remote_repo=production ;;
-    s) remote_repo=staging ;;
+       environment=production ;;
+    s) environment=staging;;
     *) print_usage
        exit 1;;
   esac
@@ -69,9 +76,10 @@ if (( $OPTIND == 1 )); then
   exit 1
 fi
 
+remote_repo=${platform}-${environment}
+
 if [ "$force" = true ]; then
   echo "force push"
-  # git push $remote_repo `git subtree split --prefix $code_path master`:master --force
   git push $remote_repo `git subtree split --prefix $code_path master`:master --force
 else
   git subtree push --prefix $code_path $remote_repo master
