@@ -1,9 +1,22 @@
-# 
-# hcloud_token for creating resources in Hetzner letting project
-#  - if compromised 
-#    - login to Hetzner.
-#    - delete token
-#    - create new token and change it below
-#
+hcloud_token="hetzner token"
 
-hcloud_token = "ABCDEFG1234"
+operator_fingerprint = "ab:cd:5c" # etc
+
+server = {
+    # ubuntu-18.04 / debian-9 / snapshot id
+    image       = "ubuntu-18.04"
+
+    # nbg1, fsn1 or hel1
+    location    = "fsn1"
+
+    # Types
+    # cx11 cx21 cx31 cx41 cs51
+    # https://www.hetzner.de/cloud
+    server_type = "cx11"
+}
+
+# server_name
+server_name_by_workspace = {
+    staging="[server name].[domain]"
+    production="[fubar].[example.com]"
+}
