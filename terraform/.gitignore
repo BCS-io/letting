@@ -1,6 +1,6 @@
 
 # ignore terraform binaries
-.terraform
+.terraform/
 
 # ignore state file which include plain text passwords
 *.tfstate
