@@ -19,7 +19,7 @@ print_usage() {
   printf "Terraform bash script wrapper\n\n"
   printf " - runs terraform script and updates hosts file with new address"
   printf "Workspace options are as follows - choose one:\n"
-  printf "  -d development\n"
+  printf "  -s staging\n"
   printf "  -p production\n"
   printf "\n"
   printf "Terraform action (optional)\n"
@@ -68,7 +68,7 @@ while getopts 'adht:ps' flag; do
   esac
 done
 
-if [ -z "$workspace"]; then
+if [ -z "$workspace" ]; then
   printf "Workspace was not set. Choose a workspace option\n"
   printf " -------------------------------------------------\n\n"
 fi
