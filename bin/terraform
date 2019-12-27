@@ -16,14 +16,15 @@ project_path="./terraform/project"
 print_usage() {
   printf "Terraform wrapper\n\n"
   printf "options are as follows:\n"
-  printf "  -a workspace_name - to apply a workspace\n"
-  printf "  -b workspace_name - to bounce workspace - destroy and re-apply\n"
-  printf "  -d workspace_name - to destroy a workspace\n"
-  printf "  -i workspace_name - to init a workspace\n"
-  printf "  -n workspace_name - to make a new workspace\n\n"
-  printf "  -o variable       - to output a variable value\n\n"
-  printf "  -p workspace_name - to plan a workspace\n\n"
-  printf "Workspaces available:\n"
+  printf "  -a [workspace_name] - to apply a workspace\n"
+  printf "  -b [workspace_name] - to bounce workspace - destroy and re-apply\n"
+  printf "  -d [workspace_name] - to destroy a workspace\n"
+  printf "  -i [workspace_name] - to init a workspace\n"
+  printf "  -n [workspace_name] - to make a new workspace\n\n"
+  printf "  -o [variable]       - to output a variable value\n\n"
+  printf "  -p [workspace_name] - to plan a workspace\n"
+  printf "\n"
+  printf "Workspace_names:\n"
   printf "  - development\n"
   printf "  - production\n"
   printf "  - staging\n"
@@ -35,7 +36,7 @@ while getopts 'a:b:d:hi:n:op:' flag; do
     a)  (cd $project_path && terraform workspace select $OPTARG)
         (cd $project_path && terraform apply -auto-approve) ;;
     b)  (cd $project_path && terraform workspace select $OPTARG)
-        (cd $project_path && terraform destroy) 
+        (cd $project_path && terraform destroy)
         (cd $project_path && terraform apply -auto-approve) ;;
     d)  (cd $project_path && terraform workspace select $OPTARG)
         (cd $project_path && terraform destroy) ;;
