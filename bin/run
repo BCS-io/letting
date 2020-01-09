@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-if [ $EUID -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
-
 option=''
 workspace=''
 terraform_action='-b'
@@ -50,13 +45,12 @@ are_you_sure() {
   esac
 }
 
-while getopts 'adht:ps' flag; do
+while getopts 'ahnpst:' flag; do
   case "${flag}" in
     a) terraform_action="-a" ;;
-    d) option="-${flag}"
-       workspace='development' ;;
     h) print_usage
        exit 1 ;;
+    n) terraform_action="-n" ;;
     p) print_banner
        are_you_sure
        option="-${flag}"
@@ -79,12 +73,9 @@ if (( $OPTIND == 1 )); then
 fi
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# needs to work without sudo
 # source ${__dir}/clean ${option}
 source ${__dir}/terraform "${terraform_action}" "${workspace}"
 ip_address=$(cd $terraform_project_path && terraform output public_ip4)
 
-# needs sudo and changes other things complicated
-source ${__dir}/hosts $option $ip_address
 echo $ip_address | pbcopy
 echo "end"
