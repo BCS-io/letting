@@ -6,7 +6,7 @@
 # main dokku library
 - name: dokku_bot.ansible_dokku
   src: https://github.com/dokku/ansible-dokku
-  version: master
+  version: v2020.3.24
 
 # unattended upgrades
 - name: jnv.unattended-upgrades
