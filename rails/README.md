@@ -148,7 +148,8 @@ This document covers the following sections
 
 1. Database
   The database will be imported as part of the Ansible script. However, if you only want to import the database:
-    -  `bin/ansible-playbook -t database`
+    -  `bin/ansible-playbook -t database`  
+        - Backup database should be kept at the location specified in Amazon variable: `postgres_backup_file`
 
 2. Elasticsearch
   Elasticsearch synchronises with the postgres database. To force this you can use the ansible instruction: 

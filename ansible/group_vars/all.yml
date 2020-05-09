@@ -28,24 +28,11 @@ aws_region: eu-west-2
 
 
 # postgres
-# backing up from local letting database to dumpfile (binary format)
 #
-# Restore from "legacy"
-#  - Get the latest legacy as binary format
-#    - download from old amazon account and copy to letting/rails
-#      - letting.tar file
-#    - cd to letting/rails
-#    - bin/rails db:environment:set RAILS_ENV=development db:restore
-#    - bin/deploy.sh -b
-#      - generates: deploy/backup_database/letting.dump
-#  - cd ..
-#  - Import into current database
-#    - bin/ansible-playbook -p -t import
-#
-# Restore from current binary backup
-#  - Get the latest backup
-#    - download from the current amazon account
-#    - unarchive and copy export file to deploy/backup_database/letting.dump
+# (new) Restore from binary backup
+#  - Get the latest backup from Amazon S3
+#    - download from the current backup
+#    - unarchive and copy export file to postgres_backup_file
 #  - Import into current database
 #    - bin/ansible-playbook -t import
 #

@@ -42,6 +42,7 @@ Terraform configuration is specific for a single cloud provider. If you required
 Which gives:
 ```
 bin/run -p -a 
+# Update DNS if ip addresses have changed
 bin/ansible-galaxy-requirements
 bin/ansible-playbook -p
 bin/deploy -p
@@ -63,3 +64,11 @@ sudo killall -HUP mDNSResponder
 
 [1]: https://bcs.io
 [2]: https://github.com/dokku/dokku
+
+
+### Update database
+1. Log into AWS S3 and download latest backup
+2. Unzip the file leaving a file called "export"
+3. Copy "export" to the postgres_backup_file location
+   1. currently : roles/dokku/files/export
+4. bin/ansible-playbook -s -t import
