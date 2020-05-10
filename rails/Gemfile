@@ -111,12 +111,7 @@ gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
 gem 'rails', '~> 5.2.3'
 gem 'rails-env-favicon'
 
-# BREAKING GEM
-# rake versions after this break args options code in import rake (used for
-# setting range and test user logins).
-# TODO: fix for being able to read in args
-# Using this version of the gem because it is the same as on production system
-gem 'rake', '10.1.0'
+gem 'rake', '~> 12.3'
 gem 'redis', '~> 4.0'
 gem 'sass-rails', '~> 5.0.0'
 gem 'seedbank'
