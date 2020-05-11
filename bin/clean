@@ -7,15 +7,17 @@
 #
 
 OPTIND=1
+domain='fl-adams.uk'
+production_client='lamba.local'
+production_server='eigg'
+staging_client='lamba'
+staging_server='danna'
 
 print_usage() {
   printf "Cleaning host key from known hosts\n\n"
   printf "Options flags as follows:\n"
-  printf "  -c development client admin machine\n"
-  printf "  -C production client admin machine\n"
-  printf "  d - development\n"
-  printf "  l - local development\n"
-  printf "  L - local production\n"
+  printf "  -C staging client admin machine\n"
+  printf "  -c production client admin machine\n"
   printf "  p - production\n"
   printf "  s - staging\n"
   printf "\n"
@@ -29,40 +31,25 @@ fi
 
 while getopts 'cCdhlLps' flag; do
   case "${flag}" in
-    c) ssh-keygen -R lamba.bcs.io
-       ssh-keygen -R lamba
-       ip=$(dscacheutil -q host -a name lamba.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+    C) ssh-keygen -R ${staging_client}.${domain}
+       ssh-keygen -R ${staging_client}
+       ip=$(dscacheutil -q host -a name ${staging_client}.${domain} | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
        ssh-keygen -R $ip ;;
-    C) ssh-keygen -R lamba.local.bcs.io    
-       ssh-keygen -R lamba.local
-       ip=$(dscacheutil -q host -a name lamba.local.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-       ssh-keygen -R $ip ;;
-    d) ssh-keygen -R cava.fl-adams.uk
-       ssh-keygen -R cava
-       # return ip from hosts file
-       ip=$(dscacheutil -q host -a name cava.fl-adams.uk  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+    c) ssh-keygen -R ${production_client}.${domain}
+       ssh-keygen -R ${production_client}
+       ip=$(dscacheutil -q host -a name ${production_client}.${domain} | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
        ssh-keygen -R $ip ;;
     h) print_usage
        exit 1 ;;
-    l) ssh-keygen -R jura.local.bcs.io
-       ssh-keygen -R jura
+    p) ssh-keygen -R ${domain}
+       ssh-keygen -R ${production_server}.${domain}
        # return ip from hosts file
-       ip=$(dscacheutil -q host -a name jura.local.bcs.io  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ip=$(dscacheutil -q host -a name ${production_server}.${domain}  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
        ssh-keygen -R $ip ;;
-    L) ssh-keygen -R kerrera.local.fl-adams.uk
-       ssh-keygen -R kerrera 
+    s) ssh-keygen -R staging.${domain}
+       ssh-keygen -R ${staging_server}.${domain}
        # return ip from hosts file
-       ip=$(dscacheutil -q host -a name kerrera.local.fl-adams.uk  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-       ssh-keygen -R $ip ;;
-    p) ssh-keygen -R eigg.fl-adams.uk
-       ssh-keygen -R eigg 
-       # return ip from hosts file
-       ip=$(dscacheutil -q host -a name eigg.fl-adams.uk  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
-       ssh-keygen -R $ip ;;
-    s) ssh-keygen -R danna.fl-adams.uk
-       ssh-keygen -R danna 
-       # return ip from hosts file
-       ip=$(dscacheutil -q host -a name danna.fl-adams.uk  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
+       ip=$(dscacheutil -q host -a name ${staging_server}.${domain} | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b")
        ssh-keygen -R $ip ;;
     *) print_usage
        exit 1;;
