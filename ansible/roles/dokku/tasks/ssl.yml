@@ -48,11 +48,24 @@
     - ssl
     - info
 
-- name: letsencrypt:auto-rewnew {{ application }}
-  command: dokku letsencrypt:auto-renew {{ application }}
+# Letsencrypt
+# - Letsencrypt auto-renew wasn't working for me
+# - This works: dokku letsencrypt letting
+# - need more verbose output to know what the problem is
+#
+# Get certificate when we have a website returning 200 (OK!) or
+#  when we get error code saying SSL has failed
+#    -1 and CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:852)>",
+#
+# However if the website isn't up we should not waste a letsencrypt renewal which will fail:
+#  "msg": "Status code was -1 and not [200]: Connection failure: Remote end closed connection without response",
+#  "status": -1,
+#
+- name: letsencrypt {{ application }}
+  command: dokku letsencrypt {{ application }}
   when:
     - "'encrypt' in group_names"
-    - http_response.status == 200
+    - http_response.status == 200  or (http_response.status == -1 and http_response.msg is search("CERTIFICATE_VERIFY_FAILED"))
   tags:
     - dokku
     - ssl
