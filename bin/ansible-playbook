@@ -54,8 +54,8 @@ while getopts 'acCdlLht:ps' flag; do
     a) limit='--limit all' ;;
     c) playbook='client' 
        limit='--limit lamba.bcs.io' ;;
-    C) playbook='client' 
-       limit='--limit lamba.local.bcs.io' ;;
+    C) playbook='client'
+       limit='--limit lamba.local.fl-adams.uk' ;;
     d) limit='--limit cava.fl-adams.uk' ;;
     h) print_usage
        exit 1 ;;
