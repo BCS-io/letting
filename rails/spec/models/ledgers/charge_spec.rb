@@ -3,13 +3,16 @@ require 'rails_helper'
 RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
   describe 'validations' do
     it('is valid') { expect(charge_new).to be_valid }
+
     describe 'presence' do
       it('charge type') { expect(charge_new charge_type: nil).not_to be_valid }
       it('amount') { expect(charge_new amount: nil).not_to be_valid }
+
       describe 'amount when zero' do
         it 'rejects active' do
           expect(charge_new amount: 0, activity: 'active').not_to be_valid
         end
+
         it 'allows dormant' do
           expect(charge_new amount: 0, activity: 'dormant').to be_valid
         end
@@ -22,9 +25,11 @@ RSpec.describe Charge, :ledgers, :range, :cycle, type: :model do
       it 'accepts string' do
         expect(charge_new payment_type: 'manual').to be_valid
       end
+
       it 'accepts symbol' do
         expect(charge_new payment_type: :manual).to be_valid
       end
+
       it('rejects nil') { expect(charge_new payment_type: nil).not_to be_valid }
     end
 

@@ -48,6 +48,7 @@ RSpec.describe Account, :ledgers, type: :model do
 
         expect(account.exclusive query_debits: [debit]).to eq [debit]
       end
+
       it 'rejects duplicate charges' do
         debit = debit_new(at_time: '2013-3-25', charge: charge_new)
         account = account_new debits: [debit]
@@ -137,6 +138,7 @@ RSpec.describe Account, :ledgers, type: :model do
 
     describe '.find_by_human_ref' do
       it('handles nil') { expect(described_class.find_by_human_ref(nil)).to be_nil }
+
       it('matching ref') do
         expect(described_class.find_by_human_ref('5')).to eq described_class.first
       end

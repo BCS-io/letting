@@ -5,9 +5,11 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
     describe 'default' do
       it('has name') { expect(cycle_new.name).to eq 'Mar' }
       it('has term cycle_type') { expect(cycle_new.cycle_type).to eq 'term' }
+
       it 'has due_on' do
         expect(cycle_new.due_ons.size).to eq 1
       end
+
       it 'has due_on on date' do
         expect(cycle_new.due_ons[0].day).to eq 25
         expect(cycle_new.due_ons[0].month).to eq 3
@@ -18,6 +20,7 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
       it 'changes cycle_type' do
         cycle_new cycle_type: ''
       end
+
       it 'changes due ons' do
         cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 24)]
         expect(cycle.due_ons[0].month).to eq 6
@@ -32,6 +35,7 @@ RSpec.describe 'Cycle Factory', :cycle, :ledgers do
       it 'is created' do
         expect { cycle_create }.to change(Cycle, :count).by(1)
       end
+
       it 'makes due_on' do
         expect { cycle_create }.to change(DueOn, :count).by(1)
       end

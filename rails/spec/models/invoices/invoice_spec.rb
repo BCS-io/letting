@@ -5,11 +5,14 @@ include ChargeTypes
 
 RSpec.describe Invoice, type: :model do
   it('is valid') { expect(invoice_new).to be_valid }
+
   describe 'validates presence' do
     it('property_ref') do
       expect(invoice_new property: property_new(human_ref: nil)).not_to be_valid
     end
+
     it('invoice_date') { expect(invoice_new invoice_date: nil).not_to be_valid }
+
     it 'property_address' do
       (invoice = described_class.new).property_address = nil
       expect(invoice).not_to be_valid

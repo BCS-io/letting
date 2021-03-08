@@ -8,11 +8,13 @@ RSpec.describe Client, type: :model do
     describe '#human_ref' do
       it('is needed') { expect(client_new(human_ref: nil)).not_to be_valid }
       it('is a number') { expect(client_new(human_ref: 'nan')).not_to be_valid }
+
       it 'is unique' do
         client_create human_ref: 1
         expect { client_create human_ref: 1 }
           .to raise_error ActiveRecord::RecordInvalid
       end
+
       it 'has a name' do
         (client = client_new).entities.destroy_all
         expect(client).not_to be_valid

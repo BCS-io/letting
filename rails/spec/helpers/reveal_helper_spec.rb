@@ -41,6 +41,7 @@ RSpec.describe RevealHelper, type: :helper do
     it 'return true if first' do
       expect(first_record? index: 0).to eq true
     end
+
     it 'return false otherwise' do
       expect(first_record? index: 1).to eq false
     end

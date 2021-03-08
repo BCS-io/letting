@@ -8,6 +8,7 @@ RSpec.describe DueOns, :ledgers, :cycle, type: :model do
         13.times { cycle.due_ons.build day: 25, month: 3 }
         expect(cycle).not_to be_valid
       end
+
       it 'valid if marked for destruction' do
         cycle = cycle_new due_ons: []
         12.times { cycle.due_ons.build day: 25, month: 3 }

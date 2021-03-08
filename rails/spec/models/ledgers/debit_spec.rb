@@ -5,26 +5,31 @@ RSpec.describe Debit, :ledgers, type: :model do
     let(:debit) { charge_new(debits: [debit_new]).debits.first }
 
     it('is valid') { expect(debit).to be_valid }
+
     describe 'presence' do
       it 'charge required but missing' do
         (debit = debit_new).valid?
         expect(debit.errors.first).to eq [:charge, "can't be blank"]
       end
+
       it 'at_time' do
         debit.at_time = nil
         expect(debit).not_to be_valid
       end
+
       it('amount') { debit_new amount: nil }
     end
 
     describe 'amount' do
       it('is a number') { expect(debit_new(amount: 'nan')).not_to be_valid }
+
       it('is valid within range') do
         expect(debit_new(charge: charge_new, amount: 99_999.99)).to be_valid
         expect(debit_new(charge: charge_new, amount: 100_000)).not_to be_valid
         expect(debit_new(charge: charge_new, amount: -99_999.99)).to be_valid
         expect(debit_new(charge: charge_new, amount: -100_000)).not_to be_valid
       end
+
       it('fails zero amount') { expect(debit_new amount: 0).not_to be_valid }
     end
   end

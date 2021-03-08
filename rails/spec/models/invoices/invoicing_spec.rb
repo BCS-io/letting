@@ -5,10 +5,12 @@ RSpec.describe Invoicing, type: :model do
     property_create human_ref: 1, account: account_new
     expect(invoicing_new).to be_valid
   end
+
   describe 'validates presence' do
     it 'property_range' do
       expect(invoicing_new property_range: nil).not_to be_valid
     end
+
     it('runs') { expect(invoicing_new runs: nil).not_to be_valid }
   end
 
@@ -152,6 +154,7 @@ RSpec.describe Invoicing, type: :model do
     it 'can be true' do
       expect(invoicing_new).to be_valid_arguments
     end
+
     it 'can be false if range false' do
       expect(invoicing_new property_range: nil).not_to be_valid_arguments
     end

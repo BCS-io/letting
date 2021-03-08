@@ -11,6 +11,7 @@ RSpec.describe 'Invoicing Factory' do
       it 'property_range' do
         expect(invoicing_new property_range: nil).not_to be_valid
       end
+
       it('runs') { expect(invoicing_new runs: nil).not_to be_valid }
     end
   end

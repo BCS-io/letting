@@ -3,20 +3,26 @@ require 'rails_helper'
 RSpec.describe Payment, :payment, :ledgers, type: :model do
   describe 'validates' do
     it('is valid') { expect(payment_new account: account_new).to be_valid }
+
     it 'requires account' do
       expect(payment_new(account_id: nil)).not_to be_valid
     end
+
     describe 'amount' do
       it('requires amount') { expect(payment_new amount: nil).not_to be_valid }
       it('is a number') { expect(payment_new amount: 'nan').not_to be_valid }
       it('has a max') { expect(payment_new amount: 100_000).not_to be_valid }
+
       it 'is valid under max' do
         expect(payment_new account: account_new, amount: 99_999.99).to be_valid
       end
+
       it('has a min') { expect(payment_new amount: -100_000).not_to be_valid }
+
       it 'is valid under min' do
         expect(payment_new account: account_new, amount: -99_999.99).to be_valid
       end
+
       it('fails zero amount') { expect(payment_new amount: 0).not_to be_valid }
     end
 
@@ -43,6 +49,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       it 'sets nil amount to 0' do
         expect(payment_new(amount: nil).amount).to eq 0
       end
+
       it 'leaves defined amounts intact' do
         payment = payment_create account: account_new, amount: 10.50
         expect(described_class.find(payment.id).amount).to eq(10.50)
@@ -108,6 +115,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
         payment.prepare
         expect(payment.credits.size).to eq(0)
       end
+
       it 'adds returned credits' do
         (payment = payment_new).account = account_new
         allow(payment.account).to receive(:charges).and_return [charge_new]

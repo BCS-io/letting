@@ -7,18 +7,22 @@ RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
     it('requires a name') { expect(cycle_new name: '').not_to be_valid }
     it('charged_in') { expect(cycle_new charged_in: nil).not_to be_valid }
     it('requires an order') { expect(cycle_new order: '').not_to be_valid }
+
     it 'requires a cycle_type' do
       (cycle = cycle_new).cycle_type = ''
       expect(cycle).not_to be_valid
     end
+
     it 'includes cycle_type of term' do
       (cycle = cycle_new).cycle_type = 'term'
       expect(cycle).to be_valid
     end
+
     it 'includes cycle_type of monthly' do
       (cycle = cycle_new).cycle_type = 'monthly'
       expect(cycle).to be_valid
     end
+
     it 'no other cycle_type accepted' do
       (cycle = cycle_new).cycle_type = 'anything'
       expect(cycle).not_to be_valid

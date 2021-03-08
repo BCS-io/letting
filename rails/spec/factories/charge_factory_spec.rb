@@ -8,9 +8,11 @@ RSpec.describe 'ChargeFactory' do
       it('has cycle_id') { expect(charge_new.cycle_id).to be_nil }
       it('has type') { expect(charge_new.charge_type).to eq 'Ground Rent' }
       it('has cycle') { expect(charge_new.cycle.name).to eq 'Mar' }
+
       it 'has due_ons' do
         expect(charge_new.cycle.due_ons.size).to eq 1
       end
+
       it 'has due ons' do
         expect(charge_new.cycle.due_ons[0])
           .to eq DueOn.new(month: 3, day: 25)
@@ -40,6 +42,7 @@ RSpec.describe 'ChargeFactory' do
     it 'instantiates object if missing' do
       expect(charge_find_or_create(id: 1).amount).to eq 88.08
     end
+
     it 'can be called many times' do
       charge_find_or_create id: 1
       expect { charge_find_or_create id: 1 }.not_to raise_error

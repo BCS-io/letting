@@ -33,6 +33,7 @@ RSpec.describe DueOn, :ledgers, :cycle, type: :model do
       it 'is required' do
         expect(due_on_new show_month: nil, show_day: 1).not_to be_valid
       end
+
       it('is numeric')    { expect(due_on_new show_month: 'a').not_to be_valid }
       it('is an integer') { expect(due_on_new show_month: 8.3).not_to be_valid }
       it('is > -1')       { expect(due_on_new show_month: -2).not_to be_valid }
@@ -43,6 +44,7 @@ RSpec.describe DueOn, :ledgers, :cycle, type: :model do
       it 'is required' do
         expect(due_on_new show_month: 1, show_day: nil).not_to be_valid
       end
+
       it('is numeric')    { expect(due_on_new show_day: 'a').not_to be_valid }
       it('is an integer') { expect(due_on_new show_day: 8.3).not_to be_valid }
       it('is > 0')        { expect(due_on_new show_day: 0).not_to be_valid }
@@ -134,6 +136,7 @@ RSpec.describe DueOn, :ledgers, :cycle, type: :model do
       it 'with attributes not empty' do
         expect(due_on_new month: 3, day: 25).not_to be_empty
       end
+
       it 'without attributes empty' do
         expect(due_on_new day: nil, month: nil).to be_empty
       end

@@ -7,6 +7,7 @@ RSpec.describe 'InvoiceText Factory' do
       it 'has description' do
         expect(invoice_text_new.description).to eq 'Page 1 Invoice'
       end
+
       it 'has address' do
         expect(invoice_text_new.address).not_to be_nil
       end

@@ -6,6 +6,7 @@ RSpec.describe Credit, :ledgers, type: :model do
   describe 'validates' do
     describe 'presence' do
       it('is valid') { expect(credit_new).to be_valid }
+
       it 'at_time' do
         (credit = credit_new).at_time = nil
         expect(credit).not_to be_valid
@@ -14,16 +15,21 @@ RSpec.describe Credit, :ledgers, type: :model do
 
     describe 'amount' do
       it('is a number') { expect(credit_new amount: 'nan').not_to be_valid }
+
       it 'has a max' do
         expect(credit_new charge: charge_new, amount: 100_000).not_to be_valid
       end
+
       it('is valid under max') do
         expect(credit_new charge: charge_new, amount: 99_999.99).to be_valid
       end
+
       it('has a min') { expect(credit_new amount: -100_000).not_to be_valid }
+
       it('is valid under min') do
         expect(credit_new charge: charge_new, amount: -99_999.99).to be_valid
       end
+
       it 'fails zero amount' do
         expect(credit_new charge: charge_new, amount: 0).not_to be_valid
       end

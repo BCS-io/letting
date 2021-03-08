@@ -13,10 +13,12 @@ RSpec.describe Chargeable, :ledgers, type: :model do
     it('account_id') { expect(chargeable.account_id).to eq 2 }
     it('charge_id') { expect(chargeable.charge_id).to eq 1 }
     it('date') { expect(chargeable.at_time).to eq Date.new(2013, 3, 25) }
+
     it 'period' do
       expect(chargeable.period)
         .to eq '2013-3-25'..'2013-6-30'
     end
+
     it('amount') { expect(chargeable.amount).to eq 88.08 }
   end
 

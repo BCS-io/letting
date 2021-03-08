@@ -5,6 +5,7 @@ RSpec.describe SpaceOut do
     spaced_out = described_class.process(nil)
     expect(spaced_out).to eq ''
   end
+
   context 'with hyphen' do
     it 'spaces out hyphen' do
       spaced_out = described_class.process('100-200')

@@ -8,6 +8,7 @@ RSpec.describe 'Snapshot Factory' do
       it 'makes account' do
         expect { snapshot_new.save! }.to change(Account, :count).by(1)
       end
+
       it 'makes debits' do
         expect { snapshot_new.save! }.to change(Debit, :count).by(1)
       end

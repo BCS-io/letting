@@ -10,6 +10,7 @@ RSpec.describe PaymentDecorator, :payment do
 
         expect(payment.human_ref).to eq 15
       end
+
       it '#property_decorator returns the property' do
         property = property_create account: account_new
         payment = described_class.new payment_new

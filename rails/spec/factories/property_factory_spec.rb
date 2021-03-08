@@ -15,10 +15,12 @@ RSpec.describe 'Property Factory' do
       it 'alters human_ref' do
         expect(property_new(human_ref: 8).human_ref).to eq 8
       end
+
       it 'alters occupiers' do
         property = property_new occupiers: [Entity.new(name: 'Prior')]
         expect(property.occupiers).to eq 'Prior'
       end
+
       it 'alters address' do
         property = property_new human_ref: 3001,
                                 address: address_new(road: 'Hill')

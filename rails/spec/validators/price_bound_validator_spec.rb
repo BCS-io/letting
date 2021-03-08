@@ -20,12 +20,14 @@ RSpec.describe PriceBoundValidator do
 
   describe 'amount' do
     it('is a number') { expect(validatable('nan')).not_to be_valid }
+
     it('validates the boundary') do
       expect(validatable(99_999.99)).to be_valid
       expect(validatable(100_000)).not_to be_valid
       expect(validatable(-99_999.99)).to be_valid
       expect(validatable(-100_000)).not_to be_valid
     end
+
     it('fails zero amount') { expect(validatable amount: 0).not_to be_valid }
   end
 

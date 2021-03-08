@@ -7,6 +7,7 @@ RSpec.describe Property, type: :model do
     describe '#human_ref' do
       it('is present') { expect(property_new(human_ref: nil)).not_to be_valid }
       it('is a number') { expect(property_new(human_ref: 'n')).not_to be_valid }
+
       it 'is unique' do
         property_create human_ref: 8000
         expect { property_create human_ref: 8000 }
@@ -19,6 +20,7 @@ RSpec.describe Property, type: :model do
         (property = property_new).agent = nil
         expect(property).not_to be_valid
       end
+
       it 'entities' do
         expect(property_new occupiers: []).not_to be_valid
       end
