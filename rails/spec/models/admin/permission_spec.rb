@@ -64,10 +64,6 @@ RSpec.describe Permission, type: :model do
     it('cycles#edit') { is_expected.not_to allow?('cycles', 'edit') }
     it('cycles#update') { is_expected.not_to allow?('cycles', 'update') }
     it('cycles#destroy') { is_expected.not_to allow?('cycles', 'destroy') }
-  end
-
-  context 'with an admin' do
-    subject { described_class.new(user_create role: 'user') }
 
     it('users#index') { is_expected.not_to allow?('users', 'index') }
     it('users#create') { is_expected.not_to allow?('users', 'create') }
