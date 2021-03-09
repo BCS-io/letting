@@ -10,7 +10,7 @@ namespace :spec do
 
 rescue LoadError
   desc 'Run all fast tests'
-  task :fast do
+  task fast: :environment do
     abort 'spec:fast rake task is not available.'
   end
 end

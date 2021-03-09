@@ -10,7 +10,7 @@ namespace :spec do
 
 rescue LoadError
   desc 'Run all tests regardless of tags'
-  task :all do
+  task all: :environment do
     abort 'spec:all rake task is not available.'
   end
 end
