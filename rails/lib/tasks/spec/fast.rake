@@ -8,7 +8,6 @@ namespace :spec do
     t.exclude_pattern = 'spec/features/**/*_spec.rb'
   end
 
-  task 'fast' => 'db:test:prepare'
 rescue LoadError
   desc 'Run all fast tests'
   task :fast do

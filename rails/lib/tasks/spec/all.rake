@@ -8,7 +8,6 @@ namespace :spec do
     task.rspec_opts = '-O .rspec-no-tags'
   end
 
-  task 'spec:all' => 'db:test:prepare'
 rescue LoadError
   desc 'Run all tests regardless of tags'
   task :all do
