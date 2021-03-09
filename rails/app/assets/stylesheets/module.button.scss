@@ -31,6 +31,20 @@
       background: $button-icon-active-background;
       color: $button-icon-active-color;
     }
+
+    &[disabled] {
+      background: $button-icon-disabled-background;
+      border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
+      color: $button-icon-disabled-color;
+      padding: .2em;
+      text-decoration: none;
+
+      &:hover,
+      &:active {
+        background: $button-icon-disabled-background;
+        color: $button-icon-disabled-color;
+      }
+    }
   }
 
   .ButtonIcon-action {
@@ -46,19 +60,6 @@
     }
   }
 
-  .ButtonIcon[disabled] {
-    background: $button-icon-disabled-background;
-    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
-    color: $button-icon-disabled-color;
-    padding: .2em;
-    text-decoration: none;
-
-    &:hover,
-    &:active {
-      background: $button-icon-disabled-background;
-      color: $button-icon-disabled-color;
-    }
-  }
 
   .ButtonIcon-inactive {
     background: $button-icon-background;
@@ -67,37 +68,47 @@
     padding: .3em;
   }
 
-  @mixin redbutton {
+  .ButtonPrimary {
     background: $primary-action-background;
     border: 1px solid darken($primary-action-background, $border-color-darken);
     color: $primary-action-color;
+    padding: 1.3em;
 
     &:hover,
     &:active {
       background: $primary-action-active-background;
       color: $primary-action-active-color;
     }
-  }
 
-  .ButtonPrimary {
-    @include redbutton;
-    padding: 1.3em;
+    &[disabled] {
+      background: $button-icon-disabled-background;
+      border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
+      color: $button-icon-disabled-color;
+      padding: 1.3em;
+
+      &:hover,
+      &:active {
+        background: $button-icon-disabled-background;
+        color: $button-icon-disabled-color;
+      }
+    }
   }
 
   .ButtonSecondary {
-    @include redbutton;
+    background: $secondary-action-background;
+    border: 1px solid darken($secondary-action-background, $border-color-darken);
+    color: $secondary-action-color;
     padding: .5em;
-  }
-
-  .ButtonPrimary[disabled] {
-    background: $button-icon-disabled-background;
-    border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
-    color: $button-icon-disabled-color;
-    padding: 1.3em;
 
     &:hover,
     &:active {
+      background: $secondary-action-active-background;
+      color: $secondary-action-active-color;
+    }
+
+    &[disabled] {
       background: $button-icon-disabled-background;
+      border: 1px solid darken($button-icon-disabled-background, $border-color-darken);
       color: $button-icon-disabled-color;
     }
   }

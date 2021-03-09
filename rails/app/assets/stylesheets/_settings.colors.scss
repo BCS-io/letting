@@ -200,6 +200,10 @@ $primary-action-color:                $color-white;
 $primary-action-active-background:    lighten($primary-action-background, 5%);  // Blue
 $primary-action-active-color:         $color-white;
 
+$secondary-action-background:         $color-secondary-shade-1;
+$secondary-action-color:              $color-tundora;
+$secondary-action-active-background:  lighten($secondary-action-background, 5%);  // Blue
+$secondary-action-active-color:       $color-black;
 
 
 //
