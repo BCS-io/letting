@@ -21,6 +21,6 @@ class Payments
   end
 
   def sum
-    payments.map(&:amount).inject(0, &:+)
+    payments.sum(&:amount)
   end
 end

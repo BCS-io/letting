@@ -107,7 +107,7 @@ class Debit < ApplicationRecord
   private
 
   def settled
-    settlements.pluck(:amount).inject(0, :+)
+    settlements.pluck(:amount).sum
   end
 
   # Called on save to see if a debit can be matched to a credit

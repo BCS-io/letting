@@ -81,7 +81,7 @@ class Credit < ApplicationRecord
   end
 
   def settled
-    settlements.pluck(:amount).inject(0, :+)
+    settlements.pluck(:amount).sum
   end
 
   def charge_to_s

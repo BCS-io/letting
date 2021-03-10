@@ -80,7 +80,7 @@ class PaymentDecorator
   end
 
   def todays_takings
-    number_to_currency Payment.created_on.map(&:amount).inject(0, &:+)
+    number_to_currency Payment.created_on.sum(&:amount)
   end
 
   private
