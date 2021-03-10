@@ -178,7 +178,7 @@ group :test do
 
   # Create e.s. test node
   gem 'elasticsearch-extensions'
-  gem 'rspec-rails', '~> 3.9.0'
+  gem 'rspec-rails', '~> 4.1.0'
   gem 'selenium-webdriver', '~>3.0'
   gem 'stackprof', '>= 0.2.9', require: false
   gem 'test-prof'
