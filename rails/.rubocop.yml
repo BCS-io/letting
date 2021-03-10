@@ -18,6 +18,7 @@ require:
 
 AllCops:
   TargetRubyVersion: 2.5
+  NewCops: enable
   Exclude:
     - db/migrate/**/*
     - bin/**/*
@@ -59,18 +60,24 @@ Layout/LineLength:
     - 'spec/models/ledgers/cycle_spec.rb'
     - 'spec/models/utils/literal_search_spec.rb'
     - 'spec/support/elasticsearch.rb'
+
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
+Lint/BinaryOperatorWithIdenticalOperands: # (new in 0.89)
+  Enabled: true
+  Exclude:
+    - 'spec/models/ledgers/due_on_spec.rb'
+    - 'spec/models/ledgers/matched_due_on_spec.rb'
 Lint/SuppressedException:
   Exclude:
     - 'spec/support/elasticsearch.rb' # suppress Elasticsearch NotFound Errors
 Lint/MissingCopEnableDirective:
   Enabled: false
 Lint/MissingSuper:
+  Enabled: true
   Exclude:
     - 'lib/modules/method_missing.rb'
-Style/MethodDefParentheses:
-  Enabled: false
+
 Metrics/BlockLength:
   Max: 205
   Exclude:
@@ -83,12 +90,14 @@ Metrics/MethodLength:
 Metrics/ParameterLists:
   Exclude:
     - 'spec/models/characters/address_spec.rb'
+
 Naming/AccessorMethodName:
   Exclude:
     - 'app/controllers/invoicings_controller.rb'
     - 'app/controllers/payments_controller.rb'
     - 'app/controllers/search_controller.rb'
     - 'app/models/utils/literal_search.rb'
+
 Rails:
   Enabled: true
 Rails/DynamicFindBy:
@@ -117,6 +126,7 @@ Rails/SkipsModelValidations:
   Exclude:
     - 'app/models/concerns/act_as_fake_deletable.rb'
     - 'app/models/utils/search_suggestion.rb'
+
 Style/AndOr:
   Enabled: false
 Style/ExpandPathArguments:
@@ -125,16 +135,28 @@ Style/ExpandPathArguments:
     - 'config/boot.rb'
     - 'config/environment.rb'
     - 'spec/rails_helper.rb'
+Style/MethodDefParentheses:
+  Enabled: false
 Style/MixinUsage:
   Exclude:
     - 'spec/models/characters/address_spec.rb'
     - 'spec/models/invoices/invoice_spec.rb'
     - 'spec/models/invoices/product_spec.rb'
     - 'spec/models/ledgers/accounts_debits_spec.rb'
-Style/RedundantPercentQ:
-  Enabled: false
+Style/RedundantAssignment:
+  Exclude:
+    - 'app/models/invoices/make_products.rb'
+Style/StringConcatenation:
+  Exclude:
+    - 'app/models/characters/entity.rb'
+    - 'app/models/ledgers/due_ons.rb'
+
 
 # newly added - review
+
+# this is needed
+Style/KeywordParametersOrder:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/NestedParenthesizedCalls:
@@ -177,3 +199,4 @@ RSpec/MultipleExpectations:
 
 RSpec/NestedGroups:
   Max: 5
+
