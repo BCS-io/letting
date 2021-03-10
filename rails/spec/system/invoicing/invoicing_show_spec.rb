@@ -14,7 +14,7 @@ RSpec.describe 'Invoicing#show', type: :system do
   end
 
   describe 'deletion of runs' do
-    it 'disables first deletion' do
+    it 'disables with only one run' do
       log_in
       property_create human_ref: 2, account: account_new
       invoicing_create id: 1,
@@ -23,11 +23,11 @@ RSpec.describe 'Invoicing#show', type: :system do
       visit '/invoicings/1'
 
       within '.t-run-delete-0' do
-        expect(find '.t-delete-run').to be_disabled
+        expect(page).to have_button('Delete Run', disabled: true)
       end
     end
 
-    it 'enable subsequent deletions' do
+    it 'enable when more than one run' do
       log_in
       property_create human_ref: 2, account: account_new
       invoicing_create id: 1, property_range: '2',
@@ -37,8 +37,11 @@ RSpec.describe 'Invoicing#show', type: :system do
       visit '/invoicings/1'
 
       within '.t-run-delete-1' do
-        expect(find '.t-delete-run').not_to be_disabled
+        expect(page).to have_button('Delete Run', disabled: false)
+        click_on 'Delete Run'
       end
+
+      expect(page).to have_text /run.*deleted!/i
     end
   end
 
@@ -54,7 +57,7 @@ RSpec.describe 'Invoicing#show', type: :system do
                        runs: [run_new(invoices: [invoice])]
       visit '/invoicings/1'
 
-      expect(find '#print-link').to be_disabled
+      expect(page).to have_button('Print Run', disabled: true)
       expect(page.has_content? /No invoices will be delivered./i).to be true
     end
 
@@ -69,7 +72,7 @@ RSpec.describe 'Invoicing#show', type: :system do
                        runs: [run_new(invoices: [invoice])]
       visit '/invoicings/1'
 
-      expect(find '#print-link').not_to be_disabled
+      expect(page).to have_button('Print Run', disabled: false)
       expect(page.has_no_content? /No invoices will be delivered./i).to be true
     end
   end

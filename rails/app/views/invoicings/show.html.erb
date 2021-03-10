@@ -27,15 +27,15 @@
               <h2><%= "#{(index + 1).ordinalize} Run (#{run_dec.invoice_date})" %></h2>
             </div>
 
-            <div class='col-9-24'>&nbsp;</div>
-            <div class='col-4-24  inherit-row  top-1-line-spacer'>
-              <%= print_link text: 'Print Run', path: print_run_path(run), id: 'print-link', css: 'Button  ButtonPrimary', title: 'Print Run', disabled: !run.deliverable?  %>
+            <div class='col-7-24'>&nbsp;</div>
+            <div class='col-5-24  inherit-row  top-1-line-spacer'>
+              <%= button_to print_run_path(run), { method: :get, title: 'Print Run', class: 'Button ButtonPrimary', disabled: !run.deliverable?,  id: 'print-link' } do %>
+                <%= fa_icon('print lg') %> <span>Print Run</span>
+              <% end %>
             </div>
-            <div class='col-3-24  top-1-line-spacer  t-run-delete-<%= index %> '>
-              <% if index.nonzero? %>
-                <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', css: 't-delete-run', disabled: false %>
-              <% else %>
-                <%= delete_link text: 'Delete Run', path: run, title: 'Delete Run', css: 't-delete-run', disabled: true %>
+            <div class='col-4-24  top-1-line-spacer  t-run-delete-<%= index %> '>
+              <%= button_to run, { method: :delete, title: 'Delete Run ' + (index.nonzero? ? '' : '(disabled)'), class: 't-delete-run Button ButtonSecondary', disabled: !index.nonzero?, id: 'print-link' } do %>
+                <%= fa_icon('trash lg') %> <span>Delete Run</span>
               <% end %>
             </div>
             <%= render 'invoices/invoices', run: run, action: true %>
