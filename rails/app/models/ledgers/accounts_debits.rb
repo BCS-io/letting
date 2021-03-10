@@ -15,7 +15,7 @@ class AccountsDebits
   end
 
   def list
-    @list ||= Hash[make.sort]
+    @list ||= make.sort.to_h
   end
 
   private
