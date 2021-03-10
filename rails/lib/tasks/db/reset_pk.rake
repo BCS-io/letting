@@ -3,7 +3,7 @@
 # At the end of the seed I go through all the tables and make sure the PK
 # points to the next empty row!
 #
-STDOUT.sync = true
+$stdout.sync = true
 
 namespace :db do
   desc 'Fix for automatic pk sequence getting out of step with your data rows.'

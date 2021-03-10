@@ -2,7 +2,7 @@
 # Note: db:reset mirrors much of the calls but also db:seed which I didn't want.
 # https://gist.github.com/nithinbekal/3423153
 
-STDOUT.sync = true
+$stdout.sync = true
 
 namespace :db do
   desc 'Raise an error unless development environment'

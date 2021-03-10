@@ -1,6 +1,6 @@
 require 'active_support'
 
-STDOUT.sync = true
+$stdout.sync = true
 
 namespace :db do
   #

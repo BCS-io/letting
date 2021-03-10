@@ -1,4 +1,4 @@
-STDOUT.sync = true
+$stdout.sync = true
 
 namespace :db do
   desc 'Sets the autoincrement for all tables'
