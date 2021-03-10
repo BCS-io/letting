@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Lint/UselessComparison
 
 RSpec.describe MatchedDueOn, :ledgers, :cycle, type: :model do
   describe '#<=>' do

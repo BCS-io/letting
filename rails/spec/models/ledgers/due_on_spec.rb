@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Lint/UselessComparison
-
 RSpec.describe DueOn, :ledgers, :cycle, type: :model do
   it('is valid') { expect(due_on_new).to be_valid }
 
