@@ -3,7 +3,7 @@
 namespace :db do
   desc "Fix 'database is being accessed by other users'"
   task terminate_backend: :environment do
-    ActiveRecord::Base.connection.execute <<-SQL
+    ActiveRecord::Base.connection.execute <<-SQL.squish
       SELECT
         pg_terminate_backend(pid)
       FROM
