@@ -34,7 +34,7 @@ RSpec.describe AccountDecorator do
     end
 
     it 'orders abbrev-items by date' do
-      Timecop.travel(Date.new(2013, 1, 31)) do
+      travel_to Date.new(2013, 1, 31) do
         expect(account.abbrev_items.map(&:at_time)).to \
           contain_exactly \
             Time.zone.local(2013, 1, 1,  0, 0, 0),

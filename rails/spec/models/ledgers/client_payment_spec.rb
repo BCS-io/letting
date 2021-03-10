@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ClientPayment, :ledgers do
   it 'creates years' do
-    Timecop.travel('2014-6-1') do
+    travel_to '2014-6-1' do
       payment = described_class.query
       expect(payment.years).to eq %w[2014 2013 2012 2011 2010]
     end

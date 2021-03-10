@@ -9,7 +9,7 @@ RSpec.describe 'Invoicing#create', type: :system do
   end
 
   it 'invoices an account that matches the search' do
-    Timecop.travel('2013-6-1') do
+    travel_to '2013-6-1' do
       create_account human_ref: 87,
                      cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
       invoicing_page.load
@@ -44,7 +44,7 @@ RSpec.describe 'Invoicing#create', type: :system do
 
   describe 'period', js: true, elasticsearch: true do
     it 'uses defaults dates' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load.choose_dates
@@ -59,7 +59,7 @@ RSpec.describe 'Invoicing#create', type: :system do
     end
 
     it 'uses chosen dates' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load.choose_dates
@@ -76,7 +76,7 @@ RSpec.describe 'Invoicing#create', type: :system do
     end
 
     it 'uses defaults dates if left on default choice' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load.choose_dates
@@ -92,7 +92,7 @@ RSpec.describe 'Invoicing#create', type: :system do
     end
 
     it 'enables dates when dates are chosen' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load.choose_dates
@@ -105,7 +105,7 @@ RSpec.describe 'Invoicing#create', type: :system do
 
   describe 'invoice_date' do
     it 'defaults to today' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load
@@ -115,7 +115,7 @@ RSpec.describe 'Invoicing#create', type: :system do
     end
 
     it 'saves date between invoicings' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 6, day: 24)])
         invoicing_page.load
@@ -131,7 +131,7 @@ RSpec.describe 'Invoicing#create', type: :system do
     end
 
     it 'saves date when it errors' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         invoicing_page.load
         invoicing_page.invoice_date = Time.zone.tomorrow.to_s
         invoicing_page.search_term('87').button 'Create'
@@ -143,7 +143,7 @@ RSpec.describe 'Invoicing#create', type: :system do
 
   describe 'errors when the property range' do
     it 'excludes all existing properties (3.a.)' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         invoicing_page.load
         invoicing_page.search_term('87').button 'Create'
 
@@ -152,7 +152,7 @@ RSpec.describe 'Invoicing#create', type: :system do
     end
 
     it 'does not include a chargeable property for the billing-period (3.b.)' do
-      Timecop.travel('2013-6-1') do
+      travel_to '2013-6-1' do
         create_account human_ref: 87,
                        cycle: cycle_new(due_ons: [DueOn.new(month: 3, day: 25)])
 
@@ -165,7 +165,7 @@ RSpec.describe 'Invoicing#create', type: :system do
   end
 
   it 'does not invoice properties that remain in credit after billing (3.c.)' do
-    Timecop.travel('2013-6-1') do
+    travel_to '2013-6-1' do
       cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
       charge = charge_new(payment_type: 'manual', cycle: cycle)
       account_create property: property_new(human_ref: 9),
@@ -184,7 +184,7 @@ RSpec.describe 'Invoicing#create', type: :system do
   describe 'warns on' do
     describe 'retaining mail' do
       it 'to properties that only have automatic charges. (3.d.)' do
-        Timecop.travel('2013-6-1') do
+        travel_to '2013-6-1' do
           cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
           account_create property: property_new(human_ref: 9),
                          charges: [charge_new(payment_type: 'automatic',
@@ -202,7 +202,7 @@ RSpec.describe 'Invoicing#create', type: :system do
       # presence (3.d.).
       #
       it 'will not retain when cash payment due' do
-        Timecop.travel('2013-6-1') do
+        travel_to '2013-6-1' do
           cycle = cycle_new due_ons: [DueOn.new(month: 6, day: 25)]
           account_create property: property_new(human_ref: 9),
                          charges: [charge_new(payment_type: 'manual',
@@ -218,7 +218,7 @@ RSpec.describe 'Invoicing#create', type: :system do
 
     describe 'ignoring mail' do
       it 'to properties that have no charges in billing-period. (3.e.)' do
-        Timecop.travel('2013-6-1') do
+        travel_to '2013-6-1' do
           create_account human_ref: 8,
                          cycle: cycle_new(due_ons: [DueOn.new(month: 5, day: 1)])
           create_account human_ref: 9,

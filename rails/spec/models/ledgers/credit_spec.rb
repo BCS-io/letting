@@ -77,7 +77,7 @@ RSpec.describe Credit, :ledgers, type: :model do
 
   context 'with default initialize' do
     it 'has at_time' do
-      Timecop.travel(Date.new(2013, 9, 30)) do
+      travel_to Date.new(2013, 9, 30) do
         expect(credit_new(at_time: nil).at_time.to_s)
           .to eq Time.zone.local(2013, 9, 30, 0, 0, 0, '+1').to_s
       end

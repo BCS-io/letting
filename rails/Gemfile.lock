@@ -389,7 +389,6 @@ GEM
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    timecop (0.8.1)
     tinycon-rails (0.0.1)
       railties (>= 3.1)
     traceroute (0.8.1)
@@ -488,7 +487,6 @@ DEPENDENCIES
   stackprof (>= 0.2.9)
   table_print
   test-prof
-  timecop (~> 0.8.0)
   traceroute
   turbolinks (~> 5)
   uglifier (~> 2.7.0)

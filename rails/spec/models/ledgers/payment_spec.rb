@@ -38,7 +38,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     # changing for Date to DateTime - so I want test to fail if we use date
     describe 'booked_at' do
       it 'sets nil booked_at to today' do
-        Timecop.freeze(Time.zone.local(2013, 9, 30, 2, 0)) do
+        travel_to Time.zone.local(2013, 9, 30, 2, 0) do
           expect(payment_new(booked_at: nil).booked_at)
             .to eq Time.zone.now
         end
@@ -61,7 +61,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     # changing for Date to DateTime - so I want test to fail if we use date
 
     it 'booking time is current time if booking today' do
-      Timecop.freeze(Time.zone.local(2013, 9, 30, 2, 0)) do
+      travel_to Time.zone.local(2013, 9, 30, 2, 0) do
         payment = payment_new account: account_new,
                               booked_at: Time.zone.local(2013, 9, 30, 10, 0)
 
@@ -83,7 +83,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
     end
 
     it 'booking time set to start of day if booking in future' do
-      Timecop.freeze(Time.zone.local(2013, 9, 30, 2, 0)) do
+      travel_to Time.zone.local(2013, 9, 30, 2, 0) do
         payment = payment_new account: account_new,
                               booked_at: Time.zone.local(2013, 10, 1, 10, 0)
 

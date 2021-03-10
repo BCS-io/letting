@@ -29,7 +29,7 @@ RSpec.describe AccountDetails, :ledgers, type: :model do
     end
 
     it 'ignores recent transactions' do
-      Timecop.travel(Date.new(2013, 1, 31)) do
+      travel_to Date.new(2013, 1, 31) do
         charge = charge_create
         account = account_new id: 3, property: property_new(id: 4)
         account.debits.push debit_new at_time: '25/3/2010',
