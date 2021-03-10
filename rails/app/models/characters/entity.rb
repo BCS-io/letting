@@ -46,9 +46,10 @@ class Entity < ApplicationRecord
 
   private
 
-  def initializer str_to_do
-    initialized = str_to_do.split.join('. ')
-    initialized + '.' if str_to_do.present?
+  def initializer initials
+    return if initials.empty?
+
+    initials.split.join('. ') + '.'
   end
 
   def destroy_entity
