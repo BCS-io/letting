@@ -14,6 +14,7 @@
 #
 class FullTextSearch
   attr_reader :query, :referrer
+
   def self.search(referrer:, query:)
     new(referrer: referrer, query: query)
   end

@@ -5,14 +5,14 @@ RSpec.configure do |config|
   es_port = es_config['port']
 
   config.before :all, elasticsearch: true do
-    Elasticsearch::Extensions::Test::Cluster.start(command: es_bin, port: es_port .to_i, nodes: 1, timeout: 120) \
-      unless Elasticsearch::Extensions::Test::Cluster.running?(command: es_bin, on: es_port .to_i)
+    Elasticsearch::Extensions::Test::Cluster.start(command: es_bin, port: es_port.to_i, nodes: 1, timeout: 120) \
+      unless Elasticsearch::Extensions::Test::Cluster.running?(command: es_bin, on: es_port.to_i)
   end
 
   # Stop elasticsearch cluster after test run
   config.after :suite do
-    Elasticsearch::Extensions::Test::Cluster.stop(command: es_bin, port: es_port .to_i, nodes: 1)  \
-      if Elasticsearch::Extensions::Test::Cluster.running?(command: es_bin, on: es_port .to_i)
+    Elasticsearch::Extensions::Test::Cluster.stop(command: es_bin, port: es_port.to_i, nodes: 1)  \
+      if Elasticsearch::Extensions::Test::Cluster.running?(command: es_bin, on: es_port.to_i)
   end
 
   # Create indexes for all elastic searchable models

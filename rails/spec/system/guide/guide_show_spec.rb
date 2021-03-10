@@ -12,7 +12,7 @@ RSpec.describe 'Guide#show', type: :system do
                  sample: 'Filled'
 
     visit '/invoice_texts/2'
-    expect(page.title). to eq 'Letting - View Invoice Text'
+    expect(page.title).to eq 'Letting - View Invoice Text'
     expect(page).to have_text 'ins1'
     expect(page).to have_text 'Useful stuff'
     expect(page).to have_text 'Filled'

@@ -7,6 +7,7 @@
 #
 class MakeProducts
   attr_reader :account, :color, :debits, :arrears_date
+
   def initialize(account:, debits:, color: :blue)
     @account = account
     @debits = debits

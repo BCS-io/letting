@@ -32,7 +32,7 @@ RSpec.describe 'InvoiceText#update', type: :system do
       guide_create id: 1, invoice_text: invoice_text
       visit '/invoice_texts/2/edit'
 
-      expect(page.title). to eq 'Letting - Edit Invoice Text'
+      expect(page.title).to eq 'Letting - Edit Invoice Text'
       fill_in 'Subheading', with: 'Bowled Out!'
       click_on 'Update Invoice Text'
       expect(page).to have_text /created|updated/i

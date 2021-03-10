@@ -10,7 +10,7 @@ RSpec.describe 'InvoiceText#show', type: :system do
   it 'shows the 1st page' do
     visit '/invoice_texts/1'
 
-    expect(page.title). to eq 'Letting - View Invoice Text'
+    expect(page.title).to eq 'Letting - View Invoice Text'
   end
 
   it 'has edit link' do

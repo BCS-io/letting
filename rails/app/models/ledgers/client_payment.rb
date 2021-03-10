@@ -61,6 +61,7 @@
 #
 class ClientPayment
   attr_reader :client_id, :year, :month
+
   def initialize(client_id:)
     @client_id = client_id
   end

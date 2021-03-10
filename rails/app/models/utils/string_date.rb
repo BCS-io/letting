@@ -8,6 +8,7 @@
 #
 class StringDate
   attr_reader :datestring
+
   def initialize datestring
     @datestring = datestring
   end

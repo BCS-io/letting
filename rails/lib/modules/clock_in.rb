@@ -17,6 +17,7 @@
 #
 class ClockIn
   attr_reader :booking_date
+
   def initialize(booking_date: Time.zone.today)
     @booking_date = booking_date
   end

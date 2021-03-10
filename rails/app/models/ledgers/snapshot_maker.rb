@@ -9,6 +9,7 @@
 #
 class SnapshotMaker
   attr_reader :snapshot
+
   def initialize(account:, debit_period:)
     @snapshot = Snapshot.new account: account, period: debit_period
   end

@@ -4,6 +4,7 @@
 #
 class AccountFinder
   attr_reader :matching
+
   def initialize(property_range:)
     @matching = Account.between?(property_range).includes(account_includes)
   end

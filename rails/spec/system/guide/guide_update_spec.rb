@@ -11,7 +11,7 @@ RSpec.describe 'Guide#update', type: :system do
     guide_create fillin: 'Useful', invoice_text: invoice_text
     guide_create sample: 'Sample', invoice_text: invoice_text
     visit '/invoice_texts/1/edit'
-    expect(page.title). to eq 'Letting - Edit Invoice Text'
+    expect(page.title).to eq 'Letting - Edit Invoice Text'
     click_on 'Update Invoice Text'
     expect(page).to have_text /updated!/i
   end

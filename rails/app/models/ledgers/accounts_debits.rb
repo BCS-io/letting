@@ -8,6 +8,7 @@
 #
 class AccountsDebits
   attr_reader :property_range, :debit_period
+
   def initialize(property_range:, debit_period:)
     @property_range = property_range
     @debit_period = debit_period

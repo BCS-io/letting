@@ -11,6 +11,7 @@
 #
 class BatchMonths
   attr_reader :first, :last, :now
+
   MAR = 3
   JUN = 6
   SEP = 9

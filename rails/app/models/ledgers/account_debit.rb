@@ -9,6 +9,7 @@
 class AccountDebit
   include Comparable
   attr_reader :amount, :date_due, :charge_type, :property_refs
+
   def initialize(date_due:, charge_type:, property_ref:, amount:)
     @date_due = date_due
     @charge_type = charge_type
