@@ -92,8 +92,7 @@ class Invoicing < ApplicationRecord
                       comments: comments
   end
 
-  # note:
-  # size works with memory loaded vs count which is the database count
+  # NOTE: size works with memory loaded vs count which is the database count
   #
   def color
     runs.size <= 1 ? :blue : :red

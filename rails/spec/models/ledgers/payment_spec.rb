@@ -28,7 +28,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
 
     it 'requires date' do
       payment = payment_new
-      # note: default_initialization for booked_at
+      # NOTE: default_initialization for booked_at
       payment.booked_at = nil
       expect(payment).not_to be_valid
     end
@@ -316,7 +316,7 @@ RSpec.describe Payment, :payment, :ledgers, type: :model do
       payment_create account: account_create(property: property_new), amount: 12.70
       described_class.import force: true, refresh: true
 
-      # note this should match but doesn't
+      # NOTE: this should match but doesn't
       expect(described_class.search('12.70', sort: 'booked_at').results.total).to eq 1
     end
 

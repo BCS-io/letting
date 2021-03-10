@@ -113,7 +113,7 @@ RSpec.describe 'Charge#create', type: :system do
                                                   payment_type: 'manual',
                                                   amount: 20.01)
 
-      # note zero ordered
+      # NOTE: zero ordered
       page.all('.t-charge-count')[0].click
       account.button('Update').successful?(self)
 
@@ -138,7 +138,7 @@ RSpec.describe 'Charge#create', type: :system do
                                                   payment_type: 'manual',
                                                   amount: 20.01)
 
-      # note zero ordered
+      # NOTE: zero ordered
       page.all('.t-charge-count')[1].click
       account.button('Update').successful?(self)
 
