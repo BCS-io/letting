@@ -12,7 +12,7 @@ module ActAsFakeDeletable
       update_columns(deleted_at: DateTime.current)
     end
 
-    scope :deleted, -> { where('deleted_at IS NOT NULL') }
-    scope :kept, -> { where('deleted_at IS NULL') }
+    scope :deleted, -> { where.not(deleted_at: nil) }
+    scope :kept, -> { where(deleted_at: nil) }
   end
 end

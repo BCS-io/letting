@@ -126,11 +126,11 @@ class Account < ApplicationRecord
     delete_before = (Time.zone.now - 2.years).to_date
     account_ids = AccountDetails.balanced.map { |ad| ad.account.id }
 
-    Credit.where('account_id in (?)', account_ids)
+    Credit.where(account_id: account_ids)
           .where('at_time < ?', delete_before)
           .find_each(&:fake_delete)
 
-    Debit.where('account_id in (?)', account_ids)
+    Debit.where(account_id: account_ids)
          .where('at_time < ?', delete_before)
          .find_each(&:fake_delete)
   end
