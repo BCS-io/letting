@@ -45,6 +45,20 @@ Layout/LeadingBlankLines:
     - 'app/models/invoices/invoicing.rb'
     - 'spec/lib/modules/rangify_spec.rb'
     - 'spec/support/factories/run_factory.rb'
+Layout/LineLength:
+  Max: 95
+  Exclude:
+    - 'app/helpers/link_helper.rb'
+    - Gemfile
+    - 'db/seeds/**/*'
+    - 'spec/models/invoices/guide_spec.rb'
+    - 'spec/models/invoices/invoice_spec.rb'
+    - 'spec/models/ledgers/account_debit_spec.rb'
+    - 'spec/models/ledgers/advance_spec.rb'
+    - 'spec/models/ledgers/arrears_spec.rb'
+    - 'spec/models/ledgers/cycle_spec.rb'
+    - 'spec/models/utils/literal_search_spec.rb'
+    - 'spec/support/elasticsearch.rb'
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 Lint/HandleExceptions:
@@ -58,12 +72,6 @@ Metrics/BlockLength:
   Max: 205
   Exclude:
     - 'spec/models/ledgers/payment_spec.rb'
-Metrics/LineLength:
-  Max: 95
-  Exclude:
-    - Gemfile
-    - 'db/seeds/**/*'
-    - 'spec/support/elasticsearch.rb'
 Metrics/MethodLength:
   Max: 10
   Exclude:

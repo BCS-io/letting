@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Metrics/LineLength
 
 RSpec.describe AccountDebit, type: :model do
   it 'returns #key' do

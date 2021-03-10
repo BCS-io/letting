@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Metrics/LineLength
-
 RSpec.describe Arrears, :ledgers, :range do
   it 'initializes with repeat dates' do
     repeat = described_class.new repeat_dates: [RepeatDate.new(month: 5, day: 4)]

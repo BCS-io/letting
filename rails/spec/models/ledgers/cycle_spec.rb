@@ -1,5 +1,4 @@
 require 'rails_helper'
-# rubocop: disable Metrics/LineLength
 
 RSpec.describe Cycle, :ledgers, :range, :cycle, type: :model do
   describe 'validates' do

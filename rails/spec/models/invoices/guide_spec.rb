@@ -1,5 +1,3 @@
-# rubocop: disable Metrics/LineLength
-
 require 'rails_helper'
 
 RSpec.describe Guide, type: :model do

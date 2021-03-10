@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-# rubocop: disable Metrics/LineLength
-
 RSpec.describe 'LiteralSearch #go', type: :model do
   describe 'client query' do
     it 'returns client in results' do

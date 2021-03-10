@@ -5,7 +5,7 @@
 #
 # Shared helper methods
 #
-# rubocop: disable Metrics/LineLength, Metrics/MethodLength,  Metrics/ParameterLists, Metrics/ModuleLength
+# rubocop: disable Metrics/MethodLength,  Metrics/ParameterLists, Metrics/ModuleLength
 #
 ####
 #
