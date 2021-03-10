@@ -1,18 +1,18 @@
 RSpec.configure do |config|
   # Start an in-memory cluster for Elasticsearch as needed
   es_config = YAML.load_file('config/elasticsearch.yml')['test']
-  ES_BIN = es_config['es_bin']
-  ES_PORT = es_config['port']
+  es_bin = es_config['es_bin']
+  es_port = es_config['port']
 
   config.before :all, elasticsearch: true do
-    Elasticsearch::Extensions::Test::Cluster.start(command: ES_BIN, port: ES_PORT.to_i, nodes: 1, timeout: 120) \
-      unless Elasticsearch::Extensions::Test::Cluster.running?(command: ES_BIN, on: ES_PORT.to_i)
+    Elasticsearch::Extensions::Test::Cluster.start(command: es_bin, port: es_port .to_i, nodes: 1, timeout: 120) \
+      unless Elasticsearch::Extensions::Test::Cluster.running?(command: es_bin, on: es_port .to_i)
   end
 
   # Stop elasticsearch cluster after test run
   config.after :suite do
-    Elasticsearch::Extensions::Test::Cluster.stop(command: ES_BIN, port: ES_PORT.to_i, nodes: 1)  \
-      if Elasticsearch::Extensions::Test::Cluster.running?(command: ES_BIN, on: ES_PORT.to_i)
+    Elasticsearch::Extensions::Test::Cluster.stop(command: es_bin, port: es_port .to_i, nodes: 1)  \
+      if Elasticsearch::Extensions::Test::Cluster.running?(command: es_bin, on: es_port .to_i)
   end
 
   # Create indexes for all elastic searchable models
