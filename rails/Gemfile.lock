@@ -309,25 +309,29 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.3)
-    rubocop (0.93.1)
+    rubocop (1.11.0)
       parallel (~> 1.10)
-      parser (>= 2.7.1.5)
+      parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8)
+      regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 0.6.0)
+      rubocop-ast (>= 1.2.0, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (>= 1.4.0, < 2.0)
+      unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.4.1)
       parser (>= 2.7.1.5)
-    rubocop-performance (1.6.1)
-      rubocop (>= 0.71.0)
-    rubocop-rails (2.5.2)
-      activesupport
+    rubocop-performance (1.10.1)
+      rubocop (>= 0.90.0, < 2.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rails (2.9.1)
+      activesupport (>= 4.2.0)
       rack (>= 1.1)
-      rubocop (>= 0.72.0)
-    rubocop-rspec (1.41.0)
-      rubocop (>= 0.68.1)
+      rubocop (>= 0.90.0, < 2.0)
+    rubocop-rake (0.5.1)
+      rubocop
+    rubocop-rspec (2.2.0)
+      rubocop (~> 1.0)
+      rubocop-ast (>= 1.1.0)
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.11.0)
@@ -404,7 +408,7 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicode-display_width (1.7.0)
+    unicode-display_width (2.0.0)
     uniform_notifier (1.14.1)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -473,9 +477,10 @@ DEPENDENCIES
   redis (~> 4.0)
   require_all (~> 1.0)
   rspec-rails (~> 3.8.0)
-  rubocop (~> 0.93.0)
+  rubocop (~> 1.11.0)
   rubocop-performance
   rubocop-rails
+  rubocop-rake
   rubocop-rspec
   rubycritic
   sass-rails (~> 5.0.0)
