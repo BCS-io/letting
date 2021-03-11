@@ -86,7 +86,7 @@ ruby '~> 2.5.0'
 #
 gem 'autoprefixer-rails', '~> 10.2.0'
 gem 'bcrypt', '~> 3.1.12'
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.4.2', require: false
 gem 'coffee-rails', '~> 4.2.0'
 gem 'elasticsearch', '~> 6.0.0'
 gem 'elasticsearch-model', '~> 6.0.0'
@@ -108,16 +108,17 @@ gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
 gem 'pg', '~>1.2.0'
 gem 'puma', '~> 4.3'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
-gem 'rails', '~> 5.2.4'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.5'
 gem 'rails-env-favicon'
 
 gem 'rake', '~> 12.3'
 gem 'redis', '~> 4.0'
-gem 'sass-rails', '~> 5.0.0'
+gem 'sass-rails', '>= 6'
 gem 'seedbank'
 gem 'sprockets', '~>3.7.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '~> 2.7.0'
+gem 'webpacker', '~> 4.0'
 
 #
 # Development only
@@ -127,7 +128,7 @@ group :development do
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'brakeman', '~>5.0.0', require: false
   gem 'bullet', '~>6.1'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '~> 3.2'
   gem 'rails_best_practices', '~>1.20.0'
   gem 'rails-erd'
   gem 'rubocop', '~> 1.11.0', require: false
