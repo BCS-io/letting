@@ -147,7 +147,7 @@ GEM
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    inline_svg (1.6.0)
+    inline_svg (1.7.2)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
     jbuilder (2.7.0)
@@ -451,7 +451,7 @@ DEPENDENCIES
   elasticsearch-rails (~> 6.0.0)
   equalizer
   font-awesome-rails
-  inline_svg (~> 1.6.0)
+  inline_svg (~> 1.7.0)
   jbuilder (~> 2.7.0)
   jquery-rails (~> 4.3.0)
   jquery-ui-rails (= 6.0.1)

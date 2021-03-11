@@ -93,7 +93,7 @@ gem 'elasticsearch-model', '~> 6.0.0'
 gem 'elasticsearch-rails', '~> 6.0.0'
 gem 'equalizer'
 gem 'font-awesome-rails'
-gem 'inline_svg', '~> 1.6.0'
+gem 'inline_svg', '~> 1.7.0'
 gem 'jbuilder', '~> 2.7.0'
 gem 'jquery-rails', '~> 4.3.0'
 
