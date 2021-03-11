@@ -32,7 +32,8 @@ Terraform configuration is specific for a single cloud provider. If you required
 ## Getting Started
 
 ### Create a server
-1. Create new server by environment
+1. Clean up ssh keys
+2. Create new server by environment
    - Update DNS to the ip address
 3. Install playbooks
 4. Provision with Ansible playbook
@@ -41,6 +42,7 @@ Terraform configuration is specific for a single cloud provider. If you required
 
 Which gives:
 ```
+bin/clean -p
 bin/run -p -a 
 # Update DNS if ip addresses have changed
 bin/ansible-galaxy-requirements
