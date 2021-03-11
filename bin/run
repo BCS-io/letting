@@ -2,7 +2,7 @@
 
 option=''
 workspace=''
-terraform_action='-b'
+terraform_action='-a'
 
 terraform_project_path="./terraform/project"
 ip_address=''
@@ -48,6 +48,7 @@ are_you_sure() {
 while getopts 'ahnpst:' flag; do
   case "${flag}" in
     a) terraform_action="-a" ;;
+    b) terraform_action="-b" ;;
     h) print_usage
        exit 1 ;;
     n) terraform_action="-n" ;;
