@@ -17,11 +17,18 @@
 !/log/.keep
 /tmp
 
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+
 /node_modules
 /yarn-error.log
 
-# Ignore Byebug command history file.
+public/assets
 .byebug_history
+
+#  Ignore master key for decrypting credentials and more.
+/config/master.key
 
 # Sandi Meter
 /sandi_meter
@@ -34,7 +41,6 @@
 
 Guardfile
 
-public/assets
 
 # Personal TODO
 todo/work.TODO
@@ -69,9 +75,6 @@ PostgreSQL.sql
 
 # rails-erd
 erd.pdf
-
-# Ignore master key for decrypting credentials and more.
-/config/master.key
 
 # ignore terraform binaries
 .terraform
