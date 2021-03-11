@@ -105,7 +105,7 @@ gem 'jquery-ui-rails', '6.0.1'
 gem 'kaminari', '~> 1.2.0'
 gem 'lograge'
 gem 'nokogiri', '>= 1.8.2' # to avoid vulnerability
-gem 'pg', '~>1.2.0' # rails 5 required to use pg 1.0+
+gem 'pg', '~>1.2.0'
 gem 'puma', '~> 4.3'
 gem 'rack-dev-mark', '~> 0.7.0' # corner banner on staging environment
 gem 'rails', '~> 5.2.4'
