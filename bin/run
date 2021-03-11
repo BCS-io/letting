@@ -51,7 +51,6 @@ while getopts 'ahnpst:' flag; do
     b) terraform_action="-b" ;;
     h) print_usage
        exit 1 ;;
-    n) terraform_action="-n" ;;
     p) print_banner
        are_you_sure
        option="-${flag}"
