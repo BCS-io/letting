@@ -18,8 +18,8 @@ print_usage() {
   printf "Options flags as follows:\n"
   printf "  -C staging client admin machine\n"
   printf "  -c production client admin machine\n"
-  printf "  p - production\n"
-  printf "  s - staging\n"
+  printf "  -p - production\n"
+  printf "  -s - staging\n"
   printf "\n"
   printf "Example: clean -p \n"
 }
