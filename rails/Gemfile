@@ -87,14 +87,14 @@ ruby '~> 2.5.0'
 gem 'autoprefixer-rails', '~> 10.2.0'
 gem 'bcrypt', '~> 3.1.12'
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'coffee-rails', '~> 4.2.0'
+gem 'coffee-rails', '~> 5.0.0'
 gem 'elasticsearch', '~> 6.0.0'
 gem 'elasticsearch-model', '~> 6.0.0'
 gem 'elasticsearch-rails', '~> 6.0.0'
 gem 'equalizer'
 gem 'font-awesome-rails'
 gem 'inline_svg', '~> 1.7.0'
-gem 'jbuilder', '~> 2.7.0'
+gem 'jbuilder', '~> 2.9.0'
 gem 'jquery-rails', '~> 4.3.0'
 
 # BREAKING GEM
